@@ -14,7 +14,7 @@ import model.Organization.BasicOrganization.Type;
 public class OrganizationDirctory {
     private ArrayList<BasicOrganization> organizationList;
 
-    public OrganizationDirectory() {
+    public OrganizationDirctory() {
         organizationList = new ArrayList();
     }
 
