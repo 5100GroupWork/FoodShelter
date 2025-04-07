@@ -12,6 +12,54 @@ import model.Organization.BasicOrganization;
  * @author 59386
  */
 public class WorkRequest {
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public BasicOrganization getSender() {
+        return sender;
+    }
+
+    public void setSender(BasicOrganization sender) {
+        this.sender = sender;
+    }
+
+    public BasicOrganization getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(BasicOrganization receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public Date getResolveDate() {
+        return resolveDate;
+    }
+
+    public void setResolveDate(Date resolveDate) {
+        this.resolveDate = resolveDate;
+    }
     
     private String message;
     private BasicOrganization sender;

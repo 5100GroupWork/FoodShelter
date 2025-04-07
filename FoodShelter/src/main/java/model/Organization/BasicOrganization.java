@@ -5,17 +5,18 @@
 package model.Organization;
 
 import java.util.ArrayList;
+import model.Account.UserAccountDirctory;
 import model.Role.BasicRole;
+import model.WorkQueue.WorkQueue;
 
 /**
  *
  * @author 59386
  */
-public class BasicOrganization {
+public abstract class BasicOrganization {
     private String name;
     private WorkQueue workQueue;
-    private EmployeeDirectory employeeDirectory;
-    private UserAccountDirectory userAccountDirectory;
+    private UserAccountDirctory userAccountDirectory;
     private int organizationID;
     private static int counter=0;
     
@@ -33,24 +34,19 @@ public class BasicOrganization {
     public BasicOrganization(String name) {
         this.name = name;
         workQueue = new WorkQueue();
-        employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
+        userAccountDirectory = new UserAccountDirctory();
         organizationID = counter;
         ++counter;
     }
 
     public abstract ArrayList<BasicRole> getSupportedRole();
     
-    public UserAccountDirectory getUserAccountDirectory() {
+    public UserAccountDirctory getUserAccountDirectory() {
         return userAccountDirectory;
     }
 
     public int getOrganizationID() {
         return organizationID;
-    }
-
-    public EmployeeDirectory getEmployeeDirectory() {
-        return employeeDirectory;
     }
     
     public String getName() {
