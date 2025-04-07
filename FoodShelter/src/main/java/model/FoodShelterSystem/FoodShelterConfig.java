@@ -9,6 +9,7 @@ package model.FoodShelterSystem;
  * @author 59386
  */
 public class FoodShelterConfig {
+    
     public static FoodShelterSystem configure(){
         return 
     }

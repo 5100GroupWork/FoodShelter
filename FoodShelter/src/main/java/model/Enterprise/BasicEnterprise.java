@@ -11,7 +11,7 @@ import model.Organization.OrganizationDirctory;
  *
  * @author 59386
  */
-public class BasicEnterprise extends BasicOrganization{
+public abstract class BasicEnterprise extends BasicOrganization{
     private BasicEnterpriseType enterpriseType;
     private OrganizationDirctory organizationDirectory;
     
