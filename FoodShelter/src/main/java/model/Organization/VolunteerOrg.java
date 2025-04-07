@@ -4,10 +4,28 @@
  */
 package model.Organization;
 
+import java.util.ArrayList;
+import model.Role.BasicRole;
+import model.Role.Deliver;
+import model.Role.FoodIncEmployee;
+import model.Role.TaskManager;
+
 /**
  *
  * @author 59386
  */
-public class VolunteerOrg {
+public class VolunteerOrg extends BasicOrganization{
+    
+    public VolunteerOrg() {
+        super(Type.Volunteer.getValue());
+    }
+    
+    @Override
+    public ArrayList<BasicRole> getSupportedRole() {
+        ArrayList<BasicRole> roles = new ArrayList();
+        roles.add(new TaskManager());
+        roles.add(new Deliver());
+        return roles;
+    }
     
 }

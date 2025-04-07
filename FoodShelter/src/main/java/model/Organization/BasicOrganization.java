@@ -7,6 +7,7 @@ package model.Organization;
 import java.util.ArrayList;
 import model.Account.UserAccountDirctory;
 import model.Role.BasicRole;
+import model.Role.WareHourseChecker;
 import model.WorkQueue.WorkQueue;
 
 /**
@@ -21,7 +22,12 @@ public abstract class BasicOrganization {
     private static int counter=0;
     
     public enum Type{
-        Admin("Admin Organization"), Doctor("Doctor Organization"), Lab("Lab Organization");
+        FoodInc("FoodIncOrg"),
+        Volunteer("VolunteerOrg"),
+        RequestCollect("RequestCollectOrg"),
+        RequestEntertain("RequestEntertainOrg"),
+        NewFoodChecker("NewFoodCHeckOrg"),
+        WareHourseCheck("WareHourseCheckOrg");
         private String value;
         private Type(String value) {
             this.value = value;
