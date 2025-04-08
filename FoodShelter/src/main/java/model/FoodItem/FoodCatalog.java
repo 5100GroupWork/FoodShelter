@@ -28,6 +28,7 @@ public class FoodCatalog {
     // add Item 
     public FoodItem addFoodItem(){
         FoodItem foodItem  = new FoodItem();
+        foodItem.setCatalogName(name);
         foodItems.add(foodItem);
         return foodItem;
     }
