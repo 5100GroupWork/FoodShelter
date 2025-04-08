@@ -11,9 +11,28 @@ import model.Role.BasicRole;
  * @author 59386
  */
 public class UserAccount {
-    private String username;
-    private String password;
-    private BasicRole role;
+    String username;
+    String password;
+    BasicRole role;
+    String email;
+    String phone;
+    
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getUsername() {
         return username;

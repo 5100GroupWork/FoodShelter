@@ -5,43 +5,47 @@
 package model.FoodShelterSystem;
 
 import java.util.ArrayList;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Role.BasicRole;
+import model.Role.SystemAdmin;
 
 /**
  *
  * @author 59386
  */
 public class FoodShelterSystem extends BasicOrganization{
-    private static EcoSystem business;
-    private ArrayList<Network> networkList;
-    public static EcoSystem getInstance(){
+    private static FoodShelterSystem business;
+    private ArrayList<NetWork> networkList;
+    public static FoodShelterSystem getInstance(){
         if(business==null){
-            business=new EcoSystem();
+            business=new FoodShelterSystem();
         }
         return business;
     }
     
-    public Network createAndAddNetwork(){
-        Network network=new Network();
+    public NetWork createAndAddNetwork(){
+        NetWork network=new NetWork();
         networkList.add(network);
         return network;
     }
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roleList=new ArrayList<Role>();
-        roleList.add(new SystemAdminRole());
+    public ArrayList<BasicRole> getSupportedRole() {
+        ArrayList<BasicRole> roleList=new ArrayList<BasicRole>();
+        roleList.add(new SystemAdmin());
         return roleList;
     }
-    private EcoSystem(){
+    
+    private FoodShelterSystem(){
         super(null);
-        networkList=new ArrayList<Network>();
+        networkList=new ArrayList<NetWork>();
     }
 
-    public ArrayList<Network> getNetworkList() {
+    public ArrayList<NetWork> getNetworkList() {
         return networkList;
     }
 
-    public void setNetworkList(ArrayList<Network> networkList) {
+    public void setNetworkList(ArrayList<NetWork> networkList) {
         this.networkList = networkList;
     }
     
@@ -49,7 +53,7 @@ public class FoodShelterSystem extends BasicOrganization{
         if(!this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)){
             return false;
         }
-        for(Network network:networkList){
+        for(NetWork network:networkList){
             
         }
         return true;
