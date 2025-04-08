@@ -15,6 +15,19 @@ import model.Organization.BasicOrganization;
  * @author 59386
  */
 public class FoodIncEmployee extends BasicRole{
+    /**
+     * 
+     * @param userProcessContainer
+     * @param account
+     * @param organization
+     * @param enterprise
+     * @param business
+     * @return 
+     * 
+     * post usless food
+     */
+    
+    
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {

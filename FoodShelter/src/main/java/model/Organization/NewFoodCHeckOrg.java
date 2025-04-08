@@ -14,9 +14,9 @@ import model.Role.FreshChecker;
  *
  * @author 59386
  */
-public class NewFoodCHeckOrg extends BasicOrganization{
+public class NewFoodCheckOrg extends BasicOrganization{
     
-    public NewFoodCHeckOrg() {
+    public NewFoodCheckOrg() {
         super(Type.NewFoodChecker.getValue());
     }
     
