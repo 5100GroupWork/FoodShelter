@@ -64,7 +64,7 @@ public class WorkRequest {
     private String message;
     private BasicOrganization sender;
     private BasicOrganization receiver;
-    private String status;
+    private String status; // finish/ waiting /pedding
     private Date requestDate;
     private Date resolveDate;
 }

@@ -83,10 +83,18 @@ public class FoodItem {
     public void setCheckingStatus(String CheckingStatus) {
         this.CheckingStatus = CheckingStatus;
     }
+    public String getDecs() {
+        return decs;
+    }
+
+    public void setDecs(String decs) {
+        this.decs = decs;
+    }
     String CheckingStatus; // accept or reject
     
     String FoodName;
     String CatalogName;
+    String decs;
     int number;
     FoodIncOrg foodIncOrg;
     String postDate;

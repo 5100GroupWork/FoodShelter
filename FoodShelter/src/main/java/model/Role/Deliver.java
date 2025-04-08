@@ -11,6 +11,7 @@ import model.FoodShelterSystem.FoodShelterSystem;
 import model.Organization.BasicOrganization;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestDelivery;
 
 /**
  *
@@ -29,21 +30,26 @@ public class Deliver extends BasicRole{
      * 
      * 快递接单业务,workQueue
      */
-    WorkQueue undoWorkQueue = new WorkQueue();
+    WorkQueue doingWorkQueue = new WorkQueue();
     WorkQueue finishedWorkQueue = new WorkQueue();
     int workExp = 0;
     
     public void newWorkQueue(WorkRequest request){
-        this.undoWorkQueue.getWorkRequestList().add(request);      
+        this.doingWorkQueue.getWorkRequestList().add(request);      
     }
     
     public void WorkQueueFinished(WorkRequest request){
         this.finishedWorkQueue.getWorkRequestList().add(request);
-        this.undoWorkQueue.removeWorkRequest(request);
+        this.doingWorkQueue.removeWorkRequest(request);
     }
     
     public int getDeliverExp(){
        return this.finishedWorkQueue.getWorkRequestList().size()*5;
+    }
+    
+    // status change
+    public void changeDeliveryStatus(WorkRequestDelivery workRequestDelivery, String Status){
+        workRequestDelivery.setStatus(Status);
     }
     
     
