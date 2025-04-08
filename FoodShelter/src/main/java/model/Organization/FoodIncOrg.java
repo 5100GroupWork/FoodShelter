@@ -11,8 +11,29 @@ import model.Role.FoodIncEmployee;
 /**
  *
  * @author 59386
+ * 添加employee的时候要同时新建UserAccount先才行
  */
 public class FoodIncOrg extends BasicOrganization{
+    ArrayList<FoodIncEmployee> employees;
+    String address;
+    
+    
+    
+    public ArrayList<FoodIncEmployee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(ArrayList<FoodIncEmployee> employees) {
+        this.employees = employees;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public FoodIncOrg() {
         super(Type.FoodInc.getValue());
     }
