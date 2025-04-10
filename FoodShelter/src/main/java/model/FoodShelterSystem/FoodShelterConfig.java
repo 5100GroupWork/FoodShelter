@@ -11,6 +11,7 @@ package model.FoodShelterSystem;
 public class FoodShelterConfig {
     
     public static FoodShelterSystem configure(){
+        
         return 
     }
     

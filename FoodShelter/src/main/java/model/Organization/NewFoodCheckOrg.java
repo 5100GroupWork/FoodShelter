@@ -5,9 +5,7 @@
 package model.Organization;
 
 import java.util.ArrayList;
-import model.Organization.BasicOrganization.Type;
 import model.Role.BasicRole;
-import model.Role.FoodIncEmployee;
 import model.Role.FreshChecker;
 
 /**
@@ -28,3 +26,4 @@ public class NewFoodCheckOrg extends BasicOrganization{
     }
     
 }
+
