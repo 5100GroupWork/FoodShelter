@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class FoodCatalog {
     String name;
     ArrayList<FoodItem> foodItems;
+    int count =0;
     
     public ArrayList<FoodItem> FoodCatalog(String Name){
         foodItems = new ArrayList<>();
@@ -27,7 +28,9 @@ public class FoodCatalog {
     
     // add Item 
     public FoodItem addFoodItem(){
+        count++;
         FoodItem foodItem  = new FoodItem();
+        foodItem.setId(count);
         foodItem.setCatalogName(name);
         foodItems.add(foodItem);
         return foodItem;

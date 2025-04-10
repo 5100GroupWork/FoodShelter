@@ -15,8 +15,8 @@ import model.Role.FoodIncEmployee;
  */
 public class RequestEntertainOrg extends BasicOrganization{
     
-    public RequestEntertainOrg() {
-        super(Type.RequestEntertain.getValue());
+    public RequestEntertainOrg(String name) {
+        super(Type.RequestEntertain.getValue(),name);
     }
     
     @Override

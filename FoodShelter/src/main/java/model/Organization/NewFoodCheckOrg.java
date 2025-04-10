@@ -14,8 +14,8 @@ import model.Role.FreshChecker;
  */
 public class NewFoodCheckOrg extends BasicOrganization{
     
-    public NewFoodCheckOrg() {
-        super(Type.NewFoodChecker.getValue());
+    public NewFoodCheckOrg(String name) {
+        super(Type.NewFoodChecker.getValue(),name);
     }
     
     @Override

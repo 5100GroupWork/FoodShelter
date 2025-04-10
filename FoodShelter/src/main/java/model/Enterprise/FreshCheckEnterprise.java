@@ -19,29 +19,52 @@ import model.Role.FoodIncEmployee;
  */
 public class FreshCheckEnterprise extends BasicEnterprise{
 
-    
-    NewFoodCheckOrg newFoodCheckOrg;
-    WareHourseCheckOrg wareHourseCheckOrg;
-    
-    public NewFoodCheckOrg getNewFoodCheckOrg() {
-        return newFoodCheckOrg;
+    public ArrayList<NewFoodCheckOrg> getNewFoodCheckOrgs() {
+        return newFoodCheckOrgs;
     }
 
-    public void setNewFoodCheckOrg(NewFoodCheckOrg newFoodCheckOrg) {
-        this.newFoodCheckOrg = newFoodCheckOrg;
+    public void setNewFoodCheckOrgs(ArrayList<NewFoodCheckOrg> newFoodCheckOrgs) {
+        this.newFoodCheckOrgs = newFoodCheckOrgs;
     }
 
-    public WareHourseCheckOrg getWareHourseCheckOrg() {
+    public ArrayList<WareHourseCheckOrg> getWareHourseCheckOrg() {
+        return wareHourseCheckOrgs;
+    }
+
+    public void setWareHourseCheckOrg(ArrayList<WareHourseCheckOrg> wareHourseCheckOrg) {
+        this.wareHourseCheckOrgs = wareHourseCheckOrg;
+    }
+    
+    /////////////////////////////////////////////////////////
+    // add
+    public NewFoodCheckOrg addNewFoodCheckOrg(String name){
+        NewFoodCheckOrg newFoodCheckOrg = new NewFoodCheckOrg(name);
+        this.newFoodCheckOrgs.add(newFoodCheckOrg);
+         return  newFoodCheckOrg;
+    }
+    
+    public WareHourseCheckOrg addWareHourseCheckOrg(String name){
+        WareHourseCheckOrg wareHourseCheckOrg = new WareHourseCheckOrg(name);
+        this.wareHourseCheckOrgs.add(wareHourseCheckOrg);
         return wareHourseCheckOrg;
     }
+    
+    // remove 
+    public boolean removeNewFoodCheckOrg(NewFoodCheckOrg org) {
+        return this.newFoodCheckOrgs.remove(org);
+    }
 
-    public void setWareHourseCheckOrg(WareHourseCheckOrg wareHourseCheckOrg) {
-        this.wareHourseCheckOrg = wareHourseCheckOrg;
+    public boolean removeWareHourseCheckOrg(WareHourseCheckOrg org) {
+        return this.wareHourseCheckOrgs.remove(org);
     }
     
+    ArrayList<NewFoodCheckOrg> newFoodCheckOrgs;
+    ArrayList<WareHourseCheckOrg> wareHourseCheckOrgs;
+   
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);
     }
+    
     
     @Override
     public ArrayList<BasicRole> getSupportedRole() {

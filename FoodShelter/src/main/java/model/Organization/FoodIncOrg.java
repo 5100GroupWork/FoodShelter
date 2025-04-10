@@ -34,8 +34,8 @@ public class FoodIncOrg extends BasicOrganization{
     public void setAddress(String address) {
         this.address = address;
     }
-    public FoodIncOrg() {
-        super(Type.FoodInc.getValue());
+    public FoodIncOrg(String name) {
+        super(Type.FoodInc.getValue(),name);
     }
     
     @Override

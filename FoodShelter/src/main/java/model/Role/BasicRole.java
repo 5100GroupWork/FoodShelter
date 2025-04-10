@@ -18,6 +18,7 @@ public abstract class BasicRole {
     
     public enum RoleType{
         SystemAdmin("SystemAdmin"),
+        CollectorManager("CollectorManager"),
         FoodIncEmpolyee("FoodIncEmpolyee"),
         Deliver("Deliver"),
         TaskManager("TaskManager"),
