@@ -31,10 +31,7 @@ public class CollectorManager extends BasicRole{
         org.getUserAccountDirectory().getUserAccountList().add(homelessUser);
         return homelessUser;
     }
-    
-    
-    
-    
+
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
         return new CollectorManager(userProcessContainer, enterprise);

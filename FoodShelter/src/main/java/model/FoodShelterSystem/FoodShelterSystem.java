@@ -37,7 +37,7 @@ public class FoodShelterSystem extends BasicOrganization{
     }
     
     private FoodShelterSystem(){
-        super(null);
+        super(null,null);
         networkList=new ArrayList<NetWork>();
     }
 
