@@ -15,18 +15,16 @@ import model.Organization.BasicOrganization;
  * @author 59386
  */
 public class WareHourseChecker extends BasicRole{
-    public String getOrganizationName() {
-        return OrganizationName;
+    String name;
+    BasicOrganization org;
+    public WareHourseChecker(String name,BasicOrganization org){
+        this.name = name;
+        this.org = org;
     }
-
-    public void setOrganizationName(String OrganizationName) {
-        this.OrganizationName = OrganizationName;
-    }
-    String OrganizationName;
     
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new WareHourseCheckerWorkAreaJPanel(userProcessContainer, enterprise);
-    }
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new WareHourseCheckerWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
     
 }

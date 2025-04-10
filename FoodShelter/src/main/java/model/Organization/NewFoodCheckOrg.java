@@ -18,6 +18,11 @@ public class NewFoodCheckOrg extends BasicOrganization{
         super(Type.NewFoodChecker.getValue(),name);
     }
     
+    // add newFoodChecker
+    public FreshChecker addFreshChecker(){
+    
+    }
+    
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roles = new ArrayList();

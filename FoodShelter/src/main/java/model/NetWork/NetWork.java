@@ -5,9 +5,12 @@
 package model.NetWork;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
+import model.Account.UserAccountDirctory;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.EnterPriseDirctory;
 import model.FoodItem.FoodItem;
+import model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -15,23 +18,42 @@ import model.FoodItem.FoodItem;
  */
 public class NetWork {
     private String name;
-
-    
+    UserAccountDirctory userAccountDirctory;
     private EnterPriseDirctory enterpriseDirectory;
-    ArrayList<FoodItem> checkList;
-    ArrayList<FoodItem> warehouseList;
+    WorkQueue checkList;
+    WorkQueue warehouseList;
     
     
     //////////////////////fun/////////////////////
-    public  FoodItem addFoodItem(ArrayList<FoodItem> list){
-        FoodItem foodItem = new FoodItem();
-        list.add(foodItem);
-        return foodItem;
+    public WorkQueue getCheckList() {
+        return checkList;
+    }
+
+    public void setCheckList(WorkQueue checkList) {
+        this.checkList = checkList;
+    }
+
+    public WorkQueue getWarehouseList() {
+        return warehouseList;
+    }
+
+    public void setWarehouseList(WorkQueue warehouseList) {
+        this.warehouseList = warehouseList;
     }
     
-    
+
+    public UserAccountDirctory getUserAccountDirctory() {
+        return userAccountDirctory;
+    }
+
+    public void setUserAccountDirctory(UserAccountDirctory userAccountDirctory) {
+        this.userAccountDirctory = userAccountDirctory;
+    }
     public NetWork(){
         enterpriseDirectory=new EnterPriseDirctory();
+        checkList = new WorkQueue();
+        warehouseList = new WorkQueue();
+        userAccountDirctory = new UserAccountDirctory();
     }
     public String getName() {
         return name;
@@ -44,21 +66,7 @@ public class NetWork {
     public EnterPriseDirctory getEnterpriseDirectory() {
         return enterpriseDirectory;
     }
-    public ArrayList<FoodItem> getCheckList() {
-        return checkList;
-    }
-
-    public void setCheckList(ArrayList<FoodItem> checkList) {
-        this.checkList = checkList;
-    }
-
-    public ArrayList<FoodItem> getWarehouseList() {
-        return warehouseList;
-    }
-
-    public void setWarehouseList(ArrayList<FoodItem> warehouseList) {
-        this.warehouseList = warehouseList;
-    }
+    
     
     @Override
     public String toString(){
