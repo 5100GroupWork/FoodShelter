@@ -7,9 +7,11 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.FoodItem.FoodItem;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestFoodItem;
 
 /**
@@ -41,9 +43,16 @@ public class FreshChecker extends BasicRole{
         this.org = org;
     }
     // freshChecker check the foodItem
-    public WorkRequestFoodItem getAllfoodItem(NetWork netWork){
+    public WorkQueue getAllfoodItem(NetWork netWork){
         return netWork.getCheckList();
     }
+    
+    // check the foodItem
+    public void checkFoodItem(WorkRequestFoodItem workRequestFoodItem,String status){
+        FoodItem foodItem = workRequestFoodItem.getFoodItem();
+        foodItem.setFoodStatus(status);
+    }
+    
     
 //    @Override
 //    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
