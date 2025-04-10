@@ -15,8 +15,9 @@ import model.Organization.BasicOrganization;
  * @author 59386
  */
 public class ShelterHelper extends BasicRole{
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new ShelterHelperWorkAreaJPanel(userProcessContainer, enterprise);
-    }
+    
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new ShelterHelperWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
 }
