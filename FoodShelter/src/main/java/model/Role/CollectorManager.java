@@ -9,6 +9,7 @@ import model.Account.UserAccount;
 import model.Account.UserAccountDirctory;
 import model.Enterprise.BasicEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 
@@ -18,23 +19,24 @@ import model.Organization.RequestCollectOrg;
  */
 public class CollectorManager extends BasicRole{
     String name;
-    
-    public CollectorManager(String name){
+    BasicOrganization org;
+    public CollectorManager(String name,BasicOrganization org){
         this.name = name;
+        this.org = org;
     }
     
     // add homeless
-    public UserAccount addHomeLess(RequestCollectOrg org,UserAccountDirctory userAccountDirctory,String username, String password){
+    public UserAccount addHomeLess(RequestCollectOrg org,String username, String password,NetWork netWork){
         Homeless homeless = new Homeless();
-        UserAccount homelessUser = userAccountDirctory.createUserAccount(username,password,homeless);
+        UserAccount homelessUser = netWork.getUserAccountDirctory().createUserAccount(username,password,homeless);
         //org.userAccountDirectory.getUserAccountList().add(homelessUser);
         org.getUserAccountDirectory().getUserAccountList().add(homelessUser);
         return homelessUser;
     }
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new CollectorManager(userProcessContainer, enterprise);
-    }
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new CollectorManager(userProcessContainer, enterprise);
+//    }
     
 }

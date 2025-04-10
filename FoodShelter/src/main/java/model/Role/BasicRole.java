@@ -44,11 +44,11 @@ public abstract class BasicRole {
         }
     }
     
-        public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account, 
-            BasicOrganization organization, 
-            BasicEnterprise enterprise, 
-            FoodShelterSystem business);
+//        public abstract JPanel createWorkArea(JPanel userProcessContainer, 
+//            UserAccount account, 
+//            BasicOrganization organization, 
+//            BasicEnterprise enterprise, 
+//            FoodShelterSystem business);
     
     
     

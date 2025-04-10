@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.WorkQueue.WorkRequestFoodItem;
 
 /**
  *
@@ -16,19 +18,36 @@ import model.Organization.BasicOrganization;
  */
 public class FreshChecker extends BasicRole{
 
-    public String getOrganizationName() {
-        return OrganizationName;
+    public String getName() {
+        return name;
     }
 
-    public void setOrganizationName(String OrganizationName) {
-        this.OrganizationName = OrganizationName;
+    public void setName(String name) {
+        this.name = name;
     }
-    String OrganizationName;
-    
-    
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new FreshCheckerWorkAreaJPanel(userProcessContainer, enterprise);
+
+    public BasicOrganization getOrg() {
+        return org;
     }
+
+    public void setOrg(BasicOrganization org) {
+        this.org = org;
+    }
+
+    String name;
+    BasicOrganization org;
+    public FreshChecker(String name,BasicOrganization org){
+        this.name = name;
+        this.org = org;
+    }
+    // freshChecker check the foodItem
+    public WorkRequestFoodItem getAllfoodItem(NetWork netWork){
+        return netWork.getCheckList();
+    }
+    
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new FreshCheckerWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
     
 }

@@ -53,9 +53,9 @@ public class Deliver extends BasicRole{
     }
     
     
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new DeliverWorkAreaJPanel(userProcessContainer, enterprise);
-    }
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new DeliverWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
     
 }
