@@ -43,9 +43,10 @@ public abstract class BasicEnterprise extends BasicOrganization{
         this.enterpriseType = enterpriseType;
     }
     
-    public BasicEnterprise(String name,BasicEnterpriseType type){
-        super(name);
-        this.enterpriseType=type;
-        organizationDirectory=new OrganizationDirctory();
+    public BasicEnterprise(String name, BasicEnterpriseType type) {
+        super(type.getValue(), name); 
+        this.enterpriseType = type;
+        organizationDirectory = new OrganizationDirctory();
     }
+
 }

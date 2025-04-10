@@ -5,6 +5,7 @@
 package model.Organization;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.Role.BasicRole;
 import model.Role.Homeless;
 
@@ -14,9 +15,10 @@ import model.Role.Homeless;
  */
 public class RequestCollectOrg extends BasicOrganization{
     
-    public RequestCollectOrg() {
-        super(Type.RequestEntertain.getValue());
+    public RequestCollectOrg(String name) {
+        super(Type.RequestCollect.getValue(), name);
     }
+    
     
     @Override
     public ArrayList<BasicRole> getSupportedRole() {

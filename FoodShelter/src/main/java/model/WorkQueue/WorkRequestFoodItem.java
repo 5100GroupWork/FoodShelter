@@ -20,6 +20,7 @@ public class WorkRequestFoodItem extends WorkRequest{
         this.foodItem = foodItem;
     }
     
+    
     FoodItem foodItem;
     
 }

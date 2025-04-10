@@ -5,9 +5,7 @@
 package model.Organization;
 
 import java.util.ArrayList;
-import model.Organization.BasicOrganization.Type;
 import model.Role.BasicRole;
-import model.Role.FoodIncEmployee;
 import model.Role.FreshChecker;
 
 /**
@@ -16,8 +14,8 @@ import model.Role.FreshChecker;
  */
 public class NewFoodCheckOrg extends BasicOrganization{
     
-    public NewFoodCheckOrg() {
-        super(Type.NewFoodChecker.getValue());
+    public NewFoodCheckOrg(String name) {
+        super(Type.NewFoodChecker.getValue(),name);
     }
     
     @Override
@@ -28,3 +26,4 @@ public class NewFoodCheckOrg extends BasicOrganization{
     }
     
 }
+

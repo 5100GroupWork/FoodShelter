@@ -5,6 +5,7 @@
 package model.Organization;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.Account.UserAccountDirctory;
 import model.Role.BasicRole;
 import model.Role.WareHourseChecker;
@@ -15,9 +16,12 @@ import model.WorkQueue.WorkQueue;
  * @author 59386
  */
 public abstract class BasicOrganization {
+
+    
+    private String Typename;
     private String name;
     private WorkQueue workQueue;
-    private UserAccountDirctory userAccountDirectory;
+    UserAccountDirctory userAccountDirectory;
     private int organizationID;
     private static int counter=0;
     
@@ -37,14 +41,23 @@ public abstract class BasicOrganization {
         }
     }
 
-    public BasicOrganization(String name) {
+    public BasicOrganization(String Typename,String name) {
         this.name = name;
+        this.Typename = Typename;
         workQueue = new WorkQueue();
         userAccountDirectory = new UserAccountDirctory();
         organizationID = counter;
         ++counter;
     }
 
+    public String getTypename() {
+        return Typename;
+    }
+
+    public void setTypename(String Typename) {
+        this.Typename = Typename;
+    }
+    
     public abstract ArrayList<BasicRole> getSupportedRole();
     
     public UserAccountDirctory getUserAccountDirectory() {
@@ -70,6 +83,11 @@ public abstract class BasicOrganization {
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
     }
+    
+//    public UserAccount addUser(){
+//        UserAccount userAccount = new UserAccount();
+//        this.userAccountDirectory.add()
+//    }
 
     @Override
     public String toString() {

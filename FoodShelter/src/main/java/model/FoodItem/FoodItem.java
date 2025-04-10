@@ -91,7 +91,16 @@ public class FoodItem {
         this.decs = decs;
     }
     String CheckingStatus; // accept or reject
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
+    int id;
     String FoodName;
     String CatalogName;
     String decs;
