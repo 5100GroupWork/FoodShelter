@@ -27,7 +27,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblRole = new javax.swing.JLabel();
         txtuserName = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         lblpassword = new javax.swing.JLabel();
@@ -40,9 +39,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
-        txtRole = new javax.swing.JTextField();
-
-        lblRole.setText("Role");
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -81,25 +77,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(102, 137, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblRole, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtuserName)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(btnSubmit))
-                    .addComponent(txtEmail)
-                    .addComponent(txtPhone)
-                    .addComponent(txtRole)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(204, 204, 204))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(btnBack)
@@ -107,8 +84,27 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                 .addComponent(enterpriseLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addComponent(jLabel1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtuserName)
+                            .addComponent(txtEmail)
+                            .addComponent(txtPhone)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(204, 204, 204))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSubmit)
+                        .addGap(249, 249, 249))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,13 +129,9 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrganization)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRole)
-                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(47, 47, 47)
                 .addComponent(btnSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -187,13 +179,11 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblConfirmPassword;
     private javax.swing.JLabel lblOrganization;
-    private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblpassword;
     private javax.swing.JLabel lbluserName;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtuserName;
     // End of variables declaration//GEN-END:variables
 }
