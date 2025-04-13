@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.CoordinatorWorkArea;
+package ui.TaskManagerWorkArea;
 
 /**
  *
  * @author sylvia
  */
-public class CoordinatorWorkPanel extends javax.swing.JPanel {
+public class VolunteerListPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CoordinatorWorkPanel
+     * Creates new form VolunteerListPanel
      */
-    public CoordinatorWorkPanel() {
+    public VolunteerListPanel() {
         initComponents();
     }
 
