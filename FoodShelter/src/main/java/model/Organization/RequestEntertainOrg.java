@@ -8,15 +8,18 @@ import java.util.ArrayList;
 import model.Organization.BasicOrganization.Type;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
+import model.WorkQueue.WorkQueue;
 
 /**
  *
  * @author 59386
  */
 public class RequestEntertainOrg extends BasicOrganization{
+    WorkQueue DeliveryQueue;
     
     public RequestEntertainOrg(String name) {
         super(Type.RequestEntertain.getValue(),name);
+        this.DeliveryQueue = new WorkQueue();
     }
     
     @Override
