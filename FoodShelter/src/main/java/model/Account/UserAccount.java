@@ -5,6 +5,7 @@
 package model.Account;
 
 import model.Role.BasicRole;
+import model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -16,7 +17,22 @@ public class UserAccount {
     BasicRole role;
     String email;
     String phone;
+    WorkQueue workQueue;
     
+    
+    //////////////////////////////////////////////////
+    
+    
+    
+    
+    // get set fun
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
+    }
     
     public String getEmail() {
         return email;

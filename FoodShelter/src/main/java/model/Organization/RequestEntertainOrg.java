@@ -5,18 +5,33 @@
 package model.Organization;
 
 import java.util.ArrayList;
+import java.util.Date;
 import model.Organization.BasicOrganization.Type;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
+import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequestDelivery;
 
 /**
  *
  * @author 59386
  */
 public class RequestEntertainOrg extends BasicOrganization{
+    WorkQueue DeliveryQueue;
+    
+    // new deliveryRequest
+    public WorkRequestDelivery newRequestDelivery(){
+        WorkRequestDelivery workRequestDelivery = new WorkRequestDelivery();
+        Date date = new Date();
+        workRequestDelivery.setSender(this);
+        workRequestDelivery.setRequestDate(date);
+        this.getWorkQueue().getWorkRequestList().add(workRequestDelivery);
+        return workRequestDelivery;
+    }
     
     public RequestEntertainOrg(String name) {
         super(Type.RequestEntertain.getValue(),name);
+        this.DeliveryQueue = new WorkQueue();
     }
     
     @Override

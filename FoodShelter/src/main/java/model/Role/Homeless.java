@@ -41,9 +41,9 @@ public class Homeless extends BasicRole{
     }
     
     
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new HomelessWorkAreaJPanel(userProcessContainer, enterprise);
-    }
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new HomelessWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
     
 }

@@ -40,6 +40,23 @@ public abstract class BasicOrganization {
             return value;
         }
     }
+    
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    private String address = "";
+    
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        BasicOrganization.counter = counter;
+    }
 
     public BasicOrganization(String Typename,String name) {
         this.name = name;

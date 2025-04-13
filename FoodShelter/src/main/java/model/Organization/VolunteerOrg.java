@@ -16,8 +16,8 @@ import model.Role.TaskManager;
  */
 public class VolunteerOrg extends BasicOrganization{
     
-    public VolunteerOrg() {
-        super(Type.Volunteer.getValue());
+    public VolunteerOrg(String name) {
+        super(Type.Volunteer.getValue(),name);
     }
     
     @Override
