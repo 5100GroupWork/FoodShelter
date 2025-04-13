@@ -92,6 +92,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                                 .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGap(18, 18, 18)
+
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnSubmit)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -99,6 +100,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                                     .addComponent(txtEmail)
                                     .addComponent(txtPhone)
                                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,7 +126,9 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrganization)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                 .addGap(42, 42, 42)
+
                 .addComponent(btnSubmit)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
