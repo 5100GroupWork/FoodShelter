@@ -50,9 +50,19 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
+
                 "Task ID", "Food Name", "Quantity", "From", "To", "Stauts"
+
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnApply2.setText("Delivered");
