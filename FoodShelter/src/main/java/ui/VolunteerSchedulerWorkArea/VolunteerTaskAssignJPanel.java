@@ -6,14 +6,14 @@ package ui.VolunteerSchedulerWorkArea;
 
 /**
  *
- * @author sylvia
+ * @author yuewu
  */
-public class VolunteerSchedulerWorkPanel extends javax.swing.JPanel {
+public class VolunteerTaskAssignJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form VolunteerSchedulerWorkPanel
+     * Creates new form VolunteerTaskAssignJPanel
      */
-    public VolunteerSchedulerWorkPanel() {
+    public VolunteerTaskAssignJPanel() {
         initComponents();
     }
 
