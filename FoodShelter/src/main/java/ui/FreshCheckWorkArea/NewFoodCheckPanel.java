@@ -41,7 +41,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Inspector - Pending Food Inspection");
+        enterpriseLabel.setText("New Food Check");
 
         tblPendingInspection.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,8 +80,8 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(backJButton)
-                .addGap(64, 64, 64)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(132, 132, 132)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(10, Short.MAX_VALUE)
