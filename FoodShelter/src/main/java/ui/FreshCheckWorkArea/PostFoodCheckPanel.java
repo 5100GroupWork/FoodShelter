@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.VolunteerWorkAreaShelter;
+package ui.FreshCheckWorkArea;
 
 /**
  *
  * @author sylvia
  */
-public class MyTasksPanel extends javax.swing.JPanel {
+public class PostFoodCheckPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form MyTasksPanel
+     * Creates new form PostFoodCheckPanel
      */
-    public MyTasksPanel() {
+    public PostFoodCheckPanel() {
         initComponents();
     }
 
