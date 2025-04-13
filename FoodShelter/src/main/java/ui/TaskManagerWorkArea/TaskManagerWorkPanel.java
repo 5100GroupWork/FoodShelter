@@ -83,7 +83,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Task ID", "Food Name", "Quantity", "From", "To", "Status"
+                "Food ID", "Food Name", "Quantity", "From", "To", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
