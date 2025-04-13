@@ -4,6 +4,7 @@
  */
 package model.WorkQueue;
 
+import java.util.Date;
 import model.Account.UserAccount;
 
 /**
@@ -11,6 +12,30 @@ import model.Account.UserAccount;
  * @author 59386
  */
 public class WorkRequestNeeds extends WorkRequest{
-    UserAccount homeless;
+    private UserAccount homeless;
+    private String needStatus=""; // accepted || rejected 
     
+    // 不用传入，直接在ui的部分填入需要的东西
+    public WorkRequestNeeds(){
+        Date date = new Date();
+        this.setRequestDate(date);
+        this.setStatus("pedding");
+    }
+
+    public UserAccount getHomeless() {
+        return homeless;
+    }
+
+    public void setHomeless(UserAccount homeless) {
+        this.homeless = homeless;
+    }
+
+    public String getNeedStatus() {
+        return needStatus;
+    }
+
+    public void setNeedStatus(String needStatus) {
+        this.needStatus = needStatus;
+    }
+
 }

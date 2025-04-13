@@ -6,6 +6,7 @@ package model.Account;
 
 import java.util.ArrayList;
 import model.Role.BasicRole;
+import model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -34,9 +35,10 @@ public class UserAccountDirctory {
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);
         userAccount.setPassword(password);
-//        userAccount.setEmployee(employee);
         userAccount.setRole(role);
         userAccountList.add(userAccount);
+        WorkQueue workQueue = new WorkQueue();
+        userAccount.setWorkQueue(workQueue);
         return userAccount;
     }
     

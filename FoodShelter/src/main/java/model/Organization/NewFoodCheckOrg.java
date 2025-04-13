@@ -19,14 +19,15 @@ public class NewFoodCheckOrg extends BasicOrganization{
     }
     
     // add newFoodChecker
-    public FreshChecker addFreshChecker(){
-    
-    }
-    
+    // 这部分内容应该放入FoodCheckerManager中
+//    public FreshChecker addFreshChecker(){
+//        
+//    }
+//    
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roles = new ArrayList();
-        roles.add(new FreshChecker());
+        roles.add(new FreshChecker(null,null));
         return roles;
     }
     

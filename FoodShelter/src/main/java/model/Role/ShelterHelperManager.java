@@ -24,11 +24,11 @@ public class ShelterHelperManager extends BasicRole{
     
     // add homeless
     public UserAccount addShelterHelper(RequestEntertainOrg org,String username, String password,NetWork netWork){
-        ShelterHelper sh = new ShelterHelper();
+        ShelterHelper sh = new ShelterHelper(username,org);
         UserAccount homelessUser = netWork.getUserAccountDirctory().createUserAccount(username,password,sh);
         //org.userAccountDirectory.getUserAccountList().add(homelessUser);
         org.getUserAccountDirectory().getUserAccountList().add(homelessUser);
         return homelessUser;
-    }
+    }  
     
 }

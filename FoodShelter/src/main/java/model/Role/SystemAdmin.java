@@ -16,8 +16,9 @@ import model.Organization.BasicOrganization;
  */
 public class SystemAdmin extends BasicRole{
     
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-        return new SystemAdminWorkAreaJPanel(userProcessContainer, enterprise);
-    }
+    
+//    @Override
+//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
+//        return new SystemAdminWorkAreaJPanel(userProcessContainer, enterprise);
+//    }
 }

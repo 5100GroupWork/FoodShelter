@@ -23,7 +23,7 @@ public class WareHourseCheckOrg extends BasicOrganization{
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roles = new ArrayList();
-        roles.add(new WareHourseChecker());
+        roles.add(new WareHourseChecker(null, null));
         return roles;
     }
     
