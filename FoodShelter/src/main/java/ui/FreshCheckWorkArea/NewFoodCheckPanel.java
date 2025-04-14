@@ -45,17 +45,17 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
 
         tblPendingInspection.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Food ID", "Food Name", "Type", "Quantity", "Expiry Date", "Donor"
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
