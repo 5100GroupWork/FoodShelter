@@ -47,6 +47,8 @@
                           </Group>
                       </Group>
                   </Group>
+          </Group>
+
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -81,12 +83,15 @@
                   <Component id="lblQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spinnerQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+    <EmptySpace pref="50" max="32767" attributes="0"/>
+
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnApply" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnView" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+
           </Group>
       </Group>
     </DimensionLayout>
