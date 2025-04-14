@@ -35,6 +35,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblUnassignedTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
+        btnAssignTask1 = new javax.swing.JButton();
+        btnAssignTask2 = new javax.swing.JButton();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +75,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
         enterpriseLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        enterpriseLabel2.setText("Unassigned Tasks ");
+        enterpriseLabel2.setText("Shelter Request Tasks ");
 
         tblUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +105,20 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAssignTask1.setText("Refresh undo");
+        btnAssignTask1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignTask1ActionPerformed(evt);
+            }
+        });
+
+        btnAssignTask2.setText("View All");
+        btnAssignTask2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignTask2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,22 +126,29 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(btnAssignTask))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(enterpriseLabel2))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(255, 255, 255)
+                                .addComponent(enterpriseLabel1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(backJButton)
                                 .addGap(95, 95, 95)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(enterpriseLabel2)
-                            .addComponent(enterpriseLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(btnAssignTask)))
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(btnAssignTask1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAssignTask2)
+                .addGap(174, 174, 174))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -141,13 +164,17 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                     .addComponent(backJButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(enterpriseLabel2)
-                .addGap(123, 123, 123)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAssignTask1)
+                    .addComponent(btnAssignTask2))
+                .addGap(20, 20, 20)
                 .addComponent(enterpriseLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAssignTask)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(87, 87, 87)
@@ -164,10 +191,20 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAssignTaskActionPerformed
 
+    private void btnAssignTask1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTask1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssignTask1ActionPerformed
+
+    private void btnAssignTask2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTask2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssignTask2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAssignTask;
+    private javax.swing.JButton btnAssignTask1;
+    private javax.swing.JButton btnAssignTask2;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel enterpriseLabel2;
