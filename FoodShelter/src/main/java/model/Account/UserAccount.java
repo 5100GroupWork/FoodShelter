@@ -24,7 +24,6 @@ public class UserAccount {
     
     
     
-    
     // get set fun
     public WorkQueue getWorkQueue() {
         return workQueue;

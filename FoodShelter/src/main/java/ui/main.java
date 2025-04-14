@@ -7,6 +7,9 @@ package ui;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.DB4OUtil.DB4OUtil;
 
 /**
  *
@@ -14,11 +17,14 @@ import javax.swing.JPanel;
  */
 public class main extends javax.swing.JFrame {
 
+    private FoodShelterSystem system;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     /**
      * Creates new form main
      */
     public main() {
         initComponents();
+        system = dB4OUtil.retrieveSystem();
     }
 
     /**
