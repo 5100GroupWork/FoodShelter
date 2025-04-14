@@ -5,21 +5,25 @@
 package model.Enterprise;
 
 import java.util.ArrayList;
+import model.Enterprise.BasicEnterprise.BasicEnterpriseType;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
+import model.Role.BasicRole;
+import model.Role.FoodIncEmployee;
 
 /**
  *
  * @author 59386
  */
-public class RescueNetEnterprise {
+public class RescueNetEnterprise extends BasicEnterprise{
 
     private RequestCollectOrg requestCollectOrg;
     private RequestEntertainOrg requestEntertainOrg;
 
-    public RescueNetEnterprise(String collectName, String entertainName) {
-        this.requestCollectOrg = new RequestCollectOrg(collectName);
-        this.requestEntertainOrg = new RequestEntertainOrg(entertainName);
+    public RescueNetEnterprise(String name) {
+//        this.requestCollectOrg = new RequestCollectOrg(collectName);
+//        this.requestEntertainOrg = new RequestEntertainOrg(entertainName);
+         super(name, BasicEnterpriseType.RescueNet);
     }
 
     public RequestCollectOrg getRequestCollectOrg() {
@@ -54,6 +58,14 @@ public class RescueNetEnterprise {
 
     public void removeRequestEntertainOrg() {
         this.requestEntertainOrg = null;
+    }
+    
+    
+        @Override
+    public ArrayList<BasicRole> getSupportedRole() {
+        ArrayList<BasicRole> roles = new ArrayList();
+        roles.add(new FoodIncEmployee());
+        return roles;
     }
 }
 

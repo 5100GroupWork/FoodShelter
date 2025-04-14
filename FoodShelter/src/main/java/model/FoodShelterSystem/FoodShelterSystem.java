@@ -5,9 +5,11 @@
 package model.FoodShelterSystem;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Role.BasicRole;
+import model.Role.SysAdmin;
 import model.Role.SystemAdmin;
 
 /**
@@ -17,6 +19,8 @@ import model.Role.SystemAdmin;
 public class FoodShelterSystem extends BasicOrganization{
     private static FoodShelterSystem business;
     private ArrayList<NetWork> networkList;
+    
+    
     public static FoodShelterSystem getInstance(){
         if(business==null){
             business=new FoodShelterSystem();
@@ -32,13 +36,13 @@ public class FoodShelterSystem extends BasicOrganization{
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roleList=new ArrayList<BasicRole>();
-        roleList.add(new SystemAdmin());
+        roleList.add(new SysAdmin());
         return roleList;
     }
     
     private FoodShelterSystem(){
         super(null,null);
-        networkList=new ArrayList<NetWork>();
+        networkList=new ArrayList<>();
     }
 
     public ArrayList<NetWork> getNetworkList() {
