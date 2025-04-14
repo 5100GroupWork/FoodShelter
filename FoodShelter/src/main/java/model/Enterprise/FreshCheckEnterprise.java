@@ -40,7 +40,7 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     public NewFoodCheckOrg addNewFoodCheckOrg(String name){
         NewFoodCheckOrg newFoodCheckOrg = new NewFoodCheckOrg(name);
         this.newFoodCheckOrgs.add(newFoodCheckOrg);
-         return  newFoodCheckOrg;
+        return  newFoodCheckOrg;
     }
     
     public WareHourseCheckOrg addWareHourseCheckOrg(String name){

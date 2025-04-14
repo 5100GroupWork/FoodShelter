@@ -50,5 +50,12 @@ public class UserAccountDirctory {
         return true;
     }
     
-    
+    public BasicRole login(String name , String pwd){
+        for(UserAccount user: this.userAccountList){
+            if(name.equals(user.username) && pwd.equals(user.password)){
+            return user.role;
+            }
+        }
+        return null;
+    }
 }

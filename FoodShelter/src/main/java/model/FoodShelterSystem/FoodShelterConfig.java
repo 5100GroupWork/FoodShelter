@@ -4,6 +4,13 @@
  */
 package model.FoodShelterSystem;
 
+import java.util.ArrayList;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
+import model.NetWork.NetWork;
+import model.Role.SysAdmin;
+
 /**
  *
  * @author 59386
@@ -12,7 +19,26 @@ public class FoodShelterConfig {
     
     public static FoodShelterSystem configure(){
         
-        return 
+        FoodShelterSystem system = FoodShelterSystem.getInstance();
+        
+        // create a system admin
+        NetWork  netWork = system.createAndAddNetwork();
+        UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",new SysAdmin() );
+        
+        
+        // create 4 enterprise
+        // food enterprise
+        FoodEnterprise foodEnterprise = (FoodEnterprise)netWork.getEnterpriseDirectory().createEnterprise("WhoolFoods", "Food");
+        BasicEnterprise volunteerEnterprise = netWork.getEnterpriseDirectory().createEnterprise("volunteer", "Volunteer");
+        BasicEnterprise freshChEnterprise = netWork.getEnterpriseDirectory().createEnterprise("FreshChecker", "FreshChecker");
+        BasicEnterprise rescuEnterprise = netWork.getEnterpriseDirectory().createEnterprise("RescueNet", "RescueNet");
+        
+        // create enterprise employee
+        UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",new SysAdmin() );
+        UserAccount foodEnplyee = foodEnterprise.getEmployees().add()
+        
+        // creat Org
+        return system;
     }
     
 }

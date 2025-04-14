@@ -18,10 +18,10 @@ import model.Organization.RequestCollectOrg;
  *
  * @author 59386
  */
-public class FoodOrgManager extends BasicRole{
+public class FoodCheckOrgManager extends BasicRole{
     String name;
     BasicOrganization org;
-    public FoodOrgManager(String name,BasicOrganization org){
+    public FoodCheckOrgManager(String name,BasicOrganization org){
         this.name = name;
         this.org = org;
     }

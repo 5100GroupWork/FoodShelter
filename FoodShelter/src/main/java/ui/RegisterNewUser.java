@@ -105,7 +105,7 @@ public class RegisterNewUser extends javax.swing.JPanel {
                             .addComponent(txtuserName, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(passwordField)
                             .addComponent(btnRegister))))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {passwordField, txtConfirmPassword, txtuserName});
@@ -139,7 +139,7 @@ public class RegisterNewUser extends javax.swing.JPanel {
                     .addComponent(lblRole))
                 .addGap(32, 32, 32)
                 .addComponent(btnRegister)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
