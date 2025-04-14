@@ -5,6 +5,7 @@
 package model.Organization;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
 
@@ -14,16 +15,16 @@ import model.Role.FoodIncEmployee;
  * 添加employee的时候要同时新建UserAccount先才行
  */
 public class FoodIncOrg extends BasicOrganization{
-    ArrayList<FoodIncEmployee> employees;
+    ArrayList<UserAccount> employees;
     String address;
     
     
     
-    public ArrayList<FoodIncEmployee> getEmployees() {
+    public ArrayList<UserAccount> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(ArrayList<FoodIncEmployee> employees) {
+    public void setEmployees(ArrayList<UserAccount> employees) {
         this.employees = employees;
     }
 

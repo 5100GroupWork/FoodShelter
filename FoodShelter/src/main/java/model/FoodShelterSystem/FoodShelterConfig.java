@@ -9,6 +9,9 @@ import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
 import model.NetWork.NetWork;
+import model.Organization.FoodIncOrg;
+import model.Role.FoodEnterpriseManager;
+import model.Role.FoodIncEmployee;
 import model.Role.SysAdmin;
 
 /**
@@ -34,9 +37,13 @@ public class FoodShelterConfig {
         BasicEnterprise rescuEnterprise = netWork.getEnterpriseDirectory().createEnterprise("RescueNet", "RescueNet");
         
         // create enterprise employee
-        UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",new SysAdmin() );
-        UserAccount foodEnplyee = foodEnterprise.getEmployees().add()
+        UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodEnterpriseManager());
+        foodEnterprise.getEmployees().add(foodEnplyee);
         
+        FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WhoolFoods-blackbay");
+        foodIncOrg.setAddress("blackbay-Boston-MA");
+        UserAccount foodIncOrgEmployee = netWork.getUserAccountDirctory().createUserAccount("Jhon", "0000",new FoodIncEmployee());
+        foodIncOrg.getEmployees().add(foodIncOrgEmployee);
         // creat Org
         return system;
     }
