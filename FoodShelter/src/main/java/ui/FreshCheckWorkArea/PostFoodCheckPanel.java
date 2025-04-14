@@ -45,17 +45,17 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
 
         tblFoodList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Food ID", "Food Name", "Type", "Quantity", "Expiry Date", "Donor", "Status"
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
