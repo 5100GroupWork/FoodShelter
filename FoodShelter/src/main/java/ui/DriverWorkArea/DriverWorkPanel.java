@@ -39,7 +39,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Delivery Task List");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -50,19 +50,9 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-
                 "Task ID", "Food Name", "Quantity", "From", "To", "Stauts"
-
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, false, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         btnApply2.setText("Delivered");
