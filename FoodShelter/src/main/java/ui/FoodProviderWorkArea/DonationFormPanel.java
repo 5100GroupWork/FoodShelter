@@ -36,6 +36,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         valueLabel1 = new javax.swing.JLabel();
         txtExpiry = new javax.swing.JTextField();
         btnResetForm = new javax.swing.JButton();
+        requestTestJButton1 = new javax.swing.JButton();
 
         requestTestJButton.setText("Submit Donation");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +68,13 @@ public class DonationFormPanel extends javax.swing.JPanel {
             }
         });
 
+        requestTestJButton1.setText("View My Donation");
+        requestTestJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestTestJButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,16 +94,18 @@ public class DonationFormPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addGap(24, 24, 24)
                         .addComponent(requestTestJButton)
-                        .addGap(64, 64, 64)
-                        .addComponent(btnResetForm))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnResetForm)
+                        .addGap(27, 27, 27)
+                        .addComponent(requestTestJButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(backJButton)
                         .addGap(39, 39, 39)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +129,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(requestTestJButton)
-                    .addComponent(btnResetForm))
+                    .addComponent(btnResetForm)
+                    .addComponent(requestTestJButton1))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -140,6 +151,10 @@ public class DonationFormPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnResetFormActionPerformed
 
+    private void requestTestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_requestTestJButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
@@ -147,6 +162,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton requestTestJButton;
+    private javax.swing.JButton requestTestJButton1;
     private javax.swing.JSpinner spinnerQuantity;
     private javax.swing.JTextField txtExpiry;
     private javax.swing.JTextField txtFoodName;

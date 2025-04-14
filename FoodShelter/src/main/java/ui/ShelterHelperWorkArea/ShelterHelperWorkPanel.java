@@ -79,17 +79,17 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
         tblUnassignedTaskstblUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Food ID", "Food Name", "Type", "Quantity", "Expiry Date", "Expiry Date"
+                "Food ID", "Food Name", "Type", "Quantity", "Expiry Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
