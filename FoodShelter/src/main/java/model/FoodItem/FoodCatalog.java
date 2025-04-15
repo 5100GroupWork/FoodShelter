@@ -5,6 +5,7 @@
 package model.FoodItem;
 
 import java.util.ArrayList;
+import model.Organization.FoodIncOrg;
 
 /**
  *
@@ -15,11 +16,10 @@ public class FoodCatalog {
     ArrayList<FoodItem> foodItems;
     int count =0;
     
-    public ArrayList<FoodItem> FoodCatalog(String Name){
-        foodItems = new ArrayList<>();
-        this.name = Name;
-        return foodItems;
-    }
+    public FoodCatalog(String name) {
+    this.name = name;
+    this.foodItems = new ArrayList<>();
+}
     
     // get Catalog
     public ArrayList<FoodItem> getFoodCatalog(){
@@ -27,11 +27,12 @@ public class FoodCatalog {
     }
     
     // add Item 
-    public FoodItem addFoodItem(){
+    public FoodItem addFoodItem(FoodIncOrg org){
         count++;
         FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
         foodItem.setCatalogName(name);
+        foodItem.setFoodIncOrg(org);
         foodItems.add(foodItem);
         return foodItem;
     }
