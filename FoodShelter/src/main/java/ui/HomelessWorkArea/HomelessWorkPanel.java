@@ -4,6 +4,14 @@
  */
 package ui.HomelessWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.RescueNetEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.RequestCollectOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,15 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
     /**
      * Creates new form HomelessWorkPanel
      */
-    public HomelessWorkPanel() {
+    NetWork netWork;
+    JPanel workArea;
+    RequestCollectOrg requestCollectOrg;
+    RescueNetEnterprise rescueNetEnterprise;
+    public HomelessWorkPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.netWork  = netWork;
+        this.workArea = workArea;
+        this.requestCollectOrg = (RequestCollectOrg) organization;
+        this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
         initComponents();
     }
 

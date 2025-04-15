@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
+import ui.TaskManagerWorkArea.TaskManagerWorkPanel;
 
 /**
  *
@@ -17,9 +20,11 @@ import model.Organization.BasicOrganization;
 public class TaskManager extends BasicRole{
     
     
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new TaskManagerWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
-//    
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //任务分配中心
+        
+        return new TaskManagerWorkPanel(workArea,account,organization,enterprise,netWork);
+    }
+    
 }

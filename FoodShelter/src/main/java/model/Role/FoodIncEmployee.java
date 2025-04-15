@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import ui.FoodProviderWorkArea.DonationFormPanel;
+import ui.FreshCheckWorkArea.NewFoodCheckPanel;
 
 /**
  *
@@ -27,10 +30,10 @@ public class FoodIncEmployee extends BasicRole{
      * post usless food
      */
     
-    
-    
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new FoodIncEmployeeWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        
+        return new DonationFormPanel(workArea,account,organization,enterprise,netWork);
+    }
+   
 }

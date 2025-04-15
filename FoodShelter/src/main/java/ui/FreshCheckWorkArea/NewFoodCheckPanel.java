@@ -4,6 +4,14 @@
  */
 package ui.FreshCheckWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FreshCheckEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.WareHouseCheckOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,15 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
     /**
      * Creates new form InspectorWorkPanel
      */
-    public NewFoodCheckPanel() {
+    NetWork netWork;
+    WareHouseCheckOrg wareHouseCheckOrg;
+    FreshCheckEnterprise freshCheckEnterprise;
+    JPanel workArea;
+    public NewFoodCheckPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.wareHouseCheckOrg = (WareHouseCheckOrg) wareHouseCheckOrg;
+        this.freshCheckEnterprise = (FreshCheckEnterprise) enterprise;
+        this.netWork = netWork;
         initComponents();
     }
 

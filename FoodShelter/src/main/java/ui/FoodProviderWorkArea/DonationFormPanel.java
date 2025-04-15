@@ -4,6 +4,14 @@
  */
 package ui.FoodProviderWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,14 @@ public class DonationFormPanel extends javax.swing.JPanel {
     /**
      * Creates new form DonationFormPanel
      */
-    public DonationFormPanel() {
+    JPanel workArea;
+    NetWork netWork;
+    FoodIncOrg foodIncOrg;
+    FoodEnterprise foodEnterprise;
+    public DonationFormPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.foodEnterprise = (FoodEnterprise) enterprise;
         initComponents();
     }
 

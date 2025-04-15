@@ -4,6 +4,13 @@
  */
 package ui.DriverWorkArea;
 
+import javax.swing.JPanel;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +20,15 @@ public class DriverWorkPanel extends javax.swing.JPanel {
     /**
      * Creates new form DriverWorkPanel
      */
-    public DriverWorkPanel() {
+    JPanel workArea;
+    VolunteerEnterprise volunteerEnterprise;
+    DriverOrg driverOrg;
+    NetWork netWork;
+    public DriverWorkPanel(JPanel workArea, BasicEnterprise enterprise,BasicOrganization organization,NetWork netWork) {
+        this.workArea = workArea;
+        this.volunteerEnterprise =(VolunteerEnterprise)enterprise;
+        this.driverOrg = (DriverOrg)organization;
+        this.netWork = netWork;
         initComponents();
     }
 

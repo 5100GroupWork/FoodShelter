@@ -10,10 +10,13 @@ import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.RescueNetEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestNeeds;
+import ui.HomelessWorkArea.HomelessWorkPanel;
+import ui.RescueNetAdminWorkArea.HomelessAdmin;
 
 /**
  *
@@ -41,10 +44,12 @@ public class Homeless extends BasicRole{
         return this.homelessWorkQueue;
     }
     
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        
+        return new HomelessWorkPanel(workArea,account,organization,enterprise,netWork);
+    }
+
     
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new HomelessWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
     
 }

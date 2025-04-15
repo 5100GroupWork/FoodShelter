@@ -4,6 +4,13 @@
  */
 package ui.FreshCheckWorkArea;
 
+import javax.swing.JPanel;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FreshCheckEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.WareHouseCheckOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +20,15 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
     /**
      * Creates new form PostFoodCheckPanel
      */
-    public PostFoodCheckPanel() {
+    JPanel workArea;
+    FreshCheckEnterprise freshCheckEnterprise;
+    WareHouseCheckOrg wareHouseCheckOrg;
+    NetWork netWork;
+    public PostFoodCheckPanel(JPanel workArea,BasicEnterprise freshCheckEnterprise, BasicOrganization wareHouseCheckOrg,NetWork netWork) {
+        this.workArea = workArea;
+        this.freshCheckEnterprise = (FreshCheckEnterprise)freshCheckEnterprise;
+        this.wareHouseCheckOrg  = (WareHouseCheckOrg)wareHouseCheckOrg;
+        this.netWork = netWork;
         initComponents();
     }
 

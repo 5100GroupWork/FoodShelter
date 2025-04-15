@@ -13,6 +13,8 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestFoodItem;
+import ui.FreshCheckWorkArea.NewFoodCheckPanel;
+import ui.HomelessWorkArea.HomelessWorkPanel;
 
 /**
  *
@@ -54,9 +56,12 @@ public class FreshChecker extends BasicRole{
     }
     
     
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new FreshCheckerWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        
+        return new NewFoodCheckPanel(workArea,account,organization,enterprise,netWork);
+    }
+    
+
     
 }
