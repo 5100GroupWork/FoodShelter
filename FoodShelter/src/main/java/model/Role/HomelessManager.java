@@ -17,11 +17,10 @@ import model.Organization.RequestCollectOrg;
  *
  * @author 59386
  */
-public class CollectorManager extends BasicRole{
-    String name;
+public class HomelessManager extends BasicRole{
+//    String name;
     BasicOrganization org;
-    public CollectorManager(String name,BasicOrganization org){
-        this.name = name;
+    public HomelessManager(BasicOrganization org){
         this.org = org;
     }
     

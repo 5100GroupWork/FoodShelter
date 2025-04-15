@@ -27,9 +27,10 @@ public class Homeless extends BasicRole{
     }
     
     // create a request to belonged org
-    public WorkRequestNeeds createRequest(String message,RescueNetEnterprise rescueNetEnterprise){
+    public WorkRequestNeeds createRequest(String message,RescueNetEnterprise rescueNetEnterprise,RequestCollectOrg org){
         WorkRequestNeeds workRequestNeeds = new WorkRequestNeeds();
         this.homelessWorkQueue.getWorkRequestList().add(workRequestNeeds);
+        org.getWorkQueue().getWorkRequestList().add(workRequestNeeds);
         workRequestNeeds.setMessage(message);
         workRequestNeeds.setSender(rescueNetEnterprise.getRequestCollectOrg());
         workRequestNeeds.setReceiver(rescueNetEnterprise.getRequestEntertainOrg());

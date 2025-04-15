@@ -31,7 +31,7 @@ public class FoodCatalog {
         count++;
         FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
-        foodItem.setCatalogName(name);
+        //foodItem.setCatalogName(name);
         foodItems.add(foodItem);
         return foodItem;
     }

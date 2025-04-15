@@ -5,6 +5,7 @@
 package model.Enterprise;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.FoodItem.FoodItem;
 import model.Organization.NewFoodCheckOrg;
 import model.Organization.WareHourseCheckOrg;
@@ -60,6 +61,23 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     
     ArrayList<NewFoodCheckOrg> newFoodCheckOrgs;
     ArrayList<WareHourseCheckOrg> wareHourseCheckOrgs;
+
+    public ArrayList<WareHourseCheckOrg> getWareHourseCheckOrgs() {
+        return wareHourseCheckOrgs;
+    }
+
+    public void setWareHourseCheckOrgs(ArrayList<WareHourseCheckOrg> wareHourseCheckOrgs) {
+        this.wareHourseCheckOrgs = wareHourseCheckOrgs;
+    }
+
+    public ArrayList<UserAccount> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(ArrayList<UserAccount> employees) {
+        this.employees = employees;
+    }
+    ArrayList<UserAccount> employees;
    
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);

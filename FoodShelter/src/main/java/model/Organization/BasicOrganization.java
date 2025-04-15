@@ -31,7 +31,8 @@ public abstract class BasicOrganization {
         RequestCollect("RequestCollectOrg"),
         RequestEntertain("RequestEntertainOrg"),
         NewFoodChecker("NewFoodCHeckOrg"),
-        WareHourseCheck("WareHourseCheckOrg");
+        WareHourseCheck("WareHourseCheckOrg"),
+        DriverOrg("DriverOrg");
         private String value;
         private Type(String value) {
             this.value = value;
