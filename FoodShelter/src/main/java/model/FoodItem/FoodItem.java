@@ -28,9 +28,8 @@ public class FoodItem {
     String UsingStatus; // stored or send
     
 
-    public FoodItem(FoodIncOrg foodIncOrg) {
+    public FoodItem() {
         id = ++counter;
-        this.foodIncOrg = foodIncOrg;
         
         LocalDateTime now = LocalDateTime.now(); // Local current time
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
