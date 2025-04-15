@@ -27,9 +27,9 @@ public class FoodCatalog {
     }
     
     // add Item 
-    public FoodItem addFoodItem(FoodIncOrg foodIncOrg){
+    public FoodItem addFoodItem(){
         count++;
-        FoodItem foodItem  = new FoodItem(foodIncOrg);
+        FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
         //foodItem.setCatalogName(name);
         foodItems.add(foodItem);
