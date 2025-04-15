@@ -14,9 +14,9 @@ import model.Role.WareHourseChecker;
  *
  * @author 59386
  */
-public class WareHourseCheckOrg extends BasicOrganization{
+public class WareHouseCheckOrg extends BasicOrganization{
     
-    public WareHourseCheckOrg(String name) {
+    public WareHouseCheckOrg(String name) {
         super(Type.Volunteer.getValue(),name);
     }
     

@@ -4,6 +4,14 @@
  */
 package ui.TaskManagerWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,15 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     /**
      * Creates new form CoordinatorWorkPanel
      */
-    public TaskManagerWorkPanel() {
+    VolunteerEnterprise volunteerEnterprise;
+    VolunteerOrg volunteerOrg;
+    NetWork netWork;
+    JPanel workArea;
+    public TaskManagerWorkPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.netWork = netWork;
         initComponents();
     }
 

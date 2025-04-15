@@ -4,11 +4,15 @@
  */
 package model.Role;
 
+import javax.swing.JPanel;
 import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
+import ui.RescueNetAdminWorkArea.ShelterHelperAdmin;
+import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
 
 /**
  *
@@ -30,5 +34,12 @@ public class ShelterHelperManager extends BasicRole{
         org.getUserAccountDirectory().getUserAccountList().add(helper);
         return helper;
     }  
+    
+    
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //r
+        return new ShelterHelperAdmin(workArea,account,organization,enterprise,netWork);
+    }
     
 }

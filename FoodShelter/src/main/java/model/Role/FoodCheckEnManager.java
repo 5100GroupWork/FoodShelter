@@ -13,7 +13,8 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.NewFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
-import model.Organization.WareHourseCheckOrg;
+import model.Organization.WareHouseCheckOrg;
+import ui.FoodProviderWorkArea.DonationFormPanel;
 
 /**
  *
@@ -35,7 +36,7 @@ public class FoodCheckEnManager extends BasicRole{
         return  freshChecker;
     }
     
-    public UserAccount addWarehouseChecker(WareHourseCheckOrg org,NetWork netWork,String username, String password){
+    public UserAccount addWarehouseChecker(WareHouseCheckOrg org,NetWork netWork,String username, String password){
         WareHourseChecker whc = new WareHourseChecker(username,org);
         UserAccount warehouseEmployee = netWork.getUserAccountDirctory().createUserAccount(username,password,whc);
         warehouseEmployee.setRole(whc);
@@ -43,11 +44,10 @@ public class FoodCheckEnManager extends BasicRole{
         return warehouseEmployee ;
     }
     
-    
-    
-    
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new CollectorManager(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        
+        return new DonationFormPanel(null,null,null,null,null);
+    }
+   
 }

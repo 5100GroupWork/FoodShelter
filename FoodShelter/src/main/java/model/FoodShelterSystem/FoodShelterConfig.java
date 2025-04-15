@@ -18,8 +18,7 @@ import model.Organization.NewFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
-import model.Organization.WareHourseCheckOrg;
-import model.Role.DeliverManager;
+import model.Organization.WareHouseCheckOrg;
 import model.Role.FoodCheckEnManager;
 import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
@@ -69,7 +68,7 @@ public class FoodShelterConfig {
         
             // create 2 orgs
         NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");
-        WareHourseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise.addWareHourseCheckOrg("WareHouseCheckOrg");
+        WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise.addWareHourseCheckOrg("WareHouseCheckOrg");
             // create employees in orgs
         //UserAccount employee_org1 = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",new FoodCheckEnManager(freshCheckerEnterprise));
         foodCheckEnManager.addFreshChecker(newFoodCheckOrg, netWork, "Alven", "0000");
@@ -80,14 +79,15 @@ public class FoodShelterConfig {
         VolunteerOrg volunteerOrg  = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
         DriverOrg driverOrg  = volunteerEnterprise.createDriverOrg("DriverOrg1");
         
-        DeliverManager deliverManager = new DeliverManager(driverOrg);
-        UserAccount uaDeliverManager = netWork.getUserAccountDirctory().createUserAccount("Ashley", "0000", deliverManager);
-        deliverManager.createDriver(driverOrg, netWork, "Jessica", "0000");
+//        DeliverManager deliverManager = new DeliverManager(driverOrg);
+//        UserAccount uaDeliverManager = netWork.getUserAccountDirctory().createUserAccount("Ashley", "0000", deliverManager);
+        
+        
         
         VolunteerManager volunteerManager = new VolunteerManager(volunteerOrg);
         UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000", volunteerManager);
         volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
-        
+        volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
         
         //create rescueNetOrg(helper and homeless) and people
         RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");

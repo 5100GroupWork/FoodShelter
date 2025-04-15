@@ -4,11 +4,14 @@
  */
 package model.Role;
 
+import javax.swing.JPanel;
 import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.VolunteerOrg;
+import ui.DriverWorkArea.DriverWorkPanel;
 
 /**
  *
@@ -26,6 +29,19 @@ public class VolunteerManager extends BasicRole{
         UserAccount userAccount = netWork.getUserAccountDirctory().createUserAccount(username, password, v);
         org.getUserAccountDirectory().getUserAccountList().add(userAccount);
         return userAccount;
+    }
+    
+    public UserAccount createDriver(DriverOrg org,NetWork netWork,String username, String password){
+        Deliver d = new Deliver();
+        UserAccount userAccount = netWork.getUserAccountDirctory().createUserAccount(username, password, d);
+        org.getUserAccountDirectory().getUserAccountList().add(userAccount);
+        return userAccount;
+    }
+    
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //todo 跳转到一个管理界面还没有做
+        return new (workArea, enterprise,organization,netWork);
     }
     
 }

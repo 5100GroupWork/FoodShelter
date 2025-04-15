@@ -5,8 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26bca3da-e922-4b04-b4fd-7810f9d6805e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Account/UserAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Account/UserAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Enterprise/FreshCheckEnterprise.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Enterprise/FreshCheckEnterprise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/FoodShelterSystem/FoodShelterConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/FoodShelterSystem/FoodShelterConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Organization/WareHourseCheckOrg.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Organization/WareHouseCheckOrg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/BasicRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/BasicRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Deliver.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Deliver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/DeliverManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodCheckEnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodCheckEnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodEnterpriseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodEnterpriseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodIncEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FoodIncEmployee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FreshChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/FreshChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Homeless.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Homeless.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/HomelessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/HomelessManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/ShelterHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/ShelterHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/ShelterHelperManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/ShelterHelperManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/SysAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/SysAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Volunteer.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/Volunteer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/VolunteerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/VolunteerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/WareHourseChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/model/Role/WareHourseChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/DriverWorkArea/DriverWorkPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/DriverWorkArea/DriverWorkPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FoodProviderWorkArea/DonationFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FoodProviderWorkArea/DonationFormPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FreshCheckWorkArea/NewFoodCheckPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FreshCheckWorkArea/NewFoodCheckPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FreshCheckWorkArea/PostFoodCheckPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/FreshCheckWorkArea/PostFoodCheckPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/HomelessWorkArea/HomelessWorkPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/HomelessWorkArea/HomelessWorkPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/HomelessAdmin.form" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/HomelessAdmin.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/HomelessAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/HomelessAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/ShelterHelperAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/RescueNetAdminWorkArea/ShelterHelperAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/ShelterHelperWorkArea/ShelterHelperWorkPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/ShelterHelperWorkArea/ShelterHelperWorkPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/TaskManagerWorkArea/TaskManagerWorkPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/TaskManagerWorkArea/TaskManagerWorkPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodShelter/src/main/java/ui/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,22 +54,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "yigeWang-f8",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/59386/OneDrive/Desktop/EcoSystemDemo/EcoSystemDemo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yigeWang-f9&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/5100Final/FoodShelter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -58,6 +88,8 @@
       <updated>1744746403390</updated>
       <workItem from="1744746404970" duration="98000" />
       <workItem from="1744746511204" duration="669000" />
+      <workItem from="1744749239203" duration="45000" />
+      <workItem from="1744749294174" duration="2090000" />
     </task>
     <servers />
   </component>

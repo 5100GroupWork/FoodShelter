@@ -147,66 +147,71 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        // Get user name
+    private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String userName = userNameJTextField.getText();
-        // Get Password
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
 
-        //Step1: Check in the system admin user account directory if you have the user
-        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        UserAccount userAccount = null;
+        NetWork inNetwork = null;
+        BasicEnterprise inEnterprise = null;
+        BasicOrganization inOrganization = null;
 
-        BasicEnterprise inEnterprise=null;
-        BasicOrganization inOrganization=null;
+        // Step 1: 遍历所有 network
+        for (NetWork network : system.getNetworkList()) {
+            // 先从 network 级别的 UserDir 查
+            userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
+            if (userAccount != null) {
+                inNetwork = network; // 记录所属 network
+                break; // 已知用户属于这个 network，继续查 enterprise/org
+            }
+        }
 
-        if(userAccount==null){
-            //Step 2: Go inside each network and check each enterprise
-            for(NetWork network:system.getNetworkList()){
-                //Step 2.a: check against each enterprise
-                for(BasicEnterprise enterprise:network.getEnterpriseDirectory().getEnterprises()){
-                    userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
-                    if(userAccount==null){
-                        //Step 3:check against each organization for each enterprise
-                        for(BasicOrganization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
-                            userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
-                            if(userAccount!=null){
-                                inEnterprise=enterprise;
-                                inOrganization=organization;
-                                break;
-                            }
-                        }
-                    }
-                    else{
-                        inEnterprise=enterprise;
-                        break;
-                    }
-                    if(inOrganization!=null){
+        // Step 2: 如果找到了 userAccount，则再去深入查他具体属于哪个 enterprise / organization
+        if (userAccount != null && inNetwork != null) {
+            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                // 先查 enterprise 级别的用户
+                if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                    inEnterprise = enterprise;
+                    break;
+                }
+
+                // 再查 org 层
+                for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                        inEnterprise = enterprise;
+                        inOrganization = organization;
                         break;
                     }
                 }
-                if(inEnterprise!=null){
+
+                if (inEnterprise != null && inOrganization != null) {
                     break;
                 }
             }
         }
 
-        if(userAccount==null){
+        // Step 3: 判断是否找到了
+        if (userAccount == null || inNetwork == null) {
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
         }
-        else{
-            CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
-            layout.next(container);
-        }
+
+        // Step 4: 进入角色界面
+        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
+        String panelName = userAccount.getRole().getClass().getSimpleName();
+        container.add("workArea", workArea);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container,panelName);
 
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
-    }//GEN-LAST:event_loginJButtonActionPerformed
+    }
+
+
+
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
         logoutJButton.setEnabled(false);
