@@ -136,6 +136,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
+        FoodItem foodItem = new FoodItem();
+        
         
         
       
