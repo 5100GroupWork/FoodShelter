@@ -18,12 +18,12 @@ import model.Organization.RequestCollectOrg;
  *
  * @author 59386
  */
-public class FoodCheckOrgManager extends BasicRole{
-    String name;
-    BasicOrganization org;
-    public FoodCheckOrgManager(String name,BasicOrganization org){
-        this.name = name;
-        this.org = org;
+public class FoodCheckEnManager extends BasicRole{
+    BasicEnterprise en;
+    
+    public FoodCheckEnManager(BasicEnterprise org){
+//        this.name = name;
+        this.en = org;
     }
     
     // add freshchecker and warehousechecker

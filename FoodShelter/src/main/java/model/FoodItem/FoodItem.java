@@ -21,13 +21,13 @@ public class FoodItem {
         this.FoodName = FoodName;
     }
 
-    public String getCatalogName() {
-        return CatalogName;
-    }
-
-    public void setCatalogName(String CatalogName) {
-        this.CatalogName = CatalogName;
-    }
+//    public String getCatalogName() {
+//        return CatalogName;
+//    }
+//
+//    public void setCatalogName(String CatalogName) {
+//        this.CatalogName = CatalogName;
+//    }
 
     public int getNumber() {
         return number;
@@ -102,7 +102,7 @@ public class FoodItem {
     
     int id;
     String FoodName;
-    String CatalogName;
+//    String CatalogName;
     String decs;
     int number;
     FoodIncOrg foodIncOrg;
