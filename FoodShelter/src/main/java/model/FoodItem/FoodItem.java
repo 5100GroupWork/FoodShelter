@@ -4,6 +4,8 @@
  */
 package model.FoodItem;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import model.Organization.FoodIncOrg;
 
 /**
@@ -13,6 +15,33 @@ import model.Organization.FoodIncOrg;
  */
 public class FoodItem {
 
+    public static int counter = 0;
+    int id;
+    String FoodName;
+//    String CatalogName;
+    String decs;
+    int number;
+    FoodIncOrg foodIncOrg;
+    String postDate;
+    String expiredDate;
+    String FoodStatus; // great or expired 
+    String UsingStatus; // stored or send
+    
+
+    public FoodItem(FoodIncOrg foodIncOrg) {
+        id = ++counter;
+        this.foodIncOrg = foodIncOrg;
+        
+        LocalDateTime now = LocalDateTime.now(); // Local current time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        this.postDate = now.format(formatter);
+        
+        FoodStatus = "Good";
+        UsingStatus = "Stored";       
+    }
+    
+    
+    
     public String getFoodName() {
         return FoodName;
     }
@@ -100,16 +129,5 @@ public class FoodItem {
         this.id = id;
     }
     
-    int id;
-    String FoodName;
-//    String CatalogName;
-    String decs;
-    int number;
-    FoodIncOrg foodIncOrg;
-    String postDate;
-    String expiredDate;
-    String FoodStatus; // great or expired 
-    String UsingStatus; // stored or send
-
     
 }
