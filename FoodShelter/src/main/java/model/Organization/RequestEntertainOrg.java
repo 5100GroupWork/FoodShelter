@@ -6,6 +6,8 @@ package model.Organization;
 
 import java.util.ArrayList;
 import java.util.Date;
+import model.FoodItem.FoodCatalog;
+import model.FoodItem.FoodItem;
 import model.Organization.BasicOrganization.Type;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
@@ -18,6 +20,7 @@ import model.WorkQueue.WorkRequestDelivery;
  */
 public class RequestEntertainOrg extends BasicOrganization{
     WorkQueue DeliveryQueue;
+    FoodCatalog foodCatalog;
     
     // new deliveryRequest
     public WorkRequestDelivery newRequestDelivery(){
@@ -32,7 +35,21 @@ public class RequestEntertainOrg extends BasicOrganization{
     public RequestEntertainOrg(String name) {
         super(Type.RequestEntertain.getValue(),name);
         this.DeliveryQueue = new WorkQueue();
+        this.foodCatalog = new FoodCatalog("RequestEntertainCatalog");
     }
+    
+     public WorkQueue getWorkQueue() {
+        return this.DeliveryQueue;
+    }
+
+     public ArrayList<FoodItem> getFoodList() {
+        return this.foodCatalog.getFoodCatalog(); 
+    }
+     
+     public FoodCatalog getFoodCatalog() {
+        return this.foodCatalog; 
+    }
+
     
     @Override
     public ArrayList<BasicRole> getSupportedRole() {

@@ -16,10 +16,12 @@ public class FoodCatalog {
     ArrayList<FoodItem> foodItems;
     int count =0;
     
-    public FoodCatalog(String Name){
-        foodItems = new ArrayList<>();
-        this.name = Name;
-    }
+
+    public FoodCatalog(String name) {
+    this.name = name;
+    this.foodItems = new ArrayList<>();
+}
+
     
     // get Catalog
     public ArrayList<FoodItem> getFoodCatalog(){
@@ -27,11 +29,14 @@ public class FoodCatalog {
     }
     
     // add Item 
-    public FoodItem addFoodItem(){
+    public FoodItem addFoodItem(FoodIncOrg org){
         count++;
         FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
-        //foodItem.setCatalogName(name);
+
+        foodItem.setCatalogName(name);
+        foodItem.setFoodIncOrg(org);
+
         foodItems.add(foodItem);
         return foodItem;
     }

@@ -4,6 +4,14 @@
  */
 package ui.ShelterHelperWorkArea;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.FoodItem.FoodItem;
+
+import model.WorkQueue.DeliveryTask;
+import model.WorkQueue.WorkRequest;
+
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
@@ -12,15 +20,19 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestEntertainOrg;
 
+
 /**
  *
  * @author sylvia
  */
 public class ShelterHelperWorkPanel extends javax.swing.JPanel {
+    
+    private RequestEntertainOrg requestEntertainOrg;
 
     /**
      * Creates new form ShelterHelperWorkPanel
      */
+
     RequestEntertainOrg requestEntertainOrg;
     JPanel workArea;
     RescueNetEnterprise rescueNetEnterprise;
@@ -31,7 +43,11 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         this.requestEntertainOrg = (RequestEntertainOrg) organization;
         this.netWork = netWork;
         
+
         initComponents();
+        this.requestEntertainOrg = requestEntertainOrg;
+        populateApprovedFoodTable(shelterHelperOrg.getFoodCatalog().getFoodCatalog());
+        populateShelterRequestTable(shelterHelperOrg.getWorkQueue().getWorkRequestList());
     }
 
     /**
@@ -51,7 +67,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel1 = new javax.swing.JLabel();
         enterpriseLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblUnassignedTaskstblUnassignedTasks = new javax.swing.JTable();
+        tblApprovedFoodTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -94,7 +110,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
         enterpriseLabel2.setText("Approved Food Table");
 
-        tblUnassignedTaskstblUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
+        tblApprovedFoodTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -113,7 +129,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblUnassignedTaskstblUnassignedTasks);
+        jScrollPane2.setViewportView(tblApprovedFoodTasks);
 
         btnAssignTask.setText("Assign Task");
         btnAssignTask.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +152,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(237, 237, 237)
+                                .addGap(233, 233, 233)
                                 .addComponent(enterpriseLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(253, 253, 253)
@@ -151,7 +167,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jLabel1)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +195,10 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +212,77 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTaskActionPerformed
         // TODO add your handling code here:
+    int foodRow = tblApprovedFoodTasks.getSelectedRow();
+    int requestRow = tblShelterRequests.getSelectedRow();
+
+    if (foodRow < 0 || requestRow < 0) {
+        JOptionPane.showMessageDialog(null, "Please select one food item and one shelter request.");
+        return;
+    }
+
+    DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+    DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
+
+    FoodItem selectedFood = (FoodItem) foodModel.getValueAt(foodRow, 0);
+    WorkRequest selectedRequest = (WorkRequest) requestModel.getValueAt(requestRow, 0);
+
+     if (selectedRequest.getReceiver() == null) {
+            JOptionPane.showMessageDialog(null, "This request has no receiver assigned.");
+            return;
+        }
+    
+    // DeliveryTask创建了！
+    DeliveryTask task = new DeliveryTask();
+    task.setFoodItem(selectedFood);
+    task.setQuantity(selectedFood.getNumber());
+    task.setFromLocation(selectedFood.getFoodIncOrg().getName());
+    task.setToLocation("Shelter"); // 后面要记得改成 selectedRequest 的 source
+    task.setSender(selectedRequest.getSender()); 
+    task.setReceiver(null); 
+    task.setStatus("Pending");
+
+    selectedRequest.getReceiver().getWorkQueue().getWorkRequestList().add(task);
+
+    selectedRequest.setStatus("Matched");
+
+    JOptionPane.showMessageDialog(null, "Delivery Task Created Successfully.");
+
+    populateApprovedFoodTable(requestEntertainOrg.getFoodCatalog().getFoodCatalog());
+    populateShelterRequestTable(requestEntertainOrg.getWorkQueue().getWorkRequestList());
+
     }//GEN-LAST:event_btnAssignTaskActionPerformed
 
+    private void populateApprovedFoodTable(List<FoodItem> approvedFoodList) {
+    DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+    model.setRowCount(0); 
+
+    for (FoodItem food : approvedFoodList) {
+        if ("accepted".equalsIgnoreCase(food.getCheckingStatus()) && "stored".equalsIgnoreCase(food.getUsingStatus())) {
+            Object[] row = new Object[5];
+            row[0] = food; 
+            row[1] = food.getFoodName();
+            row[2] = food.food.getFoodIncOrg().getName();// 这里报错是因为需要等FoodIncEmployee调用的addFoodItem
+            row[3] = food.getNumber();
+            row[4] = food.getExpiredDate();
+            model.addRow(row);
+        }
+    }
+}
+    
+    private void populateShelterRequestTable(List<WorkRequest> shelterRequestList) {
+    DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
+    model.setRowCount(0); 
+
+    for (WorkRequest request : shelterRequestList) {
+        if ("Pending".equalsIgnoreCase(request.getStatus())) {
+            Object[] row = new Object[3];
+            row[0] = request; 
+            row[1] = request.getMessage(); //这里也需要修改
+            row[2] = request.getStatus();
+            model.addRow(row);
+        }
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
@@ -206,7 +294,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblApprovedFoodTasks;
     private javax.swing.JTable tblShelterRequests;
-    private javax.swing.JTable tblUnassignedTaskstblUnassignedTasks;
     // End of variables declaration//GEN-END:variables
 }
