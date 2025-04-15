@@ -16,10 +16,12 @@ public class FoodCatalog {
     ArrayList<FoodItem> foodItems;
     int count =0;
     
+
     public FoodCatalog(String name) {
     this.name = name;
     this.foodItems = new ArrayList<>();
 }
+
     
     // get Catalog
     public ArrayList<FoodItem> getFoodCatalog(){
@@ -31,8 +33,10 @@ public class FoodCatalog {
         count++;
         FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
+
         foodItem.setCatalogName(name);
         foodItem.setFoodIncOrg(org);
+
         foodItems.add(foodItem);
         return foodItem;
     }

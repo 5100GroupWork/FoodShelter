@@ -15,6 +15,7 @@ import model.Organization.RequestEntertainOrg;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
 import model.WorkQueue.WorkRequestDelivery;
+import ui.RescueNetAdminWorkArea.ShelterHelperAdmin;
 
 /**
  *
@@ -56,8 +57,11 @@ public class ShelterHelper extends BasicRole{
         homelessRequest.setStatus(status); // accepted || rejected 
     }
     
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new ShelterHelperWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //
+        return new ShelterHelperAdmin(workArea,account,organization,enterprise,netWork);
+    }
+    
+
 }

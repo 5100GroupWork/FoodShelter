@@ -13,39 +13,41 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.NewFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
+import model.Organization.WareHouseCheckOrg;
+import ui.FoodProviderWorkArea.DonationFormPanel;
 
 /**
  *
  * @author 59386
  */
-public class FoodCheckOrgManager extends BasicRole{
-    String name;
-    BasicOrganization org;
-    public FoodCheckOrgManager(String name,BasicOrganization org){
-        this.name = name;
-        this.org = org;
+public class FoodCheckEnManager extends BasicRole{
+    BasicEnterprise en;
+    
+    public FoodCheckEnManager(BasicEnterprise org){
+        this.en = org;
     }
     
     // add freshchecker and warehousechecker
     public UserAccount addFreshChecker(NewFoodCheckOrg org,NetWork netWork,String username, String password){
         FreshChecker fc = new FreshChecker(username,org);
         UserAccount freshChecker = netWork.getUserAccountDirctory().createUserAccount(username,password,fc);
+        freshChecker.setRole(fc);
         org.getUserAccountDirectory().getUserAccountList().add(freshChecker);   
         return  freshChecker;
     }
     
-    public UserAccount addWarehouseChecker(NewFoodCheckOrg org,NetWork netWork,String username, String password){
+    public UserAccount addWarehouseChecker(WareHouseCheckOrg org,NetWork netWork,String username, String password){
         WareHourseChecker whc = new WareHourseChecker(username,org);
         UserAccount warehouseEmployee = netWork.getUserAccountDirctory().createUserAccount(username,password,whc);
+        warehouseEmployee.setRole(whc);
         org.getUserAccountDirectory().getUserAccountList().add(warehouseEmployee);   
         return warehouseEmployee ;
     }
     
-    
-    
-    
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new CollectorManager(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        
+        return new DonationFormPanel(null,null,null,null,null);
+    }
+   
 }

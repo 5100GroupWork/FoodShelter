@@ -13,7 +13,8 @@ import model.Organization.OrganizationDirctory;
  */
 public abstract class BasicEnterprise extends BasicOrganization{
     private BasicEnterpriseType enterpriseType;
-    private OrganizationDirctory organizationDirectory;
+
+    
     
     public enum BasicEnterpriseType{
         Food("FoodEnterprise"),
@@ -48,5 +49,14 @@ public abstract class BasicEnterprise extends BasicOrganization{
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirctory();
     }
+    
+    public OrganizationDirctory getOrganizationDirectory() {
+        return organizationDirectory;
+    }
+
+    public void setOrganizationDirectory(OrganizationDirctory organizationDirectory) {
+        this.organizationDirectory = organizationDirectory;
+    }
+    private OrganizationDirctory organizationDirectory;
 
 }

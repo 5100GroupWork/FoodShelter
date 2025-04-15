@@ -4,6 +4,14 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.RescueNetEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.RequestEntertainOrg;
+
 /**
  *
  * @author yuewu
@@ -13,7 +21,17 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     /**
      * Creates new form ShelterHelperAdmin
      */
-    public ShelterHelperAdmin() {
+    JPanel workArea;
+    RequestEntertainOrg requestEntertainOrg;
+    NetWork netWork;
+    RescueNetEnterprise rescueNetEnterprise;
+    public ShelterHelperAdmin(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea  = workArea;
+        this.requestEntertainOrg = (RequestEntertainOrg) organization;
+        this.netWork =netWork;
+        this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
+        
+        
         initComponents();
     }
 

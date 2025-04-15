@@ -13,6 +13,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestFoodItem;
+import ui.FreshCheckWorkArea.PostFoodCheckPanel;
 
 /**
  *
@@ -52,9 +53,11 @@ public class WareHourseChecker extends BasicRole{
         foodItem.setFoodStatus(status);
     }
     
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new WareHourseCheckerWorkAreaJPanel(userProcessContainer, enterprise);
-//    }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //todo 跳转到一个管理界面还没有做
+        return new PostFoodCheckPanel(workArea, enterprise,organization,netWork);
+    }
+    
     
 }

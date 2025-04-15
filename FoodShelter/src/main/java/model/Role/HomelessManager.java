@@ -12,16 +12,16 @@ import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
+import ui.RescueNetAdminWorkArea.HomelessAdmin;
 
 /**
  *
  * @author 59386
  */
-public class CollectorManager extends BasicRole{
-    String name;
+public class HomelessManager extends BasicRole{
+//    String name;
     BasicOrganization org;
-    public CollectorManager(String name,BasicOrganization org){
-        this.name = name;
+    public HomelessManager(BasicOrganization org){
         this.org = org;
     }
     
@@ -33,10 +33,11 @@ public class CollectorManager extends BasicRole{
         org.getUserAccountDirectory().getUserAccountList().add(homelessUser);
         return homelessUser;
     }
+    @Override
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        //
+        return new HomelessAdmin(workArea,account,organization,enterprise,netWork);
+    }
 
-//    @Override
-//    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, FoodShelterSystem business) {
-//        return new CollectorManager(userProcessContainer, enterprise);
-//    }
     
 }

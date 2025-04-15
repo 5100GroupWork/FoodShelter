@@ -18,8 +18,6 @@ public class UserAccount {
     String email;
     String phone;
     WorkQueue workQueue;
-    
-    
     //////////////////////////////////////////////////
     
     

@@ -4,6 +4,14 @@
  */
 package ui.FoodProviderWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,14 @@ public class DonationFormPanel extends javax.swing.JPanel {
     /**
      * Creates new form DonationFormPanel
      */
-    public DonationFormPanel() {
+    JPanel workArea;
+    NetWork netWork;
+    FoodIncOrg foodIncOrg;
+    FoodEnterprise foodEnterprise;
+    public DonationFormPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.foodEnterprise = (FoodEnterprise) enterprise;
         initComponents();
     }
 
@@ -29,7 +44,6 @@ public class DonationFormPanel extends javax.swing.JPanel {
         requestTestJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtFoodName = new javax.swing.JTextField();
-        backJButton = new javax.swing.JButton();
         valueLabel = new javax.swing.JLabel();
         enterpriseLabel = new javax.swing.JLabel();
         spinnerQuantity = new javax.swing.JSpinner();
@@ -37,6 +51,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         txtExpiry = new javax.swing.JTextField();
         btnResetForm = new javax.swing.JButton();
         requestTestJButton1 = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
 
         requestTestJButton.setText("Submit Donation");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -46,13 +61,6 @@ public class DonationFormPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setText("Expiry Date:");
-
-        backJButton.setText("<<Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
-            }
-        });
 
         valueLabel.setText("Quantity:");
 
@@ -75,45 +83,48 @@ public class DonationFormPanel extends javax.swing.JPanel {
             }
         });
 
+        lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lblWelcome.setText("<Value>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(valueLabel)
-                    .addComponent(valueLabel1))
-                .addGap(18, 18, 18)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(157, 157, 157))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(valueLabel)
+                            .addComponent(valueLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(127, 127, 127))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addComponent(requestTestJButton)
                         .addGap(29, 29, 29)
                         .addComponent(btnResetForm)
                         .addGap(27, 27, 27)
                         .addComponent(requestTestJButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(backJButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblWelcome)
                         .addGap(39, 39, 39)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,36 +142,40 @@ public class DonationFormPanel extends javax.swing.JPanel {
                     .addComponent(requestTestJButton)
                     .addComponent(btnResetForm)
                     .addComponent(requestTestJButton1))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
+        FoodItem foodItem = new FoodItem();
+        
+        
+        
       
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-
-      
-
-    }//GEN-LAST:event_backJButtonActionPerformed
-
     private void btnResetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFormActionPerformed
         // TODO add your handling code here:
+        
+        valueLabel1.setText("");
+        spinnerQuantity.setValue(0);
+        txtExpiry.setText("");
     }//GEN-LAST:event_btnResetFormActionPerformed
 
     private void requestTestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton1ActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_requestTestJButton1ActionPerformed
 
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backJButton;
     private javax.swing.JButton btnResetForm;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JButton requestTestJButton1;
     private javax.swing.JSpinner spinnerQuantity;

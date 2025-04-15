@@ -7,33 +7,21 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
-import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
-import ui.FoodProviderWorkArea.DonationFormPanel;
-import ui.FreshCheckWorkArea.NewFoodCheckPanel;
+import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
 
 /**
  *
  * @author 59386
  */
-public class FoodIncEmployee extends BasicRole{
-    /**
-     * 
-     * @param userProcessContainer
-     * @param account
-     * @param organization
-     * @param enterprise
-     * @param business
-     * @return 
-     * 
-     * post usless food
-     */
+public class Volunteer extends BasicRole{
+    
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
-        
-        return new DonationFormPanel(workArea,account,organization,enterprise,netWork);
+        //volunteer 是救助中心的volunteer
+        return new ShelterHelperWorkPanel(workArea,account,organization,enterprise,netWork);
     }
-   
+    
 }

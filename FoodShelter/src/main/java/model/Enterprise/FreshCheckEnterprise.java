@@ -5,9 +5,10 @@
 package model.Enterprise;
 
 import java.util.ArrayList;
+import model.Account.UserAccount;
 import model.FoodItem.FoodItem;
 import model.Organization.NewFoodCheckOrg;
-import model.Organization.WareHourseCheckOrg;
+import model.Organization.WareHouseCheckOrg;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
 
@@ -27,11 +28,11 @@ public class FreshCheckEnterprise extends BasicEnterprise{
         this.newFoodCheckOrgs = newFoodCheckOrgs;
     }
 
-    public ArrayList<WareHourseCheckOrg> getWareHourseCheckOrg() {
+    public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrg() {
         return wareHourseCheckOrgs;
     }
 
-    public void setWareHourseCheckOrg(ArrayList<WareHourseCheckOrg> wareHourseCheckOrg) {
+    public void setWareHourseCheckOrg(ArrayList<WareHouseCheckOrg> wareHourseCheckOrg) {
         this.wareHourseCheckOrgs = wareHourseCheckOrg;
     }
     
@@ -43,8 +44,8 @@ public class FreshCheckEnterprise extends BasicEnterprise{
         return  newFoodCheckOrg;
     }
     
-    public WareHourseCheckOrg addWareHourseCheckOrg(String name){
-        WareHourseCheckOrg wareHourseCheckOrg = new WareHourseCheckOrg(name);
+    public WareHouseCheckOrg addWareHourseCheckOrg(String name){
+        WareHouseCheckOrg wareHourseCheckOrg = new WareHouseCheckOrg(name);
         this.wareHourseCheckOrgs.add(wareHourseCheckOrg);
         return wareHourseCheckOrg;
     }
@@ -54,12 +55,29 @@ public class FreshCheckEnterprise extends BasicEnterprise{
         return this.newFoodCheckOrgs.remove(org);
     }
 
-    public boolean removeWareHourseCheckOrg(WareHourseCheckOrg org) {
+    public boolean removeWareHourseCheckOrg(WareHouseCheckOrg org) {
         return this.wareHourseCheckOrgs.remove(org);
     }
     
     ArrayList<NewFoodCheckOrg> newFoodCheckOrgs;
-    ArrayList<WareHourseCheckOrg> wareHourseCheckOrgs;
+    ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs;
+
+    public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrgs() {
+        return wareHourseCheckOrgs;
+    }
+
+    public void setWareHourseCheckOrgs(ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs) {
+        this.wareHourseCheckOrgs = wareHourseCheckOrgs;
+    }
+
+    public ArrayList<UserAccount> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(ArrayList<UserAccount> employees) {
+        this.employees = employees;
+    }
+    ArrayList<UserAccount> employees;
    
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);

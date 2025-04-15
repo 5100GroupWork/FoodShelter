@@ -8,9 +8,18 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.FoodItem.FoodItem;
-import model.Organization.RequestEntertainOrg;
+
 import model.WorkQueue.DeliveryTask;
 import model.WorkQueue.WorkRequest;
+
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.RescueNetEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.RequestEntertainOrg;
+
 
 /**
  *
@@ -23,7 +32,18 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     /**
      * Creates new form ShelterHelperWorkPanel
      */
-    public ShelterHelperWorkPanel(RequestEntertainOrg shelterHelperOrg) {
+
+    RequestEntertainOrg requestEntertainOrg;
+    JPanel workArea;
+    RescueNetEnterprise rescueNetEnterprise;
+    NetWork netWork;
+    public ShelterHelperWorkPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
+        this.requestEntertainOrg = (RequestEntertainOrg) organization;
+        this.netWork = netWork;
+        
+
         initComponents();
         this.requestEntertainOrg = requestEntertainOrg;
         populateApprovedFoodTable(shelterHelperOrg.getFoodCatalog().getFoodCatalog());
