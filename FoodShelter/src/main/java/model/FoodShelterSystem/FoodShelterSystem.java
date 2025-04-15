@@ -10,7 +10,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Role.BasicRole;
 import model.Role.SysAdmin;
-import model.Role.SystemAdmin;
+//import model.Role.SystemAdmin;
 
 /**
  *
@@ -33,9 +33,10 @@ public class FoodShelterSystem extends BasicOrganization{
         networkList.add(network);
         return network;
     }
+    
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
-        ArrayList<BasicRole> roleList=new ArrayList<BasicRole>();
+        ArrayList<BasicRole> roleList=new ArrayList<>();
         roleList.add(new SysAdmin());
         return roleList;
     }

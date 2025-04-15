@@ -13,6 +13,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.NewFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
+import model.Organization.WareHourseCheckOrg;
 
 /**
  *
@@ -22,7 +23,6 @@ public class FoodCheckEnManager extends BasicRole{
     BasicEnterprise en;
     
     public FoodCheckEnManager(BasicEnterprise org){
-//        this.name = name;
         this.en = org;
     }
     
@@ -30,13 +30,15 @@ public class FoodCheckEnManager extends BasicRole{
     public UserAccount addFreshChecker(NewFoodCheckOrg org,NetWork netWork,String username, String password){
         FreshChecker fc = new FreshChecker(username,org);
         UserAccount freshChecker = netWork.getUserAccountDirctory().createUserAccount(username,password,fc);
+        freshChecker.setRole(fc);
         org.getUserAccountDirectory().getUserAccountList().add(freshChecker);   
         return  freshChecker;
     }
     
-    public UserAccount addWarehouseChecker(NewFoodCheckOrg org,NetWork netWork,String username, String password){
+    public UserAccount addWarehouseChecker(WareHourseCheckOrg org,NetWork netWork,String username, String password){
         WareHourseChecker whc = new WareHourseChecker(username,org);
         UserAccount warehouseEmployee = netWork.getUserAccountDirctory().createUserAccount(username,password,whc);
+        warehouseEmployee.setRole(whc);
         org.getUserAccountDirectory().getUserAccountList().add(warehouseEmployee);   
         return warehouseEmployee ;
     }
