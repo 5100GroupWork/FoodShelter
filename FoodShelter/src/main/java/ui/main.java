@@ -177,7 +177,6 @@ public class main extends javax.swing.JFrame {
                                 break;
                             }
                         }
-
                     }
                     else{
                         inEnterprise=enterprise;
