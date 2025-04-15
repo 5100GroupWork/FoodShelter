@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.DB4OUtil.DB4OUtil;
+import model.Enterprise.BasicEnterprise;
+import model.Organization.BasicOrganization;
+import model.NetWork.NetWork;
 
 /**
  *
@@ -155,18 +158,18 @@ public class main extends javax.swing.JFrame {
         //Step1: Check in the system admin user account directory if you have the user
         UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
 
-        Enterprise inEnterprise=null;
-        Organization inOrganization=null;
+        BasicEnterprise inEnterprise=null;
+        BasicOrganization inOrganization=null;
 
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
-            for(Network network:system.getNetworkList()){
+            for(NetWork network:system.getNetworkList()){
                 //Step 2.a: check against each enterprise
-                for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                for(BasicEnterprise enterprise:network.getEnterpriseDirectory().getEnterprises()){
                     userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
                     if(userAccount==null){
                         //Step 3:check against each organization for each enterprise
-                        for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                        for(BasicOrganization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
                             userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
                             if(userAccount!=null){
                                 inEnterprise=enterprise;
