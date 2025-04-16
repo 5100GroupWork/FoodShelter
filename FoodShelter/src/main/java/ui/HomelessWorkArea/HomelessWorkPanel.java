@@ -31,6 +31,7 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
         this.requestCollectOrg = (RequestCollectOrg) organization;
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
         initComponents();
+        rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList();
     }
 
     /**
