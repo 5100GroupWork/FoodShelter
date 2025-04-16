@@ -4,13 +4,17 @@
  */
 package ui.FreshCheckWorkArea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.WareHouseCheckOrg;
+import model.WorkQueue.*;
+
 
 /**
  *
@@ -45,7 +49,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPendingInspection = new javax.swing.JTable();
+        NewFoodTable = new javax.swing.JTable();
         btnApprove = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
 
@@ -59,7 +63,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("New Food Check");
 
-        tblPendingInspection.setModel(new javax.swing.table.DefaultTableModel(
+        NewFoodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -78,7 +82,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblPendingInspection);
+        jScrollPane2.setViewportView(NewFoodTable);
 
         btnApprove.setText("Accept");
         btnApprove.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +92,11 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         });
 
         btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,15 +142,65 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         // TODO add your handling code here:
+        int rowNumber = NewFoodTable.getSelectedRow();
+        if(rowNumber<0){
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
+        WorkRequestFoodItem wfd = (WorkRequestDelivery) NewFoodTable.getValueAt(5, rowNumber);
+        // 从checklist中取出来
+        netWork.getCheckList().removeWorkRequest(wfd);
+        netWork.getWarehouseList().getWorkRequestList().add(wfd);
+        populateTable();
+        
     }//GEN-LAST:event_btnApproveActionPerformed
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        // TODO add your handling code here:
+        int rowNumber = NewFoodTable.getSelectedRow();
+        if(rowNumber<0){
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
+        WorkRequestFoodItem wfd = (WorkRequestDelivery) NewFoodTable.getValueAt(5, rowNumber);
+        // 从checklist中取出来
+        netWork.getCheckList().removeWorkRequest(wfd);
+        populateTable();
+    }//GEN-LAST:event_btnRejectActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable NewFoodTable;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnReject;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblPendingInspection;
     // End of variables declaration//GEN-END:variables
+
+
+    /////////// function////////////
+    /// populize
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
+        model.setRowCount(0);
+        WorkQueue foodQueue = netWork.getCheckList();
+        
+        int count =0;
+        for (WorkRequest wd : foodQueue.getWorkRequestList()) {
+            WorkRequestFoodItem wrf = (WorkRequestDelivery) wd;
+            Object row[] = new Object[6];
+            row[0] = count;
+            row[1] = wrf.getFoodItem().getFoodName();
+            row[2] = wrf;
+            row[3] = wrf.getFoodItem().getExpiredDate();
+            row[4] = wrf.getFoodItem().getFoodIncOrg();
+            model.addRow(row);
+        }
+    }
+
+
+
+
+
 }

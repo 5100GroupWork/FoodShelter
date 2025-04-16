@@ -157,6 +157,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
+
         FoodItem fooditem = new FoodItem();
         fooditem.setFoodName(txtFoodName.getText());
         fooditem.setNumber((int) spinnerQuantity.getValue());
@@ -183,6 +184,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         account.getWorkQueue().getWorkRequestList().add(request);
         
         }
+
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 

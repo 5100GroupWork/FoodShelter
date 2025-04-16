@@ -23,4 +23,9 @@ public class WorkRequestDelivery extends WorkRequestFoodItem{
     Deliver deliver;
     // status : shipped / deliverying / accepted  
     
+    @Override
+    public String toString(){
+        return this.getStatus();
+    }
+    
 }
