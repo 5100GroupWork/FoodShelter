@@ -4,13 +4,22 @@
  */
 package ui.FoodProviderWorkArea;
 
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
+import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
+import model.Role.Deliver;
+import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestDelivery;
+import model.WorkQueue.WorkRequestFoodItem;
 
 /**
  *
@@ -34,6 +43,9 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
         this.foodIncOrg = (FoodIncOrg) organization;
         this.account = account;
         
+        lblEnterprise.setText(enterprise.getName());
+        populateTable();
+        
         initComponents();
     }
 
@@ -49,27 +61,33 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDonations = new javax.swing.JTable();
-        lblWelcome = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblEnterprise = new javax.swing.JLabel();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("My Donation");
 
         tblDonations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Food Name", "Quantity", "Expiry Date", "Status"
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Status"
             }
-        ));
-        jScrollPane1.setViewportView(tblDonations);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
 
-        lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lblWelcome.setText("<Value>");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblDonations);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +96,11 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Enterprise: ");
+
+        lblEnterprise.setText("<value>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,28 +108,30 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lblWelcome)
-                        .addGap(26, 26, 26)
-                        .addComponent(enterpriseLabel)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(144, 144, 144)
+                        .addComponent(enterpriseLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEnterprise))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblWelcome))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblEnterprise))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addGap(18, 18, 18)
@@ -117,14 +142,46 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"DonationFormPanel");
     }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblWelcome;
+    private javax.swing.JLabel lblEnterprise;
     private javax.swing.JTable tblDonations;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tblDonations.getModel();
+        model.setRowCount(0);
+        // 从userAccount的workQueue中获得
+
+        WorkQueue workQueue = account.getWorkQueue();
+
+        for (WorkRequest request : workQueue.getWorkRequestList()) {
+
+            if (request instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrd = (WorkRequestFoodItem) request;
+                FoodItem foodItem = wrd.getFoodItem();
+
+                Object row[] = new Object[5];
+                row[0] = foodItem.getId();
+                row[1] = foodItem.getFoodName();
+                row[2] = foodItem.getNumber();
+                row[3] = foodItem.getExpiredDate();
+                row[4] = foodItem.getFoodStatus();
+
+                // r[4]存储的是原来的workrequest
+                model.addRow(row);
+            }
+        }
+    }
 }
