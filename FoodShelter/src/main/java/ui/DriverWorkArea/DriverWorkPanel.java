@@ -4,6 +4,7 @@
  */
 package ui.DriverWorkArea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -52,7 +53,8 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TaskTable = new javax.swing.JTable();
-        btnApply2 = new javax.swing.JButton();
+        DeliveredBtn = new javax.swing.JButton();
+        getItemBtn = new javax.swing.JButton();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -77,10 +79,17 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(TaskTable);
 
-        btnApply2.setText("Confirm Delivery");
-        btnApply2.addActionListener(new java.awt.event.ActionListener() {
+        DeliveredBtn.setText("Confirm Delivery");
+        DeliveredBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApply2ActionPerformed(evt);
+                DeliveredBtnActionPerformed(evt);
+            }
+        });
+
+        getItemBtn.setText("Confirm getItem");
+        getItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getItemBtnActionPerformed(evt);
             }
         });
 
@@ -89,7 +98,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,10 +107,12 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                                 .addGap(88, 88, 88)
                                 .addComponent(jLabel4))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(btnApply2)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(getItemBtn)
+                        .addGap(98, 98, 98)
+                        .addComponent(DeliveredBtn)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,33 +123,52 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnApply2)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DeliveredBtn)
+                    .addComponent(getItemBtn))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnApply2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApply2ActionPerformed
+    private void DeliveredBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeliveredBtnActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
-        
+        int rowNumber = TaskTable.getSelectedRow();
+        if(rowNumber<0){
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
+        WorkRequestDelivery wrd = (WorkRequestDelivery) TaskTable.getValueAt(5, rowNumber);
+        wrd.setStatus("delivered");
+
         populateTable();
-    }//GEN-LAST:event_btnApply2ActionPerformed
+    }//GEN-LAST:event_DeliveredBtnActionPerformed
+
+    private void getItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getItemBtnActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int rowNumber = TaskTable.getSelectedRow();
+        if(rowNumber<0){
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
+        WorkRequestDelivery wrd = (WorkRequestDelivery) TaskTable.getValueAt(5, rowNumber);
+        wrd.setStatus("picked up");
+
+        populateTable();
+    }//GEN-LAST:event_getItemBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeliveredBtn;
     private javax.swing.JTable TaskTable;
-    private javax.swing.JButton btnApply2;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton getItemBtn;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
@@ -154,13 +184,13 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         for (WorkRequest wd : workQueue.getWorkRequestList()) {
             WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
             count++;
-            Object row[] = new Object[4];
+            Object row[] = new Object[6];
             row[0] = count;
             row[1] = wrd.getFoodItem().getFoodName();
             row[2] = wrd.getFoodItem().getNumber();
             row[3] = wrd.getSender().getAddress();
             row[4] = wrd.getReceiver().getAddress();
-            row[4] = wrd;
+            row[5] = wrd;
             // r[4]存储的是原来的workrequest
             model.addRow(row);
         }
