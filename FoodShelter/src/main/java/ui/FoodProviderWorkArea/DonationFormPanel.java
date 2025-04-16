@@ -38,6 +38,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         this.account = account;
 
         lblWelcome.setText("Welcome, " + foodIncOrg.getName() + " !");
+        lblEnterprise.setText(enterprise.getName());
 
         initComponents();
     }
@@ -62,6 +63,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
         btnResetForm = new javax.swing.JButton();
         requestTestJButton1 = new javax.swing.JButton();
         lblWelcome = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblEnterprise = new javax.swing.JLabel();
 
         requestTestJButton.setText("Submit Donation");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,12 +99,17 @@ public class DonationFormPanel extends javax.swing.JPanel {
         lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblWelcome.setText("<Value>");
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Enterprise: ");
+
+        lblEnterprise.setText("<value>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,17 +130,26 @@ public class DonationFormPanel extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addComponent(requestTestJButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblWelcome)
-                        .addGap(39, 39, 39)
+                        .addGap(124, 124, 124)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblEnterprise)
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(lblWelcome)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWelcome)
+                    .addComponent(jLabel2)
+                    .addComponent(lblEnterprise))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
@@ -211,6 +228,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnResetForm;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblEnterprise;
     private javax.swing.JLabel lblWelcome;
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JButton requestTestJButton1;
