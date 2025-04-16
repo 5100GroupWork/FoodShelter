@@ -32,8 +32,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     /**
      * Creates new form ShelterHelperWorkPanel
      */
-
-    RequestEntertainOrg requestEntertainOrg;
     JPanel workArea;
     RescueNetEnterprise rescueNetEnterprise;
     NetWork netWork;
@@ -46,8 +44,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
         initComponents();
         this.requestEntertainOrg = requestEntertainOrg;
-        populateApprovedFoodTable(shelterHelperOrg.getFoodCatalog().getFoodCatalog());
-        populateShelterRequestTable(shelterHelperOrg.getWorkQueue().getWorkRequestList());
+        populateApprovedFoodTable(requestEntertainOrg.getFoodCatalog().getFoodCatalog());
+        populateShelterRequestTable((List<WorkRequest>) requestEntertainOrg.getWorkQueue().getWorkRequestList());
     }
 
     /**
