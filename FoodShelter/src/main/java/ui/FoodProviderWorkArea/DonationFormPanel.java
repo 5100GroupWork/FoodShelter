@@ -150,9 +150,6 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
         FoodItem food = new FoodItem();
         
-        
-      
-
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void btnResetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFormActionPerformed

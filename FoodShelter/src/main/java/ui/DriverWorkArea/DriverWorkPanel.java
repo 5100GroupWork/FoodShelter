@@ -5,11 +5,15 @@
 package ui.DriverWorkArea;
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
+import model.Role.Deliver;
+import model.WorkQueue.*;
 
 /**
  *
@@ -24,12 +28,15 @@ public class DriverWorkPanel extends javax.swing.JPanel {
     VolunteerEnterprise volunteerEnterprise;
     DriverOrg driverOrg;
     NetWork netWork;
-    public DriverWorkPanel(JPanel workArea, BasicEnterprise enterprise,BasicOrganization organization,NetWork netWork) {
+    UserAccount driver;
+    public DriverWorkPanel(JPanel workArea, BasicEnterprise enterprise,BasicOrganization organization,NetWork netWork,UserAccount userAccount) {
         this.workArea = workArea;
         this.volunteerEnterprise =(VolunteerEnterprise)enterprise;
         this.driverOrg = (DriverOrg)organization;
         this.netWork = netWork;
+        this.driver = userAccount;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -44,7 +51,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TaskTable = new javax.swing.JTable();
         btnApply2 = new javax.swing.JButton();
 
         btnBack.setText("<< Back");
@@ -57,7 +64,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Delivery Task List");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TaskTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -68,7 +75,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                 "Task ID", "Food Name", "Quantity", "From", "To", "Stauts"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TaskTable);
 
         btnApply2.setText("Confirm Delivery");
         btnApply2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,14 +124,48 @@ public class DriverWorkPanel extends javax.swing.JPanel {
 
     private void btnApply2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApply2ActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        
+        populateTable();
     }//GEN-LAST:event_btnApply2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TaskTable;
     private javax.swing.JButton btnApply2;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    /////// my funcation///////////////
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) TaskTable.getModel();
+        model.setRowCount(0);
+        // 从userAccount的workQueue中获得
+        Deliver deliver = (Deliver) this.driver.getRole();
+        WorkQueue workQueue = deliver.getWorkQueue();
+        int count =0;
+        for (WorkRequest wd : workQueue.getWorkRequestList()) {
+            WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
+            count++;
+            Object row[] = new Object[4];
+            row[0] = count;
+            row[1] = wrd.getFoodItem().getFoodName();
+            row[2] = wrd.getFoodItem().getNumber();
+            row[3] = wrd.getSender().getAddress();
+            row[4] = wrd.getReceiver().getAddress();
+            row[4] = wrd;
+            // r[4]存储的是原来的workrequest
+            model.addRow(row);
+        }
+    }
+
+
+
 }
