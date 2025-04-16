@@ -7,12 +7,19 @@ package ui.FoodProviderWorkArea;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
+import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
+import model.Role.Deliver;
+import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestDelivery;
+import model.WorkQueue.WorkRequestFoodItem;
 
 /**
  *
@@ -37,6 +44,7 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
         this.account = account;
         
         lblEnterprise.setText(enterprise.getName());
+        populateTable();
         
         initComponents();
     }
@@ -62,15 +70,23 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
 
         tblDonations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Food Name", "Quantity", "Expiry Date", "Status"
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblDonations);
 
         btnBack.setText("<< Back");
@@ -92,9 +108,6 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
@@ -104,8 +117,11 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                         .addGap(52, 52, 52)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEnterprise)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(lblEnterprise))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,4 +157,31 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblEnterprise;
     private javax.swing.JTable tblDonations;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tblDonations.getModel();
+        model.setRowCount(0);
+        // 从userAccount的workQueue中获得
+
+        WorkQueue workQueue = account.getWorkQueue();
+
+        for (WorkRequest request : workQueue.getWorkRequestList()) {
+
+            if (request instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrd = (WorkRequestFoodItem) request;
+                FoodItem foodItem = wrd.getFoodItem();
+
+                Object row[] = new Object[5];
+                row[0] = foodItem.getId();
+                row[1] = foodItem.getFoodName();
+                row[2] = foodItem.getNumber();
+                row[3] = foodItem.getExpiredDate();
+                row[4] = foodItem.getFoodStatus();
+
+                // r[4]存储的是原来的workrequest
+                model.addRow(row);
+            }
+        }
+    }
 }
