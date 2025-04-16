@@ -4,6 +4,7 @@
  */
 package ui.FoodProviderWorkArea;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
@@ -12,6 +13,7 @@ import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
+import model.WorkQueue.WorkRequestFoodItem;
 
 /**
  *
@@ -26,10 +28,16 @@ public class DonationFormPanel extends javax.swing.JPanel {
     NetWork netWork;
     FoodIncOrg foodIncOrg;
     FoodEnterprise foodEnterprise;
+    UserAccount account;
+    
     public DonationFormPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
         this.netWork = netWork;
         this.foodEnterprise = (FoodEnterprise) enterprise;
+        this.foodIncOrg = (FoodIncOrg) organization;
+        this.account = account;
+
+
         initComponents();
     }
 
@@ -151,33 +159,37 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
         FoodItem fooditem = new FoodItem();
         fooditem.setFoodName(txtFoodName.getText());
-        fooditem.setNumber(spinnerQuantity.getComponentCount());
+        fooditem.setNumber((int) spinnerQuantity.getValue());
         fooditem.setExpiredDate(txtExpiry.getText());
-        
-        
-        Organization org = null;
-        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
-            if (organization instanceof LabOrganization){
-                org = organization;
+
+        // Declare outside the loop
+        FoodIncOrg org = null;
+
+        for (BasicOrganization candidate : foodEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (candidate instanceof FoodIncOrg) {
+                org = (FoodIncOrg) candidate;
                 break;
             }
         }
-        if (org!=null){
-            org.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
+
+        if (org != null) {
+        WorkRequestFoodItem request = new WorkRequestFoodItem();
+        request.setFoodItem(fooditem);
+        request.setSender(foodIncOrg);  
+        request.setStatus("Pending");
+        request.setRequestDate(new java.util.Date());
+
+        org.getWorkQueue().getWorkRequestList().add(request);
+        account.getWorkQueue().getWorkRequestList().add(request);
+        
         }
-        
-        
-        
-        
-      
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void btnResetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetFormActionPerformed
         // TODO add your handling code here:
         
-        valueLabel1.setText("");
+        txtFoodName.setText("");
         spinnerQuantity.setValue(0);
         txtExpiry.setText("");
     }//GEN-LAST:event_btnResetFormActionPerformed
@@ -185,7 +197,10 @@ public class DonationFormPanel extends javax.swing.JPanel {
     private void requestTestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButton1ActionPerformed
         // TODO add your handling code here:
         
-        
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("MyDonationTablePanel", new MyDonationTablePanel(workArea, account, foodIncOrg, foodEnterprise, netWork));
+        layout.show(workArea,"MyDonationTablePanel");
+                
     }//GEN-LAST:event_requestTestJButton1ActionPerformed
 
  
