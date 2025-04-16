@@ -4,12 +4,18 @@
  */
 package ui.FreshCheckWorkArea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.WareHouseCheckOrg;
+import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestDelivery;
+import model.WorkQueue.WorkRequestFoodItem;
 
 /**
  *
@@ -44,7 +50,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblFoodList = new javax.swing.JTable();
+        wareFoodTable = new javax.swing.JTable();
         btnRemoveExpired = new javax.swing.JButton();
         btnRefreshList = new javax.swing.JButton();
 
@@ -58,7 +64,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Post Food Check");
 
-        tblFoodList.setModel(new javax.swing.table.DefaultTableModel(
+        wareFoodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -77,7 +83,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblFoodList);
+        jScrollPane2.setViewportView(wareFoodTable);
 
         btnRemoveExpired.setText("Remove Expired");
         btnRemoveExpired.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +93,11 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         });
 
         btnRefreshList.setText("Refresh List");
+        btnRefreshList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -132,7 +143,22 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
 
     private void btnRemoveExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveExpiredActionPerformed
         // TODO add your handling code here:
+        int rowNumber = wareFoodTable.getSelectedRow();
+        if(rowNumber<0){
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
+        WorkRequestFoodItem wfd = (WorkRequestDelivery) wareFoodTable.getValueAt(5, rowNumber);
+        // 从checklist中取出来
+        netWork.getWarehouseList().removeWorkRequest(wfd);
+        populateTable();
+        
     }//GEN-LAST:event_btnRemoveExpiredActionPerformed
+
+    private void btnRefreshListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshListActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_btnRefreshListActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -141,6 +167,30 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRemoveExpired;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblFoodList;
+    private javax.swing.JTable wareFoodTable;
     // End of variables declaration//GEN-END:variables
+
+    /////////////////////////// fun //////////////////
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) wareFoodTable.getModel();
+        model.setRowCount(0);
+        WorkQueue foodQueue = netWork.getWarehouseList();
+        
+        int count =0;
+        for (WorkRequest wd : foodQueue.getWorkRequestList()) {
+            WorkRequestFoodItem wrf = (WorkRequestDelivery) wd;
+            Object row[] = new Object[6];
+            row[0] = count;
+            row[1] = wrf.getFoodItem().getFoodName();
+            row[2] = wrf;
+            row[3] = wrf.getFoodItem().getExpiredDate();
+            row[4] = wrf.getFoodItem().getFoodIncOrg();
+            model.addRow(row);
+        }
+    }
+
+
+
+
+
 }
