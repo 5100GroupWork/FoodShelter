@@ -23,4 +23,8 @@ public class WorkRequestFoodItem extends WorkRequest{
     
     FoodItem foodItem;
     
+    @Override
+    public String toString(){
+        return String.valueOf(foodItem.getNumber());
+    }
 }
