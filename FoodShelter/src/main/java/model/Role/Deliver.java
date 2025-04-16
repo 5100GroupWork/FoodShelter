@@ -54,10 +54,14 @@ public class Deliver extends BasicRole{
         workRequestDelivery.setStatus(Status);
     }
     
+    public WorkQueue getWorkQueue(){
+        return  this.doingWorkQueue;
+    }
+    
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
-        return new DriverWorkPanel(workArea, enterprise,organization,netWork);
+        return new DriverWorkPanel(workArea, enterprise,organization,netWork,account);
     }
     
 }

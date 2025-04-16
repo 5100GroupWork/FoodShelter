@@ -67,4 +67,5 @@ public class WorkRequest {
     private String status; // finish/ waiting /pedding
     private Date requestDate;
     private Date resolveDate;
+    
 }
