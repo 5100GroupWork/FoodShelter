@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
+import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
@@ -148,7 +149,24 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
-        FoodItem foodItem = new FoodItem();
+        FoodItem fooditem = new FoodItem();
+        fooditem.setFoodName(txtFoodName.getText());
+        fooditem.setNumber(spinnerQuantity.getComponentCount());
+        fooditem.setExpiredDate(txtExpiry.getText());
+        
+        
+        Organization org = null;
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+            if (organization instanceof LabOrganization){
+                org = organization;
+                break;
+            }
+        }
+        if (org!=null){
+            org.getWorkQueue().getWorkRequestList().add(request);
+            userAccount.getWorkQueue().getWorkRequestList().add(request);
+        }
+        
         
         
         
