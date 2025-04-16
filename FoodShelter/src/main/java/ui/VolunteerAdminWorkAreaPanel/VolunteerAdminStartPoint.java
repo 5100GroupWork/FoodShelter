@@ -4,6 +4,19 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
+import model.Organization.FoodIncOrg;
+import model.Organization.VolunteerOrg;
+import ui.FoodProviderWorkArea.MyDonationTablePanel;
+
 /**
  *
  * @author yuewu
@@ -13,7 +26,23 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
     /**
      * Creates new form VolunteerAdminStartPoint
      */
-    public VolunteerAdminStartPoint() {
+    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    public VolunteerAdminStartPoint(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+
+        lblWelcome.setText("Welcome, " + account.getUsername() + " !");
+        lblEnterprise.setText("Enterprise: " + enterprise.getName());
+        
+        
         initComponents();
     }
 
@@ -26,25 +55,25 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnTaskManager = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
+        lblEnterprise = new javax.swing.JLabel();
+        btnManageDriver = new javax.swing.JButton();
+        btnManageTaskManager = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setText("Welcome, <value>");
+        lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblWelcome.setText("Welcome, <value>");
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel2.setText("Enterprise: < >");
+        lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblEnterprise.setText("Enterprise: < >");
 
-        jButton1.setText("Manage Drivers");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnManageDriver.setText("Manage Drivers");
+        btnManageDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnManageDriverActionPerformed(evt);
             }
         });
 
-        btnTaskManager.setText("Manage TaskManagers");
+        btnManageTaskManager.setText("Manage Task Managers");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,43 +83,48 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(lblEnterprise))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTaskManager)
-                            .addComponent(jButton1))))
+                            .addComponent(btnManageTaskManager)
+                            .addComponent(btnManageDriver))))
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnTaskManager, jButton1});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageDriver, btnManageTaskManager});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lblWelcome)
+                    .addComponent(lblEnterprise))
                 .addGap(67, 67, 67)
-                .addComponent(jButton1)
+                .addComponent(btnManageDriver)
                 .addGap(35, 35, 35)
-                .addComponent(btnTaskManager)
+                .addComponent(btnManageTaskManager)
                 .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnManageDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageDriverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("DriverAdminWorkAreaPanel", new DriverAdminWorkAreaPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork));
+        layout.show(workArea,"DriverAdminWorkAreaPanel");
+                
+    }//GEN-LAST:event_btnManageDriverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTaskManager;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnManageDriver;
+    private javax.swing.JButton btnManageTaskManager;
+    private javax.swing.JLabel lblEnterprise;
+    private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,14 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+
 /**
  *
  * @author sylvia
@@ -12,8 +20,23 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form VolunteerSchedulerWorkPanel
-     */
-    public DriverAdminWorkAreaPanel() {
+     */    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    
+    public DriverAdminWorkAreaPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+        
+        lblEnterprise.setText("Enterprise: " + enterprise.getName());
+
+        
         initComponents();
     }
 
@@ -32,6 +55,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         tblDriver = new javax.swing.JTable();
         btnAddDriver = new javax.swing.JButton();
         btnDeleteDriver = new javax.swing.JButton();
+        lblEnterprise = new javax.swing.JLabel();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +102,9 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             }
         });
 
+        lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblEnterprise.setText("Enterprise: < >");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,35 +112,45 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addGap(143, 143, 143)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addGap(33, 33, 33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEnterprise)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backJButton)
+                                .addGap(103, 103, 103)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(169, 169, 169)
                 .addComponent(btnAddDriver)
-                .addGap(183, 183, 183)
+                .addGap(157, 157, 157)
                 .addComponent(btnDeleteDriver)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteDriver)
-                    .addComponent(btnAddDriver))
-                .addGap(62, 62, 62))
+                .addContainerGap()
+                .addComponent(lblEnterprise)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(backJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDeleteDriver)
+                            .addComponent(btnAddDriver))
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,6 +173,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDeleteDriver;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblEnterprise;
     private javax.swing.JTable tblDriver;
     // End of variables declaration//GEN-END:variables
 }

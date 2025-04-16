@@ -69,7 +69,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Task Manager  Management");
+        enterpriseLabel.setText("Task Manager Management");
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
