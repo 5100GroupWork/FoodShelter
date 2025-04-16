@@ -61,6 +61,11 @@ public class RegisterNewUser extends javax.swing.JPanel {
         });
 
         ComboBoxOrganization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxOrganization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxOrganizationActionPerformed(evt);
+            }
+        });
 
         ComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -168,6 +173,10 @@ public class RegisterNewUser extends javax.swing.JPanel {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void ComboBoxOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxOrganizationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxOrganizationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
