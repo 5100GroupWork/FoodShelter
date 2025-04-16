@@ -69,7 +69,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Task Manager Admin - Account Management");
+        enterpriseLabel.setText("Task Manager  Management");
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +95,8 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(backJButton)
-                        .addGap(34, 34, 34)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(91, 91, 91)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
