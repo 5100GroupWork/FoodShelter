@@ -182,30 +182,33 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+                                       
+        int selectedRow = tblEmployee.getSelectedRow();
 
-        int selectedRow = tblTaskManager.getSelectedRow();
-        
-        if (selectedRow <0){
-            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an account to delete.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
-        
-        String username = (String) tblTaskManager.getValueAt(selectedRow, 0);
-        
+
+        String username = (String) tblEmployee.getValueAt(selectedRow, 0);
+
         UserAccount toRemove = null;
-      
-        for (UserAccount ua: volunteerOrg.getUserAccountDirectory().getUserAccountList() ){
-            if (ua.getUsername().equals(username)){
-                toRemove = ua;
-                break;
+       
+        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
+                
+           if (ua.getOrganization() instanceof FoodIncOrg || ua.getUsername().equals(username)){  
+                            toRemove = ua;
+                            // Remove from both org and global list
+                            FoodIncOrg org = (FoodIncOrg) ua.getOrganization();                           
+                            
+                            org.getUserAccountDirectory().getUserAccountList().remove(ua);
+                            
+                            // 需要在network里删吗？network.getUserAccountDirctory().getUserAccountList().remove(ua);
+                            JOptionPane.showMessageDialog(this, "User '" + username + "' deleted successfully.");
+                            populateTable();                     
+                            
             }
         }
-      
-        if (toRemove != null){
-            volunteerOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-            JOptionPane.showMessageDialog(this, "User deleted successfully.");
-            populateTable();
-
-        }   
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
