@@ -4,17 +4,40 @@
  */
 package ui.AdminWorkArea;
 
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+
 /**
  *
- * @author sylvia
+ * @author yuewu
  */
 public class AdminStartPoint extends javax.swing.JPanel {
 
     /**
      * Creates new form AdminStartPoint
      */
-    public AdminStartPoint() {
+    
+    JPanel workArea;
+    UserAccount account;
+    FoodShelterSystem foodShelterSystem;
+    
+    public AdminStartPoint(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
+        lblWelcome.setText("Welcome, " + account.getUsername());
+        
         initComponents();
+        
+        populateTree();
     }
 
     /**
@@ -26,22 +49,39 @@ public class AdminStartPoint extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree = new javax.swing.JTree();
+        jPanel2 = new javax.swing.JPanel();
+        lblWelcome = new javax.swing.JLabel();
+        btnEmployee = new javax.swing.JButton();
         btnTaskManager = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setText("Welcome, <value>");
+        jScrollPane1.setViewportView(jTree);
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel2.setText("Enterprise: < >");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+        );
 
-        jButton1.setText("Manage Food Employee");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblWelcome.setText("Welcome, <value>");
+
+        btnEmployee.setText("Manage Food Organizations Employee");
+        btnEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEmployeeActionPerformed(evt);
             }
         });
 
@@ -52,62 +92,55 @@ public class AdminStartPoint extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTaskManager)
-                    .addComponent(jButton1))
-                .addContainerGap(202, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTaskManager)
+                            .addComponent(btnEmployee))))
+                .addGap(51, 51, 51))
+        );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEmployee, btnTaskManager});
+
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(87, 87, 87))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(67, 67, 67)
-                .addComponent(jButton1)
-                .addGap(35, 35, 35)
+                .addComponent(lblWelcome)
+                .addGap(54, 54, 54)
+                .addComponent(btnEmployee)
+                .addGap(34, 34, 34)
                 .addComponent(btnTaskManager)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
+
+        jSplitPane1.setRightComponent(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 545, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEmployeeActionPerformed
 
     private void btnTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaskManagerActionPerformed
         // TODO add your handling code here:
@@ -115,10 +148,61 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEmployee;
     private javax.swing.JButton btnTaskManager;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTree jTree;
+    private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTree() {
+
+        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
+        
+        ArrayList<NetWork> networkList=foodShelterSystem.getNetworkList();
+        ArrayList<BasicEnterprise> enterpriseList;
+        ArrayList<BasicOrganization> organizationList;
+        
+        NetWork network;
+        BasicEnterprise enterprise;
+        BasicOrganization organization;
+        
+        
+        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Networks");
+        DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
+        root.removeAllChildren();
+        root.insert(networks, 0);
+        
+        DefaultMutableTreeNode networkNode;
+        DefaultMutableTreeNode enterpriseNode;
+        DefaultMutableTreeNode organizationNode;
+        
+        for(int i=0;i<networkList.size();i++){
+            network=networkList.get(i);
+            networkNode=new DefaultMutableTreeNode(network.getName());
+            networks.insert(networkNode, i);
+            
+            enterpriseList=network.getEnterpriseDirectory().getEnterprises();
+
+            for(int j=0; j<enterpriseList.size();j++){
+                enterprise=enterpriseList.get(j);
+                enterpriseNode=new DefaultMutableTreeNode(enterprise.getName());
+                networkNode.insert(enterpriseNode, j);
+                
+                organizationList=enterprise.getOrganizationDirectory().getOrganizationList();
+                
+                for(int k=0;k<organizationList.size();k++){
+                    organization=organizationList.get(i);
+                    organizationNode=new DefaultMutableTreeNode(organization.getName());
+                    enterpriseNode.insert(organizationNode, k);
+                }
+            }
+        }
+        model.reload();
+
+
+    }
 }
