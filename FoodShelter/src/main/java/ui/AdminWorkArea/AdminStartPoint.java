@@ -4,6 +4,16 @@
  */
 package ui.AdminWorkArea;
 
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+
 /**
  *
  * @author yuewu
@@ -13,8 +23,19 @@ public class AdminStartPoint extends javax.swing.JPanel {
     /**
      * Creates new form AdminStartPoint
      */
-    public AdminStartPoint() {
+    
+    JPanel workArea;
+    UserAccount account;
+    FoodShelterSystem foodShelterSystem;
+    
+    public AdminStartPoint(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
         initComponents();
+        
+        populateTree();
     }
 
     /**
@@ -29,13 +50,13 @@ public class AdminStartPoint extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         lblWelcome = new javax.swing.JLabel();
         btnEmployee = new javax.swing.JButton();
         btnTaskManager = new javax.swing.JButton();
 
-        jScrollPane1.setViewportView(jTree1);
+        jScrollPane1.setViewportView(jTree);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,7 +150,55 @@ public class AdminStartPoint extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTree() {
+
+        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
+        
+        ArrayList<NetWork> networkList=foodShelterSystem.getNetworkList();
+        ArrayList<BasicEnterprise> enterpriseList;
+        ArrayList<BasicOrganization> organizationList;
+        
+        NetWork network;
+        BasicEnterprise enterprise;
+        BasicOrganization organization;
+        
+        
+        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Networks");
+        DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
+        root.removeAllChildren();
+        root.insert(networks, 0);
+        
+        DefaultMutableTreeNode networkNode;
+        DefaultMutableTreeNode enterpriseNode;
+        DefaultMutableTreeNode organizationNode;
+        
+        for(int i=0;i<networkList.size();i++){
+            network=networkList.get(i);
+            networkNode=new DefaultMutableTreeNode(network.getName());
+            networks.insert(networkNode, i);
+            
+            enterpriseList=network.getEnterpriseDirectory().getEnterprises();
+
+            for(int j=0; j<enterpriseList.size();j++){
+                enterprise=enterpriseList.get(j);
+                enterpriseNode=new DefaultMutableTreeNode(enterprise.getName());
+                networkNode.insert(enterpriseNode, j);
+                
+                organizationList=enterprise.getOrganizationDirectory().getOrganizationList();
+                
+                for(int k=0;k<organizationList.size();k++){
+                    organization=organizationList.get(i);
+                    organizationNode=new DefaultMutableTreeNode(organization.getName());
+                    enterpriseNode.insert(organizationNode, k);
+                }
+            }
+        }
+        model.reload();
+
+
+    }
 }
