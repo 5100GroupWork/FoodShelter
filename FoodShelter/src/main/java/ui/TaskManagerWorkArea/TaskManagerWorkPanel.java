@@ -4,13 +4,23 @@
  */
 package ui.TaskManagerWorkArea;
 
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.Enterprise.RescueNetEnterprise;
 import model.Enterprise.VolunteerEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.RequestCollectOrg;
+import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
+import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestDelivery;
+import model.WorkQueue.WorkRequestFoodItem;
+import model.WorkQueue.WorkRequestNeeds;
 
 /**
  *
@@ -49,7 +59,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel1 = new javax.swing.JLabel();
         enterpriseLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblUnassignedTasks = new javax.swing.JTable();
+        tbUnassignedTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
         btnAssignTask1 = new javax.swing.JButton();
         btnAssignTask2 = new javax.swing.JButton();
@@ -93,7 +103,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
         enterpriseLabel2.setText("Shelter Request Tasks ");
 
-        tblUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
+        tbUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -112,7 +122,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblUnassignedTasks);
+        jScrollPane2.setViewportView(tbUnassignedTasks);
 
         btnAssignTask.setText("Assign Task");
         btnAssignTask.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +236,36 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tbUnassignedTasks;
     private javax.swing.JTable tblDrivers;
-    private javax.swing.JTable tblUnassignedTasks;
     // End of variables declaration//GEN-END:variables
+
+    
+    ////////////////function ///////////////////
+    // populizeTable
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        model.setRowCount(0);
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+        // 拿到type为 rescueNet的公司
+        //ArrayList<RescueNetEnterprise> rescueNetEnterprises = new ArrayList<>();
+        for(BasicEnterprise enterprise: enterprises){
+            if(enterprise.getEnterpriseType().getValue().equals("RescueNetEnterprise")){
+                RescueNetEnterprise en = (RescueNetEnterprise)enterprise;
+                RequestEntertainOrg org =en.getRequestEntertainOrg();
+                for (WorkRequest wd : org.getWorkQueue().getWorkRequestList()) {
+                    WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
+                    Object row[] = new Object[6];
+                    row[0] = "undo";
+                    row[1] = wrd.getFoodItem().getFoodName();
+                    row[2] = wrd.getFoodItem().getNumber();
+                    row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
+                    row[4] = wrd.getReceiver().getAddress();
+                    row[5] = wrd.getStatus();
+                    model.addRow(row);            
+                } 
+            }
+        }
+       
+    }
 }

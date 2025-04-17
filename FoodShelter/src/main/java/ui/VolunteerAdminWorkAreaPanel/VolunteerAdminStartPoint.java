@@ -38,11 +38,6 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
         this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
-
-        lblWelcome.setText("Welcome, " + account.getUsername() + " !");
-        lblEnterprise.setText("Enterprise: " + enterprise.getName());
-        
-        
         initComponents();
     }
 
