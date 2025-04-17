@@ -6,6 +6,7 @@
 package ui.AdminWorkArea;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -14,6 +15,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.Deliver;
+import ui.VolunteerAdminWorkAreaPanel.AddDriverAccountPanel;
 
 /**
  *
@@ -28,6 +30,7 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
     BasicOrganization organization;
     NetWork netWork;
     FoodShelterSystem foodShelterSystem;
+    EmployeeWorkPanel parentPanel;
     
     public EmployeeWorkPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
         this.workArea = workArea;
@@ -50,8 +53,8 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
-        btnReject = new javax.swing.JButton();
-        btnApprove = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -64,22 +67,22 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
             }
         });
 
-        btnReject.setText("Delete");
-        btnReject.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnApprove.setText("Add");
-        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApproveActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Manage Food Organizations");
+        enterpriseLabel.setText("Manage Food Organizations Emplpoyee");
 
         jLabel1.setText("Only used to manage food employee.");
 
@@ -110,16 +113,16 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
-                .addComponent(btnApprove)
+                .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReject)
+                .addComponent(btnDelete)
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119))
+                .addGap(45, 45, 45)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +144,8 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApprove)
-                    .addComponent(btnReject))
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -178,19 +181,46 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
         layout.show(workArea,"AdminStartPoint");
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-    }//GEN-LAST:event_btnRejectActionPerformed
+        int selectedRow = tblTaskManager.getSelectedRow();
+        
+        if (selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        String username = (String) tblTaskManager.getValueAt(selectedRow, 0);
+        
+        UserAccount toRemove = null;
+      
+        for (UserAccount ua: volunteerOrg.getUserAccountDirectory().getUserAccountList() ){
+            if (ua.getUsername().equals(username)){
+                toRemove = ua;
+                break;
+            }
+        }
+      
+        if (toRemove != null){
+            volunteerOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+            populateTable();
 
-    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        }   
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnApproveActionPerformed
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddLocalAdminPanel", new AddLocalAdminPanel(workArea, account, foodShelterSystem, parentPanel));
+        layout.show(workArea,"AddLocalAdminPanel");
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnReject;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

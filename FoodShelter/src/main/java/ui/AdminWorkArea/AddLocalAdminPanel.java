@@ -4,6 +4,12 @@
  */
 package ui.AdminWorkArea;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+
 /**
  *
  * @author yuewu
@@ -12,8 +18,19 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form AddLocalAdminPanel
-     */
-    public AddLocalAdminPanel() {
+     */    
+    JPanel workArea;
+    UserAccount account;
+    BasicOrganization organization;
+    FoodShelterSystem foodShelterSystem;
+    EmployeeWorkPanel parentPanel;
+    
+    public AddLocalAdminPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSyste, EmployeeWorkPanel parentPanel) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        this.parentPanel = parentPanel;
+        
         initComponents();
     }
 
