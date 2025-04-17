@@ -5,13 +5,18 @@
 package ui.VolunteerAdminWorkAreaPanel;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
 import model.Organization.VolunteerOrg;
+import model.Role.Deliver;
+import model.Role.TaskManager;
 
 /**
  *
@@ -36,7 +41,10 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
         
+        lblEnterprise.setText("Enterprise: " + enterprise.getName());
         
+        populateTable();
+
         initComponents();
     }
 
@@ -55,6 +63,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         btnDeleteTaskManager = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        lblEnterprise = new javax.swing.JLabel();
 
         tblTaskManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,7 +73,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Driver ID", "Name", "Contact"
+                "Task Manager ID", "Name", "Contact"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -101,31 +110,41 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
             }
         });
 
+        lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblEnterprise.setText("Enterprise: < >");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(131, 131, 131)
+                                .addComponent(btnAddTaskManager)
+                                .addGap(183, 183, 183)
+                                .addComponent(btnDeleteTaskManager))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backJButton)
+                                .addGap(91, 91, 91)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btnAddTaskManager)
-                        .addGap(183, 183, 183)
-                        .addComponent(btnDeleteTaskManager))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addGap(91, 91, 91)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
+                        .addComponent(lblEnterprise)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(lblEnterprise)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backJButton))
@@ -145,6 +164,32 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
 
     private void btnDeleteTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTaskManagerActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblTaskManager.getSelectedRow();
+        
+        if (selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        String username = (String) tblTaskManager.getValueAt(selectedRow, 0);
+        
+        UserAccount toRemove = null;
+      
+        for (UserAccount ua: volunteerOrg.getUserAccountDirectory().getUserAccountList() ){
+            if (ua.getUsername().equals(username)){
+                toRemove = ua;
+                break;
+            }
+        }
+      
+        if (toRemove != null){
+            volunteerOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+            populateTable();
+
+        }    
+        
+        
+        
     }//GEN-LAST:event_btnDeleteTaskManagerActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -162,6 +207,28 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDeleteTaskManager;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEnterprise;
     private javax.swing.JTable tblTaskManager;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblTaskManager.getModel();
+        model.setRowCount(0);
+       
+        for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()){
+           if (ua.getRole() instanceof TaskManager){     
+            
+            TaskManager tm = (TaskManager) ua.getRole();   
+            
+            Object[] row = new Object[3];
+            row[0] = tm.getID();
+            row[1] = ua.getUsername();
+            row[1] = tm.getContact();
+            model.addRow(row);
+           } 
+        }
+        
+        
+    }
 }

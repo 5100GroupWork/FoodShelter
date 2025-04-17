@@ -187,7 +187,6 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         
         if (selectedRow <0){
             JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
-
         }
         
         String username = (String) tblDriver.getValueAt(selectedRow, 0);
@@ -221,10 +220,9 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         if (toRemove != null){
             driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
             JOptionPane.showMessageDialog(this, "User deleted successfully.");
-             populateTable();
+            populateTable();
 
-        }
-        
+        }        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

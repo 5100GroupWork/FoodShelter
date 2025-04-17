@@ -19,6 +19,23 @@ import ui.TaskManagerWorkArea.TaskManagerWorkPanel;
  */
 public class TaskManager extends BasicRole{
     
+       
+    private static int count = 1;
+    private int ID;
+    String contact;
+    
+    public TaskManager() {
+        this.ID = ++count;
+    }
+    
+    public String getContact() {
+        return contact;
+    }
+
+    public int getID() {
+        return ID;
+    }
+    
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
