@@ -5,6 +5,18 @@
 
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Account.UserAccount;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+import model.Role.Deliver;
+import ui.VolunteerAdminWorkAreaPanel.AddDriverAccountPanel;
+
 /**
  *
  * @author sylvia
@@ -12,7 +24,21 @@ package ui.AdminWorkArea;
 public class EmployeeWorkPanel extends javax.swing.JPanel {
 
     /** Creates new form EmployeeWorkPanel */
-    public EmployeeWorkPanel() {
+    
+    JPanel workArea;
+    UserAccount account;
+    BasicOrganization organization;
+    NetWork netWork;
+    FoodShelterSystem foodShelterSystem;
+    EmployeeWorkPanel parentPanel;
+    
+    public EmployeeWorkPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
+        populateTable();
+        
         initComponents();
     }
 
@@ -27,12 +53,12 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
-        btnReject = new javax.swing.JButton();
-        btnApprove = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblDriver = new javax.swing.JTable();
+        tblEmployee = new javax.swing.JTable();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -41,45 +67,45 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
             }
         });
 
-        btnReject.setText("Delete");
-        btnReject.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnApprove.setText("Add");
-        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApproveActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Manage Food Organizations");
+        enterpriseLabel.setText("Manage Food Organizations Emplpoyee");
 
         jLabel1.setText("Only used to manage food employee.");
 
-        tblDriver.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Employee Name", "Phone"
+                "Employee Name", "Role", "Phone", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tblDriver);
+        jScrollPane3.setViewportView(tblEmployee);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,16 +113,16 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
-                .addComponent(btnApprove)
+                .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReject)
+                .addComponent(btnDelete)
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119))
+                .addGap(45, 45, 45)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,8 +144,8 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApprove)
-                    .addComponent(btnReject))
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -149,26 +175,81 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+                // TODO add your handling code here:
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"AdminStartPoint");
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+                                       
+        int selectedRow = tblEmployee.getSelectedRow();
 
-    }//GEN-LAST:event_btnRejectActionPerformed
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an account to delete.", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        String username = (String) tblEmployee.getValueAt(selectedRow, 0);
+
+        UserAccount toRemove = null;
+       
+        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
+                
+           if (ua.getOrganization() instanceof FoodIncOrg || ua.getUsername().equals(username)){  
+                            toRemove = ua;
+                            // Remove from both org and global list
+                            FoodIncOrg org = (FoodIncOrg) ua.getOrganization();                           
+                            
+                            org.getUserAccountDirectory().getUserAccountList().remove(ua);
+                            
+                            // 需要在network里删吗？network.getUserAccountDirctory().getUserAccountList().remove(ua);
+                            JOptionPane.showMessageDialog(this, "User '" + username + "' deleted successfully.");
+                            populateTable();                     
+                            
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnApproveActionPerformed
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddLocalAdminPanel", new AddLocalAdminPanel(workArea, account, foodShelterSystem, parentPanel));
+        layout.show(workArea,"AddLocalAdminPanel");
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnReject;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblDriver;
+    private javax.swing.JTable tblEmployee;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        model.setRowCount(0);
+       
+        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
+                
+           if (ua.getOrganization() instanceof FoodIncOrg){     
+                        
+            Object[] row = new Object[4];
+            
+            row[0] = ua.getUsername();
+            row[1] = ua.getRole();
+            row[2] = ua.getPhone();
+            row[3] = ua.getEmail();
+            model.addRow(row);
+           } 
+        }
+
+    }
 
 }
