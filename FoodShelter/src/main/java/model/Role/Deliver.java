@@ -32,6 +32,29 @@ public class Deliver extends BasicRole{
      * 
      * 快递接单业务,workQueue
      */
+    
+    private static int count = 0;
+    private int ID;
+    String contact;
+    
+    public Deliver() {
+        this.ID = ++count;
+    }
+    
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+
+
+    public int getID() {
+        return ID;
+    }
+     
     WorkQueue doingWorkQueue = new WorkQueue();
     WorkQueue finishedWorkQueue = new WorkQueue();
     int workExp = 0;
