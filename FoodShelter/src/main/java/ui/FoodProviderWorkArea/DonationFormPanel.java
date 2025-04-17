@@ -37,7 +37,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         this.foodIncOrg = (FoodIncOrg) organization;
         this.account = account;
 
-        lblWelcome.setText("Welcome, " + foodIncOrg.getName() + " !");
+        lblWelcome.setText("Welcome, " + account.getUsername() + " !");
         lblEnterprise.setText(enterprise.getName());
 
         initComponents();
