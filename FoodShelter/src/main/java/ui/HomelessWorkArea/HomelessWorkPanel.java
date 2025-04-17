@@ -37,7 +37,9 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
         this.account = account;
         initComponents();
+
         populateTable();
+
     }
     
     private void populateTable() {
