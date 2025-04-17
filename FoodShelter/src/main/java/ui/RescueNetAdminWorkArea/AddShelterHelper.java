@@ -4,17 +4,27 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import javax.swing.JOptionPane;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Organization.RequestEntertainOrg;
+import model.Role.FoodIncEmployee;
+
 /**
  *
  * @author yuewu
  */
 public class AddShelterHelper extends javax.swing.JPanel {
+    private BasicEnterprise enterprise;
+    private RequestEntertainOrg requestEntertainOrg;
 
     /**
      * Creates new form AddShelterHelper
      */
-    public AddShelterHelper() {
+    public AddShelterHelper(BasicEnterprise enterprise, RequestEntertainOrg requestEntertainOrg) {
         initComponents();
+        this.enterprise = enterprise;
+        this.requestEntertainOrg = requestEntertainOrg;
     }
 
     /**
@@ -134,6 +144,34 @@ public class AddShelterHelper extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+    String username = txtuserName.getText();
+    String password = String.valueOf(passwordField.getPassword());
+    String email = txtEmail.getText();
+    String phone = txtPhone.getText();
+
+    if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    if (!requestEntertainOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+        JOptionPane.showMessageDialog(this, "Username already exists.");
+        return;
+    }
+
+    FoodIncEmployee role = new FoodIncEmployee();
+
+    UserAccount account = requestEntertainOrg.getUserAccountDirectory().createUserAccount(username, password, role);
+    account.setEmail(email);
+    account.setPhone(phone);
+    account.setOrganization(requestEntertainOrg);
+
+    JOptionPane.showMessageDialog(this, "New shelter helper created successfully!");
+
+    txtuserName.setText("");
+    passwordField.setText("");
+    txtEmail.setText("");
+    txtPhone.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed

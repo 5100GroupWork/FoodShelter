@@ -4,6 +4,7 @@
  */
 package model.WorkQueue;
 
+import model.Account.UserAccount;
 import model.Role.Deliver;
 
 /**
@@ -11,21 +12,31 @@ import model.Role.Deliver;
  * @author 59386
  */
 public class WorkRequestDelivery extends WorkRequestFoodItem{
+    
+    String TaskStatus;// UnPick/ picked/ deliverying / accepted  
 
-    public Deliver getDeliver() {
+    public String getTaskStatus() {
+        return TaskStatus;
+    }
+
+    public void setTaskStatus(String TaskStatus) {
+        this.TaskStatus = TaskStatus;
+    }
+
+    public UserAccount getDeliver() {
         return deliver;
     }
 
-    public void setDeliver(Deliver deliver) {
+    public void setDeliver(UserAccount deliver) {
         this.deliver = deliver;
     }
+
     
-    Deliver deliver;
-    // status : shipped / deliverying / accepted  
+    UserAccount deliver;
     
     @Override
     public String toString(){
-        return this.getStatus();
+        return this.getTaskStatus();
     }
     
 }

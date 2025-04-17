@@ -180,6 +180,11 @@ public class FoodRequestPanel extends javax.swing.JPanel {
 
     private void btnViewRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRequestsActionPerformed
         // TODO add your handling code here:
+        HomelessWorkPanel panel = new HomelessWorkPanel(workArea, account, requestCollectOrg, rescueNetEnterprise, netWork);
+        workArea.removeAll();
+        workArea.add(panel);
+        workArea.revalidate();
+        workArea.repaint();
     }//GEN-LAST:event_btnViewRequestsActionPerformed
 
 

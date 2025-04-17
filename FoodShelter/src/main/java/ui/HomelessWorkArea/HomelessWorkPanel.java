@@ -158,10 +158,10 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
     private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
-    if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(null, "Please select a request to withdraw.");
-        return;
-    }
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a request to withdraw.");
+            return;
+        }
 
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     String selectedFoodOrgName = model.getValueAt(selectedRow, 0).toString();

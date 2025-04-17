@@ -35,6 +35,15 @@ public class Deliver extends BasicRole{
     
     private static int count = 1;
     private int ID;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    String status;//"free / bussy"
     String contact;
     
     public Deliver() {

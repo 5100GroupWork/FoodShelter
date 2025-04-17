@@ -56,8 +56,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnTaskManager" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnHomeless" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnShelter" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -74,9 +74,9 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnShelter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="btnTaskManager" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnHomeless" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="115" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -99,18 +99,21 @@
             <Property name="text" type="java.lang.String" value="Enterprise: &lt; &gt;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnShelter">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Shelter Helper"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShelterActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnTaskManager">
+        <Component class="javax.swing.JButton" name="btnHomeless">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Homeless"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomelessActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

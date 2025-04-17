@@ -4,17 +4,46 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.RequestCollectOrg;
+import model.Organization.RequestEntertainOrg;
+
 /**
  *
  * @author sylvia
  */
 public class RescueNetAdminStartPoint extends javax.swing.JPanel {
+    private JPanel workArea;
+    private UserAccount account;
+    private BasicEnterprise enterprise;
+    private NetWork netWork;
+    private RequestEntertainOrg requestEntertainOrg;
+    private RequestCollectOrg requestCollectOrg;
 
     /**
      * Creates new form RescueNetAdminStartPoint
      */
-    public RescueNetAdminStartPoint() {
+    public RescueNetAdminStartPoint(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         initComponents();
+        this.workArea = workArea;
+        this.account = account;
+        this.enterprise = enterprise;
+        this.netWork = netWork;
+
+        if (organization instanceof RequestEntertainOrg) {
+            this.requestEntertainOrg = (RequestEntertainOrg) organization;
+        } else if (organization instanceof RequestCollectOrg) {
+            this.requestCollectOrg = (RequestCollectOrg) organization;
+        }
+
+        jLabel1.setText("Welcome, " + account.getUsername());
+        jLabel2.setText("Enterprise: " + enterprise.getName());
+        
     }
 
     /**
@@ -29,8 +58,8 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnTaskManager = new javax.swing.JButton();
+        btnShelter = new javax.swing.JButton();
+        btnHomeless = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Welcome, <value>");
@@ -38,14 +67,19 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel2.setText("Enterprise: < >");
 
-        jButton1.setText("Manage Shelter Helper");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnShelter.setText("Manage Shelter Helper");
+        btnShelter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnShelterActionPerformed(evt);
             }
         });
 
-        btnTaskManager.setText("Manage Homeless");
+        btnHomeless.setText("Manage Homeless");
+        btnHomeless.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomelessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,8 +95,8 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTaskManager)
-                            .addComponent(jButton1))))
+                            .addComponent(btnHomeless)
+                            .addComponent(btnShelter))))
                 .addContainerGap(172, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -73,9 +107,9 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(67, 67, 67)
-                .addComponent(jButton1)
+                .addComponent(btnShelter)
                 .addGap(35, 35, 35)
-                .addComponent(btnTaskManager)
+                .addComponent(btnHomeless)
                 .addContainerGap(115, Short.MAX_VALUE))
         );
 
@@ -101,14 +135,26 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnShelterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShelterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    ShelterHelperAdmin panel = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
+    workArea.add("ShelterHelperAdmin", panel);
+    CardLayout layout = (CardLayout) workArea.getLayout();
+    layout.next(workArea);
+    }//GEN-LAST:event_btnShelterActionPerformed
+
+    private void btnHomelessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomelessActionPerformed
+        // TODO add your handling code here:
+    HomelessAdmin panel = new HomelessAdmin(workArea, account, requestCollectOrg, enterprise, netWork);
+    workArea.add("HomelessAdmin", panel);
+    CardLayout layout = (CardLayout) workArea.getLayout();
+    layout.next(workArea);
+    }//GEN-LAST:event_btnHomelessActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTaskManager;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnHomeless;
+    private javax.swing.JButton btnShelter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

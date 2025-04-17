@@ -4,7 +4,10 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.RescueNetEnterprise;
@@ -32,7 +35,25 @@ public class HomelessAdmin extends javax.swing.JPanel {
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
         
         initComponents();
+        populateTable();
+
     }
+    
+    private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) tblHomeless.getModel();
+    model.setRowCount(0); 
+
+    int count = 1;
+    for (UserAccount ua : requestCollectOrg.getUserAccountDirectory().getUserAccountList()) {
+        Object[] row = new Object[3];
+        row[0] = count++;
+        row[1] = ua.getUsername();
+        row[2] = ua.getPhone(); 
+        model.addRow(row);
+    }
+}
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,10 +161,35 @@ public class HomelessAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        AddHomelessAccount panel = new AddHomelessAccount(rescueNetEnterprise, requestCollectOrg);
+        workArea.add("AddHomelessAccount", panel);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblHomeless.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        return;
+    }
+
+    String username = (String) tblHomeless.getValueAt(selectedRow, 0);
+
+    UserAccount toRemove = null;
+    for (UserAccount ua : requestCollectOrg.getUserAccountDirectory().getUserAccountList()) {
+        if (ua.getUsername().equals(username)) {
+            toRemove = ua;
+            break;
+        }
+    }
+
+    if (toRemove != null) {
+        requestCollectOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+        JOptionPane.showMessageDialog(this, "User deleted.");
+        populateTable();
+    }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

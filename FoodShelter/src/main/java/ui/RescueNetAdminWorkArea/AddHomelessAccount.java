@@ -4,17 +4,28 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import javax.swing.JOptionPane;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Organization.RequestCollectOrg;
+import model.Role.Homeless;
+
 /**
  *
  * @author yuewu
  */
 public class AddHomelessAccount extends javax.swing.JPanel {
+   private BasicEnterprise enterprise;
+   private RequestCollectOrg requestCollectOrg; 
+   
 
     /**
      * Creates new form NewJPanel
      */
-    public AddHomelessAccount() {
+    public AddHomelessAccount(BasicEnterprise enterprise, RequestCollectOrg org) {
         initComponents();
+         this.enterprise = enterprise;
+         this.requestCollectOrg = org;
     }
 
     /**
@@ -144,6 +155,35 @@ public class AddHomelessAccount extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+    String username = txtuserName.getText();
+    String password = String.valueOf(passwordField.getPassword());
+    String email = txtEmail.getText();
+    String phone = txtPhone.getText();
+
+    if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+        return;
+    }
+
+    if (!requestCollectOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+        JOptionPane.showMessageDialog(this, "Username already exists.");
+        return;
+    }
+
+    Homeless role = new Homeless();
+
+    UserAccount account = requestCollectOrg.getUserAccountDirectory().createUserAccount(username, password, role);
+
+    account.setEmail(email);
+    account.setPhone(phone);
+    account.setOrganization(requestCollectOrg);
+
+    JOptionPane.showMessageDialog(this, "New homeless user created successfully!");
+
+    txtuserName.setText("");
+    passwordField.setText("");
+    txtEmail.setText("");
+    txtPhone.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
