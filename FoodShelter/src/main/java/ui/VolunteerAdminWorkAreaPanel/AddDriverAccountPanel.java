@@ -4,6 +4,14 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+
 /**
  *
  * @author sylvia
@@ -13,7 +21,20 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddDriverAccountPanel
      */
-    public AddDriverAccountPanel() {
+    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    public AddDriverAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+
+        
         initComponents();
     }
 

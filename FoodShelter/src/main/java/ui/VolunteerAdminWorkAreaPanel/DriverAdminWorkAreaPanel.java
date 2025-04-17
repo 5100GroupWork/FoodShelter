@@ -5,6 +5,7 @@
 package ui.VolunteerAdminWorkAreaPanel;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -63,7 +64,6 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDriver = new javax.swing.JTable();
         btnAddDriver = new javax.swing.JButton();
-        btnDeleteDriver = new javax.swing.JButton();
         lblEnterprise = new javax.swing.JLabel();
 
         backJButton.setText("<<Back");
@@ -104,13 +104,6 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDeleteDriver.setText("Delete");
-        btnDeleteDriver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteDriverActionPerformed(evt);
-            }
-        });
-
         lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblEnterprise.setText("Enterprise: < >");
 
@@ -134,10 +127,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(286, 286, 286)
                 .addComponent(btnAddDriver)
-                .addGap(157, 157, 157)
-                .addComponent(btnDeleteDriver)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,16 +141,14 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(backJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDeleteDriver)
-                            .addComponent(btnAddDriver))
-                        .addGap(43, 43, 43))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnAddDriver)
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,17 +161,17 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void btnAddDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDriverActionPerformed
         // TODO add your handling code here:
+                
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddDriverAccountPanel", new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork));
+        layout.show(workArea,"AddDriverAccountPanel");
+        
     }//GEN-LAST:event_btnAddDriverActionPerformed
-
-    private void btnDeleteDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDriverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteDriverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAddDriver;
-    private javax.swing.JButton btnDeleteDriver;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblEnterprise;
