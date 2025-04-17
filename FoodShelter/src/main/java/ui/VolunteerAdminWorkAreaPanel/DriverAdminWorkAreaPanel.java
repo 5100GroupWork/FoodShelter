@@ -4,6 +4,7 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -164,6 +165,9 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"VolunteerAdminStartPoint");
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDriverActionPerformed
