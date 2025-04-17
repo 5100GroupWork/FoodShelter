@@ -4,6 +4,18 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+=======
+=======
+>>>>>>> a0f6650bf1e236c3335f34d18473da403ac2111e
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
@@ -16,6 +28,10 @@ import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
 import model.Organization.VolunteerOrg;
 import ui.FoodProviderWorkArea.MyDonationTablePanel;
+<<<<<<< HEAD
+>>>>>>> ea6442cdc767a352f48b507929a76e123324cdd2
+=======
+>>>>>>> a0f6650bf1e236c3335f34d18473da403ac2111e
 
 /**
  *
@@ -26,18 +42,44 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
     /**
      * Creates new form VolunteerAdminStartPoint
      */
+<<<<<<< HEAD
+<<<<<<< HEAD
+    JPanel workArea;
+    UserAccount userAccount;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    NetWork netWork;
+=======
+=======
+>>>>>>> a0f6650bf1e236c3335f34d18473da403ac2111e
     
     JPanel workArea;
     NetWork netWork;
     VolunteerOrg volunteerOrg;
     VolunteerEnterprise volunteerEnterprise;
     UserAccount account;
+<<<<<<< HEAD
+>>>>>>> ea6442cdc767a352f48b507929a76e123324cdd2
+=======
+>>>>>>> a0f6650bf1e236c3335f34d18473da403ac2111e
     public VolunteerAdminStartPoint(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
         this.netWork = netWork;
         this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
         this.volunteerOrg = (VolunteerOrg) organization;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
         this.account = account;
+
+        lblWelcome.setText("Welcome, " + account.getUsername() + " !");
+        lblEnterprise.setText("Enterprise: " + enterprise.getName());
+        
+>>>>>>> ea6442cdc767a352f48b507929a76e123324cdd2
+        
+=======
+        this.account = account;
+>>>>>>> a0f6650bf1e236c3335f34d18473da403ac2111e
         initComponents();
     }
 

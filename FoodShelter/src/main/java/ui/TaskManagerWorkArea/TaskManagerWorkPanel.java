@@ -5,6 +5,7 @@
 package ui.TaskManagerWorkArea;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -13,9 +14,11 @@ import model.Enterprise.RescueNetEnterprise;
 import model.Enterprise.VolunteerEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
+import model.Role.Deliver;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
 import model.WorkQueue.WorkRequestDelivery;
@@ -41,6 +44,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         this.volunteerOrg = (VolunteerOrg) organization;
         this.netWork = netWork;
         initComponents();
+        populateTableDriver();
+        populateTableTask();
     }
 
     /**
@@ -55,7 +60,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDrivers = new javax.swing.JTable();
+        tbDrivers = new javax.swing.JTable();
         enterpriseLabel1 = new javax.swing.JLabel();
         enterpriseLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -74,7 +79,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Task Manager - Task Assignment");
 
-        tblDrivers.setModel(new javax.swing.table.DefaultTableModel(
+        tbDrivers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -93,7 +98,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblDrivers);
+        jScrollPane1.setViewportView(tbDrivers);
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -215,14 +220,36 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTaskActionPerformed
         // TODO add your handling code here:
+        //get task and driver with tables
+        int TaskRow = tbUnassignedTasks.getSelectedRow();
+        int DriverRow = tbDrivers.getSelectedRow();
+        if (TaskRow < 0 || DriverRow<0) {
+            JOptionPane.showMessageDialog(null, "Please select a Task first.");
+            return;
+        }
+        WorkRequestDelivery task = (WorkRequestDelivery) tbUnassignedTasks.getValueAt(TaskRow, 5);
+        UserAccount usDriver = (UserAccount) tbDrivers.getValueAt(DriverRow, 1);
+        
+        // check task status
+        if(!task.getTaskStatus().equals("UnPick")){
+            JOptionPane.showMessageDialog(null, "Please select an unPicked Task.");
+            return;
+        }
+        
+        task.setDeliver(usDriver);
+        JOptionPane.showMessageDialog(null, "Task set successfully.");      
+        task.setTaskStatus("picked");
+        
     }//GEN-LAST:event_btnAssignTaskActionPerformed
 
     private void btnAssignTask1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTask1ActionPerformed
         // TODO add your handling code here:
+        populateTableTaskUndo();
     }//GEN-LAST:event_btnAssignTask1ActionPerformed
 
     private void btnAssignTask2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTask2ActionPerformed
         // TODO add your handling code here:
+        populateTableTask();
     }//GEN-LAST:event_btnAssignTask2ActionPerformed
 
 
@@ -236,14 +263,14 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tbDrivers;
     private javax.swing.JTable tbUnassignedTasks;
-    private javax.swing.JTable tblDrivers;
     // End of variables declaration//GEN-END:variables
 
     
     ////////////////function ///////////////////
     // populizeTable
-    public void populateTable(){
+    public void populateTableTask(){
         DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
         model.setRowCount(0);
         ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
@@ -266,6 +293,58 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 } 
             }
         }
-       
+    }
+    
+    //populate Task Undo
+    public void populateTableTaskUndo(){
+        DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        model.setRowCount(0);
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+        // 拿到type为 rescueNet的公司
+        //ArrayList<RescueNetEnterprise> rescueNetEnterprises = new ArrayList<>();
+        for(BasicEnterprise enterprise: enterprises){
+            if(enterprise.getEnterpriseType().getValue().equals("RescueNetEnterprise")){
+                RescueNetEnterprise en = (RescueNetEnterprise)enterprise;
+                RequestEntertainOrg org =en.getRequestEntertainOrg();
+                for (WorkRequest wd : org.getWorkQueue().getWorkRequestList()) {
+                    WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
+                    if(wrd.getStatus().equals("unpick")){
+                        Object row[] = new Object[6];
+                        row[0] = "undo";
+                        row[1] = wrd.getFoodItem().getFoodName();
+                        row[2] = wrd.getFoodItem().getNumber();
+                        row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
+                        row[4] = wrd.getReceiver().getAddress();
+                        row[5] = wrd;
+                        model.addRow(row);
+                    }            
+                } 
+            }
+        }
+    }
+    
+    public void populateTableDriver(){
+        DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
+        model.setRowCount(0);
+        //拿到driverOrg
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+        for(BasicEnterprise enterprise: enterprises){
+            if(enterprise.getEnterpriseType().getValue().equals("Volunteer")){
+                VolunteerEnterprise en = (VolunteerEnterprise)enterprise;
+                for(BasicOrganization org: en.getOrganizationDirectory().getOrganizationList()){
+                    if(org instanceof DriverOrg driverOrg){
+                        for (UserAccount account : driverOrg.getEmployees()) {
+                            Object row[] = new Object[6];
+                            row[0] = "undo";
+                            row[1] = account;
+                            Deliver deliver = (Deliver) account.getRole();
+                            row[2] = deliver.getStatus();
+                            model.addRow(row);            
+                        } 
+                    }
+                }  
+            }
+        }
+        
     }
 }
