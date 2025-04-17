@@ -12,6 +12,7 @@ import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.VolunteerOrg;
 import ui.DriverWorkArea.DriverWorkPanel;
+import ui.VolunteerAdminWorkAreaPanel.VolunteerAdminStartPoint;
 
 /**
  *
@@ -41,7 +42,7 @@ public class VolunteerManager extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         //todo 跳转到一个管理界面还没有做
-        return new (workArea, enterprise,organization,netWork);
+        return new VolunteerAdminStartPoint(workArea, account, organization, enterprise, netWork);
     }
     
 }

@@ -4,6 +4,14 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+
 /**
  *
  * @author yuewu
@@ -13,7 +21,17 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
     /**
      * Creates new form VolunteerAdminStartPoint
      */
-    public VolunteerAdminStartPoint() {
+    JPanel workArea;
+    UserAccount userAccount;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    NetWork netWork;
+    public VolunteerAdminStartPoint(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        
         initComponents();
     }
 
