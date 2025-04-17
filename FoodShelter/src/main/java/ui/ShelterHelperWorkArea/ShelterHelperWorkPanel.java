@@ -259,7 +259,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             Object[] row = new Object[5];
             row[0] = food; 
             row[1] = food.getFoodName();
-            row[2] = food.food.getFoodIncOrg().getName();// 这里报错是因为需要等FoodIncEmployee调用的addFoodItem
+            row[2] = food.getFoodIncOrg().getName();// 这里报错是因为需要等FoodIncEmployee调用的addFoodItem
             row[3] = food.getNumber();
             row[4] = food.getExpiredDate();
             model.addRow(row);
@@ -275,7 +275,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         if ("Pending".equalsIgnoreCase(request.getStatus())) {
             Object[] row = new Object[3];
             row[0] = request; 
-            row[1] = request.getMessage(); //这里也需要修改
+            row[1] = request.getMessage(); //这里需要修改，从food request panel来
             row[2] = request.getStatus();
             model.addRow(row);
         }

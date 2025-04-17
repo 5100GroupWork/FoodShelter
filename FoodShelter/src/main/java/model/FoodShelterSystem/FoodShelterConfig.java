@@ -51,17 +51,20 @@ public class FoodShelterConfig {
         
         // create enterprise details
         UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodEnterpriseManager());
+        foodEnplyee.setOrganization(foodEnterprise);  //zhiyu添加
         foodEnterprise.getEmployees().add(foodEnplyee);
         
         FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WhoolFoods-backbay");
         foodIncOrg.setAddress("blackbay-Boston-MA");
         UserAccount foodIncOrgEmployee = netWork.getUserAccountDirctory().createUserAccount("Jhon", "0000",new FoodIncEmployee());
+        foodIncOrgEmployee.setOrganization(foodIncOrg); //zhiyu添加
         foodIncOrg.getEmployees().add(foodIncOrgEmployee);
         
         
         // create freshCheckerEnterprise details
         // add manager
         UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",new FoodCheckEnManager(freshCheckerEnterprise));
+        checkManager.setOrganization(freshCheckerEnterprise);//zhiyu添加
         FoodCheckEnManager foodCheckEnManager =new FoodCheckEnManager(freshCheckerEnterprise);
         checkManager.setRole(foodCheckEnManager);
         freshCheckerEnterprise.getEmployees().add(checkManager);
