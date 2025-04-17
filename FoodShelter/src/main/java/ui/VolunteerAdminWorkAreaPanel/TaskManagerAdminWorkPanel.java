@@ -33,6 +33,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     VolunteerOrg volunteerOrg;
     VolunteerEnterprise volunteerEnterprise;
     UserAccount account;
+    TaskManagerAdminWorkPanel parentPanel;
     
     public TaskManagerAdminWorkPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
@@ -160,6 +161,12 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
 
     private void btnAddTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskManagerActionPerformed
         // TODO add your handling code here:
+                  
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddTaskManagerAccountPanel", new AddTaskManagerAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel));
+        layout.show(workArea,"AddTaskManagerAccountPanel");
+        
+        
     }//GEN-LAST:event_btnAddTaskManagerActionPerformed
 
     private void btnDeleteTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteTaskManagerActionPerformed
@@ -211,7 +218,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblTaskManager;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblTaskManager.getModel();
         model.setRowCount(0);

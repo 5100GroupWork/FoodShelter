@@ -4,6 +4,17 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+import model.Role.VolunteerManager;
+
 /**
  *
  * @author sylvia
@@ -13,7 +24,23 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddTaskManagerAccountPanel
      */
-    public AddTaskManagerAccountPanel() {
+    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    TaskManagerAdminWorkPanel parentPanel;
+    
+    public AddTaskManagerAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork, TaskManagerAdminWorkPanel parentPanel) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+        this.parentPanel = parentPanel;
+
+        
         initComponents();
     }
 
@@ -77,7 +104,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(102, 137, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +121,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(204, 204, 204))
-
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(btnBack)
@@ -105,25 +130,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 15, Short.MAX_VALUE)
                 .addComponent(jLabel1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtuserName)
-                            .addComponent(txtEmail)
-                            .addComponent(txtPhone)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(204, 204, 204))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSubmit)
-                        .addGap(249, 249, 249))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +154,9 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrganization)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-
                 .addGap(38, 38, 38)
                 .addComponent(btnSubmit)
                 .addGap(54, 54, 54)
-
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -181,6 +185,37 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        
+        String username = txtuserName.getText();
+        String password = passwordField.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        
+    
+        if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
+            return;
+        }
+        
+        if(!volunteerOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
+            JOptionPane.showMessageDialog(this, "Username already exists.");
+            return;
+        }
+        
+        VolunteerManager vm = (VolunteerManager) account.getRole();
+        
+        UserAccount newTaskManager = vm.createVolunteer(volunteerOrg, netWork, username, password);
+        
+        newTaskManager.setEmail(email);
+        newTaskManager.setPhone(phone);
+
+        JOptionPane.showMessageDialog(this, "Task Manager added successfully: " + username);
+        
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
@@ -189,6 +224,10 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        parentPanel.populateTable();
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"TaskManagerAdminWorkPanel");
     }//GEN-LAST:event_btnBackActionPerformed
 
 

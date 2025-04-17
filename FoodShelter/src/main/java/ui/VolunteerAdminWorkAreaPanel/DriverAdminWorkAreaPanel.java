@@ -35,6 +35,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     VolunteerOrg volunteerOrg;
     VolunteerEnterprise volunteerEnterprise;
     UserAccount account;
+    DriverAdminWorkAreaPanel parentPanel;
     
     public DriverAdminWorkAreaPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
@@ -176,7 +177,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
                 
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AddDriverAccountPanel", new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork));
+        workArea.add("AddDriverAccountPanel", new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel));
         layout.show(workArea,"AddDriverAccountPanel");
         
     }//GEN-LAST:event_btnAddDriverActionPerformed
@@ -236,7 +237,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblDriver;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    public void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
         model.setRowCount(0);

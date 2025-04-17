@@ -4,6 +4,7 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
@@ -31,12 +32,15 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
     VolunteerOrg volunteerOrg;
     VolunteerEnterprise volunteerEnterprise;
     UserAccount account;
-    public AddDriverAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    DriverAdminWorkAreaPanel parentPanel;
+
+    public AddDriverAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork, DriverAdminWorkAreaPanel parentPanel) {
         this.workArea = workArea;
         this.netWork = netWork;
         this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
+        this.parentPanel = parentPanel;
 
         
         initComponents();
@@ -214,6 +218,12 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        parentPanel.populateTable();        
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"DriverAdminWorkAreaPanel");
+        
+
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
