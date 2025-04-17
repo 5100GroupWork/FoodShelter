@@ -4,7 +4,10 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.RescueNetEnterprise;
@@ -17,6 +20,7 @@ import model.Organization.RequestEntertainOrg;
  * @author yuewu
  */
 public class ShelterHelperAdmin extends javax.swing.JPanel {
+    
 
     /**
      * Creates new form ShelterHelperAdmin
@@ -25,15 +29,33 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     RequestEntertainOrg requestEntertainOrg;
     NetWork netWork;
     RescueNetEnterprise rescueNetEnterprise;
+    private BasicEnterprise enterprise;
+    
     public ShelterHelperAdmin(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea  = workArea;
         this.requestEntertainOrg = (RequestEntertainOrg) organization;
         this.netWork =netWork;
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
+        this.enterprise = enterprise;
         
         
         initComponents();
+        populateTable();
     }
+    
+    private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) tblShelterHelper.getModel();
+    model.setRowCount(0);
+
+    int count = 1;
+    for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+        Object[] row = new Object[3];
+        row[0] = count++;
+        row[1] = ua.getUsername();
+        row[2] = ua.getPhone();
+        model.addRow(row);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +91,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Homeless ID", "Name", "Contact"
+                "Shelter Helper ID", "Name", "Contact"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -101,20 +123,17 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(btnAdd)
-                                .addGap(183, 183, 183)
-                                .addComponent(btnDelete)
-                                .addGap(107, 107, 107)))))
+                    .addComponent(backJButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(138, 138, 138)
+                            .addComponent(btnAdd)
+                            .addGap(183, 183, 183)
+                            .addComponent(btnDelete)
+                            .addGap(107, 107, 107))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -144,10 +163,35 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+    AddShelterHelper panel = new AddShelterHelper(enterprise, requestEntertainOrg);
+    workArea.add("AddShelterHelper", panel);
+    CardLayout layout = (CardLayout) workArea.getLayout();
+    layout.next(workArea);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblShelterHelper.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        return;
+    }
+
+    String username = (String) tblShelterHelper.getValueAt(selectedRow, 0);
+
+    UserAccount toRemove = null;
+    for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+        if (ua.getUsername().equals(username)) {
+            toRemove = ua;
+            break;
+        }
+    }
+
+    if (toRemove != null) {
+        requestEntertainOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+        JOptionPane.showMessageDialog(this, "User deleted.");
+        populateTable();
+    }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

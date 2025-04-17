@@ -34,7 +34,7 @@ public class FoodCatalog {
         FoodItem foodItem  = new FoodItem();
         foodItem.setId(count);
 
-        foodItem.setCatalogName(name);
+        //foodItem.setCatalogName(name);
         foodItem.setFoodIncOrg(org);
 
         foodItems.add(foodItem);
