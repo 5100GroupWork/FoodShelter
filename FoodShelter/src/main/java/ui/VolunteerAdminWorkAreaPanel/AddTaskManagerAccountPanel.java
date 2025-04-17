@@ -4,6 +4,17 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.VolunteerOrg;
+import model.Role.VolunteerManager;
+
 /**
  *
  * @author sylvia
@@ -13,7 +24,23 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddTaskManagerAccountPanel
      */
-    public AddTaskManagerAccountPanel() {
+    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    TaskManagerAdminWorkPanel parentPanel;
+    
+    public AddTaskManagerAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork, TaskManagerAdminWorkPanel parentPanel) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+        this.parentPanel = parentPanel;
+
+        
         initComponents();
     }
 
@@ -158,6 +185,37 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        
+        String username = txtuserName.getText();
+        String password = passwordField.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        
+    
+        if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
+            return;
+        }
+        
+        if(!volunteerOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
+            JOptionPane.showMessageDialog(this, "Username already exists.");
+            return;
+        }
+        
+        VolunteerManager vm = (VolunteerManager) account.getRole();
+        
+        UserAccount newTaskManager = vm.createVolunteer(volunteerOrg, netWork, username, password);
+        
+        newTaskManager.setEmail(email);
+        newTaskManager.setPhone(phone);
+
+        JOptionPane.showMessageDialog(this, "Task Manager added successfully: " + username);
+        
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
@@ -166,6 +224,10 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        parentPanel.populateTable();
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"TaskManagerAdminWorkPanel");
     }//GEN-LAST:event_btnBackActionPerformed
 
 

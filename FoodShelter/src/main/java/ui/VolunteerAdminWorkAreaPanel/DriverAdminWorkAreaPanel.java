@@ -5,6 +5,7 @@
 package ui.VolunteerAdminWorkAreaPanel;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -13,6 +14,7 @@ import model.Enterprise.VolunteerEnterprise;
 import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
 import model.Organization.VolunteerOrg;
 import model.Role.Deliver;
 import model.WorkQueue.WorkQueue;
@@ -33,6 +35,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     VolunteerOrg volunteerOrg;
     VolunteerEnterprise volunteerEnterprise;
     UserAccount account;
+    DriverAdminWorkAreaPanel parentPanel;
     
     public DriverAdminWorkAreaPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
@@ -63,8 +66,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDriver = new javax.swing.JTable();
         btnAddDriver = new javax.swing.JButton();
-        btnDeleteDriver = new javax.swing.JButton();
         lblEnterprise = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,15 +107,15 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDeleteDriver.setText("Delete");
-        btnDeleteDriver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteDriverActionPerformed(evt);
-            }
-        });
-
         lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblEnterprise.setText("Enterprise: < >");
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,11 +137,11 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(167, 167, 167)
                 .addComponent(btnAddDriver)
-                .addGap(157, 157, 157)
-                .addComponent(btnDeleteDriver)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(169, 169, 169)
+                .addComponent(btnDelete)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,16 +153,16 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(backJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDeleteDriver)
-                            .addComponent(btnAddDriver))
-                        .addGap(43, 43, 43))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddDriver)
+                    .addComponent(btnDelete))
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,24 +175,69 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void btnAddDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDriverActionPerformed
         // TODO add your handling code here:
+                
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddDriverAccountPanel", new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel));
+        layout.show(workArea,"AddDriverAccountPanel");
+        
     }//GEN-LAST:event_btnAddDriverActionPerformed
 
-    private void btnDeleteDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDriverActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteDriverActionPerformed
+        int selectedRow = tblDriver.getSelectedRow();
+        
+        if (selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        String username = (String) tblDriver.getValueAt(selectedRow, 0);
+        
+        UserAccount toRemove = null;
+        
+        DriverOrg driverOrg = null;
+
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        driverOrg = (DriverOrg) org;
+                        break;
+                    }
+                }
+            }
+            if (driverOrg != null) {
+                break; // 一旦找到就跳出外层循环
+            }
+        }
+      
+        for (UserAccount ua: driverOrg.getUserAccountDirectory().getUserAccountList() ){
+            if (ua.getUsername().equals(username)){
+                toRemove = ua;
+                break;
+            }
+        }
+      
+        if (toRemove != null){
+            driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+            populateTable();
+
+        }        
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAddDriver;
-    private javax.swing.JButton btnDeleteDriver;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblEnterprise;
     private javax.swing.JTable tblDriver;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    public void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
         model.setRowCount(0);

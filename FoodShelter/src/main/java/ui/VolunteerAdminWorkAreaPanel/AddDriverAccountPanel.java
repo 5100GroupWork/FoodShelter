@@ -4,6 +4,19 @@
  */
 package ui.VolunteerAdminWorkAreaPanel;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import static model.Organization.BasicOrganization.Type.DriverOrg;
+import model.Organization.DriverOrg;
+import model.Organization.VolunteerOrg;
+import model.Role.VolunteerManager;
+
 /**
  *
  * @author sylvia
@@ -13,7 +26,23 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddDriverAccountPanel
      */
-    public AddDriverAccountPanel() {
+    
+    JPanel workArea;
+    NetWork netWork;
+    VolunteerOrg volunteerOrg;
+    VolunteerEnterprise volunteerEnterprise;
+    UserAccount account;
+    DriverAdminWorkAreaPanel parentPanel;
+
+    public AddDriverAccountPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork, DriverAdminWorkAreaPanel parentPanel) {
+        this.workArea = workArea;
+        this.netWork = netWork;
+        this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
+        this.volunteerOrg = (VolunteerOrg) organization;
+        this.account = account;
+        this.parentPanel = parentPanel;
+
+        
         initComponents();
     }
 
@@ -89,13 +118,14 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                             .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSubmit)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtuserName)
-                                .addComponent(txtEmail)
-                                .addComponent(txtPhone)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtuserName)
+                            .addComponent(txtEmail)
+                            .addComponent(txtPhone)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnSubmit))))
                     .addComponent(enterpriseLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -136,10 +166,64 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        
+        String username = txtuserName.getText();
+        String password = passwordField.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        
+    
+        if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
+            return;
+        }
+        
+        if(!volunteerOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
+            JOptionPane.showMessageDialog(this, "Username already exists.");
+            return;
+        }
+        
+        VolunteerManager vm = (VolunteerManager) account.getRole();
+        
+        DriverOrg driverOrg = null;
+
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        driverOrg = (DriverOrg) org;
+                        break;
+                    }
+                }
+            }
+            if (driverOrg != null) {
+                break; // 一旦找到就跳出外层循环
+            }
+        }
+               
+        UserAccount newDriver = vm.createDriver(driverOrg, netWork, username, password);
+        
+        newDriver.setEmail(email);
+        newDriver.setPhone(phone);
+
+        JOptionPane.showMessageDialog(this, "Driver added successfully: " + username);
+        
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        parentPanel.populateTable();        
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"DriverAdminWorkAreaPanel");
+        
+
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
