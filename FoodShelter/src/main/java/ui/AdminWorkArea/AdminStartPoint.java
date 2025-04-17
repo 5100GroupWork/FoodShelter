@@ -4,6 +4,7 @@
  */
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -13,6 +14,7 @@ import model.Enterprise.BasicEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import ui.VolunteerAdminWorkAreaPanel.DriverAdminWorkAreaPanel;
 
 /**
  *
@@ -27,6 +29,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
     JPanel workArea;
     UserAccount account;
     FoodShelterSystem foodShelterSystem;
+    NetWork netWork;
     
     public AdminStartPoint(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
         this.workArea = workArea;
@@ -140,6 +143,12 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
     private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
         // TODO add your handling code here:
+        
+                
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("EmployeeWorkPanel", new EmployeeWorkPanel(workArea, account, foodShelterSystem));
+        layout.show(workArea,"EmployeeWorkPanel");
+                
     }//GEN-LAST:event_btnEmployeeActionPerformed
 
     private void btnTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaskManagerActionPerformed

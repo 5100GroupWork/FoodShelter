@@ -5,6 +5,16 @@
 
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Account.UserAccount;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+import model.Role.Deliver;
+
 /**
  *
  * @author sylvia
@@ -12,7 +22,20 @@ package ui.AdminWorkArea;
 public class EmployeeWorkPanel extends javax.swing.JPanel {
 
     /** Creates new form EmployeeWorkPanel */
-    public EmployeeWorkPanel() {
+    
+    JPanel workArea;
+    UserAccount account;
+    BasicOrganization organization;
+    NetWork netWork;
+    FoodShelterSystem foodShelterSystem;
+    
+    public EmployeeWorkPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
+        populateTable();
+        
         initComponents();
     }
 
@@ -32,7 +55,7 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblDriver = new javax.swing.JTable();
+        tblEmployee = new javax.swing.JTable();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -60,26 +83,26 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Only used to manage food employee.");
 
-        tblDriver.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Employee Name", "Phone"
+                "Employee Name", "Role", "Phone", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tblDriver);
+        jScrollPane3.setViewportView(tblEmployee);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,6 +172,10 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+                // TODO add your handling code here:
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"AdminStartPoint");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
@@ -168,7 +195,28 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblDriver;
+    private javax.swing.JTable tblEmployee;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        model.setRowCount(0);
+       
+        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
+                
+           if (ua.getOrganization() instanceof FoodIncOrg){     
+                        
+            Object[] row = new Object[4];
+            
+            row[0] = ua.getUsername();
+            row[1] = ua.getRole();
+            row[2] = ua.getPhone();
+            row[3] = ua.getEmail();
+            model.addRow(row);
+           } 
+        }
+
+    }
 
 }
