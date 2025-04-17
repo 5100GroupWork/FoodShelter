@@ -14,6 +14,7 @@ import model.Enterprise.VolunteerEnterprise;
 import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
 import model.Organization.VolunteerOrg;
 import model.Role.Deliver;
 import model.WorkQueue.WorkQueue;
@@ -65,6 +66,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         tblDriver = new javax.swing.JTable();
         btnAddDriver = new javax.swing.JButton();
         lblEnterprise = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +109,13 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblEnterprise.setText("Enterprise: < >");
 
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,9 +136,11 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(286, 286, 286)
+                .addGap(167, 167, 167)
                 .addComponent(btnAddDriver)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(169, 169, 169)
+                .addComponent(btnDelete)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +158,9 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(btnAddDriver)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddDriver)
+                    .addComponent(btnDelete))
                 .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -168,10 +181,57 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnAddDriverActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblDriver.getSelectedRow();
+        
+        if (selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        
+        String username = (String) tblDriver.getValueAt(selectedRow, 0);
+        
+        UserAccount toRemove = null;
+        
+        DriverOrg driverOrg = null;
+
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        driverOrg = (DriverOrg) org;
+                        break;
+                    }
+                }
+            }
+            if (driverOrg != null) {
+                break; // 一旦找到就跳出外层循环
+            }
+        }
+      
+        for (UserAccount ua: driverOrg.getUserAccountDirectory().getUserAccountList() ){
+            if (ua.getUsername().equals(username)){
+                toRemove = ua;
+                break;
+            }
+        }
+      
+        if (toRemove != null){
+            driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+             populateTable();
+
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAddDriver;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblEnterprise;
