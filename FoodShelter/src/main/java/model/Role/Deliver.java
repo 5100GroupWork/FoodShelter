@@ -33,7 +33,7 @@ public class Deliver extends BasicRole{
      * 快递接单业务,workQueue
      */
     
-    private static int count = 0;
+    private static int count = 1;
     private int ID;
     String contact;
     
