@@ -4,18 +4,53 @@
  */
 package ui.HomelessWorkArea;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.RescueNetEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+import model.Organization.RequestCollectOrg;
+import model.WorkQueue.WorkRequest;
+
 /**
  *
  * @author sylvia
  */
 public class FoodRequestPanel extends javax.swing.JPanel {
+    
+    private JPanel workArea;
+    private UserAccount account;
+    private RequestCollectOrg requestCollectOrg;
+    private RescueNetEnterprise rescueNetEnterprise;
+    private NetWork netWork;
 
     /**
      * Creates new form FoodRequestPanel
      */
-    public FoodRequestPanel() {
+    public FoodRequestPanel(JPanel workArea, UserAccount account, BasicOrganization organization,
+                        BasicEnterprise enterprise, NetWork netWork) {
         initComponents();
+        this.workArea = workArea;
+        this.account = account;
+        this.requestCollectOrg = (RequestCollectOrg) organization;
+        this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
+        this.netWork = netWork;
+
+        populateFoodOrgComboBox();
     }
+    
+    private void populateFoodOrgComboBox() {
+    ComboBoxType.removeAllItems();
+    for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        if (org instanceof FoodIncOrg) {
+            ComboBoxType.addItem(org.getName());
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,8 +84,18 @@ public class FoodRequestPanel extends javax.swing.JPanel {
         });
 
         btnViewRequests.setText("View Requests");
+        btnViewRequests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewRequestsActionPerformed(evt);
+            }
+        });
 
         ComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,7 +152,35 @@ public class FoodRequestPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+
+    String foodOrgName = ComboBoxType.getSelectedItem().toString();
+    int quantity = (Integer) spinnerQuantity.getValue();
+
+
+    if (foodOrgName == null || foodOrgName.isEmpty() || quantity <= 0) {
+        JOptionPane.showMessageDialog(null, "Please select a food organization and enter a valid quantity.");
+        return;
+    }
+
+    WorkRequest request = new WorkRequest();
+    request.setFoodOrgName(foodOrgName);
+    request.setQuantity(quantity);
+    request.setSender(requestCollectOrg);
+    request.setStatus("Pending");
+    request.setRequestDate(new Date());
+
+    requestCollectOrg.getWorkQueue().getWorkRequestList().add(request);
+
+    JOptionPane.showMessageDialog(null, "Food request submitted successfully!");
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void ComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxTypeActionPerformed
+
+    private void btnViewRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRequestsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewRequestsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,13 +4,16 @@
  */
 package ui.HomelessWorkArea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
+import model.WorkQueue.WorkRequest;
 
 /**
  *
@@ -25,14 +28,34 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
     JPanel workArea;
     RequestCollectOrg requestCollectOrg;
     RescueNetEnterprise rescueNetEnterprise;
+    private UserAccount account;
+    
     public HomelessWorkPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.netWork  = netWork;
         this.workArea = workArea;
         this.requestCollectOrg = (RequestCollectOrg) organization;
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
+        this.account = account;
         initComponents();
-        rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList();
+
+        populateTable();
+
     }
+    
+    private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+
+    for (WorkRequest request : requestCollectOrg.getWorkQueue().getWorkRequestList()) {
+       
+        if (request.getSender() != null && request.getSender().equals(account.getOrganization())) {
+            Object[] row = new Object[3];
+            row[0] = request.getFoodOrgName(); 
+            row[1] = request.getStatus(); 
+            model.addRow(row);
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,17 +84,17 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Type", "Name", "Status"
+                "Type", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -134,6 +157,40 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
 
     private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow < 0) {
+        JOptionPane.showMessageDialog(null, "Please select a request to withdraw.");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    String selectedFoodOrgName = model.getValueAt(selectedRow, 0).toString();
+    String selectedStatus = model.getValueAt(selectedRow, 1).toString();
+
+    // 注意注意～只允许撤回 Pending 状态的请求
+    if (!selectedStatus.equalsIgnoreCase("Pending")) {
+        JOptionPane.showMessageDialog(null, "Only pending requests can be withdrawn.");
+        return;
+    }
+
+    // 在 WorkQueue中移除的！
+    WorkRequest toRemove = null;
+    for (WorkRequest req : requestCollectOrg.getWorkQueue().getWorkRequestList()) {
+        if (req.getSender().equals(account.getOrganization()) &&
+            req.getFoodOrgName().equals(selectedFoodOrgName) &&
+            req.getStatus().equalsIgnoreCase("Pending")) {
+            toRemove = req;
+            break;
+        }
+    }
+
+    if (toRemove != null) {
+        requestCollectOrg.getWorkQueue().removeWorkRequest(toRemove);
+        JOptionPane.showMessageDialog(null, "Request withdrawn successfully.");
+        populateTable();
+    } else {
+        JOptionPane.showMessageDialog(null, "Unable to find the request to withdraw.");
+    }
     }//GEN-LAST:event_btnWithdrawActionPerformed
 
 
