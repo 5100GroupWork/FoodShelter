@@ -61,11 +61,29 @@ public class WorkRequest {
         this.resolveDate = resolveDate;
     }
     
+    public String getFoodOrgName() {
+        return foodOrgName;
+    }
+
+    public void setFoodOrgName(String foodOrgName) {
+        this.foodOrgName = foodOrgName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
     private String message;
     private BasicOrganization sender;
     private BasicOrganization receiver;
     private String status; // finish/ waiting /pedding
     private Date requestDate;
     private Date resolveDate;
-    
+     // zhiyu新增字段（用于homeless的食物请求）
+    private String foodOrgName; // 对应 ComboBoxType 的值
+    private int quantity;       // 对应 spinner 的值
 }
