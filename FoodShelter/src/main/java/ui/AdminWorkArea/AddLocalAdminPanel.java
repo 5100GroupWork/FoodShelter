@@ -4,16 +4,19 @@
  */
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
 import model.Enterprise.VolunteerEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
+import model.Role.FoodIncEmployee;
 import model.Role.VolunteerManager;
 
 /**
@@ -106,9 +109,6 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 .addContainerGap(135, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSubmit)
-                        .addGap(166, 166, 166))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -120,7 +120,10 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                             .addComponent(txtEmail)
                             .addComponent(txtPhone)
                             .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109))))
+                        .addGap(109, 109, 109))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSubmit)
+                        .addGap(173, 173, 173))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,14 +148,20 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrganization)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(36, 36, 36)
                 .addComponent(btnSubmit)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"EmployeeWorkPanel");
+        parentPanel.populateTable();
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
@@ -163,10 +172,10 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
                 
-        String username = txtuserName.getText();
-        String password = passwordField.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
+        String username = txtuserName.getText().trim();
+        String password = passwordField.getText().trim();
+        String email = txtEmail.getText().trim();
+        String phone = txtPhone.getText().trim();
         
     
         if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
@@ -174,43 +183,29 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             return;
         }
         
-        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){                
-           if (ua.getOrganization() instanceof FoodIncOrg ){ 
-               FoodIncOrg  org = (FoodIncOrg) ua.getOrganization();
-               if(!org.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-            JOptionPane.showMessageDialog(this, "Username already exists.");
+        if (!foodShelterSystem.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+            JOptionPane.showMessageDialog(this, "Username already exists. Choose a different one.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-           
-        } 
-    }
-        
-//        VolunteerManager vm = (VolunteerManager) account.getRole();
-//        
-//        DriverOrg driverOrg = null;
-//
-//        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
-//            if (en instanceof VolunteerEnterprise) {
-//                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
-//                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-//                    if (org instanceof DriverOrg) {
-//                        driverOrg = (DriverOrg) org;
-//                        break;
-//                    }
-//                }
-//            }
-//            if (driverOrg != null) {
-//                break; // 一旦找到就跳出外层循环
-//            }
-//        }
-//               
-//        UserAccount newDriver = vm.createDriver(driverOrg, netWork, username, password);
-//        
-//        newDriver.setEmail(email);
-//        newDriver.setPhone(phone);
-//
-//        JOptionPane.showMessageDialog(this, "Driver added successfully: " + username);
-        
+
+        FoodEnterprise foodEnterprise = null;
+
+
+            for (NetWork net : foodShelterSystem.getNetworkList()) {
+                for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                    if (be instanceof FoodEnterprise) {
+                        foodEnterprise = (FoodEnterprise) be;
+                        break;
+                    }
+                }                
+            }                      
+
+        FoodIncEmployee newEmployee = new FoodIncEmployee();
+        UserAccount newUser = foodShelterSystem.getUserAccountDirectory().createUserAccount(username, password, newEmployee);
+        newUser.setEmail(email);
+        newUser.setPhone(phone);
+
+              
         txtuserName.setText("");
         passwordField.setText("");
         txtEmail.setText("");

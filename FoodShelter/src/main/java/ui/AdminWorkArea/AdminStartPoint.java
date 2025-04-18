@@ -30,6 +30,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
     UserAccount account;
     FoodShelterSystem foodShelterSystem;
     NetWork netWork;
+    AdminWorkAreaPanel parent;
     
     public AdminStartPoint(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
         this.workArea = workArea;
@@ -58,8 +59,8 @@ public class AdminStartPoint extends javax.swing.JPanel {
         jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         lblWelcome = new javax.swing.JLabel();
-        btnEmployee = new javax.swing.JButton();
-        btnTaskManager = new javax.swing.JButton();
+        btnManageEmployee = new javax.swing.JButton();
+        btnManageOrg = new javax.swing.JButton();
         btnManageAdmin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -84,17 +85,17 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblWelcome.setText("Welcome, <value>");
 
-        btnEmployee.setText("Manage NetWork Employee");
-        btnEmployee.addActionListener(new java.awt.event.ActionListener() {
+        btnManageEmployee.setText("Manage NetWork Employee");
+        btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmployeeActionPerformed(evt);
+                btnManageEmployeeActionPerformed(evt);
             }
         });
 
-        btnTaskManager.setText("Manage Organizations");
-        btnTaskManager.addActionListener(new java.awt.event.ActionListener() {
+        btnManageOrg.setText("Manage Organizations");
+        btnManageOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaskManagerActionPerformed(evt);
+                btnManageOrgActionPerformed(evt);
             }
         });
 
@@ -127,13 +128,13 @@ public class AdminStartPoint extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTaskManager)
-                            .addComponent(btnEmployee)
+                            .addComponent(btnManageOrg)
+                            .addComponent(btnManageEmployee)
                             .addComponent(btnManageAdmin))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEmployee, btnManageAdmin, btnTaskManager});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageAdmin, btnManageEmployee, btnManageOrg});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,9 +142,9 @@ public class AdminStartPoint extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(lblWelcome)
                 .addGap(43, 43, 43)
-                .addComponent(btnEmployee)
+                .addComponent(btnManageEmployee)
                 .addGap(34, 34, 34)
-                .addComponent(btnTaskManager)
+                .addComponent(btnManageOrg)
                 .addGap(28, 28, 28)
                 .addComponent(btnManageAdmin)
                 .addGap(24, 24, 24)
@@ -167,7 +168,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
+    private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
         
                 
@@ -175,28 +176,28 @@ public class AdminStartPoint extends javax.swing.JPanel {
         workArea.add("EmployeeWorkPanel", new EmployeeWorkPanel(workArea, account, foodShelterSystem));
         layout.show(workArea,"EmployeeWorkPanel");
                 
-    }//GEN-LAST:event_btnEmployeeActionPerformed
+    }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
-    private void btnTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaskManagerActionPerformed
+    private void btnManageOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrgActionPerformed
         // TODO add your handling code here:
         
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AdminWorkAreaPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem));
+        workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem));
         layout.show(workArea,"AdminWorkAreaPanel");
-    }//GEN-LAST:event_btnTaskManagerActionPerformed
+    }//GEN-LAST:event_btnManageOrgActionPerformed
 
     private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
-        ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel=new ManageEnterpriseAdminJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+//        ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel=new ManageEnterpriseAdminJPanel(userProcessContainer, ecosystem);
+//        userProcessContainer.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
+//        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+//        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageAdminActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEmployee;
     private javax.swing.JButton btnManageAdmin;
-    private javax.swing.JButton btnTaskManager;
+    private javax.swing.JButton btnManageEmployee;
+    private javax.swing.JButton btnManageOrg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
