@@ -175,7 +175,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
         return;
     }
 
-    String username = (String) tblHomeless.getValueAt(selectedRow, 0);
+    String username = (String) tblHomeless.getValueAt(selectedRow, 1);
 
     UserAccount toRemove = null;
     for (UserAccount ua : requestCollectOrg.getUserAccountDirectory().getUserAccountList()) {
