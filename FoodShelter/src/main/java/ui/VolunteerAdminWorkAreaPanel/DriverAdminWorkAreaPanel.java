@@ -207,7 +207,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                 }
             }
             if (driverOrg != null) {
-                break; // 一旦找到就跳出外层循环
+                break; 
             }
         }
       
@@ -222,7 +222,6 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
             JOptionPane.showMessageDialog(this, "User deleted successfully.");
             populateTable();
-
         }        
     }//GEN-LAST:event_btnDeleteActionPerformed
 

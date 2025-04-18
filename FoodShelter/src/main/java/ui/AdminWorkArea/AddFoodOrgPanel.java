@@ -29,11 +29,13 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
     UserAccount account;
     FoodShelterSystem foodShelterSystem;
     NetWork netWork;
+    AdminWorkAreaPanel parent;
     
-    public AddFoodOrgPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+    public AddFoodOrgPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem, AdminWorkAreaPanel parent) {
         this.workArea = workArea;
         this.account = account;
         this.foodShelterSystem = foodShelterSystem;
+        this.parent = parent;
         
         //set the orgnziation ID in the label. 
         FoodIncOrg preview = new FoodIncOrg("new");
@@ -259,6 +261,7 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         workArea.remove(this);
         CardLayout layout = (CardLayout)workArea.getLayout();
         layout.show(workArea,"AdminWorkAreaPanel");
+        parent.populateTable();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtOrgNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrgNameActionPerformed
