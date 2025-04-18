@@ -4,6 +4,12 @@
  */
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+
 /**
  *
  * @author sylvia
@@ -13,7 +19,16 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminWorkAreaPanel
      */
-    public AdminWorkAreaPanel() {
+    
+    JPanel workArea;
+    UserAccount account;
+    FoodShelterSystem foodShelterSystem;
+    NetWork netWork;
+    public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
         initComponents();
     }
 
@@ -128,6 +143,9 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"AdminStartPoint");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed

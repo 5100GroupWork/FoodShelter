@@ -4,6 +4,7 @@
  */
 package ui.AdminWorkArea;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
@@ -38,6 +39,8 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         FoodIncOrg preview = new FoodIncOrg("new");
         txtOrgID.setText(String.valueOf(preview.getOrganizationID()));
         initComponents();
+        
+        populateAdminComboBox();
     }
 
     /**
@@ -253,6 +256,9 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"AdminWorkAreaPanel");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtOrgNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrgNameActionPerformed
@@ -279,4 +285,24 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtOrgID;
     private javax.swing.JTextField txtOrgName;
     // End of variables declaration//GEN-END:variables
+
+    private void populateAdminComboBox() {
+
+
+        jComboBox1.removeAllItems();
+
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                if (be instanceof FoodEnterprise) {
+                    for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
+                        if (ua.getRole() != null && ua.getRole().getClass().getSimpleName().equals("FoodOrgAdmin")) {
+                            jComboBox1.addItem(ua.toString());
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
 }

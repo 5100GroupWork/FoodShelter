@@ -181,8 +181,8 @@ public class AdminStartPoint extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AddFoodOrgPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem));
-        layout.show(workArea,"AddFoodOrgPanel");
+        workArea.add("AdminWorkAreaPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem));
+        layout.show(workArea,"AdminWorkAreaPanel");
     }//GEN-LAST:event_btnTaskManagerActionPerformed
 
     private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
