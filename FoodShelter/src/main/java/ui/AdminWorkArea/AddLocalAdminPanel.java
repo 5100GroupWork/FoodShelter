@@ -182,8 +182,8 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             return;
         }
            
-           } 
-
+        } 
+    }
         
 //        VolunteerManager vm = (VolunteerManager) account.getRole();
 //        
