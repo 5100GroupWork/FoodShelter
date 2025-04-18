@@ -5,14 +5,19 @@
 package ui.AdminWorkArea;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
+import model.Enterprise.VolunteerEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
 
@@ -160,9 +165,48 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
+        int selectedRow = tblOrg.getSelectedRow();
+        
+        if (selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please select a organization to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        }
 
-        
-        
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this organization?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int orgID = (int) tblOrg.getValueAt(selectedRow, 0);
+
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                if (be instanceof FoodEnterprise) {                    
+                    ArrayList<BasicOrganization> orgList = be.getOrganizationDirectory().getOrganizationList();
+                    for (int i = 0; i < orgList.size(); i++) {
+                        BasicOrganization org = orgList.get(i);
+                        if (org instanceof FoodIncOrg && ((FoodIncOrg) org).getOrganizationID() == orgID) {
+                            orgList.remove(i); 
+                            break;
+                        }
+                    }
+
+                   ArrayList<UserAccount> uaList = be.getUserAccountDirectory().getUserAccountList();
+                    for (int i = 0; i < uaList.size(); i++) {
+                        UserAccount ua = uaList.get(i);
+                        if (ua.getOrganization() != null
+                                && ua.getOrganization() instanceof FoodIncOrg
+                                && ((FoodIncOrg) ua.getOrganization()).getOrganizationID() == orgID) {
+                            uaList.remove(i); 
+                            break;
+                        }
+                    }
+
+                    populateTable();
+                    JOptionPane.showMessageDialog(this, "Organization deleted successfully.");
+                    return;
+                }
+            }
+        }     
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
