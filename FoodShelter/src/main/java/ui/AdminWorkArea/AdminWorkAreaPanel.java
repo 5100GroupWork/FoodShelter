@@ -6,9 +6,15 @@ package ui.AdminWorkArea;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+import model.Organization.FoodIncOrg;
+import model.Role.FoodEnterpriseManager;
 
 /**
  *
@@ -24,12 +30,16 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     UserAccount account;
     FoodShelterSystem foodShelterSystem;
     NetWork netWork;
+    AdminWorkAreaPanel parent;
+    
     public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
         this.workArea = workArea;
         this.account = account;
         this.foodShelterSystem = foodShelterSystem;
         
         initComponents();
+        populateTable();
+        
     }
 
     /**
@@ -42,12 +52,12 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
-        btnReject = new javax.swing.JButton();
-        btnApprove = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblDriver = new javax.swing.JTable();
+        tblOrg = new javax.swing.JTable();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -56,17 +66,17 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        btnReject.setText("Delete");
-        btnReject.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnApprove.setText("Add");
-        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApproveActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
@@ -75,26 +85,26 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Only used to manage food donation organizations.");
 
-        tblDriver.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Organization ID", "Location", "Admin"
+                "Organization ID", "Name", "Location", "Admin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tblDriver);
+        jScrollPane3.setViewportView(tblOrg);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,9 +112,9 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(87, 87, 87)
-                .addComponent(btnApprove)
+                .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnReject)
+                .addComponent(btnDelete)
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -133,8 +143,8 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApprove)
-                    .addComponent(btnReject))
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -148,26 +158,72 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         layout.show(workArea,"AdminStartPoint");
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
 
         
         
         
-    }//GEN-LAST:event_btnRejectActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnApproveActionPerformed
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("AddFoodOrgPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem, parent));
+        layout.show(workArea,"AddFoodOrgPanel");
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnReject;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblDriver;
+    private javax.swing.JTable tblOrg;
     // End of variables declaration//GEN-END:variables
+
+    public void populateTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+        model.setRowCount(0);  
+
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                if (be instanceof FoodEnterprise) {
+                    for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                        if (org instanceof FoodIncOrg) {
+                            FoodIncOrg foodOrg = (FoodIncOrg) org;
+
+                            // Find assigned admin
+                            UserAccount admin = null;
+                            for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
+                                if (ua.getOrganization() == foodOrg && ua.getRole() instanceof FoodEnterpriseManager) {
+                                    admin = ua;
+                                    break;
+                                }
+                            }
+
+                            Object[] row = new Object[4];
+                            row[0] = foodOrg.getOrganizationID();
+                            row[1] = foodOrg.getName();
+                            row[2] = foodOrg.getAddress();
+                            row[3] = (admin != null) ? admin.getUsername() : "N/A";
+
+                            model.addRow(row);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        
+        
+        
+
+    
+    
+    
 }
