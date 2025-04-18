@@ -136,7 +136,7 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("TaskManagerAdminWorkPanel", new DriverAdminWorkAreaPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork));
+        workArea.add("TaskManagerAdminWorkPanel", new TaskManagerAdminWorkPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork));
         layout.show(workArea,"TaskManagerAdminWorkPanel");
         
 

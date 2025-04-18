@@ -5,6 +5,7 @@
 package ui.FoodProviderWorkArea;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
@@ -177,11 +178,11 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
 
         FoodItem fooditem = new FoodItem();
-        fooditem.setFoodName(txtFoodName.getText());
+        fooditem.setFoodName(txtFoodName.getText().trim());
         fooditem.setNumber((int) spinnerQuantity.getValue());
-        fooditem.setExpiredDate(txtExpiry.getText());
+        fooditem.setExpiredDate(txtExpiry.getText().trim());
+        fooditem.setFoodIncOrg(foodIncOrg);
 
-        // Declare outside the loop
         FoodIncOrg org = null;
 
         for (BasicOrganization candidate : foodEnterprise.getOrganizationDirectory().getOrganizationList()) {
@@ -201,6 +202,10 @@ public class DonationFormPanel extends javax.swing.JPanel {
         org.getWorkQueue().getWorkRequestList().add(request);
         account.getWorkQueue().getWorkRequestList().add(request);
         
+            JOptionPane.showMessageDialog(this, "Donation submitted successfully!");
+            txtFoodName.setText("");
+            spinnerQuantity.setValue(0);
+            txtExpiry.setText("");
         }
 
 

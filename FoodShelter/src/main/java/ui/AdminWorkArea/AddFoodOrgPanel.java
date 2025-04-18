@@ -227,12 +227,10 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         
         FoodEnterprise foodEnterprise = null;
         
-        
         for(NetWork netWork:foodShelterSystem.getNetworkList()){
             for (BasicEnterprise be:netWork.getEnterpriseDirectory().getEnterprises()){
                 if (be instanceof FoodEnterprise){
                     foodEnterprise = (FoodEnterprise)be;
-                    foodEnterprise.getOrganizationDirectory().getOrganizationList().add(newOrg);
                     break;
                 }
                 
@@ -245,6 +243,8 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
             return;
         }
         
+        foodEnterprise.getOrganizationDirectory().getOrganizationList().add(newOrg);
+
         selectedAdmin.setOrganization(newOrg);
         selectedAdmin.setRole(new FoodEnterpriseManager());
         

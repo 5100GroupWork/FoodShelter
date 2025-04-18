@@ -47,7 +47,6 @@ public class main extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         loginJButton = new javax.swing.JButton();
         logoutJButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,14 +67,6 @@ public class main extends javax.swing.JFrame {
         logoutJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutJButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Not a user? Create here.");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
             }
         });
 
@@ -101,10 +92,6 @@ public class main extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {passwordField, userNameJTextField});
@@ -124,9 +111,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(loginJButton)
                 .addGap(34, 34, 34)
                 .addComponent(logoutJButton)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -230,16 +215,6 @@ public class main extends javax.swing.JFrame {
         dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        try {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://www.google.com"));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }//GEN-LAST:event_jLabel3MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -279,7 +254,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton loginJButton;

@@ -249,7 +249,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             Object[] row = new Object[3];
             row[0] = deliver.getID();
             row[1] = ua.getUsername();
-            row[1] = deliver.getContact();
+            row[2] = deliver.getContact();
             model.addRow(row);
            } 
         }
