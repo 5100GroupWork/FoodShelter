@@ -4,11 +4,17 @@
  */
 package ui.AdminWorkArea;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.VolunteerEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.DriverOrg;
+import model.Organization.FoodIncOrg;
+import model.Role.VolunteerManager;
 
 /**
  *
@@ -155,6 +161,61 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        
+                
+        String username = txtuserName.getText();
+        String password = passwordField.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        
+    
+        if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
+            return;
+        }
+        
+        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){                
+           if (ua.getOrganization() instanceof FoodIncOrg ){ 
+               FoodIncOrg  org = (FoodIncOrg) ua.getOrganization();
+               if(!org.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
+            JOptionPane.showMessageDialog(this, "Username already exists.");
+            return;
+        }
+           
+        } 
+    }
+        
+//        VolunteerManager vm = (VolunteerManager) account.getRole();
+//        
+//        DriverOrg driverOrg = null;
+//
+//        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+//            if (en instanceof VolunteerEnterprise) {
+//                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+//                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+//                    if (org instanceof DriverOrg) {
+//                        driverOrg = (DriverOrg) org;
+//                        break;
+//                    }
+//                }
+//            }
+//            if (driverOrg != null) {
+//                break; // 一旦找到就跳出外层循环
+//            }
+//        }
+//               
+//        UserAccount newDriver = vm.createDriver(driverOrg, netWork, username, password);
+//        
+//        newDriver.setEmail(email);
+//        newDriver.setPhone(phone);
+//
+//        JOptionPane.showMessageDialog(this, "Driver added successfully: " + username);
+        
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

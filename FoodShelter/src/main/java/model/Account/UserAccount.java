@@ -83,7 +83,7 @@ public class UserAccount {
 
     @Override
     public String toString() {
-        return username;
+        return this.username;
     }
     
     
