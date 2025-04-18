@@ -46,19 +46,11 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        backJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         NewFoodTable = new javax.swing.JTable();
         btnApprove = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
-
-        backJButton.setText("<<Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
-            }
-        });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("New Food Check");
@@ -103,9 +95,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(backJButton)
-                .addGap(132, 132, 132)
+                .addGap(228, 228, 228)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -123,9 +113,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -135,10 +123,6 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-
-    }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         // TODO add your handling code here:
@@ -171,7 +155,6 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable NewFoodTable;
-    private javax.swing.JButton backJButton;
     private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnReject;
     private javax.swing.JLabel enterpriseLabel;
@@ -181,26 +164,29 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
 
     /////////// function////////////
     /// populize
-    public void populateTable(){
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
         model.setRowCount(0);
         WorkQueue foodQueue = netWork.getCheckList();
-        
-        int count =0;
+
+        int count = 0;
         for (WorkRequest wd : foodQueue.getWorkRequestList()) {
-            WorkRequestFoodItem wrf = (WorkRequestDelivery) wd;
-            Object row[] = new Object[6];
-            row[0] = count;
-            row[1] = wrf.getFoodItem().getFoodName();
-            row[2] = wrf;
-            row[3] = wrf.getFoodItem().getExpiredDate();
-            row[4] = wrf.getFoodItem().getFoodIncOrg();
-            model.addRow(row);
+            if (wd instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
+                count++;
+                Object row[] = new Object[5];
+                row[0] = count;
+                row[1] = wrf.getFoodItem().getFoodName();
+                row[2] = wrf.getFoodItem().getNumber();
+                row[3] = wrf.getFoodItem().getExpiredDate();
+                row[4] = wrf.getFoodItem().getFoodIncOrg();
+
+                model.addRow(row);
+            }
         }
+
     }
-
-
-
-
-
 }
+
+
+
