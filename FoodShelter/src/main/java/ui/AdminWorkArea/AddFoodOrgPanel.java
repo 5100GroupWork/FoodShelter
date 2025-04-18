@@ -4,6 +4,16 @@
  */
 package ui.AdminWorkArea;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
+import model.Organization.FoodIncOrg;
+import model.Role.FoodEnterpriseManager;
+
 /**
  *
  * @author sylvia
@@ -13,7 +23,20 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddFoodOrgPanel
      */
-    public AddFoodOrgPanel() {
+    
+    JPanel workArea;
+    UserAccount account;
+    FoodShelterSystem foodShelterSystem;
+    NetWork netWork;
+    
+    public AddFoodOrgPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+        this.workArea = workArea;
+        this.account = account;
+        this.foodShelterSystem = foodShelterSystem;
+        
+        //set the orgnziation ID in the label. 
+        FoodIncOrg preview = new FoodIncOrg("new");
+        txtOrgID.setText(String.valueOf(preview.getOrganizationID()));
         initComponents();
     }
 
@@ -69,6 +92,7 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Add Food Organization");
 
+        txtOrgID.setEditable(false);
         txtOrgID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtOrgIDActionPerformed(evt);
@@ -182,6 +206,49 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+       String organizationName = txtOrgName.getText().trim();
+       String location = txtLocation.getText().trim();
+       
+        UserAccount selectedAdmin = (UserAccount) jComboBox1.getSelectedItem();                
+        
+        if (organizationName.isEmpty()|| location.isEmpty()||jComboBox1.getSelectedItem()== null)
+        {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        FoodIncOrg newOrg = new FoodIncOrg(organizationName);
+        newOrg.setAddress(location);
+        
+        FoodEnterprise foodEnterprise = null;
+        
+        
+        for(NetWork netWork:foodShelterSystem.getNetworkList()){
+            for (BasicEnterprise be:netWork.getEnterpriseDirectory().getEnterprises()){
+                if (be instanceof FoodEnterprise){
+                    foodEnterprise = (FoodEnterprise)be;
+                    foodEnterprise.getOrganizationDirectory().getOrganizationList().add(newOrg);
+                    break;
+                }
+                
+            }
+            
+        }
+        
+        if (foodEnterprise == null){
+            JOptionPane.showMessageDialog(this, "No FoodEnterprise found in system.");
+            return;
+        }
+        
+        selectedAdmin.setOrganization(newOrg);
+        selectedAdmin.setRole(new FoodEnterpriseManager());
+        
+        JOptionPane.showMessageDialog(this, "Organization created successfully!\nID: " + newOrg.getOrganizationID());
+
+        txtOrgName.setText("");
+        txtLocation.setText("");
+        jComboBox1.setSelectedIndex(0);
+        txtOrgID.setText(String.valueOf(new FoodIncOrg("new").getOrganizationID()));
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
