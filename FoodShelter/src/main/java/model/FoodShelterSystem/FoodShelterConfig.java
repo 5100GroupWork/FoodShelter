@@ -39,6 +39,11 @@ public class FoodShelterConfig {
         
         // create a system admin
         NetWork  netWork = system.createAndAddNetwork();
+        
+        if (netWork.getEnterpriseDirectory().getEnterprises() == null) {
+        netWork.getEnterpriseDirectory().setEnterprises(new ArrayList<>());
+        }
+            
         UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",new SysAdmin() );
         
         
