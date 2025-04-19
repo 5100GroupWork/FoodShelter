@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import model.Account.UserAccount;
 import model.FoodItem.FoodItem;
 import model.Organization.NewFoodCheckOrg;
+import model.Organization.PushedFoodCheckOrg;
 import model.Organization.WareHouseCheckOrg;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
@@ -23,6 +24,7 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     private ArrayList<NewFoodCheckOrg> newFoodCheckOrgs = new ArrayList<>();
     private ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs = new ArrayList<>();
     private ArrayList<UserAccount> employees = new ArrayList<>();
+    private ArrayList<PushedFoodCheckOrg> pushedFoodCheckOrgs = new ArrayList<>();
     
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);
@@ -53,6 +55,25 @@ public class FreshCheckEnterprise extends BasicEnterprise{
         this.wareHourseCheckOrgs = wareHourseCheckOrg;
     }
     
+    public ArrayList<PushedFoodCheckOrg> getPushedFoodCheckOrgs() {
+    if (pushedFoodCheckOrgs == null) {
+        pushedFoodCheckOrgs = new ArrayList<>();
+    }
+    return pushedFoodCheckOrgs;
+    
+   
+}
+    
+    public PushedFoodCheckOrg addPushedFoodCheckOrg(String name) {
+    PushedFoodCheckOrg pushedFoodCheckOrg = new PushedFoodCheckOrg(name);
+    this.pushedFoodCheckOrgs.add(pushedFoodCheckOrg);
+    this.getOrganizationDirectory().getOrganizationList().add(pushedFoodCheckOrg); // 同时添加到组织目录
+    return pushedFoodCheckOrg;
+}
+
+public boolean removePushedFoodCheckOrg(PushedFoodCheckOrg org) {
+    return this.pushedFoodCheckOrgs.remove(org);
+}
     /////////////////////////////////////////////////////////
     // add
     public NewFoodCheckOrg addNewFoodCheckOrg(String name){

@@ -15,6 +15,7 @@ import model.Organization.NewFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.WareHouseCheckOrg;
 import ui.FoodProviderWorkArea.DonationFormPanel;
+import ui.FreshCheckWorkArea.NewFoodCheckPanel;
 
 /**
  *
@@ -46,8 +47,7 @@ public class FoodCheckEnManager extends BasicRole{
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
-        
-        return new DonationFormPanel(null,null,null,null,null);
-    }
+    return new NewFoodCheckPanel(workArea, account, organization, enterprise, netWork);
+}
    
 }

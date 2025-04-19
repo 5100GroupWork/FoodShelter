@@ -76,6 +76,13 @@ public class WorkRequest {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public String getWorkRequestUuid() {
+        return workRequestUuid;
+    }
+
+    public void setWorkRequestUuid(String workRequestUuid) {
+        this.workRequestUuid = workRequestUuid;
+    }
     
     private String message;
     private BasicOrganization sender;
@@ -86,4 +93,5 @@ public class WorkRequest {
      // zhiyu新增字段（用于homeless的食物请求）
     private String foodOrgName; // 对应 ComboBoxType 的值
     private int quantity;       // 对应 spinner 的值
+    private String workRequestUuid;
 }

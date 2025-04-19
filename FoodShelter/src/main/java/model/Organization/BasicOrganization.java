@@ -25,6 +25,7 @@ public abstract class BasicOrganization {
     private int organizationID;
     private static int counter=0;
     
+    
     public enum Type{
         FoodInc("FoodIncOrg"),
         Volunteer("VolunteerOrg"),
@@ -32,7 +33,9 @@ public abstract class BasicOrganization {
         RequestEntertain("RequestEntertainOrg"),
         NewFoodChecker("NewFoodCHeckOrg"),
         WareHourseCheck("WareHourseCheckOrg"),
-        DriverOrg("DriverOrg");
+        DriverOrg("DriverOrg"),
+        PushedFoodCheck("PushedFoodCheckOrg");
+        
         private String value;
         private Type(String value) {
             this.value = value;

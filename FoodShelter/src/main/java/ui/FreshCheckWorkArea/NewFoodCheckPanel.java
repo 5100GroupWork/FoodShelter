@@ -12,6 +12,7 @@ import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.NewFoodCheckOrg;
 import model.Organization.WareHouseCheckOrg;
 import model.WorkQueue.*;
 
@@ -26,15 +27,27 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
      * Creates new form InspectorWorkPanel
      */
     NetWork netWork;
-    WareHouseCheckOrg wareHouseCheckOrg;
+    NewFoodCheckOrg newFoodCheckOrg;
     FreshCheckEnterprise freshCheckEnterprise;
     JPanel workArea;
+    UserAccount account;
+    
     public NewFoodCheckPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
-        this.wareHouseCheckOrg = (WareHouseCheckOrg) wareHouseCheckOrg;
-        this.freshCheckEnterprise = (FreshCheckEnterprise) enterprise;
+        this.account = account;
         this.netWork = netWork;
         initComponents();
+        if (enterprise instanceof FreshCheckEnterprise) {
+        this.freshCheckEnterprise = (FreshCheckEnterprise) enterprise;
+    }
+    
+    if (organization instanceof NewFoodCheckOrg) {
+        this.newFoodCheckOrg = (NewFoodCheckOrg) organization;
+    }
+
+    
+    // 最后填充表格
+    populateTable();
     }
 
     /**
@@ -127,29 +140,63 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         // TODO add your handling code here:
         int rowNumber = NewFoodTable.getSelectedRow();
-        if(rowNumber<0){
+        if (rowNumber < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row first");
             return;
         }
-        WorkRequestFoodItem wfd = (WorkRequestDelivery) NewFoodTable.getValueAt(5, rowNumber);
-        // 从checklist中取出来
-        netWork.getCheckList().removeWorkRequest(wfd);
-        netWork.getWarehouseList().getWorkRequestList().add(wfd);
-        populateTable();
-        
+
+        DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
+        int foodId = (int) model.getValueAt(rowNumber, 0); // 获取Food ID
+
+        WorkRequestFoodItem selectedRequest = null;
+        int count = 0;
+        for (WorkRequest wd : netWork.getCheckList().getWorkRequestList()) {
+            if (wd instanceof WorkRequestFoodItem) {
+                count++;
+                if (count == foodId) {
+                    selectedRequest = (WorkRequestFoodItem) wd;
+                    break;
+                }
+            }
+        }
+        if (selectedRequest != null) {
+
+            netWork.getCheckList().removeWorkRequest(selectedRequest);
+            netWork.getWarehouseList().getWorkRequestList().add(selectedRequest);
+
+            populateTable();
+        }
+
     }//GEN-LAST:event_btnApproveActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         // TODO add your handling code here:
         int rowNumber = NewFoodTable.getSelectedRow();
-        if(rowNumber<0){
-            JOptionPane.showMessageDialog(this, "Please select a row first");
-            return;
+    if(rowNumber < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a row first");
+        return;
+    }
+
+    DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
+    int foodId = (int) model.getValueAt(rowNumber, 0); // 获取Food ID
+    
+    WorkRequestFoodItem selectedRequest = null;
+    int count = 0;
+    for (WorkRequest wd : netWork.getCheckList().getWorkRequestList()) {
+        if (wd instanceof WorkRequestFoodItem) {
+            count++;
+            if (count == foodId) {
+                selectedRequest = (WorkRequestFoodItem) wd;
+                break;
+            }
         }
-        WorkRequestFoodItem wfd = (WorkRequestDelivery) NewFoodTable.getValueAt(5, rowNumber);
-        // 从checklist中取出来
-        netWork.getCheckList().removeWorkRequest(wfd);
+    }
+    
+    if (selectedRequest != null) {
+        netWork.getCheckList().removeWorkRequest(selectedRequest);
+        
         populateTable();
+    }
     }//GEN-LAST:event_btnRejectActionPerformed
 
 
