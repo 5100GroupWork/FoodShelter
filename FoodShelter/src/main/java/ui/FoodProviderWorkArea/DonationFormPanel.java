@@ -34,15 +34,29 @@ public class DonationFormPanel extends javax.swing.JPanel {
     public DonationFormPanel(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         this.workArea = workArea;
         this.netWork = netWork;
-        this.foodEnterprise = (FoodEnterprise) enterprise;
-        this.foodIncOrg = (FoodIncOrg) organization;
-        this.account = account;
         
         initComponents();
         
-        lblWelcome.setText("Welcome, " + account.getUsername() + " !");
-        lblEnterprise.setText(enterprise.getName());
+        this.account = account;
+        
+        if (account != null) {
+            lblWelcome.setText("Welcome, " + account.getUsername() + " !");
+        } else {
+            lblWelcome.setText("Welcome, Guest!");
+        }
+        
+        if (enterprise != null) {
+            lblEnterprise.setText(enterprise.getName());
+            if (enterprise instanceof FoodEnterprise) {
+                this.foodEnterprise = (FoodEnterprise) enterprise;
+            }
+        } else {
+            lblEnterprise.setText("No Enterprise");
+        }
 
+        if (organization != null && organization instanceof FoodIncOrg) {
+            this.foodIncOrg = (FoodIncOrg) organization;
+        }
 
     }
 
