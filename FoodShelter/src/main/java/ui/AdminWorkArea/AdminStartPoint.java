@@ -38,6 +38,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         this.foodShelterSystem = foodShelterSystem;
         
         initComponents();
+       
         lblWelcome.setText("Welcome, " + account.getUsername());
      
         populateTree();
@@ -169,8 +170,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-        
-                
+         
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("EmployeeWorkPanel", new EmployeeWorkPanel(workArea, account, foodShelterSystem));
         layout.show(workArea,"EmployeeWorkPanel");
