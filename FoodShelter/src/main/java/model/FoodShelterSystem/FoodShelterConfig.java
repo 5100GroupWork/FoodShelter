@@ -67,7 +67,16 @@ public class FoodShelterConfig {
         checkManager.setOrganization(freshCheckerEnterprise);//zhiyu添加
         FoodCheckEnManager foodCheckEnManager =new FoodCheckEnManager(freshCheckerEnterprise);
         checkManager.setRole(foodCheckEnManager);
-        freshCheckerEnterprise.getEmployees().add(checkManager);
+
+        if (freshCheckerEnterprise != null) {
+            
+            if (freshCheckerEnterprise.getEmployees() == null) {
+                freshCheckerEnterprise.setEmployees(new ArrayList<>());
+            }
+            
+            freshCheckerEnterprise.getEmployees().add(checkManager);
+        }
+        
         
             // create 2 orgs
         NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");

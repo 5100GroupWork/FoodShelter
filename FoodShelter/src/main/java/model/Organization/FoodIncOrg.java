@@ -37,6 +37,7 @@ public class FoodIncOrg extends BasicOrganization{
     }
     public FoodIncOrg(String name) {
         super(Type.FoodInc.getValue(),name);
+        employees = new ArrayList<>();
     }
     
     @Override
