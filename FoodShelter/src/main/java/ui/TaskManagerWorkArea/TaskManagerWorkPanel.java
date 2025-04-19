@@ -223,10 +223,12 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         //get task and driver with tables
         int TaskRow = tbUnassignedTasks.getSelectedRow();
         int DriverRow = tbDrivers.getSelectedRow();
+        
         if (TaskRow < 0 || DriverRow<0) {
-            JOptionPane.showMessageDialog(null, "Please select a Task first.");
+            JOptionPane.showMessageDialog(null, "Please select both a driver and a task first.");
             return;
         }
+        
         WorkRequestDelivery task = (WorkRequestDelivery) tbUnassignedTasks.getValueAt(TaskRow, 5);
         UserAccount usDriver = (UserAccount) tbDrivers.getValueAt(DriverRow, 1);
         
@@ -237,8 +239,15 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         }
         
         task.setDeliver(usDriver);
-        JOptionPane.showMessageDialog(null, "Task set successfully.");      
         task.setTaskStatus("picked");
+        
+        if (usDriver.getRole() instanceof Deliver) {
+            Deliver deliverRole = (Deliver) usDriver.getRole();
+            deliverRole.newWorkQueue(task);
+        }
+        JOptionPane.showMessageDialog(null, "Task set successfully.");      
+        populateTableTask();
+        populateTableDriver();
         
     }//GEN-LAST:event_btnAssignTaskActionPerformed
 
