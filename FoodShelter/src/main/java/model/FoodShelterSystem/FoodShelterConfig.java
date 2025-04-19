@@ -72,23 +72,22 @@ public class FoodShelterConfig {
                 }
 
         // create enterprise details
-        UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodEnterpriseManager());
-        foodEnplyee.setOrganization(foodEnterprise);  //zhiyu添加
-        foodEnterprise.getEmployees().add(foodEnplyee);
-        
-        FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
-        foodIncOrg.setAddress("Backbay-Boston-MA");
-        UserAccount foodIncOrgEmployee = netWork.getUserAccountDirctory().createUserAccount("John", "0000",new FoodIncEmployee());
-        foodIncOrgEmployee.setOrganization(foodIncOrg); //zhiyu添加
-        foodIncOrg.getEmployees().add(foodIncOrgEmployee);
-        
-        
-        // create freshCheckerEnterprise details
-        // add manager
-        UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",new FoodCheckEnManager(freshCheckerEnterprise));
-        checkManager.setOrganization(freshCheckerEnterprise);//zhiyu添加
-        FoodCheckEnManager foodCheckEnManager =new FoodCheckEnManager(freshCheckerEnterprise);
-        checkManager.setRole(foodCheckEnManager);
+      
+            FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
+            foodIncOrg.setAddress("Backbay-Boston-MA");
+
+            UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000", new FoodIncEmployee());
+            foodEnplyee.setOrganization(foodIncOrg);  
+            foodEnplyee.setEnterprise(foodEnterprise);
+            foodIncOrg.getEmployees().add(foodEnplyee);
+            foodEnterprise.getEmployees().add(foodEnplyee);
+
+            // create freshCheckerEnterprise details
+            // add manager
+            UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000", new FoodCheckEnManager(freshCheckerEnterprise));
+            checkManager.setOrganization(freshCheckerEnterprise);//zhiyu添加
+            FoodCheckEnManager foodCheckEnManager = new FoodCheckEnManager(freshCheckerEnterprise);
+            checkManager.setRole(foodCheckEnManager);
 
         freshCheckerEnterprise.getEmployees().add(checkManager);
 

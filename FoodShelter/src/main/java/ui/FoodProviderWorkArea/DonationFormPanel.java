@@ -125,39 +125,40 @@ public class DonationFormPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(valueLabel)
-                            .addComponent(valueLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(127, 127, 127))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(requestTestJButton)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnResetForm)
-                        .addGap(27, 27, 27)
-                        .addComponent(requestTestJButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(lblWelcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEnterprise)
                 .addGap(59, 59, 59))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(requestTestJButton)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnResetForm)
+                                .addGap(27, 27, 27)
+                                .addComponent(requestTestJButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(valueLabel)
+                                    .addComponent(valueLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +168,9 @@ public class DonationFormPanel extends javax.swing.JPanel {
                     .addComponent(lblWelcome)
                     .addComponent(jLabel2)
                     .addComponent(lblEnterprise))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valueLabel1))
@@ -181,49 +182,114 @@ public class DonationFormPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(36, 36, 36)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(requestTestJButton)
                     .addComponent(btnResetForm)
                     .addComponent(requestTestJButton1))
-                .addGap(46, 46, 46))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
 
+     // First find the enterprise if it's null
+        if (foodEnterprise == null && account != null) {
+            // 直接从用户账户获取企业
+            if (account.getEnterprise() != null && account.getEnterprise() instanceof FoodEnterprise) {
+                foodEnterprise = (FoodEnterprise) account.getEnterprise();
+                System.out.println("直接从用户账户获取企业: " + foodEnterprise.getName());
+            } else {
+                // 通过组织查找企业
+                BasicOrganization org = account.getOrganization();
+                if (org != null && org instanceof FoodIncOrg) {
+                    // 如果组织是FoodIncOrg，找其所属的企业
+                    foodIncOrg = (FoodIncOrg) org;
 
-        FoodItem fooditem = new FoodItem();
-        fooditem.setFoodName(txtFoodName.getText().trim());
-        fooditem.setNumber((int) spinnerQuantity.getValue());
-        fooditem.setExpiredDate(txtExpiry.getText().trim());
-        fooditem.setFoodIncOrg(foodIncOrg);
-
-        FoodIncOrg org = null;
-
-        for (BasicOrganization candidate : foodEnterprise.getOrganizationDirectory().getOrganizationList()) {
-            if (candidate instanceof FoodIncOrg) {
-                org = (FoodIncOrg) candidate;
-                break;
+                    // 通过网络查找该组织所属的企业
+                    if (netWork != null) {
+                        for (BasicEnterprise ent : netWork.getEnterpriseDirectory().getEnterprises()) {
+                            if (ent instanceof FoodEnterprise) {
+                                FoodEnterprise foodEnt = (FoodEnterprise) ent;
+                                if (foodEnt.getFoodIncOrgs().contains(foodIncOrg)) {
+                                    foodEnterprise = foodEnt;
+                                    System.out.println("通过组织在网络中找到企业: " + foodEnterprise.getName());
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+        // Now find the FoodIncOrg if it's null
+        if (foodIncOrg == null && foodEnterprise != null) {
+            // First try the organization directory
+            for (BasicOrganization org : foodEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof FoodIncOrg) {
+                    foodIncOrg = (FoodIncOrg) org;
+                    System.out.println("Found FoodIncOrg from org directory: " + foodIncOrg.getName());
+                    break;
+                }
+            }
 
-        if (org != null) {
+            // If still null, try the custom list
+            if (foodIncOrg == null && !foodEnterprise.getFoodIncOrgs().isEmpty()) {
+            foodIncOrg = foodEnterprise.getFoodIncOrgs().get(0);
+            System.out.println("Found FoodIncOrg from custom list: " + foodIncOrg.getName());
+        }
+    }
+    
+    // Check again if both are still null
+    if (foodEnterprise == null) {
+        JOptionPane.showMessageDialog(this, "Error: Food Enterprise is not properly initialized. Please log in again.");
+        return;
+    }
+    
+    if (foodIncOrg == null) {
+        JOptionPane.showMessageDialog(this, "Error: Food Organization is not properly initialized.");
+        return;
+    }
+    
+    // Rest of your method...
+    FoodItem fooditem = new FoodItem();
+    fooditem.setFoodName(txtFoodName.getText().trim());
+    fooditem.setNumber((int) spinnerQuantity.getValue());
+    fooditem.setExpiredDate(txtExpiry.getText().trim());
+    fooditem.setFoodIncOrg(foodIncOrg);
+    
+    FoodIncOrg org = null;
+    
+    for (BasicOrganization candidate : foodEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        if (candidate instanceof FoodIncOrg) {
+            org = (FoodIncOrg) candidate;
+            break;
+        }
+    }
+    
+    if (org != null) {
+        // Add null check for account
+        if (account == null) {
+            JOptionPane.showMessageDialog(this, "Error: User account is not initialized.");
+            return;
+        }
+        
         WorkRequestFoodItem request = new WorkRequestFoodItem();
         request.setFoodItem(fooditem);
         request.setSender(foodIncOrg);  
         request.setStatus("Pending");
         request.setRequestDate(new java.util.Date());
-
+        
         org.getWorkQueue().getWorkRequestList().add(request);
         account.getWorkQueue().getWorkRequestList().add(request);
         
-            JOptionPane.showMessageDialog(this, "Donation submitted successfully!");
-            txtFoodName.setText("");
-            spinnerQuantity.setValue(0);
-            txtExpiry.setText("");
-        }
-
+        JOptionPane.showMessageDialog(this, "Donation submitted successfully!");
+        txtFoodName.setText("");
+        spinnerQuantity.setValue(0);
+        txtExpiry.setText("");
+    } else {
+        JOptionPane.showMessageDialog(this, "Error: Could not find appropriate organization for donation.");
+    }
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 

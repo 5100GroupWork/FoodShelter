@@ -35,6 +35,7 @@ public class FoodEnterprise extends BasicEnterprise{
     public FoodIncOrg addFoodIncOrg(String name){
         FoodIncOrg foodIncOrg = new FoodIncOrg(name);
         this.foodIncOrgs.add(foodIncOrg);
+        this.getOrganizationDirectory().getOrganizationList().add(foodIncOrg);
         return  foodIncOrg;
     }
     
