@@ -20,6 +20,6 @@ public class FoodEnterpriseManager extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         
-        return new DonationFormPanel(null,null,null,null,null);
+        return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
     }
 }
