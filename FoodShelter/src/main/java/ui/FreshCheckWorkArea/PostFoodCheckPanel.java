@@ -11,6 +11,7 @@ import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.Organization.PushedFoodCheckOrg;
 import model.Organization.WareHouseCheckOrg;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
@@ -28,14 +29,19 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
      */
     JPanel workArea;
     FreshCheckEnterprise freshCheckEnterprise;
-    WareHouseCheckOrg wareHouseCheckOrg;
+    PushedFoodCheckOrg pushedFoodCheckOrg;
     NetWork netWork;
-    public PostFoodCheckPanel(JPanel workArea,BasicEnterprise freshCheckEnterprise, BasicOrganization wareHouseCheckOrg,NetWork netWork) {
-        this.workArea = workArea;
-        this.freshCheckEnterprise = (FreshCheckEnterprise)freshCheckEnterprise;
-        this.wareHouseCheckOrg  = (WareHouseCheckOrg)wareHouseCheckOrg;
-        this.netWork = netWork;
-        initComponents();
+    public PostFoodCheckPanel(JPanel workArea, BasicEnterprise freshCheckEnterprise, BasicOrganization organization, NetWork netWorkk) {
+       this.workArea = workArea;
+    this.freshCheckEnterprise = (FreshCheckEnterprise)freshCheckEnterprise;
+
+    if (organization instanceof PushedFoodCheckOrg) {
+        this.pushedFoodCheckOrg = (PushedFoodCheckOrg)organization;
+    }
+    
+    this.netWork = netWork;
+    initComponents();
+    populateTable();
     }
 
     /**

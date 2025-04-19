@@ -15,6 +15,7 @@ import model.NetWork.NetWork;
 import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
 import model.Organization.NewFoodCheckOrg;
+import model.Organization.PushedFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
@@ -23,6 +24,7 @@ import model.Role.FoodCheckEnManager;
 import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
 import model.Role.HomelessManager;
+import model.Role.PostFoodCheckManager;
 import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
 import model.Role.VolunteerManager;
@@ -89,8 +91,20 @@ public class FoodShelterConfig {
             FoodCheckEnManager foodCheckEnManager = new FoodCheckEnManager(freshCheckerEnterprise);
             checkManager.setRole(foodCheckEnManager);
 
-        freshCheckerEnterprise.getEmployees().add(checkManager);
+            freshCheckerEnterprise.getEmployees().add(checkManager);
 
+            // 创建 PushedFoodCheckOrg 和 PostFoodCheckManager 用户
+            PushedFoodCheckOrg pushedFoodCheckOrg = freshCheckerEnterprise.addPushedFoodCheckOrg("PushedFoodCheckOrg");
+            PostFoodCheckManager postFoodManager = new PostFoodCheckManager(pushedFoodCheckOrg);
+            UserAccount postFoodManagerAccount = netWork.getUserAccountDirctory().createUserAccount("Peter", "0000", postFoodManager);
+            postFoodManagerAccount.setOrganization(pushedFoodCheckOrg);
+            postFoodManagerAccount.setEnterprise(freshCheckerEnterprise);
+            // 如果 PushedFoodCheckOrg 有 employees 列表，则添加到该列表
+            if (pushedFoodCheckOrg instanceof PushedFoodCheckOrg) {
+                // 确保 PushedFoodCheckOrg 有 getEmployees() 方法
+                // pushedFoodCheckOrg.getEmployees().add(postFoodManagerAccount);
+            }
+            
             // Create 2 orgs - move this inside the null check
             try {
                 NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");
