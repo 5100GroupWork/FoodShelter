@@ -185,9 +185,15 @@ public class main extends javax.swing.JFrame {
         // Step 4: 进入角色界面
         JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
         String panelName = userAccount.getRole().getClass().getSimpleName();
-        container.add("workArea", workArea);
+        container.add(panelName, workArea);
+        
         CardLayout layout = (CardLayout) container.getLayout();
-        layout.show(container,panelName);
+        layout.show(container, panelName);
+        
+        
+//        container.add("workArea", workArea);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.show(container,panelName);
 
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
