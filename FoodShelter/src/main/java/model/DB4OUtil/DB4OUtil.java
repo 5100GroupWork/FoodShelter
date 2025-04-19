@@ -66,16 +66,50 @@ public class DB4OUtil {
     }
     
     public FoodShelterSystem retrieveSystem(){
-        ObjectContainer conn = createConnection();
-        ObjectSet<FoodShelterSystem> systems = conn.query(FoodShelterSystem.class); // Change to the object you want to save
-        FoodShelterSystem system;
-        if (systems.size() == 0){
-            system = FoodShelterConfig.configure();  // If there's no System in the record, create a new one
+        ObjectContainer conn = null;
+        FoodShelterSystem system = null;
+
+        try {
+            conn = createConnection();
+            if (conn == null) {
+                System.out.println("Failed to create database connection. Creating new system configuration.");
+                system = FoodShelterConfig.configure();
+                return system;
+            }
+
+            ObjectSet<FoodShelterSystem> systems = conn.query(FoodShelterSystem.class);
+            if (systems.size() == 0) {
+                system = FoodShelterConfig.configure();
+            } else {
+                system = systems.get(systems.size() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving system from database: " + e.getMessage());
+            e.printStackTrace();
+
+            
+            system = FoodShelterConfig.configure();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-        else{
-            system = systems.get(systems.size() - 1);
-        }
-        conn.close();
+
         return system;
+                    
     }
 }
+        
+        
+        
+//        ObjectContainer conn = createConnection();
+//        ObjectSet<FoodShelterSystem> systems = conn.query(FoodShelterSystem.class); // Change to the object you want to save
+//        FoodShelterSystem system;
+//        if (systems.size() == 0){
+//            system = FoodShelterConfig.configure();  // If there's no System in the record, create a new one
+//        }
+//        else{
+//            system = systems.get(systems.size() - 1);
+//        }
+//        conn.close();
+//        return system;

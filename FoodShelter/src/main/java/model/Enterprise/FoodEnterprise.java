@@ -26,9 +26,10 @@ public class FoodEnterprise extends BasicEnterprise{
     // 导入需要的名称，比如xxx食品公司
     public FoodEnterprise(String name){
         super(name, BasicEnterpriseType.Food);
-        this.foodIncOrgs = new ArrayList<>();
-        this.employees = new ArrayList<>();
-        
+
+        employees = new ArrayList<>();
+        foodIncOrgs = new ArrayList<>();
+
     }
     // add
     public FoodIncOrg addFoodIncOrg(String name){
