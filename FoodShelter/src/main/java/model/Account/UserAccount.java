@@ -4,6 +4,7 @@
  */
 package model.Account;
 
+import model.Enterprise.BasicEnterprise;
 import model.Organization.BasicOrganization;
 import model.Role.BasicRole;
 import model.WorkQueue.WorkQueue;
@@ -20,6 +21,7 @@ public class UserAccount {
     String phone;
     WorkQueue workQueue;
     BasicOrganization organization;
+    BasicEnterprise enterprise;
     //////////////////////////////////////////////////
     
     
@@ -79,6 +81,14 @@ public class UserAccount {
 
     public void setOrganization(BasicOrganization organization) {
         this.organization = organization;
+    }
+
+    public BasicEnterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(BasicEnterprise enterprise) {
+        this.enterprise = enterprise;
     }
 
     @Override
