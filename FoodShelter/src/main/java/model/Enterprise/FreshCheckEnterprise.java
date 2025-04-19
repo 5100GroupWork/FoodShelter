@@ -81,6 +81,9 @@ public class FreshCheckEnterprise extends BasicEnterprise{
    
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);
+        this.newFoodCheckOrgs = new ArrayList<>();
+        this.wareHourseCheckOrgs = new ArrayList<>();
+        this.employees = new ArrayList<>();
     }
     
     
