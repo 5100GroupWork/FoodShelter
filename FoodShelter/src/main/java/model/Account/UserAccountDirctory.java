@@ -5,6 +5,7 @@
 package model.Account;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import model.Role.BasicRole;
 import model.WorkQueue.WorkQueue;
 
@@ -33,7 +34,10 @@ public class UserAccountDirctory {
     
     public UserAccount createUserAccount(String username, String password, BasicRole role){
         UserAccount userAccount = new UserAccount();
+        // user unique id 
+        String uuid = UUID.randomUUID().toString();
         userAccount.setUsername(username);
+        userAccount.setAccountUuid(uuid);
         userAccount.setPassword(password);
         userAccount.setRole(role);
         userAccountList.add(userAccount);
