@@ -37,10 +37,9 @@ public class AdminStartPoint extends javax.swing.JPanel {
         this.account = account;
         this.foodShelterSystem = foodShelterSystem;
         
-        lblWelcome.setText("Welcome, " + account.getUsername());
-        
         initComponents();
-        
+        lblWelcome.setText("Welcome, " + account.getUsername());
+     
         populateTree();
     }
 

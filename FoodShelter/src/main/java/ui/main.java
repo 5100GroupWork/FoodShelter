@@ -209,32 +209,32 @@ public class main extends javax.swing.JFrame {
         }
     }
 
-    // Step 3: Check if user was found
-    if (userAccount == null || inNetwork == null) {
-        JOptionPane.showMessageDialog(null, "Invalid credentials");
-        return;
-    }
-    
-    // Debug information
-    System.out.println("User: " + userAccount.getUsername());
-    System.out.println("Organization: " + (inOrganization != null ? inOrganization.getName() : "null"));
-    System.out.println("Enterprise: " + (inEnterprise != null ? inEnterprise.getName() : "null"));
-    System.out.println("User's organization from account: " + 
-                     (userAccount.getOrganization() != null ? userAccount.getOrganization().getName() : "null"));
-    System.out.println("User's enterprise from account: " + 
-                     (userAccount.getEnterprise() != null ? userAccount.getEnterprise().getName() : "null"));
 
-    // Step 4: Navigate to role interface
-    JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
-    String panelName = userAccount.getRole().getClass().getSimpleName();
-    container.add("workArea", workArea);
-    CardLayout layout = (CardLayout) container.getLayout();
-    layout.show(container, panelName);
-    
-    loginJButton.setEnabled(false);
-    logoutJButton.setEnabled(true);
-    userNameJTextField.setEnabled(false);
-    passwordField.setEnabled(false);
+        // Step 3: 判断是否找到了
+        if (userAccount == null || inNetwork == null) {
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+
+        // Step 4: 进入角色界面
+        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
+        String panelName = userAccount.getRole().getClass().getSimpleName();
+        container.add(panelName, workArea);
+        
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container, panelName);
+        
+        
+//        container.add("workArea", workArea);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.show(container,panelName);
+
+        loginJButton.setEnabled(false);
+        logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
+
+
     }
 
 
