@@ -137,17 +137,20 @@ public class FoodShelterConfig {
         }
 
         // create volunteer/driveryOrg org and preoples
-        VolunteerOrg volunteerOrg = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
-        DriverOrg driverOrg = volunteerEnterprise.createDriverOrg("DriverOrg1");
 
-        // DeliverManager deliverManager = new DeliverManager(driverOrg);
-        // UserAccount uaDeliverManager =
-        // netWork.getUserAccountDirctory().createUserAccount("Ashley", "0000",
-        // deliverManager);
+        VolunteerOrg volunteerOrg  = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
+        DriverOrg driverOrg  = volunteerEnterprise.createDriverOrg("DriverOrg1");
+        
+//        DeliverManager deliverManager = new DeliverManager(driverOrg);
+//        UserAccount uaDeliverManager = netWork.getUserAccountDirctory().createUserAccount("Ashley", "0000", deliverManager);
+        
+        
+        
+        VolunteerManager volunteerManager = new VolunteerManager(volunteerEnterprise);
+        UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000", volunteerManager);
+        uavolunteerManager.setOrganization(null);  
+        uavolunteerManager.setEnterprise(volunteerEnterprise);  
 
-        VolunteerManager volunteerManager = new VolunteerManager(volunteerOrg);
-        UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000",
-                volunteerManager);
         volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
         volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
 
