@@ -91,7 +91,7 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     public void setEmployees(ArrayList<UserAccount> employees) {
         this.employees = employees;
     }
-      
+
     
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
