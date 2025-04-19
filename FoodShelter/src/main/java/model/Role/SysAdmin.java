@@ -7,25 +7,21 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
-import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
-import ui.AdminWorkArea.AdminStartPoint;
 import ui.FoodProviderWorkArea.DonationFormPanel;
 
 /**
  *
  * @author 59386
  */
-public class SysAdmin  extends BasicRole{
-    
+public class SysAdmin extends BasicRole {
+
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account,  BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
-        
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization,
+            BasicEnterprise enterprise, NetWork netWork) {
 
-        FoodShelterSystem system = FoodShelterSystem.getInstance();
-  
-        return new AdminStartPoint(workArea, account, system);
-
+        return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
     }
+
 }

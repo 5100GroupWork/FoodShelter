@@ -209,7 +209,6 @@ public class main extends javax.swing.JFrame {
         }
     }
 
-
         // Step 3: 判断是否找到了
         if (userAccount == null || inNetwork == null) {
             JOptionPane.showMessageDialog(null, "Invalid credentials");
@@ -223,8 +222,7 @@ public class main extends javax.swing.JFrame {
         
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, panelName);
-        
-        
+                
 //        container.add("workArea", workArea);
 //        CardLayout layout = (CardLayout) container.getLayout();
 //        layout.show(container,panelName);
@@ -233,8 +231,6 @@ public class main extends javax.swing.JFrame {
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
-
-
     }
 
 
