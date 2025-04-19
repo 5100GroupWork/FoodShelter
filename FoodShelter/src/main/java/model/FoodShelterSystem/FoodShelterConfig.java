@@ -49,14 +49,22 @@ public class FoodShelterConfig {
         FreshCheckEnterprise freshCheckerEnterprise = (FreshCheckEnterprise)netWork.getEnterpriseDirectory().createEnterprise("FreshChecker", "FreshChecker");
         RescueNetEnterprise rescuEnterprise = (RescueNetEnterprise)netWork.getEnterpriseDirectory().createEnterprise("RescueNet", "RescueNet");
         
+        if (foodEnterprise.getEmployees() == null) {
+            foodEnterprise.setEmployees(new ArrayList<>());
+        }
+
+        if (freshCheckerEnterprise.getEmployees() == null) {
+            freshCheckerEnterprise.setEmployees(new ArrayList<>());
+        }
+
         // create enterprise details
         UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodEnterpriseManager());
         foodEnplyee.setOrganization(foodEnterprise);  //zhiyu添加
         foodEnterprise.getEmployees().add(foodEnplyee);
         
-        FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WhoolFoods-backbay");
-        foodIncOrg.setAddress("blackbay-Boston-MA");
-        UserAccount foodIncOrgEmployee = netWork.getUserAccountDirctory().createUserAccount("Jhon", "0000",new FoodIncEmployee());
+        FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
+        foodIncOrg.setAddress("Backbay-Boston-MA");
+        UserAccount foodIncOrgEmployee = netWork.getUserAccountDirctory().createUserAccount("John", "0000",new FoodIncEmployee());
         foodIncOrgEmployee.setOrganization(foodIncOrg); //zhiyu添加
         foodIncOrg.getEmployees().add(foodIncOrgEmployee);
         
@@ -69,24 +77,40 @@ public class FoodShelterConfig {
         checkManager.setRole(foodCheckEnManager);
 
         if (freshCheckerEnterprise != null) {
-            
             if (freshCheckerEnterprise.getEmployees() == null) {
                 freshCheckerEnterprise.setEmployees(new ArrayList<>());
             }
-            
             freshCheckerEnterprise.getEmployees().add(checkManager);
+
+            // Create 2 orgs - move this inside the null check
+            try {
+                NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");
+
+                // Initialize if needed
+                if (newFoodCheckOrg == null) {
+                    // Create manually if add method failed
+                    newFoodCheckOrg = new NewFoodCheckOrg("NewFoodCheckOrg");
+                    // Add to enterprise if needed
+                }
+
+                WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise.addWareHourseCheckOrg("WareHouseCheckOrg");
+
+                // Initialize if needed
+                if (wareHourseCheckOrg == null) {
+                    // Create manually if add method failed
+                    wareHourseCheckOrg = new WareHouseCheckOrg("WareHouseCheckOrg");
+                    // Add to enterprise if needed
+                }
+
+                // Create employees in orgs
+                foodCheckEnManager.addFreshChecker(newFoodCheckOrg, netWork, "Alven", "0000");
+                foodCheckEnManager.addWarehouseChecker(wareHourseCheckOrg, netWork, "James", "0000");
+            } catch (Exception e) {
+                System.out.println("Error creating organizations: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
-        
-        
-            // create 2 orgs
-        NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");
-        WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise.addWareHourseCheckOrg("WareHouseCheckOrg");
-            // create employees in orgs
-        //UserAccount employee_org1 = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",new FoodCheckEnManager(freshCheckerEnterprise));
-        foodCheckEnManager.addFreshChecker(newFoodCheckOrg, netWork, "Alven", "0000");
-        foodCheckEnManager.addWarehouseChecker(wareHourseCheckOrg, netWork, "James", "0000");
-        
-        
+               
         // create volunteer/driveryOrg org and preoples
         VolunteerOrg volunteerOrg  = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
         DriverOrg driverOrg  = volunteerEnterprise.createDriverOrg("DriverOrg1");
