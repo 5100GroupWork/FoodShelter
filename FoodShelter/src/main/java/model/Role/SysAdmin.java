@@ -15,11 +15,13 @@ import ui.FoodProviderWorkArea.DonationFormPanel;
  *
  * @author 59386
  */
-public class SysAdmin  extends BasicRole{
-    
+public class SysAdmin extends BasicRole {
+
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
-        
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization,
+            BasicEnterprise enterprise, NetWork netWork) {
+
         return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
     }
+
 }

@@ -1,4 +1,11 @@
 /FoodShelter/nbproject/private/
 /FoodShelter/target/
 /.idea/
+<<<<<<< HEAD
 /FoodShelter/Databank.db4os
+/FoodShelter/.vscode/
+=======
+/FoodShelter/Databank.db4o
+/FoodShelter/pom.xml
+
+>>>>>>> 773a2ac4f4ba3c80571fcd935ba3cd0466521589

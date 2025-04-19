@@ -34,60 +34,59 @@ import model.Role.VolunteerManager;
  * @author 59386
  */
 public class FoodShelterConfig {
-    
-    public static FoodShelterSystem configure(){
-        
+
+    public static FoodShelterSystem configure() {
+
         FoodShelterSystem system = FoodShelterSystem.getInstance();
-        
+
         // create a system admin
-        NetWork  netWork = system.createAndAddNetwork();
-        
+        NetWork netWork = system.createAndAddNetwork();
+
         if (netWork.getEnterpriseDirectory().getEnterprises() == null) {
-        netWork.getEnterpriseDirectory().setEnterprises(new ArrayList<>());
+            netWork.getEnterpriseDirectory().setEnterprises(new ArrayList<>());
         }
-            
-        UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",new SysAdmin() );
-        
-        
+
+        UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",
+                new SysAdmin());
+
         // create 4 enterprise
         // food enterprise
-        FoodEnterprise foodEnterprise = (FoodEnterprise)netWork.getEnterpriseDirectory().createEnterprise("FoodEnterprise", "Food");
-        VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise)netWork.getEnterpriseDirectory().createEnterprise("volunteer", "Volunteer");
-        
-        FreshCheckEnterprise freshCheckerEnterprise = (FreshCheckEnterprise)netWork.getEnterpriseDirectory().createEnterprise("FreshChecker", "FreshChecker");
+        FoodEnterprise foodEnterprise = (FoodEnterprise) netWork.getEnterpriseDirectory()
+                .createEnterprise("FoodEnterprise", "Food");
+        VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) netWork.getEnterpriseDirectory()
+                .createEnterprise("volunteer", "Volunteer");
+        FreshCheckEnterprise freshCheckerEnterprise = (FreshCheckEnterprise) netWork.getEnterpriseDirectory()
+                .createEnterprise("FreshChecker", "FreshChecker");
         if (freshCheckerEnterprise == null) {
             System.out.println("Creating FreshCheckEnterprise manually because it was null");
             freshCheckerEnterprise = new FreshCheckEnterprise("FreshChecker");
             netWork.getEnterpriseDirectory().getEnterprises().add(freshCheckerEnterprise);
         }
-      
-        RescueNetEnterprise rescuEnterprise = (RescueNetEnterprise)netWork.getEnterpriseDirectory().createEnterprise("RescueNet", "RescueNet");
-        
+        RescueNetEnterprise rescuEnterprise = (RescueNetEnterprise) netWork.getEnterpriseDirectory()
+                .createEnterprise("RescueNet", "RescueNet");
         if (foodEnterprise.getEmployees() == null) {
             foodEnterprise.setEmployees(new ArrayList<>());
         }
         // Verify freshCheckerEnterprise is not null before using
-
-        if(freshCheckerEnterprise != null){
-                if (freshCheckerEnterprise.getEmployees() == null) {
-                    freshCheckerEnterprise.setEmployees(new ArrayList<>());
-                }
-
-        // create enterprise details
-      
+        if (freshCheckerEnterprise != null) {
+            if (freshCheckerEnterprise.getEmployees() == null) {
+                freshCheckerEnterprise.setEmployees(new ArrayList<>());
+            }
+            // create enterprise details
             FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
             foodIncOrg.setAddress("Backbay-Boston-MA");
-
-            UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000", new FoodIncEmployee());
-            foodEnplyee.setOrganization(foodIncOrg);  
+            UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
+                    new FoodIncEmployee());
+            foodEnplyee.setOrganization(foodIncOrg);
             foodEnplyee.setEnterprise(foodEnterprise);
             foodIncOrg.getEmployees().add(foodEnplyee);
             foodEnterprise.getEmployees().add(foodEnplyee);
 
             // create freshCheckerEnterprise details
             // add manager
-            UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000", new FoodCheckEnManager(freshCheckerEnterprise));
-            checkManager.setOrganization(freshCheckerEnterprise);//zhiyu添加
+            UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",
+                    new FoodCheckEnManager(freshCheckerEnterprise));
+            checkManager.setOrganization(freshCheckerEnterprise);// zhiyu添加
             FoodCheckEnManager foodCheckEnManager = new FoodCheckEnManager(freshCheckerEnterprise);
             checkManager.setRole(foodCheckEnManager);
 
@@ -116,7 +115,8 @@ public class FoodShelterConfig {
                     // Add to enterprise if needed
                 }
 
-                WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise.addWareHourseCheckOrg("WareHouseCheckOrg");
+                WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise
+                        .addWareHourseCheckOrg("WareHouseCheckOrg");
 
                 // Initialize if needed
                 if (wareHourseCheckOrg == null) {
@@ -135,8 +135,9 @@ public class FoodShelterConfig {
         } else {
             System.out.println("ERROR: freshCheckerEnterprise is still null after manual creation attempt!");
         }
-               
+
         // create volunteer/driveryOrg org and preoples
+
         VolunteerOrg volunteerOrg  = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
         DriverOrg driverOrg  = volunteerEnterprise.createDriverOrg("DriverOrg1");
         
@@ -149,21 +150,23 @@ public class FoodShelterConfig {
         UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000", volunteerManager);
         uavolunteerManager.setOrganization(null);  
         uavolunteerManager.setEnterprise(volunteerEnterprise);  
+
         volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
         volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
-        
-        //create rescueNetOrg(helper and homeless) and people
+
+        // create rescueNetOrg(helper and homeless) and people
         RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
         RequestEntertainOrg requestEntertainOrg = rescuEnterprise.addRequestEntertainOrg("ShelterHelperOrg1");
-        
-        ShelterHelperManager shelterHelperManager  = new ShelterHelperManager(requestEntertainOrg);
-        UserAccount uaShelterManager = netWork.getUserAccountDirctory().createUserAccount("Morgan", "0000", shelterHelperManager);
+
+        ShelterHelperManager shelterHelperManager = new ShelterHelperManager(requestEntertainOrg);
+        UserAccount uaShelterManager = netWork.getUserAccountDirctory().createUserAccount("Morgan", "0000",
+                shelterHelperManager);
         shelterHelperManager.addShelterHelper(requestEntertainOrg, "Jones", "0000", netWork);
-        
+
         HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
         homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
-        
+
         return system;
     }
-    
+
 }
