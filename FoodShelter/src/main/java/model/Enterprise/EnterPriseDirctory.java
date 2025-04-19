@@ -11,7 +11,13 @@ import java.util.ArrayList;
  * @author 59386
  */
 public class EnterPriseDirctory {
-    ArrayList<BasicEnterprise> enterprises;
+    ArrayList<BasicEnterprise> enterprises = new ArrayList<>();
+
+    public EnterPriseDirctory() {
+        enterprises = new ArrayList<>();
+    }
+    
+    
     
     // create enterprise
     public  BasicEnterprise createEnterprise(String name, String type){
@@ -19,6 +25,9 @@ public class EnterPriseDirctory {
 //        Volunteer("VolunteerEnterprise"),
 //        RescueNet("RescueNetEnterprise"),
 //        FreshCheck("FreshCheckEnterprise");
+        if (enterprises == null) {
+            enterprises = new ArrayList<>();
+        }
 
         BasicEnterprise basicEnterprise =null;
         if(type.equals("Food")){

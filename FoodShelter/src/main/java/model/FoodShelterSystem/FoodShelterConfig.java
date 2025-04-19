@@ -46,16 +46,25 @@ public class FoodShelterConfig {
         // food enterprise
         FoodEnterprise foodEnterprise = (FoodEnterprise)netWork.getEnterpriseDirectory().createEnterprise("FoodEnterprise", "Food");
         VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise)netWork.getEnterpriseDirectory().createEnterprise("volunteer", "Volunteer");
+        
         FreshCheckEnterprise freshCheckerEnterprise = (FreshCheckEnterprise)netWork.getEnterpriseDirectory().createEnterprise("FreshChecker", "FreshChecker");
+        if (freshCheckerEnterprise == null) {
+            System.out.println("Creating FreshCheckEnterprise manually because it was null");
+            freshCheckerEnterprise = new FreshCheckEnterprise("FreshChecker");
+            netWork.getEnterpriseDirectory().getEnterprises().add(freshCheckerEnterprise);
+        }
+      
         RescueNetEnterprise rescuEnterprise = (RescueNetEnterprise)netWork.getEnterpriseDirectory().createEnterprise("RescueNet", "RescueNet");
         
         if (foodEnterprise.getEmployees() == null) {
             foodEnterprise.setEmployees(new ArrayList<>());
         }
+        // Verify freshCheckerEnterprise is not null before using
 
-        if (freshCheckerEnterprise.getEmployees() == null) {
-            freshCheckerEnterprise.setEmployees(new ArrayList<>());
-        }
+        if(freshCheckerEnterprise != null){
+                if (freshCheckerEnterprise.getEmployees() == null) {
+                    freshCheckerEnterprise.setEmployees(new ArrayList<>());
+                }
 
         // create enterprise details
         UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodEnterpriseManager());
@@ -76,11 +85,7 @@ public class FoodShelterConfig {
         FoodCheckEnManager foodCheckEnManager =new FoodCheckEnManager(freshCheckerEnterprise);
         checkManager.setRole(foodCheckEnManager);
 
-        if (freshCheckerEnterprise != null) {
-            if (freshCheckerEnterprise.getEmployees() == null) {
-                freshCheckerEnterprise.setEmployees(new ArrayList<>());
-            }
-            freshCheckerEnterprise.getEmployees().add(checkManager);
+        freshCheckerEnterprise.getEmployees().add(checkManager);
 
             // Create 2 orgs - move this inside the null check
             try {
@@ -109,6 +114,8 @@ public class FoodShelterConfig {
                 System.out.println("Error creating organizations: " + e.getMessage());
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("ERROR: freshCheckerEnterprise is still null after manual creation attempt!");
         }
                
         // create volunteer/driveryOrg org and preoples

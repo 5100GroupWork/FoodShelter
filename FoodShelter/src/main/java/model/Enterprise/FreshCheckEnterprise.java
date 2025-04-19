@@ -20,7 +20,21 @@ import model.Role.FoodIncEmployee;
  */
 public class FreshCheckEnterprise extends BasicEnterprise{
 
+    private ArrayList<NewFoodCheckOrg> newFoodCheckOrgs = new ArrayList<>();
+    private ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs = new ArrayList<>();
+    private ArrayList<UserAccount> employees = new ArrayList<>();
+    
+    public FreshCheckEnterprise(String name) {
+        super("FreshChecker", BasicEnterpriseType.FreshCheck);
+        this.newFoodCheckOrgs = new ArrayList<>();
+        this.wareHourseCheckOrgs = new ArrayList<>();
+        this.employees = new ArrayList<>();
+    }
+    
     public ArrayList<NewFoodCheckOrg> getNewFoodCheckOrgs() {
+        if (newFoodCheckOrgs == null) {
+            newFoodCheckOrgs = new ArrayList<>();
+        }
         return newFoodCheckOrgs;
     }
 
@@ -29,6 +43,9 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     }
 
     public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrg() {
+        if (wareHourseCheckOrgs == null) {
+            wareHourseCheckOrgs = new ArrayList<>();
+        }
         return wareHourseCheckOrgs;
     }
 
@@ -58,9 +75,6 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     public boolean removeWareHourseCheckOrg(WareHouseCheckOrg org) {
         return this.wareHourseCheckOrgs.remove(org);
     }
-    
-    ArrayList<NewFoodCheckOrg> newFoodCheckOrgs;
-    ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs;
 
     public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrgs() {
         return wareHourseCheckOrgs;
@@ -77,12 +91,7 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     public void setEmployees(ArrayList<UserAccount> employees) {
         this.employees = employees;
     }
-    ArrayList<UserAccount> employees;
-   
-    public FreshCheckEnterprise(String name) {
-        super("FreshChecker", BasicEnterpriseType.FreshCheck);
-    }
-    
+      
     
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
