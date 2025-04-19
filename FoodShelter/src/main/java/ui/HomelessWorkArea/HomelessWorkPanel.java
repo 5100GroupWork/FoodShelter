@@ -4,6 +4,7 @@
  */
 package ui.HomelessWorkArea;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -153,6 +154,10 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        workArea.remove(this);       
+        CardLayout layout = (CardLayout)workArea.getLayout();
+        layout.show(workArea,"FoodRequestPanel");
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
