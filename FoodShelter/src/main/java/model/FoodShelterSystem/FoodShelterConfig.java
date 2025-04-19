@@ -145,8 +145,10 @@ public class FoodShelterConfig {
         
         
         
-        VolunteerManager volunteerManager = new VolunteerManager(volunteerOrg);
+        VolunteerManager volunteerManager = new VolunteerManager(volunteerEnterprise);
         UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000", volunteerManager);
+        uavolunteerManager.setOrganization(null);  
+        uavolunteerManager.setEnterprise(volunteerEnterprise);  
         volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
         volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
         

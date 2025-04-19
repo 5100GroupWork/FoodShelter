@@ -19,10 +19,10 @@ import ui.VolunteerAdminWorkAreaPanel.VolunteerAdminStartPoint;
  * @author 59386
  */
 public class VolunteerManager extends BasicRole{
-    BasicOrganization BO;
+    BasicEnterprise enterprise;
     
-    public VolunteerManager(BasicOrganization org){
-        this.BO = org;
+    public VolunteerManager(BasicEnterprise enterprise){
+        this.enterprise = enterprise;
     }
     
     public UserAccount createVolunteer(VolunteerOrg org,NetWork netWork,String username, String password){

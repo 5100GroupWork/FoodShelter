@@ -46,11 +46,17 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
         this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
+        
+        initComponents();
+        System.out.println("VolunteerAdminStartPoint构造函数 - account: " + (account != null ? account.getUsername() : "null"));
+        System.out.println("VolunteerAdminStartPoint构造函数 - enterprise: " + (enterprise != null ? enterprise.getName() : "null"));
+        System.out.println("VolunteerAdminStartPoint构造函数 - organization: " + (organization != null ? organization.getName() : "null"));
 
         lblWelcome.setText("Welcome, " + account.getUsername() + " !");
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
-
-        initComponents();
+        if (organization != null && organization instanceof VolunteerOrg) {
+        this.volunteerOrg = (VolunteerOrg) organization;
+    }
     }
 
     /**

@@ -225,16 +225,21 @@ public class main extends javax.swing.JFrame {
                      (userAccount.getEnterprise() != null ? userAccount.getEnterprise().getName() : "null"));
 
     // Step 4: Navigate to role interface
-    JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
-    String panelName = userAccount.getRole().getClass().getSimpleName();
-    container.add("workArea", workArea);
-    CardLayout layout = (CardLayout) container.getLayout();
-    layout.show(container, panelName);
+container.removeAll(); // 清除所有已有面板
+JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
+String panelName = "workArea"; // 使用固定名称
+System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
+
+container.add(panelName, workArea);
+CardLayout layout = (CardLayout) container.getLayout();
+layout.show(container, panelName);
+container.revalidate(); // 刷新界面
+container.repaint(); // 重绘界面
     
-    loginJButton.setEnabled(false);
-    logoutJButton.setEnabled(true);
-    userNameJTextField.setEnabled(false);
-    passwordField.setEnabled(false);
+loginJButton.setEnabled(false);
+logoutJButton.setEnabled(true);
+userNameJTextField.setEnabled(false);
+passwordField.setEnabled(false);
     }
 
 
