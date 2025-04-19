@@ -20,11 +20,19 @@ public class UserAccount {
     String phone;
     WorkQueue workQueue;
     BasicOrganization organization;
+    String accountUuid;
     //////////////////////////////////////////////////
     
     
     
     // get set fun
+    public String getAccountUuid() {
+        return accountUuid;
+    }
+
+    public void setAccountUuid(String accountUuid) {
+        this.accountUuid = accountUuid;
+    }
     public WorkQueue getWorkQueue() {
         return workQueue;
     }

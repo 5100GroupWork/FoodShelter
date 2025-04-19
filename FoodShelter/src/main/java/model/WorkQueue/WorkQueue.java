@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author 59386
  */
 public class WorkQueue {
-    
+
     private ArrayList<WorkRequest> workRequestList;
 
     public WorkQueue() {
@@ -21,10 +21,9 @@ public class WorkQueue {
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
     }
-    
-    public void removeWorkRequest(WorkRequest workRequest){
+
+    public void removeWorkRequest(WorkRequest workRequest) {
         this.workRequestList.remove(workRequest);
     }
-    
-    
+
 }
