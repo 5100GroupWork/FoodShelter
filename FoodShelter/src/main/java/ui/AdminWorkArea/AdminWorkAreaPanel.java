@@ -160,7 +160,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         workArea.remove(this);
         CardLayout layout = (CardLayout)workArea.getLayout();
-        layout.show(workArea,"AdminStartPoint");
+        layout.previous(workArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -213,7 +213,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AddFoodOrgPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem, parent));
+        workArea.add("AddFoodOrgPanel", new AddFoodOrgPanel(workArea, account, foodShelterSystem, this));
         layout.show(workArea,"AddFoodOrgPanel");
     }//GEN-LAST:event_btnAddActionPerformed
 

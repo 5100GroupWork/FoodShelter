@@ -34,7 +34,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
     FoodShelterSystem foodShelterSystem;
     EmployeeWorkPanel parentPanel;
     
-    public AddLocalAdminPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSyste, EmployeeWorkPanel parentPanel) {
+    public AddLocalAdminPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem, EmployeeWorkPanel parentPanel) {
         this.workArea = workArea;
         this.account = account;
         this.foodShelterSystem = foodShelterSystem;
@@ -170,14 +170,12 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
-                
+                       
         String username = txtuserName.getText().trim();
         String password = passwordField.getText().trim();
         String email = txtEmail.getText().trim();
         String phone = txtPhone.getText().trim();
-        
-    
+          
         if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
             JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
             return;
@@ -188,29 +186,38 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             return;
         }
 
-        FoodEnterprise foodEnterprise = null;
+        //FoodEnterprise foodEnterprise = null;
+        FoodIncOrg targetOrg = null;
 
-
-            for (NetWork net : foodShelterSystem.getNetworkList()) {
-                for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                    if (be instanceof FoodEnterprise) {
-                        foodEnterprise = (FoodEnterprise) be;
-                        break;
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                if (be instanceof FoodEnterprise) {
+                    for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                        if (org instanceof FoodIncOrg) {
+                            targetOrg = (FoodIncOrg) org;
+                            break;
+                        }
                     }
-                }                
-            }                      
+                }
+            }
+        }
 
+        if (targetOrg == null) {
+            JOptionPane.showMessageDialog(this, "No Food Industry Organization found in the system.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         FoodIncEmployee newEmployee = new FoodIncEmployee();
-        UserAccount newUser = foodShelterSystem.getUserAccountDirectory().createUserAccount(username, password, newEmployee);
+        UserAccount newUser = targetOrg.getUserAccountDirectory().createUserAccount(username, password, newEmployee);
         newUser.setEmail(email);
         newUser.setPhone(phone);
-
-              
+        
+        JOptionPane.showMessageDialog(this, "New employee added successfully!");
+           
         txtuserName.setText("");
         passwordField.setText("");
         txtEmail.setText("");
-        txtPhone.setText("");
-        
+        txtPhone.setText("");      
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
