@@ -49,19 +49,11 @@ public class DriverWorkPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TaskTable = new javax.swing.JTable();
         DeliveredBtn = new javax.swing.JButton();
         getItemBtn = new javax.swing.JButton();
-
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Delivery Task List");
@@ -103,8 +95,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(88, 88, 88)
+                                .addGap(168, 168, 168)
                                 .addComponent(jLabel4))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -118,9 +109,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -131,11 +120,6 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void DeliveredBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeliveredBtnActionPerformed
         // TODO add your handling code here:
         int rowNumber = TaskTable.getSelectedRow();
@@ -144,9 +128,15 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             return;
         }
         WorkRequestDelivery wrd = (WorkRequestDelivery) TaskTable.getValueAt(5, rowNumber);
-        wrd.setStatus("delivered");
+        
+        if (wrd != null) {
+            wrd.setStatus("delivered");
+            populateTable();
+            JOptionPane.showMessageDialog(this, "Delivery confirmed successfully.");
+        } else{
+            JOptionPane.showMessageDialog(this, "Error: Could not update delivery status.");
 
-        populateTable();
+        }
     }//GEN-LAST:event_DeliveredBtnActionPerformed
 
     private void getItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getItemBtnActionPerformed
@@ -167,7 +157,6 @@ public class DriverWorkPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeliveredBtn;
     private javax.swing.JTable TaskTable;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton getItemBtn;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
