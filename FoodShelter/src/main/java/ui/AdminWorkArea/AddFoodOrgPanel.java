@@ -175,6 +175,7 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
+
     // Validate input fields
         String orgName = txtOrgName.getText().trim();
         String location = txtLocation.getText().trim();
