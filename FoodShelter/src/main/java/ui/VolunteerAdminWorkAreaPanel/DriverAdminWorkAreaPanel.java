@@ -40,12 +40,12 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         this.volunteerEnterprise = (VolunteerEnterprise) enterprise;
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
+        initComponents();
 
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
 
         populateTable();
 
-        initComponents();
     }
 
     /**
@@ -55,7 +55,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -77,21 +77,22 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Drivers Management");
 
         tblDriver.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Driver ID", "Name", "Contact"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Driver ID", "Name", "Contact"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblDriver);
@@ -116,56 +117,45 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(50, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                .createSequentialGroup()
-                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(33, 33, 33))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblEnterprise)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(backJButton)
-                                                                .addGap(103, 103, 103)
-                                                                .addComponent(enterpriseLabel,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 206,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE))))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(167, 167, 167)
-                                .addComponent(btnAddDriver)
-                                .addGap(169, 169, 169)
-                                .addComponent(btnDelete)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        layout.setVerticalGroup(
-
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEnterprise)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backJButton)
+                                .addGap(103, 103, 103)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(btnAddDriver)
+                        .addGap(169, 169, 169)
+                        .addComponent(btnDelete)))
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(lblEnterprise)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(backJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(backJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddDriver)
                     .addComponent(btnDelete))
-                .addGap(51, 51, 51))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
@@ -238,7 +228,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     } else {
         JOptionPane.showMessageDialog(this, "Could not find driver organization.", "Error", JOptionPane.ERROR_MESSAGE);
     } 
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }                                         
 
 
 
@@ -254,21 +244,39 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     public void populateTable() {
 
-        DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
-        model.setRowCount(0);
+DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+    model.setRowCount(0);
 
+    if (volunteerOrg == null) {
+        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (org instanceof DriverOrg) {
+                DriverOrg driverOrg = (DriverOrg) org;
+                
+                for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+                    if (ua.getRole() instanceof Deliver) {
+                        Deliver deliver = (Deliver) ua.getRole();
+                        
+                        Object[] row = new Object[3];
+                        row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                        row[1] = ua.getUsername(); 
+                        row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                        model.addRow(row);
+                    }
+                }
+            }
+        }
+    } else {
         for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()) {
             if (ua.getRole() instanceof Deliver) {
-
                 Deliver deliver = (Deliver) ua.getRole();
-
+                
                 Object[] row = new Object[3];
-                row[0] = deliver.getID();
+                row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
                 row[1] = ua.getUsername();
-                row[2] = deliver.getContact();
+                row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
                 model.addRow(row);
             }
         }
-
+    }
     }
 }

@@ -224,10 +224,10 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         parentPanel.populateTable();
     }
         
-    }//GEN-LAST:event_btnSubmitActionPerformed
+    }                                         
 
 
-    }// GEN-LAST:event_btnSubmitActionPerformed
+
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
