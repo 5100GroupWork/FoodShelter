@@ -81,7 +81,7 @@ public class DB4OUtil {
             conn = createConnection();
             if (conn == null) {
                 System.out.println("Failed to create database connection. Creating new system configuration.");
-                system = FoodShelterConfig.configure();
+                system = FoodShelterConfig.configure(null,null);
                 return system;
             }
 
@@ -89,7 +89,7 @@ public class DB4OUtil {
             ObjectSet<FoodShelterSystem> systems = conn.query(FoodShelterSystem.class);
             if (systems.size() == 0) {
                 System.out.println("create a new system ");
-                system = FoodShelterConfig.configure();
+                system = FoodShelterConfig.configure(null,null);
             } else {
                 System.out.println("get system from db");
                 system = systems.get(systems.size() - 1);
@@ -98,7 +98,7 @@ public class DB4OUtil {
             System.out.println("Error retrieving system from database: " + e.getMessage());
             e.printStackTrace();
 
-            system = FoodShelterConfig.configure();
+            system = FoodShelterConfig.configure(null,null);
         } finally {
             if (conn != null) {
                 conn.close();

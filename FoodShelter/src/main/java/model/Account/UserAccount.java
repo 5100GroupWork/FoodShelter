@@ -29,7 +29,7 @@ public class UserAccount {
     
     // get set fun
     public String getAccountUuid() {
-        return accountUuid;
+        return accountUuid.substring(0,6);
     }
 
     public void setAccountUuid(String accountUuid) {
