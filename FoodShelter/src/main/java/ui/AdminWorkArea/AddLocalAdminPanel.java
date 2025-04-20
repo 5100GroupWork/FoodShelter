@@ -16,6 +16,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
+import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
 import model.Role.VolunteerManager;
 
@@ -32,13 +33,17 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
     UserAccount account;
     BasicOrganization organization;
     FoodShelterSystem foodShelterSystem;
-    EmployeeWorkPanel parentPanel;
+    AdminWorkAreaPanel parentPanel;
+    FoodIncOrg newOrg;
+    BasicEnterprise enterprise;
     
-    public AddLocalAdminPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSyste, EmployeeWorkPanel parentPanel) {
+    public AddLocalAdminPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem, AdminWorkAreaPanel parentPanel, FoodIncOrg newOrg, BasicEnterprise enterprise) {
         this.workArea = workArea;
         this.account = account;
         this.foodShelterSystem = foodShelterSystem;
         this.parentPanel = parentPanel;
+        this.newOrg = newOrg;
+        this.enterprise = enterprise;
         
         initComponents();
     }
@@ -72,7 +77,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Add New Employee ");
+        enterpriseLabel.setText("Assign Administrator");
 
         lbluserName.setText("User Name");
 
@@ -102,7 +107,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(btnBack)
-                .addGap(62, 62, 62)
+                .addGap(72, 72, 72)
                 .addComponent(enterpriseLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -159,8 +164,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
         
         workArea.remove(this);
         CardLayout layout = (CardLayout)workArea.getLayout();
-        layout.show(workArea,"EmployeeWorkPanel");
-        parentPanel.populateTable();
+        layout.show(workArea,"AddFoodOrgPanel");
         
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -170,14 +174,12 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
-                
+                       
         String username = txtuserName.getText().trim();
         String password = passwordField.getText().trim();
         String email = txtEmail.getText().trim();
         String phone = txtPhone.getText().trim();
-        
-    
+          
         if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
             JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
             return;
@@ -187,30 +189,26 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists. Choose a different one.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        FoodEnterprise foodEnterprise = null;
-
-
-            for (NetWork net : foodShelterSystem.getNetworkList()) {
-                for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                    if (be instanceof FoodEnterprise) {
-                        foodEnterprise = (FoodEnterprise) be;
-                        break;
-                    }
-                }                
-            }                      
-
-        FoodIncEmployee newEmployee = new FoodIncEmployee();
-        UserAccount newUser = foodShelterSystem.getUserAccountDirectory().createUserAccount(username, password, newEmployee);
-        newUser.setEmail(email);
-        newUser.setPhone(phone);
-
-              
+        
+        FoodEnterpriseManager role = new FoodEnterpriseManager();
+        UserAccount newAdmin = enterprise.getUserAccountDirectory().createUserAccount(username, password, role);
+        newAdmin.setEmail(email);
+        newAdmin.setPhone(phone);
+        newAdmin.setOrganization(newOrg);
+        
+        JOptionPane.showMessageDialog(this, "New organization and administrator created successfully!");
+           
         txtuserName.setText("");
         passwordField.setText("");
         txtEmail.setText("");
-        txtPhone.setText("");
+        txtPhone.setText("");   
         
+        workArea.remove(this);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "AdminWorkAreaPanel");
+        if (parentPanel != null) {
+            parentPanel.populateTable();
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
