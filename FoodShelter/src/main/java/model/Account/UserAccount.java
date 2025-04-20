@@ -28,7 +28,7 @@ public class UserAccount {
 
     // get set fun
     public String getAccountUuid() {
-        return accountUuid.substring(0, 6);
+        return accountUuid.substring(0, 8);
     }
 
     public void setAccountUuid(String accountUuid) {

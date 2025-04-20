@@ -134,7 +134,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                         .addComponent(btnAddDriver)
                         .addGap(169, 169, 169)
                         .addComponent(btnDelete)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +154,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddDriver)
                     .addComponent(btnDelete))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

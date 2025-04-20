@@ -337,10 +337,10 @@ public class main extends javax.swing.JFrame {
         passwordField.setText("");
 
         container.removeAll();
-        JPanel blankJP = new JPanel();
-        container.add("blank", blankJP);
-        CardLayout crdLyt = (CardLayout) container.getLayout();
-        crdLyt.next(container);
+        WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
+        container.add("WelComeJPanel", welcomeJPanel);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container, "WelComeJPanel");
         combox.setEnabled(true);
         dB4OUtil.storeSystem(system);
     }// GEN-LAST:event_logoutJButtonActionPerformed
