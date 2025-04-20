@@ -51,6 +51,14 @@ public class FoodEnterprise extends BasicEnterprise{
         return user;
     }
     
+    //remove FoodEnterprise employee
+
+    public void deleteEmployee(NetWork netWork, UserAccount employee) {
+        if (this.employees.contains(employee)) {
+            this.employees.remove(employee);
+            netWork.getUserAccountDirctory().getUserAccountList().remove(employee);
+        }
+    }
 
     public ArrayList<UserAccount> getEmployees() {
         return employees;
