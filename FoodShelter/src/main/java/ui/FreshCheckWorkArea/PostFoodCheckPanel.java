@@ -134,16 +134,35 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
 
     private void btnRemoveExpiredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveExpiredActionPerformed
         // TODO add your handling code here:
-        int rowNumber = wareFoodTable.getSelectedRow();
-        if(rowNumber<0){
-            JOptionPane.showMessageDialog(this, "Please select a row first");
-            return;
+         int rowNumber = wareFoodTable.getSelectedRow();
+    if (rowNumber < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a row first");
+        return;
+    }
+
+    int foodId = (int) wareFoodTable.getValueAt(rowNumber, 0);
+    
+    // 从warehouseList中找到对应的WorkRequestFoodItem
+    WorkRequestFoodItem itemToRemove = null;
+    int count = 0;
+    for (WorkRequest wd : netWork.getWarehouseList().getWorkRequestList()) {
+        if (wd instanceof WorkRequestFoodItem) {
+            if (count == foodId) {
+                itemToRemove = (WorkRequestFoodItem) wd;
+                break;
+            }
+            count++;
         }
-        WorkRequestFoodItem wfd = (WorkRequestDelivery) wareFoodTable.getValueAt(5, rowNumber);
-        // 从checklist中取出来
-        
-        netWork.getWarehouseList().removeWorkRequest(wfd);
+    }
+    
+    if (itemToRemove != null) {
+        netWork.getWarehouseList().removeWorkRequest(itemToRemove);
+        JOptionPane.showMessageDialog(this, "Food item removed successfully.");
         populateTable();
+    } else {
+        JOptionPane.showMessageDialog(this, "Could not find the selected food item.");
+    }
+
         
     }//GEN-LAST:event_btnRemoveExpiredActionPerformed
 
@@ -169,7 +188,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         System.out.println("get into method");
         int count =0;
         for (WorkRequest wd : foodQueue.getWorkRequestList()) {
-            WorkRequestFoodItem wrf = (WorkRequestDelivery) wd;
+            WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
             Object row[] = new Object[6];
             row[0] = count;
             row[1] = wrf.getFoodItem().getFoodName();

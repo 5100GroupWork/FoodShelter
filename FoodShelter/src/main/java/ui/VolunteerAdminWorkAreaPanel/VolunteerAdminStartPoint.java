@@ -73,6 +73,8 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
         btnManageDriver = new javax.swing.JButton();
         btnManageTaskManager = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 153, 102));
+
         lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblWelcome.setText("Welcome, <value>");
 
