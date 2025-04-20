@@ -52,7 +52,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         txtuserName = new javax.swing.JTextField();
@@ -101,7 +101,6 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
@@ -125,7 +124,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                                 .addGap(30, 30, 30)
                                 .addComponent(btnSubmit))))
                     .addComponent(enterpriseLabel))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(643, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +151,8 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(btnSubmit)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(435, Short.MAX_VALUE))
         );
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSubmitActionPerformed

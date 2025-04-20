@@ -50,6 +50,11 @@ public class FoodShelterConfig {
                 }
                 
                 // create a system admin
+                for(NetWork netWork:system.getNetworkList()){
+                    if(netWork.getName().equals(name)){
+                        return null;
+                    }
+                }
                 NetWork netWork = system.createAndAddNetwork();
                 netWork.setName(name);
                 if(name == null){
@@ -122,7 +127,7 @@ public class FoodShelterConfig {
                 pfUser1.setEnterprise(freshCheckerEnterprise);
                 pfUser2.setEnterprise(freshCheckerEnterprise);
                 pfUser1.setOrganization(pushedFoodCheckOrg);
-                pfUser1.setOrganization(pushedFoodCheckOrg);
+                pfUser2.setOrganization(pushedFoodCheckOrg);
 
                 UserAccount nfUser1 = netWork.getUserAccountDirctory().createUserAccount("Peter-1", "0000",
                                 new FreshChecker());
@@ -161,10 +166,14 @@ public class FoodShelterConfig {
                 UserAccount volunteer = volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
                 volunteer.setEmail("taylor@volunteer.org");
                 volunteer.setPhone("555-567-8901");
+                volunteer.setEnterprise(volunteerEnterprise);
+                volunteer.setOrganization(volunteerOrg);
                 
                 UserAccount driver = volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
                 driver.setEmail("jessica@driver.org");
                 driver.setPhone("555-678-9012");
+                driver.setEnterprise(volunteerEnterprise);
+                driver.setOrganization(driverOrg);
 
                 // create rescueNetOrg(helper and homeless) and people
                 RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
@@ -176,15 +185,22 @@ public class FoodShelterConfig {
                                 shelterHelperManager);
                 uaShelterManager.setEmail("morgan@rescue.org");
                 uaShelterManager.setPhone("555-789-0123");
+                uaShelterManager.setEnterprise(rescuEnterprise);
+                
                 
                 UserAccount helper = shelterHelperManager.addShelterHelper(requestEntertainOrg, "Jones", "0000", netWork);
                 helper.setEmail("jones@rescue.org");
                 helper.setPhone("555-890-1234");
+                helper.setEnterprise(rescuEnterprise);
+                helper.setOrganization(requestEntertainOrg);
+                
 
             HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
             UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
             homeless.setEmail("homeless1@rescue.org");
             homeless.setPhone("555-901-2345");
+            homeless.setEnterprise(rescuEnterprise);
+            homeless.setOrganization(requestEntertainOrg);
 
             UserAccount taskManager = volunteerManager.createVolunteer(volunteerOrg, netWork, "Bob", "0000");
             taskManager.setRole(new TaskManager());  

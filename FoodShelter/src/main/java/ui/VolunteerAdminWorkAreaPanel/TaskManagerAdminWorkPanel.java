@@ -53,7 +53,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -65,21 +65,22 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         lblEnterprise = new javax.swing.JLabel();
 
         tblTaskManager.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Task Manager ID", "Name", "Contact"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Task Manager ID", "Name", "Contact"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblTaskManager);
@@ -114,7 +115,6 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -132,7 +132,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
                         .addComponent(backJButton)
                         .addGap(91, 91, 91)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +149,8 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteTaskManager)
                     .addComponent(btnAddTaskManager))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddTaskManagerActionPerformed
