@@ -264,12 +264,5 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
             }
         }
     }
-
-        
-        
-        
-
-    
-    
-    
+      
 }

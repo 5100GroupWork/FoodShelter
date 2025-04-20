@@ -4,9 +4,15 @@
  */
 package ui.ReportAnalystWorkArea;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 /**
  *
- * @author sylvia
+ * @author yuewu
  */
 public class SummaryMetricsPanel extends javax.swing.JPanel {
 
@@ -15,6 +21,7 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
      */
     public SummaryMetricsPanel() {
         initComponents();
+        showChart();
     }
 
     /**
@@ -26,19 +33,57 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        chartContainer = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout chartContainerLayout = new javax.swing.GroupLayout(chartContainer);
+        chartContainer.setLayout(chartContainerLayout);
+        chartContainerLayout.setHorizontalGroup(
+            chartContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 342, Short.MAX_VALUE)
+        );
+        chartContainerLayout.setVerticalGroup(
+            chartContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 203, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel chartContainer;
     // End of variables declaration//GEN-END:variables
+
+    private void showChart() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("Donated", 70);  // sample data
+        dataset.setValue("Stored", 30);
+
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Food Usage",
+                dataset,
+                true, true, false
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartContainer.setLayout(new java.awt.BorderLayout());
+        chartContainer.add(chartPanel, java.awt.BorderLayout.CENTER);
+        chartContainer.validate();
+    }
+
 }
