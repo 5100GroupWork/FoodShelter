@@ -144,81 +144,82 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    String userName = userNameJTextField.getText();
-    char[] passwordCharArray = passwordField.getPassword();
-    String password = String.valueOf(passwordCharArray);
+        String userName = userNameJTextField.getText();
+        char[] passwordCharArray = passwordField.getPassword();
+        String password = String.valueOf(passwordCharArray);
 
-    UserAccount userAccount = null;
-    NetWork inNetwork = null;
-    BasicEnterprise inEnterprise = null;
-    BasicOrganization inOrganization = null;
+        UserAccount userAccount = null;
+        NetWork inNetwork = null;
+        BasicEnterprise inEnterprise = null;
+        BasicOrganization inOrganization = null;
 
-    // Step 1: Search through all networks
-    for (NetWork network : system.getNetworkList()) {
-        // First check the network level UserDirectory
-        userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
-        if (userAccount != null) {
-            inNetwork = network; // Record the network
-            System.err.println("getNetWork");
-            break; // User belongs to this network, continue to find enterprise/org
+        // Step 1: Search through all networks
+        for (NetWork network : system.getNetworkList()) {
+            // First check the network level UserDirectory
+            userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
+            if (userAccount != null) {
+                inNetwork = network; // Record the network
+                System.err.println("getNetWork");
+                break; // User belongs to this network, continue to find enterprise/org
+            }
         }
-    }
 
-    // Step 2: If userAccount is found, find which enterprise/organization it belongs to
-    if (userAccount != null && inNetwork != null) {
-        // Check if the user account has enterprise directly set
-        if (userAccount.getEnterprise() != null) {
-            inEnterprise = userAccount.getEnterprise();
-            System.out.println("Enterprise found directly from user account: " + inEnterprise.getName());
-        }
-        
-        // If enterprise is still null, check if organization is set
-        if (inEnterprise == null || userAccount.getOrganization() != null) {
-            inOrganization = userAccount.getOrganization();
-            
-            // Find which enterprise this organization belongs to
-            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                // Check if this organization is in the enterprise's organization directory
-                if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
-                    inEnterprise = enterprise;
-                    break;
-                }
-                
-                // If it's a FoodEnterprise, also check its custom foodIncOrgs list
-                if (enterprise instanceof FoodEnterprise) {
-                    FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
-                    if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
+        // Step 2: If userAccount is found, find which enterprise/organization it
+        // belongs to
+        if (userAccount != null && inNetwork != null) {
+            // Check if the user account has enterprise directly set
+            if (userAccount.getEnterprise() != null) {
+                inEnterprise = userAccount.getEnterprise();
+                System.out.println("Enterprise found directly from user account: " + inEnterprise.getName());
+            }
+
+            // If enterprise is still null, check if organization is set
+            if (inEnterprise == null || userAccount.getOrganization() != null) {
+                inOrganization = userAccount.getOrganization();
+
+                // Find which enterprise this organization belongs to
+                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                    // Check if this organization is in the enterprise's organization directory
+                    if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
                         inEnterprise = enterprise;
+                        break;
+                    }
+
+                    // If it's a FoodEnterprise, also check its custom foodIncOrgs list
+                    if (enterprise instanceof FoodEnterprise) {
+                        FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
+                        if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
+                            inEnterprise = enterprise;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // If still not found through user attributes, use original search methods
+            if (inEnterprise == null) {
+                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                    // First check enterprise level users
+                    if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                        inEnterprise = enterprise;
+                        break;
+                    }
+
+                    // Then check organization level
+                    for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                        if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                            inEnterprise = enterprise;
+                            inOrganization = organization;
+                            break;
+                        }
+                    }
+
+                    if (inEnterprise != null) {
                         break;
                     }
                 }
             }
         }
-        
-        // If still not found through user attributes, use original search methods
-        if (inEnterprise == null) {
-            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                // First check enterprise level users
-                if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
-                    inEnterprise = enterprise;
-                    break;
-                }
-                
-                // Then check organization level
-                for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                    if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
-                        inEnterprise = enterprise;
-                        inOrganization = organization;
-                        break;
-                    }
-                }
-                
-                if (inEnterprise != null) {
-                    break;
-                }
-            }
-        }
-    }
 
         // Step 3: 判断是否找到了
         if (userAccount == null || inNetwork == null) {
@@ -226,42 +227,23 @@ public class main extends javax.swing.JFrame {
             return;
         }
 
-<<<<<<< HEAD
-        // Step 4: 进入角色界面
+        // Step 4: Navigate to role interface
+        container.removeAll(); // 清除所有已有面板
         JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
                 inNetwork);
-        String panelName = userAccount.getRole().getClass().getSimpleName();
+        String panelName = "workArea"; // 使用固定名称
+        System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
+
         container.add(panelName, workArea);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, panelName);
-                
-//        container.add("workArea", workArea);
-//        CardLayout layout = (CardLayout) container.getLayout();
-//        layout.show(container,panelName);
+        container.revalidate(); // 刷新界面
+        container.repaint(); // 重绘界面
+
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
-=======
-
-    // Step 4: Navigate to role interface
-container.removeAll(); // 清除所有已有面板
-JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
-String panelName = "workArea"; // 使用固定名称
-System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
-
-container.add(panelName, workArea);
-CardLayout layout = (CardLayout) container.getLayout();
-layout.show(container, panelName);
-container.revalidate(); // 刷新界面
-container.repaint(); // 重绘界面
-    
-loginJButton.setEnabled(false);
-logoutJButton.setEnabled(true);
-userNameJTextField.setEnabled(false);
-passwordField.setEnabled(false);
-
->>>>>>> fa9caad5896206c98bc6979e22cf35ea3a895889
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed
