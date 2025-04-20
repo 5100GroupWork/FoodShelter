@@ -146,10 +146,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                                 .addGap(233, 233, 233)
                                 .addComponent(enterpriseLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-
-                                .addComponent(backJButton)
                                 .addGap(95, 95, 95)
-
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(268, 268, 268)

@@ -296,49 +296,12 @@ public class AdminStartPoint extends javax.swing.JPanel {
     }
     private void btnDeleteNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteNetWorkActionPerformed
         // TODO add your handling code here:
-        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
-
         if (netWork == null) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network to delete.");
             return;
         }
-
-        String selectedName = selectedNode.toString();
-
-        
-        if (selectedNode.getLevel() == 1) {
-            
-            int confirm = javax.swing.JOptionPane.showConfirmDialog(
-                    null,
-                    "Are you sure you want to delete the Network: " + selectedName + "?",
-                    "Confirm Deletion",
-                    javax.swing.JOptionPane.YES_NO_OPTION);
-
-            if (confirm != javax.swing.JOptionPane.YES_OPTION) {
-                return; 
-            }
-
-            
-            NetWork toDelete = null;
-            for (NetWork net : foodShelterSystem.getNetworkList()) {
-                if (net.getName().equals(selectedName)) {
-                    toDelete = net;
-                    break;
-                }
-            }
-
-            if (toDelete != null) {
-                foodShelterSystem.getNetworkList().remove(toDelete);
-                DB4OUtil.getInstance().storeSystem(foodShelterSystem);
-                populateTree();
-                javax.swing.JOptionPane.showMessageDialog(null, "Network '" + selectedName + "' deleted successfully.");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(null, "Network not found in system.");
-            }
-
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network node to delete.");
-        }
+        foodShelterSystem.getNetworkList().remove(netWork);
+        populateTree();
 
     }// GEN-LAST:event_btnDeleteNetWorkActionPerformed
 
