@@ -4,9 +4,21 @@
  */
 package ui.ReportAnalystWorkArea;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import model.FoodItem.FoodItem;
+import model.FoodShelterSystem.FoodShelterSystem;
+import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestFoodItem;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 
@@ -19,8 +31,14 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
     /**
      * Creates new form SummaryMetricsPanel
      */
-    public SummaryMetricsPanel() {
+    FoodShelterSystem foodShelterSystem;
+    
+    public SummaryMetricsPanel(FoodShelterSystem foodShelterSystem) {
+        this.foodShelterSystem = foodShelterSystem;
         initComponents();
+        
+        loadSummaryMetrics();
+        
         showChart();
     }
 
@@ -34,56 +52,169 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         chartContainer = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblTotalDonated = new javax.swing.JLabel();
+        lblEnergySaved = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout chartContainerLayout = new javax.swing.GroupLayout(chartContainer);
-        chartContainer.setLayout(chartContainerLayout);
-        chartContainerLayout.setHorizontalGroup(
-            chartContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
-        );
-        chartContainerLayout.setVerticalGroup(
-            chartContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 203, Short.MAX_VALUE)
-        );
+        chartContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 10));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("SummaryMetrics");
+
+        lblTotalDonated.setText("Total Food Donated: ");
+
+        lblEnergySaved.setText("Estimated Energy Saved:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEnergySaved)
+                            .addComponent(lblTotalDonated))))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addGap(20, 20, 20)
+                .addComponent(lblTotalDonated)
+                .addGap(18, 18, 18)
+                .addComponent(lblEnergySaved)
+                .addGap(18, 18, 18)
+                .addComponent(chartContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartContainer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblEnergySaved;
+    private javax.swing.JLabel lblTotalDonated;
     // End of variables declaration//GEN-END:variables
 
     private void showChart() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Donated", 70);  // sample data
-        dataset.setValue("Stored", 30);
+        int donated = 0;
+        int stored = 0;
+        
+        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof WorkRequestFoodItem) {
+                FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
+                if (item.getUsingStatus().equalsIgnoreCase("Send")) {
+                    donated += item.getNumber();
+                } else {
+                    stored += item.getNumber();
+                }
+            }
+        }
+         //pie chart  
+        dataset.setValue("Donated", donated); 
+        dataset.setValue("Stored", stored);
 
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Food Usage",
+        JFreeChart pieChart = ChartFactory.createPieChart(
+                "Food Usage Distribution",
                 dataset,
-                true, true, false
+                true,
+                true,
+                false
         );
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartContainer.setLayout(new java.awt.BorderLayout());
-        chartContainer.add(chartPanel, java.awt.BorderLayout.CENTER);
-        chartContainer.validate();
+        PiePlot plot = (PiePlot) pieChart.getPlot();
+        plot.setSectionPaint("Donated", new Color(138, 201, 25)); // light blue
+        plot.setSectionPaint("Stored", new Color(255, 175, 204));  // light orange
+        plot.setBackgroundPaint(new Color(242, 242, 242));
+        pieChart.setBackgroundPaint(new Color(242, 242, 242));
+
+        plot.setOutlineVisible(false);
+        plot.setShadowPaint(null);
+        pieChart.removeLegend();  // optional
+
+        Dimension fixedSize = new Dimension(280, 240);
+        
+        ChartPanel piePanel = new ChartPanel(pieChart);
+        
+        piePanel.setPreferredSize(fixedSize);
+        piePanel.setMaximumSize(fixedSize);
+        piePanel.setMinimumSize(fixedSize);
+        piePanel.setSize(fixedSize);
+    
+        //bar chart
+        
+        DefaultCategoryDataset barDataset = new DefaultCategoryDataset();
+        barDataset.setValue(donated, "Food", "Donated");
+        barDataset.setValue(stored, "Food", "Stored");
+        
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Donation Summary",
+                "Status",
+                "Quantity",
+                barDataset,
+                PlotOrientation.VERTICAL,
+                false, true, false
+        );
+        
+        ChartPanel barPanel = new ChartPanel(barChart);
+        barPanel.setPreferredSize(fixedSize);
+        barPanel.setMaximumSize(fixedSize);
+        barPanel.setMinimumSize(fixedSize);
+        barPanel.setSize(fixedSize);
+        
+        chartContainer.removeAll();
+        //chartContainer.setLayout(new GridBagLayout());  // center and stop stretch
+        chartContainer.add(barPanel);
+        chartContainer.add(piePanel);
+        chartContainer.revalidate();
+        chartContainer.repaint();
+
+        
+        System.out.println("Donated: " + donated + ", Stored: " + stored);
+
+    }
+    
+
+    private void loadSummaryMetrics() {
+
+        System.out.println("Checking work requests...");
+        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
+            System.out.println(wr); // or wr.getClass().getSimpleName()
+        }
+
+
+        int totalDonated = 0;
+        double energySavedPerItem = 0.5; // Example: 0.5 kWh saved per item
+
+        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof WorkRequestFoodItem) {
+                FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
+                if (item.getUsingStatus().equalsIgnoreCase("Send")) {
+                    totalDonated += item.getNumber();
+                }
+            }
+        }
+
+        double totalEnergySaved = totalDonated * energySavedPerItem;
+
+        lblTotalDonated.setText("Total Food Donated: " + totalDonated);
+        lblEnergySaved.setText("Estimated Energy Saved: " + totalEnergySaved + " kWh");
     }
 
+
+
+
+    
 }
