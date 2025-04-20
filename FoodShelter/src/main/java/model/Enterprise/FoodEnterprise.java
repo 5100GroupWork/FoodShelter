@@ -45,11 +45,11 @@ public class FoodEnterprise extends BasicEnterprise{
     }
     
     // add FoodEnterprise employee
-    public UserAccount addEmployee(NetWork netWork, String name, String pwd){
-        UserAccount user = netWork.getUserAccountDirctory().createUserAccount(name, pwd, new FoodEnterpriseManager());
-        this.employees.add(user);
-        return user;
-    }
+//    public UserAccount addEmployee(NetWork netWork, String name, String pwd){
+//        UserAccount user = netWork.getUserAccountDirctory().createUserAccount(name, pwd, new FoodEnterpriseManager());
+//        this.employees.add(user);
+//        return user;
+//    }
     
     //remove FoodEnterprise employee
 

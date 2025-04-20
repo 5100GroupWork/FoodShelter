@@ -88,7 +88,7 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Employee Name", "Role", "Phone", "Email"
+                "Organization", "Employee Name", "Phone", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -215,15 +215,14 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
                 for (UserAccount ua : fe.getEmployees()) {
 
                     Object[] row = new Object[4];
-                    row[0] = ua.getUsername();
-                    row[1] = ua.getRole();
+                    row[0] = ua.getOrganization();
+                    row[1] = ua.getUsername();
+   
                     row[2] = ua.getPhone();
                     row[3] = ua.getEmail();
                     model.addRow(row);
                 }
-
-            }
-            
+            }       
             // Original code for checking through organization directory
             for (BasicOrganization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
 

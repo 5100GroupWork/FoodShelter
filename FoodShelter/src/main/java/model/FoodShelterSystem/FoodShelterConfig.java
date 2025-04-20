@@ -18,6 +18,7 @@ import model.Organization.PushedFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
+import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
 import model.Role.FreshChecker;
 import model.Role.HomelessManager;
@@ -77,13 +78,13 @@ public class FoodShelterConfig {
                 foodIncOrg.setAddress("Backbay-Boston-MA");
                 UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
                                 new FoodIncEmployee());
-                foodEnplyee.setEmail("mike@foodshelter.com");
-                foodEnplyee.setPhone("508-123-456");
+
                 foodEnplyee.setOrganization(foodIncOrg);
                 foodEnplyee.setEnterprise(foodEnterprise);
                 
                 foodEnplyee.setEmail("mike@wholefoods.com");
                 foodEnplyee.setPhone("555-123-4567");
+                foodEnplyee.setOrganization(foodIncOrg);
                 
                 foodIncOrg.getEmployees().add(foodEnplyee);
                 foodEnterprise.getEmployees().add(foodEnplyee);

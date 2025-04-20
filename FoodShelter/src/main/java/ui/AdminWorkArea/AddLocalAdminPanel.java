@@ -205,7 +205,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 for (BasicEnterprise ent : network.getEnterpriseDirectory().getEnterprises()) {
                     if (ent == enterprise) {
                         // Found the network, now add the employee
-                        ((FoodEnterprise) enterprise).addEmployee(network, username, password);
+                        ((FoodEnterprise) enterprise).getEmployees().add(newEmployee);
                         break;
                     }
                 }

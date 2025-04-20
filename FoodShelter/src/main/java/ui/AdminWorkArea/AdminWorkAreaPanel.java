@@ -20,6 +20,7 @@ import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
+import model.Role.FoodIncEmployee;
 
 /**
  *
@@ -99,7 +100,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Organization ID", "Name", "Location", "Admin"
+                "Organization ID", "Name", "Location", "Manager"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -245,7 +246,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                             // Find assigned admin
                             UserAccount admin = null;
                             for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
-                                if (ua.getOrganization() == foodOrg && ua.getRole() instanceof FoodEnterpriseManager) {
+                                if (ua.getOrganization() == foodOrg && ua.getRole() instanceof FoodEnterpriseManager && ua.getRole() instanceof FoodIncEmployee) {
                                     admin = ua;
                                     break;
                                 }
