@@ -22,4 +22,9 @@ public class FoodEnterpriseManager extends BasicRole{
         
         return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
     }
+    
+    @Override
+    public String toString() {
+        return "Food Enterprise Manager";
+    }
 }
