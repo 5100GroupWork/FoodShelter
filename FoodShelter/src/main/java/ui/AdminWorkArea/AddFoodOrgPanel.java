@@ -12,6 +12,7 @@ import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
 
@@ -42,8 +43,6 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         FoodIncOrg preview = new FoodIncOrg("new");
         txtOrgID.setText(String.valueOf(preview.getOrganizationID()));
         
-        
-        populateAdminComboBox();
     }
 
     /**
@@ -107,50 +106,55 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(btnBack)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtOrgName)
-                            .addComponent(txtLocation)
-                            .addComponent(txtOrgID, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNext, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(158, 158, 158)
+                        .addComponent(enterpriseLabel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(enterpriseLabel)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                        .addGap(15, 15, 15)
+                        .addComponent(btnBack)))
+                .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnNext)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblConfirmPassword)
+                            .addComponent(lblpassword)
+                            .addComponent(lbluserName))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtOrgID, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbluserName)
-                            .addComponent(txtOrgID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblpassword)
-                            .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblConfirmPassword)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBack)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnBack))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbluserName)
+                    .addComponent(txtOrgID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblpassword)
+                    .addComponent(txtOrgName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConfirmPassword)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(btnNext)
-                .addGap(130, 130, 130))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -158,63 +162,65 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-       String organizationName = txtOrgName.getText().trim();
-       String location = txtLocation.getText().trim();
-       
-        UserAccount selectedAdmin = (UserAccount) jComboBox1.getSelectedItem();                
-        
-        if (organizationName.isEmpty()|| location.isEmpty()||jComboBox1.getSelectedItem()== null)
-        {
-            JOptionPane.showMessageDialog(this, "All fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
+    // Validate input fields
+        String orgName = txtOrgName.getText().trim();
+        String location = txtLocation.getText().trim();
+
+        if (orgName.isEmpty() || location.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Organization name and location cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        FoodIncOrg newOrg = new FoodIncOrg(organizationName);
-        newOrg.setAddress(location);
-        
-        FoodEnterprise foodEnterprise = null;
-        
-        for(NetWork netWork:foodShelterSystem.getNetworkList()){
-            for (BasicEnterprise be:netWork.getEnterpriseDirectory().getEnterprises()){
-                if (be instanceof FoodEnterprise){
-                    foodEnterprise = (FoodEnterprise)be;
-                    break;
+
+        FoodIncOrg newOrg = null;
+        BasicEnterprise targetEnterprise = null;
+        boolean foundFoodEnterprise = false;
+
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                if (be instanceof FoodEnterprise) {
+                    foundFoodEnterprise = true;
+                    targetEnterprise = be;
+                    
+                    // Check if an org with the same name already exists
+                    boolean orgExists = false;
+                    for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                        if (org instanceof FoodIncOrg && ((FoodIncOrg) org).getName().equals(orgName)) {
+                            orgExists = true;
+                            break;
+                        }
+                    }
+                    if (orgExists) {
+                        JOptionPane.showMessageDialog(this, "An organization with this name already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    newOrg = new FoodIncOrg(orgName);
+
+                    newOrg.setAddress(location);
+                    be.getOrganizationDirectory().getOrganizationList().add(newOrg);
+                    CardLayout layout = (CardLayout) workArea.getLayout();
+                    workArea.add("AddLocalAdminPanel", new AddLocalAdminPanel(workArea, account, foodShelterSystem, parent, newOrg, be));
+                    layout.show(workArea, "AddLocalAdminPanel");
+                    return;
                 }
-                
             }
-            
         }
-        
-        if (foodEnterprise == null){
-            JOptionPane.showMessageDialog(this, "No FoodEnterprise found in system.");
-            return;
+        if (!foundFoodEnterprise) {
+            JOptionPane.showMessageDialog(this, "No Food Enterprise found in the system. Please create a Food Enterprise first.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        foodEnterprise.getOrganizationDirectory().getOrganizationList().add(newOrg);
-
-        selectedAdmin.setOrganization(newOrg);
-        selectedAdmin.setRole(new FoodEnterpriseManager());
-        
-        JOptionPane.showMessageDialog(this, "Organization created successfully!\nID: " + newOrg.getOrganizationID());
-
-        txtOrgName.setText("");
-        txtLocation.setText("");
-        jComboBox1.setSelectedIndex(0);
-        txtOrgID.setText(String.valueOf(new FoodIncOrg("new").getOrganizationID()));
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -222,7 +228,6 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
         workArea.remove(this);
         CardLayout layout = (CardLayout)workArea.getLayout();
         layout.show(workArea,"AdminWorkAreaPanel");
-        parent.populateTable();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtOrgNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrgNameActionPerformed
@@ -232,7 +237,6 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
     private void txtOrgIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrgIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrgIDActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -246,25 +250,5 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtOrgID;
     private javax.swing.JTextField txtOrgName;
     // End of variables declaration//GEN-END:variables
-
-    private void populateAdminComboBox() {
-
-
-        jComboBox1.removeAllItems();
-
-        for (NetWork net : foodShelterSystem.getNetworkList()) {
-            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                if (be instanceof FoodEnterprise) {
-                    for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
-                        if (ua.getRole() != null && ua.getRole().getClass().getSimpleName().equals("FoodOrgAdmin")) {
-                            jComboBox1.addItem(ua.toString());
-                        }
-                    }
-                }
-            }
-        }
-
-
-    }
-    
+   
 }

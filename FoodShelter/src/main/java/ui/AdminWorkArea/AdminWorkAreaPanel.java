@@ -36,6 +36,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     FoodShelterSystem foodShelterSystem;
     NetWork netWork;
     AdminWorkAreaPanel parent;
+
     
     public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
         this.workArea = workArea;
@@ -46,7 +47,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         populateTable();
         
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
