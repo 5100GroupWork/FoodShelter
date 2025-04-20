@@ -33,13 +33,17 @@ import model.Role.VolunteerManager;
  */
 public class FoodShelterConfig {
 
-        public static FoodShelterSystem configure() {
+        public static FoodShelterSystem configure(String name,FoodShelterSystem system) {
 
-                FoodShelterSystem system = FoodShelterSystem.getInstance();
-
+                if(system==null){
+                    system = FoodShelterSystem.getInstance();
+                }
+                
                 // create a system admin
                 NetWork netWork = system.createAndAddNetwork();
-
+                if(name == null){
+                    netWork.setName("Boston Shelter");
+                }
                 if (netWork.getEnterpriseDirectory().getEnterprises() == null) {
                         netWork.getEnterpriseDirectory().setEnterprises(new ArrayList<>());
                 }

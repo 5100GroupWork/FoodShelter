@@ -63,4 +63,17 @@ public class FoodShelterSystem extends BasicOrganization{
         }
         return true;
     }
+    
+    public boolean checkNetWorkIsUnique(String name){
+        for(NetWork netWork: this.networkList){
+            if(netWork.getName() == name)
+                return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString(){
+        return "System";
+    }
 }

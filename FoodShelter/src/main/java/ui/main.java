@@ -31,12 +31,13 @@ public class main extends javax.swing.JFrame {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         setResizable(false);
-        setSize(900, 760);
+        setSize(1200, 900);
         jSplitPane1.setDividerLocation(0.2);
         WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
         container.add("WelComeJPanel", welcomeJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "WelComeJPanel");
+        populateCombox();
 
         // make sure system are stored correctely
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -56,6 +57,10 @@ public class main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -68,7 +73,7 @@ public class main extends javax.swing.JFrame {
         logoutJButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        combox = new javax.swing.JComboBox<>();
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,8 +107,13 @@ public class main extends javax.swing.JFrame {
 
         jLabel4.setText("Password");
 
-        jComboBox1.setModel(
+        combox.setModel(
                 new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,37 +122,40 @@ public class main extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
                                                 .addGroup(jPanel1Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                false)
-                                                        .addComponent(passwordField,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 94,
-                                                                Short.MAX_VALUE)
-                                                        .addComponent(loginJButton,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(logoutJButton,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(userNameJTextField))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(24, 24, 24)
-                                                .addComponent(jLabel4))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(22, 22, 22)
-                                                .addComponent(jLabel1))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addGroup(jPanel1Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jComboBox1,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 89,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel3))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(passwordField,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                94, Short.MAX_VALUE)
+                                                                        .addComponent(loginJButton,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                        .addComponent(logoutJButton,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addComponent(userNameJTextField))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(24, 24, 24)
+                                                                .addComponent(jLabel4))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(22, 22, 22)
+                                                                .addComponent(jLabel1))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addComponent(jLabel3)))
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(combox, javax.swing.GroupLayout.Alignment.TRAILING, 0,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap()));
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
                 new java.awt.Component[] { passwordField, userNameJTextField });
@@ -152,10 +165,10 @@ public class main extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(combox, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(119, 119, 119)
+                                .addGap(125, 125, 125)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(userNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -187,6 +200,14 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_comboxActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_comboxActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_jComboBox1ActionPerformed
 
     private void userNameJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_userNameJTextFieldActionPerformed
         // TODO add your handling code here:
@@ -293,6 +314,8 @@ public class main extends javax.swing.JFrame {
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
+        combox.setEnabled(false);
+
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed
@@ -309,6 +332,7 @@ public class main extends javax.swing.JFrame {
         container.add("blank", blankJP);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
+        combox.setEnabled(true);
         dB4OUtil.storeSystem(system);
     }// GEN-LAST:event_logoutJButtonActionPerformed
 
@@ -352,8 +376,8 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> combox;
     private javax.swing.JPanel container;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -364,4 +388,17 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField userNameJTextField;
     // End of variables declaration//GEN-END:variables
+
+    //////////////////////////////////////////////////
+    /// populate Combox
+    public void populateCombox() {
+        combox.removeAllItems();
+        combox.addItem(system);
+        System.out.println(system.getNetworkList().size());
+        for (NetWork netWork1 : system.getNetworkList()) {
+            System.out.println(netWork1.getName());
+            combox.addItem(netWork1);
+        }
+    }
+
 }
