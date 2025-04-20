@@ -20,11 +20,38 @@ public class WelcomeJPanel extends javax.swing.JPanel {
      */
     public WelcomeJPanel() {
         initComponents();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Logo.png")); // 注意路径
+       try {
+     
+        java.net.URL imageUrl = getClass().getResource("/Logo.png");
+        if (imageUrl != null) {
+            ImageIcon icon = new ImageIcon(imageUrl);
+            Image scaledImg = icon.getImage().getScaledInstance(700, 560, Image.SCALE_SMOOTH);
+            JLabel imgLabel = new JLabel(new ImageIcon(scaledImg));
+            LogoLable.setLayout(new BorderLayout());
+            LogoLable.add(imgLabel);
+        } else {
+     
+            JLabel defaultLabel = new JLabel("Food Shelter System");
+            defaultLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
+            defaultLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            LogoLable.setLayout(new BorderLayout());
+            LogoLable.add(defaultLabel, BorderLayout.CENTER);
+        }
+    } catch (Exception e) {
+      
+        System.out.println("Error loading logo: " + e.getMessage());
+        JLabel errorLabel = new JLabel("Welcome to Food Shelter System");
+        errorLabel.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 24));
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LogoLable.setLayout(new BorderLayout());
+        LogoLable.add(errorLabel, BorderLayout.CENTER);
+    }
+        
+        /*ImageIcon icon = new ImageIcon(getClass().getResource("/Logo.png")); // 注意路径
         Image scaledImg = icon.getImage().getScaledInstance(700, 560, Image.SCALE_SMOOTH); // 等比缩放
         JLabel imgLabel = new JLabel(new ImageIcon(scaledImg));
         LogoLable.setLayout(new BorderLayout()); // 让图片居中显示
-        LogoLable.add(imgLabel);
+        LogoLable.add(imgLabel);*/
     }
 
     /**
