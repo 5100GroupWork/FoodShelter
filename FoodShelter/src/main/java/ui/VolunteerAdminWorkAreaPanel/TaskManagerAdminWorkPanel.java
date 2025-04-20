@@ -213,10 +213,9 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
     }
         
-    }//GEN-LAST:event_btnDeleteTaskManagerActionPerformed
+    }                                                    
 
 
-    }// GEN-LAST:event_btnDeleteTaskManagerActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
 
