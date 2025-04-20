@@ -112,7 +112,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblWelcome.setText("Welcome, <value>");
 
-        btnDetail.setText("Manage Food Enterprise Employees");
+        btnDetail.setText("View NetWork Details");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDetailActionPerformed(evt);

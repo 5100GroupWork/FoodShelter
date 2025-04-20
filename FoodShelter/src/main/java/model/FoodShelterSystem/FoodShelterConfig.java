@@ -39,6 +39,14 @@ public class FoodShelterConfig {
 
                 if(system==null){
                     system = FoodShelterSystem.getInstance();
+                    UserAccount systemAdmin = new UserAccount();
+                    system.setSystemAdmin(systemAdmin);
+                    systemAdmin.setRole(new SysAdmin());
+                    systemAdmin.setPassword("0000");
+                    systemAdmin.setUsername("systemAdmin");
+                    systemAdmin.setEmail("admin@foodshelter.org");
+                    systemAdmin.setPhone("555-000-0000");
+                    systemAdmin.setRole(new SysAdmin());
                 }
                 
                 // create a system admin
@@ -51,11 +59,7 @@ public class FoodShelterConfig {
                         netWork.getEnterpriseDirectory().setEnterprises(new ArrayList<>());
                 }
 
-                UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",
-                                new SysAdmin());
                 
-                systemAdmin.setEmail("admin@foodshelter.org");
-                systemAdmin.setPhone("555-000-0000");
 
                 // create 4 enterprise
                 // food enterprise

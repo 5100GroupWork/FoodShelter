@@ -220,7 +220,7 @@ public class main extends javax.swing.JFrame {
         String password = String.valueOf(passwordCharArray);
 
         Object selectedItem = combox.getSelectedItem();
-        if (selectedItem == null) {
+        if (selectedItem.toString().equals("Select Network or System")) {
             JOptionPane.showMessageDialog(null, "Please select System or a specific Network first.");
             return;
         }
@@ -231,20 +231,28 @@ public class main extends javax.swing.JFrame {
         BasicOrganization inOrganization = null;
 
         if (selectedItem instanceof FoodShelterSystem) {
-            // 如果选中的是 system，则遍历所有 network
-            for (NetWork network : system.getNetworkList()) {
-                userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
-                if (userAccount != null) {
-                    if (!(userAccount.getRole() instanceof SysAdmin)) {
-                        JOptionPane.showMessageDialog(null, "You are not the system admin.");
-                        return;
-                    }
-                    inNetwork = network;
-                    break;
-                }
+            UserAccount sysA = system.getSystemAdmin();
+            System.out.println("select systemAdmin login");
+            if(!sysA.getUsername().equals(userName) || !sysA.getPassword().equals(password)){
+                JOptionPane.showMessageDialog(null, "You are not the system admin.");
+                return;
+            }else{
+                container.removeAll();
+                JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
+                    inNetwork, system);
+                container.add("workArea", workArea);
+                CardLayout layout = (CardLayout) container.getLayout();
+                layout.show(container, "workArea");
+
+                // 状态更新
+                loginJButton.setEnabled(false);
+                logoutJButton.setEnabled(true);
+                userNameJTextField.setEnabled(false);
+                passwordField.setEnabled(false);
+                combox.setEnabled(false);
+                return;
             }
         } else if (selectedItem instanceof NetWork) {
-            // 只在选中的 Network 中查找
             NetWork selectedNetwork = (NetWork) selectedItem;
             userAccount = selectedNetwork.getUserAccountDirctory().authenticateUser(userName, password);
             if (userAccount != null) {
@@ -252,11 +260,16 @@ public class main extends javax.swing.JFrame {
             }
         }
 
-        // 后续逻辑：查找所属的 enterprise 和 organization
-        if (userAccount != null && inNetwork != null) {
-            if (userAccount.getEnterprise() != null) {
-                inEnterprise = userAccount.getEnterprise();
-            }
+        // 判断登录是否成功
+        if (userAccount == null || inNetwork == null) {
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+
+        // 查找 enterprise 和 organization 所属信息
+        if (userAccount.getEnterprise() != null) {
+            inEnterprise = userAccount.getEnterprise();
+        }
 
         if (inEnterprise == null || userAccount.getOrganization() != null) {
             inOrganization = userAccount.getOrganization();
@@ -292,31 +305,26 @@ public class main extends javax.swing.JFrame {
                     }
                 }
 
-                    if (inEnterprise != null) {
-                        break;
-                    }
+                if (inEnterprise != null) {
+                    break;
                 }
             }
         }
 
-        if (userAccount == null || inNetwork == null) {
-            JOptionPane.showMessageDialog(null, "Invalid credentials");
-            return;
-        }
-
-        // 登录成功后跳转面板
+        // 跳转用户工作区域
         container.removeAll();
-        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system);
+        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
+                inNetwork, system);
         container.add("workArea", workArea);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "workArea");
 
+        // 状态更新
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
         combox.setEnabled(false);
-
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed
