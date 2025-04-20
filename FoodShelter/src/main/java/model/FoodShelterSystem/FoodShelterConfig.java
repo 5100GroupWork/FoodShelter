@@ -206,6 +206,8 @@ public class FoodShelterConfig {
             taskManager.setRole(new TaskManager());  
             taskManager.setEmail("taskmanager@volunteer.org");
             taskManager.setPhone("555-123-4567");
+            taskManager.setEnterprise(volunteerEnterprise);
+            taskManager.setOrganization(volunteerOrg);
             
                 return system;
         }
