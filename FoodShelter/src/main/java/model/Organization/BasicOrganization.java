@@ -5,10 +5,8 @@
 package model.Organization;
 
 import java.util.ArrayList;
-import model.Account.UserAccount;
 import model.Account.UserAccountDirctory;
 import model.Role.BasicRole;
-import model.Role.WareHourseChecker;
 import model.WorkQueue.WorkQueue;
 
 /**
@@ -31,7 +29,7 @@ public abstract class BasicOrganization {
         Volunteer("VolunteerOrg"),
         RequestCollect("RequestCollectOrg"),
         RequestEntertain("RequestEntertainOrg"),
-        NewFoodChecker("NewFoodCHeckOrg"),
+        NewFoodChecker("NewFoodCheckOrg"),
         WareHourseCheck("WareHourseCheckOrg"),
         DriverOrg("DriverOrg"),
         PushedFoodCheck("PushedFoodCheckOrg");

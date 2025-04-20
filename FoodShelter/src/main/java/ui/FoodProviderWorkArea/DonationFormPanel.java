@@ -283,6 +283,9 @@ public class DonationFormPanel extends javax.swing.JPanel {
         org.getWorkQueue().getWorkRequestList().add(request);
         account.getWorkQueue().getWorkRequestList().add(request);
         
+        //要在network中展示
+        netWork.getCheckList().getWorkRequestList().add(request);
+        
         JOptionPane.showMessageDialog(this, "Donation submitted successfully!");
         txtFoodName.setText("");
         spinnerQuantity.setValue(0);

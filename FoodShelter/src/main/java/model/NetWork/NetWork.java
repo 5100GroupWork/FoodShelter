@@ -4,12 +4,8 @@
  */
 package model.NetWork;
 
-import java.util.ArrayList;
-import model.Account.UserAccount;
 import model.Account.UserAccountDirctory;
-import model.Enterprise.BasicEnterprise;
 import model.Enterprise.EnterPriseDirctory;
-import model.FoodItem.FoodItem;
 import model.WorkQueue.WorkQueue;
 
 /**

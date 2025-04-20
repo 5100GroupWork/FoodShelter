@@ -6,10 +6,8 @@ package model.Enterprise;
 
 import java.util.ArrayList;
 import model.Account.UserAccount;
-import model.FoodItem.FoodItem;
 import model.Organization.NewFoodCheckOrg;
 import model.Organization.PushedFoodCheckOrg;
-import model.Organization.WareHouseCheckOrg;
 import model.Role.BasicRole;
 import model.Role.FoodIncEmployee;
 
@@ -22,14 +20,13 @@ import model.Role.FoodIncEmployee;
 public class FreshCheckEnterprise extends BasicEnterprise{
 
     private ArrayList<NewFoodCheckOrg> newFoodCheckOrgs = new ArrayList<>();
-    private ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs = new ArrayList<>();
     private ArrayList<UserAccount> employees = new ArrayList<>();
     private ArrayList<PushedFoodCheckOrg> pushedFoodCheckOrgs = new ArrayList<>();
     
     public FreshCheckEnterprise(String name) {
         super("FreshChecker", BasicEnterpriseType.FreshCheck);
         this.newFoodCheckOrgs = new ArrayList<>();
-        this.wareHourseCheckOrgs = new ArrayList<>();
+        this.pushedFoodCheckOrgs = new ArrayList<>();
         this.employees = new ArrayList<>();
     }
     
@@ -44,16 +41,6 @@ public class FreshCheckEnterprise extends BasicEnterprise{
         this.newFoodCheckOrgs = newFoodCheckOrgs;
     }
 
-    public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrg() {
-        if (wareHourseCheckOrgs == null) {
-            wareHourseCheckOrgs = new ArrayList<>();
-        }
-        return wareHourseCheckOrgs;
-    }
-
-    public void setWareHourseCheckOrg(ArrayList<WareHouseCheckOrg> wareHourseCheckOrg) {
-        this.wareHourseCheckOrgs = wareHourseCheckOrg;
-    }
     
     public ArrayList<PushedFoodCheckOrg> getPushedFoodCheckOrgs() {
     if (pushedFoodCheckOrgs == null) {
@@ -71,9 +58,9 @@ public class FreshCheckEnterprise extends BasicEnterprise{
     return pushedFoodCheckOrg;
 }
 
-public boolean removePushedFoodCheckOrg(PushedFoodCheckOrg org) {
-    return this.pushedFoodCheckOrgs.remove(org);
-}
+    public boolean removePushedFoodCheckOrg(PushedFoodCheckOrg org) {
+        return this.pushedFoodCheckOrgs.remove(org);
+    }
     /////////////////////////////////////////////////////////
     // add
     public NewFoodCheckOrg addNewFoodCheckOrg(String name){
@@ -81,28 +68,11 @@ public boolean removePushedFoodCheckOrg(PushedFoodCheckOrg org) {
         this.newFoodCheckOrgs.add(newFoodCheckOrg);
         return  newFoodCheckOrg;
     }
-    
-    public WareHouseCheckOrg addWareHourseCheckOrg(String name){
-        WareHouseCheckOrg wareHourseCheckOrg = new WareHouseCheckOrg(name);
-        this.wareHourseCheckOrgs.add(wareHourseCheckOrg);
-        return wareHourseCheckOrg;
-    }
+   
     
     // remove 
     public boolean removeNewFoodCheckOrg(NewFoodCheckOrg org) {
         return this.newFoodCheckOrgs.remove(org);
-    }
-
-    public boolean removeWareHourseCheckOrg(WareHouseCheckOrg org) {
-        return this.wareHourseCheckOrgs.remove(org);
-    }
-
-    public ArrayList<WareHouseCheckOrg> getWareHourseCheckOrgs() {
-        return wareHourseCheckOrgs;
-    }
-
-    public void setWareHourseCheckOrgs(ArrayList<WareHouseCheckOrg> wareHourseCheckOrgs) {
-        this.wareHourseCheckOrgs = wareHourseCheckOrgs;
     }
 
     public ArrayList<UserAccount> getEmployees() {

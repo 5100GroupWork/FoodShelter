@@ -17,16 +17,12 @@ import model.Organization.BasicOrganization;
 import model.Organization.PushedFoodCheckOrg;
 import ui.FreshCheckWorkArea.PostFoodCheckPanel;
 
-public class PostFoodCheckManager extends BasicRole {
+public class PostFoodChecker extends BasicRole {
     
     private PushedFoodCheckOrg pushedFoodCheckOrg;
     
-    public PostFoodCheckManager(PushedFoodCheckOrg pushedFoodCheckOrg) {
-        this.pushedFoodCheckOrg = pushedFoodCheckOrg;
-    }
-    
     // 提供无参构造函数供 getSupportedRole() 使用
-    public PostFoodCheckManager() {
+    public PostFoodChecker() {
     }
     
     @Override

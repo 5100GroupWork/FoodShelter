@@ -159,6 +159,7 @@ public class main extends javax.swing.JFrame {
         userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
         if (userAccount != null) {
             inNetwork = network; // Record the network
+            System.err.println("getNetWork");
             break; // User belongs to this network, continue to find enterprise/org
         }
     }
@@ -172,7 +173,7 @@ public class main extends javax.swing.JFrame {
         }
         
         // If enterprise is still null, check if organization is set
-        if (inEnterprise == null && userAccount.getOrganization() != null) {
+        if (inEnterprise == null || userAccount.getOrganization() != null) {
             inOrganization = userAccount.getOrganization();
             
             // Find which enterprise this organization belongs to
@@ -225,6 +226,23 @@ public class main extends javax.swing.JFrame {
             return;
         }
 
+<<<<<<< HEAD
+        // Step 4: 进入角色界面
+        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
+                inNetwork);
+        String panelName = userAccount.getRole().getClass().getSimpleName();
+        container.add(panelName, workArea);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container, panelName);
+                
+//        container.add("workArea", workArea);
+//        CardLayout layout = (CardLayout) container.getLayout();
+//        layout.show(container,panelName);
+        loginJButton.setEnabled(false);
+        logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
+=======
 
     // Step 4: Navigate to role interface
 container.removeAll(); // 清除所有已有面板
@@ -243,6 +261,7 @@ logoutJButton.setEnabled(true);
 userNameJTextField.setEnabled(false);
 passwordField.setEnabled(false);
 
+>>>>>>> fa9caad5896206c98bc6979e22cf35ea3a895889
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed

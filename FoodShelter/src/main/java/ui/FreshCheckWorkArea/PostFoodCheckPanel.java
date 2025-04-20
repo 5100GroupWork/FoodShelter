@@ -12,7 +12,6 @@ import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.PushedFoodCheckOrg;
-import model.Organization.WareHouseCheckOrg;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
 import model.WorkQueue.WorkRequestDelivery;
@@ -31,17 +30,19 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
     FreshCheckEnterprise freshCheckEnterprise;
     PushedFoodCheckOrg pushedFoodCheckOrg;
     NetWork netWork;
-    public PostFoodCheckPanel(JPanel workArea, BasicEnterprise freshCheckEnterprise, BasicOrganization organization, NetWork netWorkk) {
-       this.workArea = workArea;
-    this.freshCheckEnterprise = (FreshCheckEnterprise)freshCheckEnterprise;
-
-    if (organization instanceof PushedFoodCheckOrg) {
-        this.pushedFoodCheckOrg = (PushedFoodCheckOrg)organization;
-    }
-    
-    this.netWork = netWork;
-    initComponents();
-    populateTable();
+    public PostFoodCheckPanel(JPanel workArea, BasicEnterprise freshCheckEnterprise, BasicOrganization organization, NetWork netWork) {
+        this.workArea = workArea;
+        this.freshCheckEnterprise = (FreshCheckEnterprise)freshCheckEnterprise;
+        this.netWork = netWork;
+        if(netWork==null){
+            System.err.println("Panel get NetWork==null");
+        }else
+            System.err.println("Panel get NetWork!=null");
+        if (organization instanceof PushedFoodCheckOrg) {
+            this.pushedFoodCheckOrg = (PushedFoodCheckOrg)organization;
+        }
+        initComponents();
+        populateTable();
     }
 
     /**
@@ -140,6 +141,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         }
         WorkRequestFoodItem wfd = (WorkRequestDelivery) wareFoodTable.getValueAt(5, rowNumber);
         // 从checklist中取出来
+        
         netWork.getWarehouseList().removeWorkRequest(wfd);
         populateTable();
         
@@ -164,7 +166,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) wareFoodTable.getModel();
         model.setRowCount(0);
         WorkQueue foodQueue = netWork.getWarehouseList();
-        
+        System.out.println("get into method");
         int count =0;
         for (WorkRequest wd : foodQueue.getWorkRequestList()) {
             WorkRequestFoodItem wrf = (WorkRequestDelivery) wd;
@@ -177,9 +179,4 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
-
-
-
-
-
 }
