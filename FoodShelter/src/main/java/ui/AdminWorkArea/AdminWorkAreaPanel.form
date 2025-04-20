@@ -123,7 +123,7 @@
                 <Column editable="false" title="Organization ID" type="java.lang.Object"/>
                 <Column editable="false" title="Name" type="java.lang.Object"/>
                 <Column editable="false" title="Location" type="java.lang.Object"/>
-                <Column editable="false" title="Admin" type="java.lang.Object"/>
+                <Column editable="false" title="Manager" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
