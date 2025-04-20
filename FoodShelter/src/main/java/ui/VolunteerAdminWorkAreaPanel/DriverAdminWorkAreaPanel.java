@@ -44,12 +44,14 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
         
+        initComponents();
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
         
+        this.parentPanel = this;
         populateTable();
 
         
-        initComponents();
+      
     }
 
     /**
@@ -238,21 +240,28 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     public void populateTable() {
         
-        DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
-        model.setRowCount(0);
-       
-        for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()){
-           if (ua.getRole() instanceof Deliver){     
+    DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+    model.setRowCount(0);
+
+        // 查找volunteerEnterprise下的所有DriverOrg
+        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (org instanceof DriverOrg) {
+                DriverOrg driverOrg = (DriverOrg) org;
+              
+                for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+                    if (ua.getRole() instanceof Deliver) {
+                        Deliver deliver = (Deliver) ua.getRole();
+                        
+                        Object[] row = new Object[3];
+                        row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                        row[1] = ua.getUsername();
+                        row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                        model.addRow(row);
+                    }
+                }
             
-            Deliver deliver = (Deliver) ua.getRole();   
-            
-            Object[] row = new Object[3];
-            row[0] = deliver.getID();
-            row[1] = ua.getUsername();
-            row[2] = deliver.getContact();
-            model.addRow(row);
-           } 
         }
+    } 
         
     }
 }
