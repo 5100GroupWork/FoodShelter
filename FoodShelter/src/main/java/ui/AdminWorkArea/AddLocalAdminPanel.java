@@ -77,7 +77,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Assign Administrator");
+        enterpriseLabel.setText("Assign Employee");
 
         lbluserName.setText("User Name");
 
@@ -189,15 +189,29 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists. Choose a different one.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+     //create a new employee   
         FoodEnterpriseManager role = new FoodEnterpriseManager();
-        UserAccount newAdmin = enterprise.getUserAccountDirectory().createUserAccount(username, password, role);
-        newAdmin.setEmail(email);
-        newAdmin.setPhone(phone);
-        newAdmin.setOrganization(newOrg);
+        UserAccount newEmployee = enterprise.getUserAccountDirectory().createUserAccount(username, password, role);
+        newEmployee.setEmail(email);
+        newEmployee.setPhone(phone);
+        newEmployee.setOrganization(newOrg);
         
-        JOptionPane.showMessageDialog(this, "New organization and administrator created successfully!");
-           
+        JOptionPane.showMessageDialog(this, "New organization and employee created successfully!");
+        
+        //add this employee to the enterprise
+        if (enterprise instanceof FoodEnterprise) {
+            // Find the network this enterprise belongs to
+            for (NetWork network : foodShelterSystem.getNetworkList()) {
+                for (BasicEnterprise ent : network.getEnterpriseDirectory().getEnterprises()) {
+                    if (ent == enterprise) {
+                        // Found the network, now add the employee
+                        ((FoodEnterprise) enterprise).addEmployee(network, username, password);
+                        break;
+                    }
+                }
+            }
+        }
+                        
         txtuserName.setText("");
         passwordField.setText("");
         txtEmail.setText("");
