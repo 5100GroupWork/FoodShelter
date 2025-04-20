@@ -176,7 +176,9 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
                     for (UserAccount ua : fe.getEmployees()) {
 
                         if (ua.getUsername().equals(username)) {
+                                     
                             toRemove = ua;
+                            fe.deleteEmployee(network,ua);
                             // Remove from both org and global list
                             FoodIncOrg org = (FoodIncOrg) ua.getOrganization();
 
