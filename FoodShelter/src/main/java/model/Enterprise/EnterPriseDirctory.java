@@ -32,15 +32,19 @@ public class EnterPriseDirctory {
         BasicEnterprise basicEnterprise =null;
         if(type.equals("Food")){
             basicEnterprise = new FoodEnterprise(name);
+            enterprises.add(basicEnterprise);
         }
         if(type.equals("Volunteer")){
             basicEnterprise = new VolunteerEnterprise(name);
+            enterprises.add(basicEnterprise);
         }
         if(type.equals("RescueNet")){
             basicEnterprise = new RescueNetEnterprise(name);
+            enterprises.add(basicEnterprise);
         }
         if(type.equals("FreshCheck")){
             basicEnterprise = new FreshCheckEnterprise(name);
+            enterprises.add(basicEnterprise);
         }
      return basicEnterprise;
     }

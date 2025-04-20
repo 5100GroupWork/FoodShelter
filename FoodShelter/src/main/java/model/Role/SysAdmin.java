@@ -7,8 +7,10 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import ui.AdminWorkArea.AdminStartPoint;
 import ui.FoodProviderWorkArea.DonationFormPanel;
 
 /**
@@ -21,7 +23,7 @@ public class SysAdmin extends BasicRole {
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization,
             BasicEnterprise enterprise, NetWork netWork) {
 
-        return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
+        return new AdminStartPoint(workArea, account, FoodShelterSystem.getInstance());
     }
 
 }
