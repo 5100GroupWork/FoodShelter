@@ -23,18 +23,18 @@ public class UserAccount {
     BasicOrganization organization;
     String accountUuid;
     BasicEnterprise enterprise;
+
     //////////////////////////////////////////////////
-    
-    
-    
+
     // get set fun
     public String getAccountUuid() {
-        return accountUuid.substring(0,6);
+        return accountUuid.substring(0, 6);
     }
 
     public void setAccountUuid(String accountUuid) {
         this.accountUuid = accountUuid;
     }
+
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
@@ -42,7 +42,7 @@ public class UserAccount {
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -82,7 +82,7 @@ public class UserAccount {
     public void setRole(BasicRole role) {
         this.role = role;
     }
-    
+
     public BasicOrganization getOrganization() {
         return organization;
     }
@@ -103,6 +103,5 @@ public class UserAccount {
     public String toString() {
         return this.username;
     }
-    
-    
+
 }

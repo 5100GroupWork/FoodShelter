@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
+import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
@@ -204,17 +206,6 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-<<<<<<< HEAD
-
-        FoodEnterpriseManager role = new FoodEnterpriseManager();
-        UserAccount newAdmin = enterprise.getUserAccountDirectory().createUserAccount(username, password, role);
-        newAdmin.setEmail(email);
-        newAdmin.setPhone(phone);
-        newAdmin.setOrganization(newOrg);
-
-        JOptionPane.showMessageDialog(this, "New organization and administrator created successfully!");
-
-=======
      //create a new employee   
         FoodEnterpriseManager role = new FoodEnterpriseManager();
         UserAccount newEmployee = enterprise.getUserAccountDirectory().createUserAccount(username, password, role);
@@ -238,7 +229,6 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
             }
         }
                         
->>>>>>> 77ba59c6faf7e5879920bc9ba4528348c478b943
         txtuserName.setText("");
         passwordField.setText("");
         txtEmail.setText("");
