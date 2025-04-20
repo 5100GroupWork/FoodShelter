@@ -13,6 +13,7 @@ import model.Enterprise.VolunteerEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.VolunteerOrg;
+import model.Role.TaskManager;
 import model.Role.VolunteerManager;
 
 /**
@@ -63,7 +64,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
         lblOrganization = new javax.swing.JLabel();
         lbluserName = new javax.swing.JLabel();
         enterpriseLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
 
@@ -98,8 +98,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Add New User - Task Manager");
 
-        jLabel1.setText("提醒备注（写完代码后删除）：Role 字段默认为TaskManager Role，在点击 Submit 时自动分配。");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,9 +125,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                 .addGap(55, 55, 55)
                 .addComponent(enterpriseLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
-                .addComponent(jLabel1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,9 +151,7 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(btnSubmit)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -185,36 +178,65 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
-        String username = txtuserName.getText();
-        String password = passwordField.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        
-    
-        if (username.isEmpty()||password.isEmpty()||email.isEmpty()||phone.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
-            return;
-        }
-        
-        if(!volunteerOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-            JOptionPane.showMessageDialog(this, "Username already exists.");
-            return;
-        }
-        
-        VolunteerManager vm = (VolunteerManager) account.getRole();
-        
-        UserAccount newTaskManager = vm.createVolunteer(volunteerOrg, netWork, username, password);
-        
-        newTaskManager.setEmail(email);
-        newTaskManager.setPhone(phone);
+    String username = txtuserName.getText();
+    String password = passwordField.getText();
+    String email = txtEmail.getText();
+    String phone = txtPhone.getText();
 
-        JOptionPane.showMessageDialog(this, "Task Manager added successfully: " + username);
+    if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields are required. Please fill in all information.");
+        return;
+    }
+
+    VolunteerOrg volOrg = null;
+
+    if (volunteerOrg != null) {
+        volOrg = volunteerOrg;
+    } 
+
+    else {
+        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (org instanceof VolunteerOrg) {
+                volOrg = (VolunteerOrg) org;
+                break;
+            }
+        }
         
-        txtuserName.setText("");
-        passwordField.setText("");
-        txtEmail.setText("");
-        txtPhone.setText("");
+
+        if (volOrg == null) {
+            volOrg = volunteerEnterprise.createVolunteerOrg("VolunteerOrg" + 
+                System.currentTimeMillis());
+            JOptionPane.showMessageDialog(this, "Created new VolunteerOrg to host Task Managers");
+        }
+    }
+    
+
+    if(!volOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+        JOptionPane.showMessageDialog(this, "Username already exists. Please choose another username.");
+        return;
+    }
+
+    VolunteerManager vm = (VolunteerManager) account.getRole();
+    UserAccount newTaskManager = vm.createVolunteer(volOrg, netWork, username, password);
+    
+    newTaskManager.setRole(new TaskManager());
+    
+    newTaskManager.setEmail(email);
+    newTaskManager.setPhone(phone);
+    
+    newTaskManager.setOrganization(volOrg);
+    newTaskManager.setEnterprise(volunteerEnterprise);
+    
+    JOptionPane.showMessageDialog(this, "Task Manager added successfully: " + username);
+    
+    txtuserName.setText("");
+    passwordField.setText("");
+    txtEmail.setText("");
+    txtPhone.setText("");
+    
+    if (parentPanel != null) {
+        parentPanel.populateTable();
+    }
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -235,7 +257,6 @@ public class AddTaskManagerAccountPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel enterpriseLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblConfirmPassword;
     private javax.swing.JLabel lblOrganization;

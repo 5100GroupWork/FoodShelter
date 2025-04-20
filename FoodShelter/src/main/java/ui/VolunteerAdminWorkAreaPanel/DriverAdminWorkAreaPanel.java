@@ -158,8 +158,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddDriver)
@@ -186,35 +185,37 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblDriver.getSelectedRow();
-        
-        if (selectedRow <0){
-            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
-        String username = (String) tblDriver.getValueAt(selectedRow, 0);
-        
-        UserAccount toRemove = null;
-        
-        DriverOrg driverOrg = null;
+            int selectedRow = tblDriver.getSelectedRow();
+    
+    if (selectedRow < 0){
+        JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        return;  
+    }
+    
+    String accountUuid = (String) tblDriver.getValueAt(selectedRow, 0);  // 获取ID
+    
+    UserAccount toRemove = null;
+    DriverOrg driverOrg = null;
 
-        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
-            if (en instanceof VolunteerEnterprise) {
-                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
-                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                    if (org instanceof DriverOrg) {
-                        driverOrg = (DriverOrg) org;
-                        break;
-                    }
+    for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+        if (en instanceof VolunteerEnterprise) {
+            VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof DriverOrg) {
+                    driverOrg = (DriverOrg) org;
+                    break;
                 }
             }
-            if (driverOrg != null) {
-                break; 
-            }
         }
-      
-        for (UserAccount ua: driverOrg.getUserAccountDirectory().getUserAccountList() ){
-            if (ua.getUsername().equals(username)){
+        if (driverOrg != null) {
+            break; 
+        }
+    }
+  
+    if (driverOrg != null) {
+        // 用accountUuid查找用户，如果后面改了ID的生成方式，记得改这里，要不然可能报错！
+        for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+            if (ua.getAccountUuid() != null && ua.getAccountUuid().equals(accountUuid)){
                 toRemove = ua;
                 break;
             }
@@ -224,7 +225,12 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
             JOptionPane.showMessageDialog(this, "User deleted successfully.");
             populateTable();
-        }        
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Could not find driver organization.", "Error", JOptionPane.ERROR_MESSAGE);
+    } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 
