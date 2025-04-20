@@ -5,7 +5,6 @@
 package ui.FoodProviderWorkArea;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
@@ -15,10 +14,8 @@ import model.FoodItem.FoodItem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
-import model.Role.Deliver;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
-import model.WorkQueue.WorkRequestDelivery;
 import model.WorkQueue.WorkRequestFoodItem;
 
 /**
@@ -183,8 +180,6 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                 row[2] = foodItem.getNumber();
                 row[3] = foodItem.getExpiredDate();
                 row[4] = foodItem.getFoodStatus();
-
-                // r[4]存储的是原来的workrequest
                 model.addRow(row);
             }
         }
