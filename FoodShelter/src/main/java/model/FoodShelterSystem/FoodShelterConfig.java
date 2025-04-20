@@ -72,6 +72,8 @@ public class FoodShelterConfig {
                 foodIncOrg.setAddress("Backbay-Boston-MA");
                 UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
                                 new FoodIncEmployee());
+                foodEnplyee.setEmail("mike@foodshelter.com");
+                foodEnplyee.setPhone("508-123-456");
                 foodEnplyee.setOrganization(foodIncOrg);
                 foodEnplyee.setEnterprise(foodEnterprise);
                 
