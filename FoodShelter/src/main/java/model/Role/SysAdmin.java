@@ -21,9 +21,9 @@ public class SysAdmin extends BasicRole {
 
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization,
-            BasicEnterprise enterprise, NetWork netWork) {
+            BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
 
-        return new AdminStartPoint(workArea, account, FoodShelterSystem.getInstance());
+        return new AdminStartPoint(workArea, account, system);
     }
 
 }

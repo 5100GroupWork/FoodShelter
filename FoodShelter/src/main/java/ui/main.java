@@ -14,6 +14,7 @@ import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
 import model.Organization.BasicOrganization;
 import model.NetWork.NetWork;
+import model.Role.SysAdmin;
 
 /**
  *
@@ -218,71 +219,78 @@ public class main extends javax.swing.JFrame {
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
 
+        Object selectedItem = combox.getSelectedItem();
+        if (selectedItem == null) {
+            JOptionPane.showMessageDialog(null, "Please select System or a specific Network first.");
+            return;
+        }
+
         UserAccount userAccount = null;
         NetWork inNetwork = null;
         BasicEnterprise inEnterprise = null;
         BasicOrganization inOrganization = null;
 
-        // Step 1: Search through all networks
-        for (NetWork network : system.getNetworkList()) {
-            // First check the network level UserDirectory
-            userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
+        if (selectedItem instanceof FoodShelterSystem) {
+            // 如果选中的是 system，则遍历所有 network
+            for (NetWork network : system.getNetworkList()) {
+                userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
+                if (userAccount != null) {
+                    if (!(userAccount.getRole() instanceof SysAdmin)) {
+                        JOptionPane.showMessageDialog(null, "You are not the system admin.");
+                        return;
+                    }
+                    inNetwork = network;
+                    break;
+                }
+            }
+        } else if (selectedItem instanceof NetWork) {
+            // 只在选中的 Network 中查找
+            NetWork selectedNetwork = (NetWork) selectedItem;
+            userAccount = selectedNetwork.getUserAccountDirctory().authenticateUser(userName, password);
             if (userAccount != null) {
-                inNetwork = network; // Record the network
-                System.err.println("getNetWork");
-                break; // User belongs to this network, continue to find enterprise/org
+                inNetwork = selectedNetwork;
             }
         }
 
-        // Step 2: If userAccount is found, find which enterprise/organization it
-        // belongs to
+        // 后续逻辑：查找所属的 enterprise 和 organization
         if (userAccount != null && inNetwork != null) {
-            // Check if the user account has enterprise directly set
             if (userAccount.getEnterprise() != null) {
                 inEnterprise = userAccount.getEnterprise();
-                System.out.println("Enterprise found directly from user account: " + inEnterprise.getName());
             }
 
-            // If enterprise is still null, check if organization is set
-            if (inEnterprise == null || userAccount.getOrganization() != null) {
-                inOrganization = userAccount.getOrganization();
+        if (inEnterprise == null || userAccount.getOrganization() != null) {
+            inOrganization = userAccount.getOrganization();
 
-                // Find which enterprise this organization belongs to
-                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                    // Check if this organization is in the enterprise's organization directory
-                    if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
+            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
+                    inEnterprise = enterprise;
+                    break;
+                }
+
+                if (enterprise instanceof FoodEnterprise) {
+                    FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
+                    if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
                         inEnterprise = enterprise;
                         break;
-                    }
-
-                    // If it's a FoodEnterprise, also check its custom foodIncOrgs list
-                    if (enterprise instanceof FoodEnterprise) {
-                        FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
-                        if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
-                            inEnterprise = enterprise;
-                            break;
-                        }
                     }
                 }
             }
+        }
 
-            // If still not found through user attributes, use original search methods
-            if (inEnterprise == null) {
-                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                    // First check enterprise level users
-                    if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+        if (inEnterprise == null) {
+            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                    inEnterprise = enterprise;
+                    break;
+                }
+
+                for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
                         inEnterprise = enterprise;
+                        inOrganization = organization;
                         break;
                     }
-
-                    // Then check organization level
-                    for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                        if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
-                            inEnterprise = enterprise;
-                            inOrganization = organization;
-                            break;
-                        }
-                    }
+                }
 
                     if (inEnterprise != null) {
                         break;
@@ -291,24 +299,17 @@ public class main extends javax.swing.JFrame {
             }
         }
 
-        // Step 3: 判断是否找到了
         if (userAccount == null || inNetwork == null) {
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
         }
 
-        // Step 4: Navigate to role interface
-        container.removeAll(); // 清除所有已有面板
-        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
-                inNetwork);
-        String panelName = "workArea"; // 使用固定名称
-        System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
-
-        container.add(panelName, workArea);
+        // 登录成功后跳转面板
+        container.removeAll();
+        JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork, system);
+        container.add("workArea", workArea);
         CardLayout layout = (CardLayout) container.getLayout();
-        layout.show(container, panelName);
-        container.revalidate(); // 刷新界面
-        container.repaint(); // 重绘界面
+        layout.show(container, "workArea");
 
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
@@ -393,6 +394,7 @@ public class main extends javax.swing.JFrame {
     /// populate Combox
     public void populateCombox() {
         combox.removeAllItems();
+        combox.addItem("Select Network or System");
         combox.addItem(system);
         System.out.println(system.getNetworkList().size());
         for (NetWork netWork1 : system.getNetworkList()) {

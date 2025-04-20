@@ -44,6 +44,28 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome.setText("Welcome, " + account.getUsername());
 
         populateTree();
+        // add tree listerner to select network
+        jTree.addTreeSelectionListener(e -> {
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+            if (selectedNode == null)
+                return;
+
+            String selectedName = selectedNode.toString();
+
+            // select network only
+            // JTree-> networks->network->....
+            if (selectedNode.getLevel() == 2) {
+                for (NetWork net : foodShelterSystem.getNetworkList()) {
+                    if (net.getName().equals(selectedName)) {
+                        netWork = net;
+                        System.out.println("Selected network: " + netWork.getName());
+                        break;
+                    }
+                }
+            } else {
+                netWork = null;
+            }
+        });
     }
 
     /**
@@ -223,9 +245,11 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDetailActionPerformed
         // TODO add your handling code here:
-
+        if (netWork == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network first.");
+        }
+        workArea.add("EmployeeWorkPanel", new viewNetWorkDetailPanel(workArea, netWork, foodShelterSystem, account));
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("EmployeeWorkPanel", new EmployeeWorkPanel(workArea, account, foodShelterSystem));
         layout.show(workArea, "EmployeeWorkPanel");
 
     }// GEN-LAST:event_btnDetailActionPerformed
@@ -248,49 +272,15 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
     private void btnDeleteNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteNetWorkActionPerformed
         // TODO add your handling code here:
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
 
-        if (selectedNode == null) {
+        if (netWork == null) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network to delete.");
             return;
         }
-
-        String selectedName = selectedNode.toString();
-
-        // 只允许删除 Network 节点
-        if (selectedNode.getLevel() == 1) {
-            // 弹出确认框
-            int confirm = javax.swing.JOptionPane.showConfirmDialog(
-                    null,
-                    "Are you sure you want to delete the Network: " + selectedName + "?",
-                    "Confirm Deletion",
-                    javax.swing.JOptionPane.YES_NO_OPTION);
-
-            if (confirm != javax.swing.JOptionPane.YES_OPTION) {
-                return; // 用户选择 No，取消删除
-            }
-
-            // 查找 Network 对象
-            NetWork toDelete = null;
-            for (NetWork net : foodShelterSystem.getNetworkList()) {
-                if (net.getName().equals(selectedName)) {
-                    toDelete = net;
-                    break;
-                }
-            }
-
-            if (toDelete != null) {
-                foodShelterSystem.getNetworkList().remove(toDelete);
-                DB4OUtil.getInstance().storeSystem(foodShelterSystem);
-                populateTree();
-                javax.swing.JOptionPane.showMessageDialog(null, "Network '" + selectedName + "' deleted successfully.");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(null, "Network not found in system.");
-            }
-
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network node to delete.");
-        }
+        foodShelterSystem.getNetworkList().remove(netWork);
+        populateTree();
+        
     }// GEN-LAST:event_btnDeleteNetWorkActionPerformed
 
     private void btnCreateNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateNetWorkActionPerformed
@@ -302,6 +292,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         } else {
             if (foodShelterSystem.checkNetWorkIsUnique(netWorkName)) {
                 FoodShelterConfig.configure(netWorkName, foodShelterSystem);
+                populateTree();
                 return;
             }
             javax.swing.JOptionPane.showMessageDialog(null, "NetWork name must be unique !");
@@ -337,6 +328,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
 
         ArrayList<NetWork> networkList = foodShelterSystem.getNetworkList();
+        System.out.println("Network size: " + foodShelterSystem.getNetworkList().size());
         ArrayList<BasicEnterprise> enterpriseList;
         ArrayList<BasicOrganization> organizationList;
 
@@ -346,6 +338,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
         DefaultMutableTreeNode networks = new DefaultMutableTreeNode("Networks");
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        System.out.println("Root node: " + model.getRoot());
         root.removeAllChildren();
         root.insert(networks, 0);
 

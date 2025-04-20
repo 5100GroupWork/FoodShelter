@@ -26,6 +26,7 @@ import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
 import model.Role.TaskManager;
 import model.Role.VolunteerManager;
+import utils.FakerUtil;
 
 /**
  *
@@ -41,6 +42,7 @@ public class FoodShelterConfig {
                 
                 // create a system admin
                 NetWork netWork = system.createAndAddNetwork();
+                netWork.setName(name);
                 if(name == null){
                     netWork.setName("Boston Shelter");
                 }
@@ -183,7 +185,7 @@ public class FoodShelterConfig {
             taskManager.setRole(new TaskManager());  
             taskManager.setEmail("taskmanager@volunteer.org");
             taskManager.setPhone("555-123-4567");
-
+            
                 return system;
         }
 
