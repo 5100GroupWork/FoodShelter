@@ -12,6 +12,7 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.PushedFoodCheckOrg;
@@ -26,7 +27,7 @@ public class PostFoodChecker extends BasicRole {
     }
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         return new PostFoodCheckPanel(workArea, enterprise, organization, netWork);
     }
 }

@@ -16,8 +16,8 @@ import model.Organization.BasicOrganization;
  * @author 59386
  */
 public abstract class BasicRole {
-    
-    public enum RoleType{
+
+    public enum RoleType {
         SystemAdmin("SystemAdmin"),
         CollectorManager("CollectorManager"),
         FoodIncEmpolyee("FoodIncEmpolyee"),
@@ -28,10 +28,10 @@ public abstract class BasicRole {
         ShelterHelper("ShelterHelper"),
         FreshChecker("FreshChecker"),
         WarehouseChecker("WarehouseChecker");
-        
-        
+
         private String value;
-        private RoleType(String value){
+
+        private RoleType(String value) {
             this.value = value;
         }
 
@@ -44,15 +44,14 @@ public abstract class BasicRole {
             return value;
         }
     }
-    
-        public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account, 
-            BasicOrganization organization, 
-            BasicEnterprise enterprise, 
-            NetWork netWork);
-    
-    
-    
+
+    public abstract JPanel createWorkArea(JPanel userProcessContainer,
+            UserAccount account,
+            BasicOrganization organization,
+            BasicEnterprise enterprise,
+            NetWork netWork,
+            FoodShelterSystem system);
+
     @Override
     public String toString() {
         return this.getClass().getName();

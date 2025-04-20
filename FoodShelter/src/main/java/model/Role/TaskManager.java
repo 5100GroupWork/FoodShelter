@@ -38,7 +38,7 @@ public class TaskManager extends BasicRole{
     
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         //任务分配中心
         
         return new TaskManagerWorkPanel(workArea,account,organization,enterprise,netWork);

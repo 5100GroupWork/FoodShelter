@@ -47,6 +47,28 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome.setText("Welcome, " + account.getUsername());
 
         populateTree();
+        // add tree listerner to select network
+        jTree.addTreeSelectionListener(e -> {
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+            if (selectedNode == null)
+                return;
+
+            String selectedName = selectedNode.toString();
+
+            // select network only
+            // JTree-> networks->network->....
+            if (selectedNode.getLevel() == 2) {
+                for (NetWork net : foodShelterSystem.getNetworkList()) {
+                    if (net.getName().equals(selectedName)) {
+                        netWork = net;
+                        System.out.println("Selected network: " + netWork.getName());
+                        break;
+                    }
+                }
+            } else {
+                netWork = null;
+            }
+        });
     }
 
     /**
@@ -67,9 +89,11 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
         btnManageOrg = new javax.swing.JButton();
+
         btnSummary = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+
         btnDeleteNetWork = new javax.swing.JButton();
         btnCreateNetWork = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -96,7 +120,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblWelcome.setText("Welcome, <value>");
 
-        btnDetail.setText("view network details");
+        btnDetail.setText("View NetWork Details");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDetailActionPerformed(evt);
@@ -120,6 +144,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         jLabel1.setText("enployee 还是food enterpris");
 
         jLabel2.setText(" organization 只是food organization");
+
 
         btnDeleteNetWork.setText("Delete NetWork");
         btnDeleteNetWork.addActionListener(new java.awt.event.ActionListener() {
@@ -152,19 +177,23 @@ public class AdminStartPoint extends javax.swing.JPanel {
                 .addGap(100, 100, 100)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDeleteNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                     .addComponent(btnSummary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
                         .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(btnCreateNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageOrg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(100, Short.MAX_VALUE))
+
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
@@ -172,6 +201,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDetail, btnManageOrg, btnSummary});
+
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,6 +213,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCreateNetWork))
+
                 .addGap(32, 32, 32)
                 .addComponent(btnDeleteNetWork)
                 .addGap(18, 18, 18)
@@ -198,6 +229,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(40, 40, 40))
+
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -206,7 +238,9 @@ public class AdminStartPoint extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
             .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,9 +250,11 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDetailActionPerformed
         // TODO add your handling code here:
-
+        if (netWork == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network first.");
+        }
+        workArea.add("EmployeeWorkPanel", new viewNetWorkDetailPanel(workArea, netWork, foodShelterSystem, account));
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("EmployeeWorkPanel", new EmployeeWorkPanel(workArea, account, foodShelterSystem));
         layout.show(workArea, "EmployeeWorkPanel");
 
     }// GEN-LAST:event_btnDetailActionPerformed
@@ -260,9 +296,9 @@ public class AdminStartPoint extends javax.swing.JPanel {
     }
     private void btnDeleteNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteNetWorkActionPerformed
         // TODO add your handling code here:
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
 
-        if (selectedNode == null) {
+        if (netWork == null) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network to delete.");
             return;
         }
@@ -303,6 +339,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network node to delete.");
         }
+
     }// GEN-LAST:event_btnDeleteNetWorkActionPerformed
 
     private void btnCreateNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateNetWorkActionPerformed
@@ -314,6 +351,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         } else {
             if (foodShelterSystem.checkNetWorkIsUnique(netWorkName)) {
                 FoodShelterConfig.configure(netWorkName, foodShelterSystem);
+                populateTree();
                 return;
             }
             javax.swing.JOptionPane.showMessageDialog(null, "NetWork name must be unique !");
@@ -331,9 +369,11 @@ public class AdminStartPoint extends javax.swing.JPanel {
     private javax.swing.JButton btnDeleteNetWork;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnManageOrg;
+
     private javax.swing.JButton btnSummary;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -349,6 +389,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
 
         ArrayList<NetWork> networkList = foodShelterSystem.getNetworkList();
+        System.out.println("Network size: " + foodShelterSystem.getNetworkList().size());
         ArrayList<BasicEnterprise> enterpriseList;
         ArrayList<BasicOrganization> organizationList;
 
@@ -358,6 +399,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
         DefaultMutableTreeNode networks = new DefaultMutableTreeNode("Networks");
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        System.out.println("Root node: " + model.getRoot());
         root.removeAllChildren();
         root.insert(networks, 0);
 

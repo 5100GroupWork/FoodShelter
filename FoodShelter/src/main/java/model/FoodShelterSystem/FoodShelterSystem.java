@@ -19,8 +19,18 @@ import model.Role.SysAdmin;
 public class FoodShelterSystem extends BasicOrganization{
     private static FoodShelterSystem business;
     private ArrayList<NetWork> networkList;
+
+    
+    private UserAccount systemAdmin;
     
     
+    public UserAccount getSystemAdmin() {
+        return systemAdmin;
+    }
+
+    public void setSystemAdmin(UserAccount systemAdmin) {
+        this.systemAdmin = systemAdmin;
+    }
     public static FoodShelterSystem getInstance(){
         if(business==null){
             business=new FoodShelterSystem();
@@ -66,7 +76,7 @@ public class FoodShelterSystem extends BasicOrganization{
     
     public boolean checkNetWorkIsUnique(String name){
         for(NetWork netWork: this.networkList){
-            if(netWork.getName() == name)
+            if(netWork.getName().equals(name))
                 return false;
         }
         return true;
