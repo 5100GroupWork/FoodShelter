@@ -164,20 +164,30 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
         String username = (String) tblEmployee.getValueAt(selectedRow, 0);
 
         UserAccount toRemove = null;
-       
-        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
-                
-           if (ua.getOrganization() instanceof FoodIncOrg || ua.getUsername().equals(username)){  
+
+        for (NetWork network : foodShelterSystem.getNetworkList()) {
+
+            for (BasicEnterprise enterprise : network.getEnterpriseDirectory().getEnterprises()) {
+
+                if (enterprise instanceof model.Enterprise.FoodEnterprise) {
+                    FoodEnterprise fe = (FoodEnterprise) enterprise;
+
+                    // Check employees directly from the FoodEnterprise
+                    for (UserAccount ua : fe.getEmployees()) {
+
+                        if (ua.getUsername().equals(username)) {
                             toRemove = ua;
                             // Remove from both org and global list
-                            FoodIncOrg org = (FoodIncOrg) ua.getOrganization();                           
-                            
+                            FoodIncOrg org = (FoodIncOrg) ua.getOrganization();
+
                             org.getUserAccountDirectory().getUserAccountList().remove(ua);
-                            
+
                             // 需要在network里删吗？network.getUserAccountDirctory().getUserAccountList().remove(ua);
                             JOptionPane.showMessageDialog(this, "User '" + username + "' deleted successfully.");
-                            populateTable();                     
-                            
+                            populateTable();
+                        }
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
