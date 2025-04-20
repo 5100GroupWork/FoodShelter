@@ -24,6 +24,7 @@ import model.Role.HomelessManager;
 import model.Role.PostFoodChecker;
 import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
+import model.Role.TaskManager;
 import model.Role.VolunteerManager;
 
 /**
@@ -45,6 +46,9 @@ public class FoodShelterConfig {
 
                 UserAccount systemAdmin = netWork.getUserAccountDirctory().createUserAccount("systemAdmin", "0000",
                                 new SysAdmin());
+                
+                systemAdmin.setEmail("admin@foodshelter.org");
+                systemAdmin.setPhone("555-000-0000");
 
                 // create 4 enterprise
                 // food enterprise
@@ -69,8 +73,14 @@ public class FoodShelterConfig {
                 foodIncOrg.setAddress("Backbay-Boston-MA");
                 UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
                                 new FoodIncEmployee());
+                foodEnplyee.setEmail("mike@foodshelter.com");
+                foodEnplyee.setPhone("508-123-456");
                 foodEnplyee.setOrganization(foodIncOrg);
                 foodEnplyee.setEnterprise(foodEnterprise);
+                
+                foodEnplyee.setEmail("mike@wholefoods.com");
+                foodEnplyee.setPhone("555-123-4567");
+                
                 foodIncOrg.getEmployees().add(foodEnplyee);
                 foodEnterprise.getEmployees().add(foodEnplyee);
 
@@ -89,6 +99,13 @@ public class FoodShelterConfig {
                                 new PostFoodChecker());
                 UserAccount pfUser2 = netWork.getUserAccountDirctory().createUserAccount("Alven-2", "0000",
                                 new PostFoodChecker());
+                
+        
+                pfUser1.setEmail("alven1@freshcheck.org");
+                pfUser1.setPhone("555-234-5678");
+
+                pfUser2.setEmail("alven2@freshcheck.org");
+                pfUser2.setPhone("555-234-5679");
                 pushedFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(pfUser1);
                 pushedFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(pfUser2);
                 pfUser1.setEnterprise(freshCheckerEnterprise);
@@ -100,6 +117,14 @@ public class FoodShelterConfig {
                                 new FreshChecker());
                 UserAccount nfUser2 = netWork.getUserAccountDirctory().createUserAccount("Peter-2", "0000",
                                 new FreshChecker());
+                
+  
+                nfUser1.setEmail("peter1@freshcheck.org");
+                nfUser1.setPhone("555-345-6789");
+
+                nfUser2.setEmail("peter2@freshcheck.org");
+                nfUser2.setPhone("555-345-6780");
+                
                 newFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(nfUser1);
                 newFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(nfUser2);
                 nfUser1.setEnterprise(freshCheckerEnterprise);
@@ -115,23 +140,45 @@ public class FoodShelterConfig {
                 VolunteerManager volunteerManager = new VolunteerManager(volunteerEnterprise);
                 UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000",
                                 volunteerManager);
+                
+                uavolunteerManager.setEmail("sarah@volunteer.org");
+                uavolunteerManager.setPhone("555-456-7890");
+                
                 uavolunteerManager.setOrganization(null);
                 uavolunteerManager.setEnterprise(volunteerEnterprise);
 
-                volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
-                volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
+                UserAccount volunteer = volunteerManager.createVolunteer(volunteerOrg, netWork, "Taylor", "0000");
+                volunteer.setEmail("taylor@volunteer.org");
+                volunteer.setPhone("555-567-8901");
+                
+                UserAccount driver = volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
+                driver.setEmail("jessica@driver.org");
+                driver.setPhone("555-678-9012");
 
                 // create rescueNetOrg(helper and homeless) and people
                 RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
                 RequestEntertainOrg requestEntertainOrg = rescuEnterprise.addRequestEntertainOrg("ShelterHelperOrg1");
 
                 ShelterHelperManager shelterHelperManager = new ShelterHelperManager(requestEntertainOrg);
+                
                 UserAccount uaShelterManager = netWork.getUserAccountDirctory().createUserAccount("Morgan", "0000",
                                 shelterHelperManager);
-                shelterHelperManager.addShelterHelper(requestEntertainOrg, "Jones", "0000", netWork);
+                uaShelterManager.setEmail("morgan@rescue.org");
+                uaShelterManager.setPhone("555-789-0123");
+                
+                UserAccount helper = shelterHelperManager.addShelterHelper(requestEntertainOrg, "Jones", "0000", netWork);
+                helper.setEmail("jones@rescue.org");
+                helper.setPhone("555-890-1234");
 
-                HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
-                homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
+            HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
+            UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
+            homeless.setEmail("homeless1@rescue.org");
+            homeless.setPhone("555-901-2345");
+
+            UserAccount taskManager = volunteerManager.createVolunteer(volunteerOrg, netWork, "Bob", "0000");
+            taskManager.setRole(new TaskManager());  
+            taskManager.setEmail("taskmanager@volunteer.org");
+            taskManager.setPhone("555-123-4567");
 
                 return system;
         }
