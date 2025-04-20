@@ -19,6 +19,7 @@ import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestEntertainOrg;
+import model.WorkQueue.WorkRequestFoodItem;
 
 
 /**
@@ -44,8 +45,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
         initComponents();
         this.requestEntertainOrg = requestEntertainOrg;
-        populateApprovedFoodTable(requestEntertainOrg.getFoodCatalog().getFoodCatalog());
-        populateShelterRequestTable((List<WorkRequest>) requestEntertainOrg.getWorkQueue().getWorkRequestList());
+        populateApprovedFoodTable();
+        populateShelterRequestTable();
     }
 
     /**
@@ -58,7 +59,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        backJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblShelterRequests = new javax.swing.JTable();
@@ -68,13 +68,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         tblApprovedFoodTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-
-        backJButton.setText("<<Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
-            }
-        });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Shelter Helper - Task Assignment");
@@ -87,7 +80,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Request ID", "Requested Food Type", "Status"
+                "Number", "Requested Vendor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -116,7 +109,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Food ID", "Food Name", "Type", "Quantity", "Expiry Date"
+                "Number", "Food Name", "Vendor", "Quantity", "Expiry Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -153,8 +146,10 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                                 .addGap(233, 233, 233)
                                 .addComponent(enterpriseLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+
                                 .addComponent(backJButton)
                                 .addGap(95, 95, 95)
+
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(268, 268, 268)
@@ -163,17 +158,17 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                         .addGap(135, 135, 135)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+
                         .addGap(280, 280, 280)
                         .addComponent(btnAssignTask)))
                 .addContainerGap(375, Short.MAX_VALUE))
+
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(enterpriseLabel2)
                 .addGap(18, 18, 18)
@@ -186,7 +181,9 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 .addComponent(btnAssignTask)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
+
                 .addGap(48, 48, 48))
+
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -200,10 +197,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-
-    }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignTaskActionPerformed
         // TODO add your handling code here:
@@ -220,67 +213,85 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     FoodItem selectedFood = (FoodItem) foodModel.getValueAt(foodRow, 0);
     WorkRequest selectedRequest = (WorkRequest) requestModel.getValueAt(requestRow, 0);
-
-     if (selectedRequest.getReceiver() == null) {
-            JOptionPane.showMessageDialog(null, "This request has no receiver assigned.");
-            return;
-        }
     
-    // DeliveryTask创建了！
+    // 创建配送任务
     DeliveryTask task = new DeliveryTask();
     task.setFoodItem(selectedFood);
     task.setQuantity(selectedFood.getNumber());
     task.setFromLocation(selectedFood.getFoodIncOrg().getName());
-    task.setToLocation("Shelter"); // 后面要记得改成 selectedRequest 的 source
-    task.setSender(selectedRequest.getSender()); 
-    task.setReceiver(null); 
-    task.setStatus("Pending");
-
-    selectedRequest.getReceiver().getWorkQueue().getWorkRequestList().add(task);
-
+    task.setToLocation(selectedRequest.getSender().getName());
+    task.setSender(requestEntertainOrg); 
+    task.setReceiver(selectedRequest.getSender()); // 接收者是请求的发送者
+    task.setStatus("Pending"); // 初始状态为待处理
+    
+    // 将任务添加到请求发送者的工作队列
+    selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
+    
+    // 将原请求状态更新为"已匹配"
     selectedRequest.setStatus("Matched");
-
-    JOptionPane.showMessageDialog(null, "Delivery Task Created Successfully.");
-
-    populateApprovedFoodTable(requestEntertainOrg.getFoodCatalog().getFoodCatalog());
-    populateShelterRequestTable(requestEntertainOrg.getWorkQueue().getWorkRequestList());
-
+    
+    // 更新食品状态为"已分配"
+    selectedFood.setUsingStatus("Assigned");
+    
+    JOptionPane.showMessageDialog(null, "Task assigned successfully!");
+    
+    // 刷新表格显示
+    populateApprovedFoodTable();
+    populateShelterRequestTable();
     }//GEN-LAST:event_btnAssignTaskActionPerformed
 
-    private void populateApprovedFoodTable(List<FoodItem> approvedFoodList) {
+    private void populateApprovedFoodTable() {
     DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
     model.setRowCount(0); 
 
-    for (FoodItem food : approvedFoodList) {
-        if ("accepted".equalsIgnoreCase(food.getCheckingStatus()) && "stored".equalsIgnoreCase(food.getUsingStatus())) {
-            Object[] row = new Object[5];
-            row[0] = food; 
-            row[1] = food.getFoodName();
-            row[2] = food.getFoodIncOrg().getName();// 这里报错是因为需要等FoodIncEmployee调用的addFoodItem
-            row[3] = food.getNumber();
-            row[4] = food.getExpiredDate();
-            model.addRow(row);
+    // 从warehouseList来
+    int index = 0;
+    for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+        if (wr instanceof WorkRequestFoodItem) {
+            WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
+            FoodItem food = wrfi.getFoodItem();
+            
+            if (food != null) {
+                index++;
+                Object[] row = new Object[5];
+                row[0] = index; 
+                row[1] = food.getFoodName();
+                row[2] = food.getFoodIncOrg().getName();
+                row[3] = food.getNumber();
+                row[4] = food.getExpiredDate();
+                model.addRow(row);
+            }
         }
     }
 }
     
-    private void populateShelterRequestTable(List<WorkRequest> shelterRequestList) {
+    private void populateShelterRequestTable() {
     DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
     model.setRowCount(0); 
 
-    for (WorkRequest request : shelterRequestList) {
-        if ("Pending".equalsIgnoreCase(request.getStatus())) {
-            Object[] row = new Object[3];
-            row[0] = request; 
-            row[1] = request.getMessage(); //这里需要修改，从food request panel来
-            row[2] = request.getStatus();
-            model.addRow(row);
+    int index = 0;
+    for (BasicEnterprise ent : netWork.getEnterpriseDirectory().getEnterprises()) {
+        if (ent instanceof RescueNetEnterprise) {
+            RescueNetEnterprise rescue = (RescueNetEnterprise) ent;
+            for (BasicOrganization org : rescue.getOrganizationDirectory().getOrganizationList()) {
+                for (WorkRequest req : org.getWorkQueue().getWorkRequestList()) {
+                    if (req.getFoodOrgName() != null
+                     && !req.getFoodOrgName().isEmpty()
+                     && "Pending".equalsIgnoreCase(req.getStatus())) {
+                        index++;
+                        Object[] row = new Object[3];
+                        row[0] = req;  
+                        row[1] = req.getFoodOrgName(); 
+                        row[2] = req.getStatus();     
+                        model.addRow(row);
+                    }
+                }
+            }
         }
     }
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAssignTask;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;

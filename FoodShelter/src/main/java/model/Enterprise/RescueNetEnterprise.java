@@ -44,11 +44,13 @@ public class RescueNetEnterprise extends BasicEnterprise{
 
     public RequestCollectOrg addRequestCollectOrg(String name) {
         this.requestCollectOrg = new RequestCollectOrg(name);
+        this.getOrganizationDirectory().getOrganizationList().add(this.requestCollectOrg);
         return this.requestCollectOrg;
     }
 
     public RequestEntertainOrg addRequestEntertainOrg(String name) {
         this.requestEntertainOrg = new RequestEntertainOrg(name);
+        this.getOrganizationDirectory().getOrganizationList().add(this.requestEntertainOrg);
         return this.requestEntertainOrg;
     }
 

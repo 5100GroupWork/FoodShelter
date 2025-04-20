@@ -68,17 +68,17 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
 
         wareFoodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor", "Status"
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -140,17 +140,35 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
 
     private void btnRemoveExpiredActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnRemoveExpiredActionPerformed
         // TODO add your handling code here:
-        int rowNumber = wareFoodTable.getSelectedRow();
-        if (rowNumber < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row first");
-            return;
+    int rowNumber = wareFoodTable.getSelectedRow();
+    if (rowNumber < 0) {
+        JOptionPane.showMessageDialog(this, "Please select a row first");
+        return;
+    }
+
+    int foodId = (int) wareFoodTable.getValueAt(rowNumber, 0);
+    
+    WorkRequestFoodItem itemToRemove = null;
+    int count = 0;
+    
+    for (WorkRequest wd : netWork.getWarehouseList().getWorkRequestList()) {
+        if (wd instanceof WorkRequestFoodItem) {
+            count++;
+            if (count == foodId) {
+                itemToRemove = (WorkRequestFoodItem) wd;
+                break;
+            }
         }
-        WorkRequestFoodItem wfd = (WorkRequestDelivery) wareFoodTable.getValueAt(5, rowNumber);
-        // 从checklist中取出来
-
-        netWork.getWarehouseList().removeWorkRequest(wfd);
-        populateTable();
-
+    }
+    
+    // 从warehouseList中移除
+    if (itemToRemove != null) {
+        netWork.getWarehouseList().removeWorkRequest(itemToRemove);
+        JOptionPane.showMessageDialog(this, "Food item removed successfully.");
+        populateTable(); 
+    } else {
+        JOptionPane.showMessageDialog(this, "Could not find the selected food item.");
+    }
     }// GEN-LAST:event_btnRemoveExpiredActionPerformed
 
     private void btnRefreshListActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnRefreshListActionPerformed
@@ -169,20 +187,29 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
     /////////////////////////// fun //////////////////
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) wareFoodTable.getModel();
-        model.setRowCount(0);
-        WorkQueue foodQueue = netWork.getWarehouseList();
-        System.out.println("get into method");
-        int count = 0;
-        for (WorkRequest wd : foodQueue.getWorkRequestList()) {
-            count++;
+    model.setRowCount(0);
+    
+    if (netWork == null || netWork.getWarehouseList() == null) {
+        System.out.println("Network or warehouseList is null");
+        return;
+    }
+    
+    WorkQueue foodQueue = netWork.getWarehouseList();
+    System.out.println("Getting warehouse items: " + foodQueue.getWorkRequestList().size() + " items");
+    
+    int count = 0;
+    for (WorkRequest wd : foodQueue.getWorkRequestList()) {
+        if (wd instanceof WorkRequestFoodItem) {
             WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
-            Object row[] = new Object[6];
-            row[0] = count;
+            count++;
+            Object row[] = new Object[5]; 
+            row[0] = count; 
             row[1] = wrf.getFoodItem().getFoodName();
-            row[2] = wrf;
-            row[3] = wrf.getFoodItem().getExpiredDate();
-            row[4] = wrf.getFoodItem().getFoodIncOrg();
+            row[2] = wrf.getFoodItem().getNumber(); 
+            row[3] = wrf.getFoodItem().getExpiredDate(); 
+            row[4] = wrf.getFoodItem().getFoodIncOrg(); 
             model.addRow(row);
         }
+    }
     }
 }

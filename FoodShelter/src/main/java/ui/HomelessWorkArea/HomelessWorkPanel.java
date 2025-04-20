@@ -121,8 +121,13 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBack))
+                        .addGap(23, 23, 23)
+                        .addComponent(btnBack)
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,9 +155,11 @@ public class HomelessWorkPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        workArea.remove(this);       
-        CardLayout layout = (CardLayout)workArea.getLayout();
-        layout.show(workArea,"FoodRequestPanel");
+    FoodRequestPanel panel = new FoodRequestPanel(workArea, account, requestCollectOrg, rescueNetEnterprise, netWork);
+    workArea.removeAll();
+    workArea.add("FoodRequestPanel", panel);
+    workArea.revalidate();
+    workArea.repaint();
         
     }//GEN-LAST:event_btnBackActionPerformed
 

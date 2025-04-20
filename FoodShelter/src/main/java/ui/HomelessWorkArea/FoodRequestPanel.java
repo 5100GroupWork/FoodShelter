@@ -4,17 +4,20 @@
  */
 package ui.HomelessWorkArea;
 
+import java.awt.CardLayout;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
 import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Organization.RequestCollectOrg;
 import model.WorkQueue.WorkRequest;
+import model.WorkQueue.WorkRequestNeeds;
 
 /**
  *
@@ -45,10 +48,22 @@ public class FoodRequestPanel extends javax.swing.JPanel {
     
     private void populateFoodOrgComboBox() {
     ComboBoxType.removeAllItems();
-    for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
-        if (org instanceof FoodIncOrg) {
-            ComboBoxType.addItem(org.getName());
-        }
+    
+    for (BasicEnterprise enterprise : netWork.getEnterpriseDirectory().getEnterprises()) {
+        if (enterprise instanceof FoodEnterprise) {
+            FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
+            
+            for (FoodIncOrg org : foodEnt.getFoodIncOrgs()) {
+                ComboBoxType.addItem(org.getName());
+            }
+            
+           
+            }
+        
+    }
+    
+    if (ComboBoxType.getItemCount() == 0) {
+        ComboBoxType.addItem("No Food Organizations Available");
     }
 }
 
@@ -74,7 +89,7 @@ public class FoodRequestPanel extends javax.swing.JPanel {
 
         valueLabel.setText("Quantity:");
 
-        valueLabel1.setText("Food Type:");
+        valueLabel1.setText("Vendor:");
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -104,10 +119,10 @@ public class FoodRequestPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(156, 156, 156)
+                        .addComponent(btnSubmit)
+                        .addGap(91, 91, 91)
+                        .addComponent(btnViewRequests))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(jLabel4))
@@ -128,10 +143,12 @@ public class FoodRequestPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(ComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valueLabel1)
+                    .addComponent(ComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
@@ -161,16 +178,26 @@ public class FoodRequestPanel extends javax.swing.JPanel {
         return;
     }
 
-    WorkRequest request = new WorkRequest();
+    WorkRequest request = new WorkRequestNeeds();
     request.setFoodOrgName(foodOrgName);
     request.setQuantity(quantity);
     request.setSender(requestCollectOrg);
     request.setStatus("Pending");
     request.setRequestDate(new Date());
 
+    request.setMessage(foodOrgName + " - " + quantity + " items");
+    for (BasicEnterprise enterprise : netWork.getEnterpriseDirectory().getEnterprises()) {
+        if (enterprise instanceof RescueNetEnterprise) {
+            RescueNetEnterprise rescueEnt = (RescueNetEnterprise) enterprise;
+            request.setReceiver(rescueEnt.getRequestEntertainOrg());
+            break;
+        }
+    }
     requestCollectOrg.getWorkQueue().getWorkRequestList().add(request);
 
     JOptionPane.showMessageDialog(null, "Food request submitted successfully!");
+    
+    spinnerQuantity.setValue(0);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void ComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxTypeActionPerformed
@@ -179,14 +206,17 @@ public class FoodRequestPanel extends javax.swing.JPanel {
 
     private void btnViewRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRequestsActionPerformed
         // TODO add your handling code here:
-        HomelessWorkPanel panel = new HomelessWorkPanel(workArea, account, requestCollectOrg, rescueNetEnterprise, netWork);
-        workArea.removeAll();
-        workArea.add(panel);
-        workArea.revalidate();
-        workArea.repaint();
+    HomelessWorkPanel panel = new HomelessWorkPanel(workArea, account, requestCollectOrg, rescueNetEnterprise, netWork);
+    
+    workArea.add("HomelessWorkPanel", panel);
+    
+    CardLayout layout = (CardLayout) workArea.getLayout();
+    layout.show(workArea, "HomelessWorkPanel");
     }//GEN-LAST:event_btnViewRequestsActionPerformed
 
 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxType;
     private javax.swing.JButton btnSubmit;

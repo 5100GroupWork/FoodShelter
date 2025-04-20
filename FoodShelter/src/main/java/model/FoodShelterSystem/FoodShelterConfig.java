@@ -193,21 +193,42 @@ public class FoodShelterConfig {
                 helper.setPhone("555-890-1234");
                 helper.setEnterprise(rescuEnterprise);
                 helper.setOrganization(requestEntertainOrg);
-                
 
             HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
-            UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
-            homeless.setEmail("homeless1@rescue.org");
+            UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "John", "0000", netWork);
+            homeless.setEmail("john@rescue.org");
             homeless.setPhone("555-901-2345");
             homeless.setEnterprise(rescuEnterprise);
             homeless.setOrganization(requestEntertainOrg);
+
+            UserAccount mainHomeless = homelessManager.addHomeLess(requestCollectOrg, "Mary", "0000", netWork);
+            mainHomeless.setEmail("homeless@rescue.org");
+            mainHomeless.setPhone("555-100-1000");
+            mainHomeless.setOrganization(requestCollectOrg);
+            mainHomeless.setEnterprise(rescuEnterprise);
+
+            FakerUtil faker = new FakerUtil();
+            for (int i = 0; i < 10; i++) {
+                String randomName = "homeless-" + (i + 1);
+                UserAccount randomHomeless = homelessManager.addHomeLess(requestCollectOrg, randomName, "0000", netWork);
+                randomHomeless.setEmail(faker.getEmail());
+                randomHomeless.setPhone("555-" + (200 + i) + "-" + (2000 + i));
+                randomHomeless.setOrganization(requestCollectOrg);
+                randomHomeless.setEnterprise(rescuEnterprise);
+            }
 
             UserAccount taskManager = volunteerManager.createVolunteer(volunteerOrg, netWork, "Bob", "0000");
             taskManager.setRole(new TaskManager());  
             taskManager.setEmail("taskmanager@volunteer.org");
             taskManager.setPhone("555-123-4567");
-            
-                return system;
-        }
+
+        UserAccount mainHelper = shelterHelperManager.addShelterHelper(requestEntertainOrg, "Sam", "0000", netWork);
+        mainHelper.setEmail("helper@rescue.org");
+        mainHelper.setPhone("555-200-2000");
+        mainHelper.setOrganization(requestEntertainOrg);
+        mainHelper.setEnterprise(rescuEnterprise);
+
+        return system;
+    }
 
 }
