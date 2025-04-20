@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Account.UserAccount;
+import model.Enterprise.BasicEnterprise;
+import model.Enterprise.FoodEnterprise;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
@@ -191,24 +193,40 @@ public class EmployeeWorkPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void populateTable() {
-        
-        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
-        model.setRowCount(0);
-       
-        for (UserAccount ua : foodShelterSystem.getUserAccountDirectory().getUserAccountList()){
-                
-           if (ua.getOrganization() instanceof FoodIncOrg){     
-                        
-            Object[] row = new Object[4];
-            
-            row[0] = ua.getUsername();
-            row[1] = ua.getRole();
-            row[2] = ua.getPhone();
-            row[3] = ua.getEmail();
-            model.addRow(row);
-           } 
-        }
+    DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+    model.setRowCount(0);
+    
+    for (NetWork network : foodShelterSystem.getNetworkList()) {
 
+        
+        for (BasicEnterprise enterprise : network.getEnterpriseDirectory().getEnterprises()) {
+            
+            if (enterprise instanceof model.Enterprise.FoodEnterprise) {
+                FoodEnterprise fe = (FoodEnterprise) enterprise;
+                
+                // Check employees directly from the FoodEnterprise
+                for (UserAccount ua : fe.getEmployees()) {
+
+                    Object[] row = new Object[4];
+                    row[0] = ua.getUsername();
+                    row[1] = ua.getRole();
+                    row[2] = ua.getPhone();
+                    row[3] = ua.getEmail();
+                    model.addRow(row);
+                }
+
+            }
+            
+            // Original code for checking through organization directory
+            for (BasicOrganization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+                if (org instanceof FoodIncOrg) {
+                    FoodIncOrg foodOrg = (FoodIncOrg) org;
+
+                }
+            }
+        }
     }
+}
 
 }

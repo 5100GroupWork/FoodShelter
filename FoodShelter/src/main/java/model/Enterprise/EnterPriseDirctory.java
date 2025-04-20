@@ -44,6 +44,7 @@ public class EnterPriseDirctory {
         }
         if(type.equals("FreshCheck")){
             basicEnterprise = new FreshCheckEnterprise(name);
+            enterprises.add(basicEnterprise);
         }
      return basicEnterprise;
     }
