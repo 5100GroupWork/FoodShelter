@@ -226,6 +226,7 @@ public class main extends javax.swing.JFrame {
             return;
         }
 
+<<<<<<< HEAD
         // Step 4: 进入角色界面
         JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
                 inNetwork);
@@ -241,6 +242,26 @@ public class main extends javax.swing.JFrame {
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
+=======
+
+    // Step 4: Navigate to role interface
+container.removeAll(); // 清除所有已有面板
+JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, inNetwork);
+String panelName = "workArea"; // 使用固定名称
+System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
+
+container.add(panelName, workArea);
+CardLayout layout = (CardLayout) container.getLayout();
+layout.show(container, panelName);
+container.revalidate(); // 刷新界面
+container.repaint(); // 重绘界面
+    
+loginJButton.setEnabled(false);
+logoutJButton.setEnabled(true);
+userNameJTextField.setEnabled(false);
+passwordField.setEnabled(false);
+
+>>>>>>> fa9caad5896206c98bc6979e22cf35ea3a895889
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed
