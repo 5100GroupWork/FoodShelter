@@ -6,7 +6,6 @@ package model.FoodShelterSystem;
 
 import java.util.ArrayList;
 import model.Account.UserAccount;
-import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.Enterprise.RescueNetEnterprise;
@@ -19,12 +18,10 @@ import model.Organization.PushedFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
-import model.Organization.WareHouseCheckOrg;
-import model.Role.FoodCheckEnManager;
-import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
+import model.Role.FreshChecker;
 import model.Role.HomelessManager;
-import model.Role.PostFoodCheckManager;
+import model.Role.PostFoodChecker;
 import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
 import model.Role.VolunteerManager;
@@ -64,86 +61,53 @@ public class FoodShelterConfig {
         }
         RescueNetEnterprise rescuEnterprise = (RescueNetEnterprise) netWork.getEnterpriseDirectory()
                 .createEnterprise("RescueNet", "RescueNet");
-        if (foodEnterprise.getEmployees() == null) {
-            foodEnterprise.setEmployees(new ArrayList<>());
-        }
-        // Verify freshCheckerEnterprise is not null before using
-        if (freshCheckerEnterprise != null) {
-            if (freshCheckerEnterprise.getEmployees() == null) {
-                freshCheckerEnterprise.setEmployees(new ArrayList<>());
-            }
-            // create enterprise details
-            FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
-            foodIncOrg.setAddress("Backbay-Boston-MA");
-            UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
-                    new FoodIncEmployee());
-            foodEnplyee.setOrganization(foodIncOrg);
-            foodEnplyee.setEnterprise(foodEnterprise);
-            foodIncOrg.getEmployees().add(foodEnplyee);
-            foodEnterprise.getEmployees().add(foodEnplyee);
-
-            // create freshCheckerEnterprise details
-            // add manager
-            UserAccount checkManager = netWork.getUserAccountDirctory().createUserAccount("Alven", "0000",
-                    new FoodCheckEnManager(freshCheckerEnterprise));
-            checkManager.setOrganization(freshCheckerEnterprise);// zhiyu添加
-            FoodCheckEnManager foodCheckEnManager = new FoodCheckEnManager(freshCheckerEnterprise);
-            checkManager.setRole(foodCheckEnManager);
-
-            freshCheckerEnterprise.getEmployees().add(checkManager);
-
-            // 创建 PushedFoodCheckOrg 和 PostFoodCheckManager 用户
-            PushedFoodCheckOrg pushedFoodCheckOrg = freshCheckerEnterprise.addPushedFoodCheckOrg("PushedFoodCheckOrg");
-            PostFoodCheckManager postFoodManager = new PostFoodCheckManager(pushedFoodCheckOrg);
-            UserAccount postFoodManagerAccount = netWork.getUserAccountDirctory().createUserAccount("Peter", "0000", postFoodManager);
-            postFoodManagerAccount.setOrganization(pushedFoodCheckOrg);
-            postFoodManagerAccount.setEnterprise(freshCheckerEnterprise);
-            // 如果 PushedFoodCheckOrg 有 employees 列表，则添加到该列表
-            if (pushedFoodCheckOrg instanceof PushedFoodCheckOrg) {
-                // 确保 PushedFoodCheckOrg 有 getEmployees() 方法
-                // pushedFoodCheckOrg.getEmployees().add(postFoodManagerAccount);
-            }
-            
-            // Create 2 orgs - move this inside the null check
-            try {
-                NewFoodCheckOrg newFoodCheckOrg = freshCheckerEnterprise.addNewFoodCheckOrg("NewFoodCheckOrg");
-
-                // Initialize if needed
-                if (newFoodCheckOrg == null) {
-                    // Create manually if add method failed
-                    newFoodCheckOrg = new NewFoodCheckOrg("NewFoodCheckOrg");
-                    // Add to enterprise if needed
-                }
-
-                WareHouseCheckOrg wareHourseCheckOrg = freshCheckerEnterprise
-                        .addWareHourseCheckOrg("WareHouseCheckOrg");
-
-                // Initialize if needed
-                if (wareHourseCheckOrg == null) {
-                    // Create manually if add method failed
-                    wareHourseCheckOrg = new WareHouseCheckOrg("WareHouseCheckOrg");
-                    // Add to enterprise if needed
-                }
-
-                // Create employees in orgs
-                foodCheckEnManager.addFreshChecker(newFoodCheckOrg, netWork, "Alven", "0000");
-                foodCheckEnManager.addWarehouseChecker(wareHourseCheckOrg, netWork, "James", "0000");
-            } catch (Exception e) {
-                System.out.println("Error creating organizations: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("ERROR: freshCheckerEnterprise is still null after manual creation attempt!");
-        }
-
+        
+        
+        // create enterprise details
+        // add FoodInc org into food-enterprise
+        // 在这里改变之前的设计，user同时归属于enterprise/org/network （如果在下面的层级中存在的话）
+        FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
+        foodIncOrg.setAddress("Backbay-Boston-MA");
+        UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",new FoodIncEmployee());
+        foodEnplyee.setOrganization(foodIncOrg);
+        foodEnplyee.setEnterprise(foodEnterprise);
+        foodIncOrg.getEmployees().add(foodEnplyee);
+        foodEnterprise.getEmployees().add(foodEnplyee);
+    
+        // create freshCheckerEnterprise details
+        // 4/19修改，这里FoodChecker 不再单端设置FoodCheckerEnterpriseManager，所有的newfoodchecker/pushedFoodChecker 人数都是固定的
+        // 创建 PushedFoodCheckOrg 和 WarehouseCheckOrg 用户
+        NewFoodCheckOrg newFoodCheckOrg = new NewFoodCheckOrg("NewFoodCheckOrg");
+        PushedFoodCheckOrg pushedFoodCheckOrg = new PushedFoodCheckOrg("PushedFoodCheckOrg");
+        freshCheckerEnterprise.getNewFoodCheckOrgs().add(newFoodCheckOrg);
+        freshCheckerEnterprise.getPushedFoodCheckOrgs().add(pushedFoodCheckOrg);
+        
+        
+        //里面加上两个checker
+        UserAccount pfUser1  = netWork.getUserAccountDirctory().createUserAccount("Alven-1","0000", new PostFoodChecker());
+        UserAccount pfUser2 = netWork.getUserAccountDirctory().createUserAccount("Alven-2","0000", new PostFoodChecker());
+        pushedFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(pfUser1);
+        pushedFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(pfUser2);
+        pfUser1.setEnterprise(freshCheckerEnterprise);
+        pfUser2.setEnterprise(freshCheckerEnterprise);
+        pfUser1.setOrganization(pushedFoodCheckOrg);
+        pfUser1.setOrganization(pushedFoodCheckOrg);
+        
+        UserAccount nfUser1 = netWork.getUserAccountDirctory().createUserAccount("Peter-1", "0000", new FreshChecker());
+        UserAccount nfUser2 = netWork.getUserAccountDirctory().createUserAccount("Peter-2", "0000", new FreshChecker());
+        newFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(nfUser1);
+        newFoodCheckOrg.getUserAccountDirectory().getUserAccountList().add(nfUser2);
+        nfUser1.setEnterprise(freshCheckerEnterprise);
+        nfUser2.setEnterprise(freshCheckerEnterprise);
+        nfUser1.setOrganization(newFoodCheckOrg);
+        nfUser2.setOrganization(newFoodCheckOrg);
+        
         // create volunteer/driveryOrg org and preoples
         VolunteerOrg volunteerOrg = volunteerEnterprise.createVolunteerOrg("VolunteerOrg1");
         DriverOrg driverOrg = volunteerEnterprise.createDriverOrg("DriverOrg1");
 
-        // DeliverManager deliverManager = new DeliverManager(driverOrg);
-        // UserAccount uaDeliverManager =
-        // netWork.getUserAccountDirctory().createUserAccount("Ashley", "0000",
-        // deliverManager);
+        
+        
 
         VolunteerManager volunteerManager = new VolunteerManager(volunteerOrg);
         UserAccount uavolunteerManager = netWork.getUserAccountDirctory().createUserAccount("Sarah", "0000",

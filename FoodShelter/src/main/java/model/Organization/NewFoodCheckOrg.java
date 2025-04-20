@@ -27,7 +27,7 @@ public class NewFoodCheckOrg extends BasicOrganization{
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roles = new ArrayList();
-        roles.add(new FreshChecker(null,null));
+        roles.add(new FreshChecker());
         return roles;
     }
     

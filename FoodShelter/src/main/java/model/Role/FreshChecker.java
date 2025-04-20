@@ -22,28 +22,6 @@ import ui.HomelessWorkArea.HomelessWorkPanel;
  */
 public class FreshChecker extends BasicRole{
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BasicOrganization getOrg() {
-        return org;
-    }
-
-    public void setOrg(BasicOrganization org) {
-        this.org = org;
-    }
-
-    String name;
-    BasicOrganization org;
-    public FreshChecker(String name,BasicOrganization org){
-        this.name = name;
-        this.org = org;
-    }
     // freshChecker check the foodItem
     public WorkQueue getAllfoodItem(NetWork netWork){
         return netWork.getCheckList();

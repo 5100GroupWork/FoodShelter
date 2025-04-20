@@ -13,7 +13,6 @@ import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.NewFoodCheckOrg;
-import model.Organization.WareHouseCheckOrg;
 import model.WorkQueue.*;
 
 

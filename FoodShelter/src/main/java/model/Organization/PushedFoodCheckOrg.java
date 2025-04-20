@@ -5,7 +5,7 @@
 package model.Organization;
 import java.util.ArrayList;
 import model.Role.BasicRole;
-import model.Role.PostFoodCheckManager;
+import model.Role.PostFoodChecker;
 
 /**
  *
@@ -20,7 +20,7 @@ public class PushedFoodCheckOrg extends BasicOrganization {
     @Override
     public ArrayList<BasicRole> getSupportedRole() {
         ArrayList<BasicRole> roles = new ArrayList();
-        roles.add(new PostFoodCheckManager(this));
+        roles.add(new PostFoodChecker());
         return roles;
     }
 }

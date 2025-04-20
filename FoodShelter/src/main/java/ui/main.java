@@ -159,6 +159,7 @@ public class main extends javax.swing.JFrame {
         userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
         if (userAccount != null) {
             inNetwork = network; // Record the network
+            System.err.println("getNetWork");
             break; // User belongs to this network, continue to find enterprise/org
         }
     }
@@ -172,7 +173,7 @@ public class main extends javax.swing.JFrame {
         }
         
         // If enterprise is still null, check if organization is set
-        if (inEnterprise == null && userAccount.getOrganization() != null) {
+        if (inEnterprise == null || userAccount.getOrganization() != null) {
             inOrganization = userAccount.getOrganization();
             
             // Find which enterprise this organization belongs to
@@ -230,7 +231,6 @@ public class main extends javax.swing.JFrame {
                 inNetwork);
         String panelName = userAccount.getRole().getClass().getSimpleName();
         container.add(panelName, workArea);
-        
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, panelName);
                 
