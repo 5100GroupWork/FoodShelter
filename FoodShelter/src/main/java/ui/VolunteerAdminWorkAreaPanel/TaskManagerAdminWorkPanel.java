@@ -42,11 +42,14 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         this.volunteerOrg = (VolunteerOrg) organization;
         this.account = account;
         
+        initComponents();
+        
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
         
+        this.parentPanel = this;
         populateTable();
 
-        initComponents();
+
     }
 
     /**
@@ -231,7 +234,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
             Object[] row = new Object[3];
             row[0] = tm.getID();
             row[1] = ua.getUsername();
-            row[1] = tm.getContact();
+            row[2] = tm.getContact();
             model.addRow(row);
            } 
         }
