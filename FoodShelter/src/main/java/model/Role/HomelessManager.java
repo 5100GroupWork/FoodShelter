@@ -31,6 +31,7 @@ public class HomelessManager extends BasicRole{
         UserAccount homelessUser = netWork.getUserAccountDirctory().createUserAccount(username,password,homeless);
         //org.userAccountDirectory.getUserAccountList().add(homelessUser);
         org.getUserAccountDirectory().getUserAccountList().add(homelessUser);
+        homelessUser.setOrganization(org);
         return homelessUser;
     }
     @Override

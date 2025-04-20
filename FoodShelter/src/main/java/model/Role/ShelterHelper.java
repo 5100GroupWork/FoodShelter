@@ -16,6 +16,7 @@ import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
 import model.WorkQueue.WorkRequestDelivery;
 import ui.RescueNetAdminWorkArea.ShelterHelperAdmin;
+import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ShelterHelper extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         //
-        return new ShelterHelperAdmin(workArea,account,organization,enterprise,netWork);
+        return new ShelterHelperWorkPanel(workArea, account, organization, enterprise, netWork);
     }
     
 

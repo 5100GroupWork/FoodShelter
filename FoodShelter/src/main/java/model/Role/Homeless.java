@@ -15,6 +15,7 @@ import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestNeeds;
+import ui.HomelessWorkArea.FoodRequestPanel;
 import ui.HomelessWorkArea.HomelessWorkPanel;
 import ui.RescueNetAdminWorkArea.HomelessAdmin;
 
@@ -47,7 +48,7 @@ public class Homeless extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
         
-        return new HomelessWorkPanel(workArea,account,organization,enterprise,netWork);
+        return new FoodRequestPanel(workArea, account, organization, enterprise, netWork);
     }
 
     
