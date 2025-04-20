@@ -24,6 +24,7 @@ import model.Role.HomelessManager;
 import model.Role.PostFoodChecker;
 import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
+import model.Role.TaskManager;
 import model.Role.VolunteerManager;
 
 /**
@@ -169,10 +170,15 @@ public class FoodShelterConfig {
                 helper.setEmail("jones@rescue.org");
                 helper.setPhone("555-890-1234");
 
-                HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
-                UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
-                homeless.setEmail("homeless1@rescue.org");
-                homeless.setPhone("555-901-2345");
+            HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
+            UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "homeless1", "0000", netWork);
+            homeless.setEmail("homeless1@rescue.org");
+            homeless.setPhone("555-901-2345");
+
+            UserAccount taskManager = volunteerManager.createVolunteer(volunteerOrg, netWork, "Bob", "0000");
+            taskManager.setRole(new TaskManager());  
+            taskManager.setEmail("taskmanager@volunteer.org");
+            taskManager.setPhone("555-123-4567");
 
                 return system;
         }

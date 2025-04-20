@@ -44,12 +44,7 @@
                   </Group>
                   <Component id="enterpriseLabel" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="19" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="544" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace pref="196" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,9 +78,7 @@
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace pref="105" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,11 +133,6 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Add New User - Driver"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x63d0;&#x9192;&#x5907;&#x6ce8;&#xff08;&#x5199;&#x5b8c;&#x4ee3;&#x7801;&#x540e;&#x5220;&#x9664;&#xff09;&#xff1a;Role &#x5b57;&#x6bb5;&#x9ed8;&#x8ba4;&#x4e3a; DriverRole&#xff0c;&#x5728;&#x70b9;&#x51fb; Submit &#x65f6;&#x81ea;&#x52a8;&#x5206;&#x914d;&#x3002;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
