@@ -4,7 +4,6 @@
  */
 package model.Role;
 
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
@@ -17,7 +16,6 @@ import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequestNeeds;
 import ui.HomelessWorkArea.FoodRequestPanel;
 import ui.HomelessWorkArea.HomelessWorkPanel;
-import ui.RescueNetAdminWorkArea.HomelessAdmin;
 
 /**
  *
@@ -46,7 +44,7 @@ public class Homeless extends BasicRole{
     }
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         
         return new FoodRequestPanel(workArea, account, organization, enterprise, netWork);
     }

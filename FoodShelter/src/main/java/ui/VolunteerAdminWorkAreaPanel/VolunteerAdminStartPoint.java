@@ -111,7 +111,7 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnManageTaskManager)
                             .addComponent(btnManageDriver))))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(682, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageDriver, btnManageTaskManager});
@@ -127,7 +127,7 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
                 .addComponent(btnManageDriver)
                 .addGap(35, 35, 35)
                 .addComponent(btnManageTaskManager)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(537, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

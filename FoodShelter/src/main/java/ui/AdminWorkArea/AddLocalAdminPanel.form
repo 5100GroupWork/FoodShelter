@@ -99,7 +99,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Assign Administrator"/>
+        <Property name="text" type="java.lang.String" value="Assign Employee"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbluserName">

@@ -13,9 +13,6 @@ import model.Organization.OrganizationDirctory;
  */
 public abstract class BasicEnterprise extends BasicOrganization{
     private BasicEnterpriseType enterpriseType;
-
-    
-    
     public enum BasicEnterpriseType{
         Food("FoodEnterprise"),
         Volunteer("VolunteerEnterprise"),
