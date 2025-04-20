@@ -20,6 +20,7 @@ import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
+import model.Role.FoodIncEmployee;
 
 /**
  *
@@ -99,7 +100,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Organization ID", "Name", "Location", "Admin"
+                "Organization ID", "Name", "Location", "Manager"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -183,6 +184,8 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         for (NetWork net : foodShelterSystem.getNetworkList()) {
             for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
                 if (be instanceof FoodEnterprise) {                    
+                    FoodEnterprise foodEnterprise = (FoodEnterprise) be;                   
+                    //remove from organziation list 
                     ArrayList<BasicOrganization> orgList = be.getOrganizationDirectory().getOrganizationList();
                     for (int i = 0; i < orgList.size(); i++) {
                         BasicOrganization org = orgList.get(i);
@@ -191,18 +194,29 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                             break;
                         }
                     }
-
-                   ArrayList<UserAccount> uaList = be.getUserAccountDirectory().getUserAccountList();
-                    for (int i = 0; i < uaList.size(); i++) {
+                    //remove frim enterprise list 
+                   ArrayList<UserAccount> employees = foodEnterprise.getEmployees();
+                    for (int i = employees.size() -1 ; i >= 0; i--){
+                                     
+                        UserAccount ua = employees.get(i);
+                        if (ua.getOrganization() != null
+                                && ua.getOrganization() instanceof FoodIncOrg
+                                && ((FoodIncOrg) ua.getOrganization()).getOrganizationID() == orgID) {
+                            employees.remove(i); 
+                            break;
+                        }
+                    }
+                    //remove from user accout directory 
+                    ArrayList<UserAccount> uaList = be.getUserAccountDirectory().getUserAccountList();
+                    for (int i = uaList.size() - 1; i >= 0; i--) {
                         UserAccount ua = uaList.get(i);
                         if (ua.getOrganization() != null
                                 && ua.getOrganization() instanceof FoodIncOrg
                                 && ((FoodIncOrg) ua.getOrganization()).getOrganizationID() == orgID) {
-                            uaList.remove(i); 
-                            break;
+                            uaList.remove(i);
                         }
                     }
-
+       
                     populateTable();
                     JOptionPane.showMessageDialog(this, "Organization deleted successfully.");
                     return;
@@ -245,7 +259,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                             // Find assigned admin
                             UserAccount admin = null;
                             for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
-                                if (ua.getOrganization() == foodOrg && ua.getRole() instanceof FoodEnterpriseManager) {
+                                if (ua.getOrganization() == foodOrg && (ua.getRole() instanceof FoodEnterpriseManager || ua.getRole() instanceof FoodIncEmployee)) {
                                     admin = ua;
                                     break;
                                 }
