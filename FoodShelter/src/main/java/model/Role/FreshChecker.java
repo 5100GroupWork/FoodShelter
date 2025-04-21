@@ -35,11 +35,9 @@ public class FreshChecker extends BasicRole{
     
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         
         return new NewFoodCheckPanel(workArea,account,organization,enterprise,netWork);
     }
-    
 
-    
 }

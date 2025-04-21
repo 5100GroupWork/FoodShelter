@@ -7,6 +7,7 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.DriverOrg;
@@ -40,7 +41,7 @@ public class VolunteerManager extends BasicRole{
     }
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         //todo 跳转到一个管理界面还没有做
 
         return new VolunteerAdminStartPoint(workArea, account, organization, enterprise, netWork);

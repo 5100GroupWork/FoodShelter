@@ -20,6 +20,7 @@ public class WelcomeJPanel extends javax.swing.JPanel {
      */
     public WelcomeJPanel() {
         initComponents();
+        setBackground(new java.awt.Color(245, 245, 245));
        try {
      
         java.net.URL imageUrl = getClass().getResource("/Logo.png");
@@ -46,12 +47,6 @@ public class WelcomeJPanel extends javax.swing.JPanel {
         LogoLable.setLayout(new BorderLayout());
         LogoLable.add(errorLabel, BorderLayout.CENTER);
     }
-        
-        /*ImageIcon icon = new ImageIcon(getClass().getResource("/Logo.png")); // 注意路径
-        Image scaledImg = icon.getImage().getScaledInstance(700, 560, Image.SCALE_SMOOTH); // 等比缩放
-        JLabel imgLabel = new JLabel(new ImageIcon(scaledImg));
-        LogoLable.setLayout(new BorderLayout()); // 让图片居中显示
-        LogoLable.add(imgLabel);*/
     }
 
     /**

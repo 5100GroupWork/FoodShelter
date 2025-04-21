@@ -36,7 +36,7 @@
                       <Component id="enterpriseLabel" min="-2" pref="280" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace pref="409" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +57,7 @@
                   <Component id="btnDeleteTaskManager" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAddTaskManager" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="87" max="32767" attributes="0"/>
+              <EmptySpace pref="397" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

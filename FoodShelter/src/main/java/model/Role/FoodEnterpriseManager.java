@@ -7,6 +7,7 @@ package model.Role;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import ui.FoodProviderWorkArea.DonationFormPanel;
@@ -18,7 +19,7 @@ import ui.FoodProviderWorkArea.DonationFormPanel;
 public class FoodEnterpriseManager extends BasicRole{
     
     @Override
-    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork) {
+    public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         
         return new DonationFormPanel(workArea, account, organization, enterprise, netWork);
     }

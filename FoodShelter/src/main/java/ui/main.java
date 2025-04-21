@@ -14,6 +14,7 @@ import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
 import model.Organization.BasicOrganization;
 import model.NetWork.NetWork;
+import model.Role.SysAdmin;
 
 /**
  *
@@ -218,104 +219,112 @@ public class main extends javax.swing.JFrame {
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
 
+        Object selectedItem = combox.getSelectedItem();
+        if (selectedItem.toString().equals("Select Network or System")) {
+            JOptionPane.showMessageDialog(null, "Please select System or a specific Network first.");
+            return;
+        }
+
         UserAccount userAccount = null;
         NetWork inNetwork = null;
         BasicEnterprise inEnterprise = null;
         BasicOrganization inOrganization = null;
 
-        // Step 1: Search through all networks
-        for (NetWork network : system.getNetworkList()) {
-            // First check the network level UserDirectory
-            userAccount = network.getUserAccountDirctory().authenticateUser(userName, password);
+        if (selectedItem instanceof FoodShelterSystem) {
+            UserAccount sysA = system.getSystemAdmin();
+            System.out.println("select systemAdmin login");
+            if(!sysA.getUsername().equals(userName) || !sysA.getPassword().equals(password)){
+                JOptionPane.showMessageDialog(null, "You are not the system admin.");
+                return;
+            }else{
+                container.removeAll();
+                JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
+                    inNetwork, system);
+                container.add("workArea", workArea);
+                CardLayout layout = (CardLayout) container.getLayout();
+                layout.show(container, "workArea");
+
+                // 状态更新
+                loginJButton.setEnabled(false);
+                logoutJButton.setEnabled(true);
+                userNameJTextField.setEnabled(false);
+                passwordField.setEnabled(false);
+                combox.setEnabled(false);
+                return;
+            }
+        } else if (selectedItem instanceof NetWork) {
+            NetWork selectedNetwork = (NetWork) selectedItem;
+            userAccount = selectedNetwork.getUserAccountDirctory().authenticateUser(userName, password);
             if (userAccount != null) {
-                inNetwork = network; // Record the network
-                System.err.println("getNetWork");
-                break; // User belongs to this network, continue to find enterprise/org
+                inNetwork = selectedNetwork;
             }
         }
 
-        // Step 2: If userAccount is found, find which enterprise/organization it
-        // belongs to
-        if (userAccount != null && inNetwork != null) {
-            // Check if the user account has enterprise directly set
-            if (userAccount.getEnterprise() != null) {
-                inEnterprise = userAccount.getEnterprise();
-                System.out.println("Enterprise found directly from user account: " + inEnterprise.getName());
-            }
-
-            // If enterprise is still null, check if organization is set
-            if (inEnterprise == null || userAccount.getOrganization() != null) {
-                inOrganization = userAccount.getOrganization();
-
-                // Find which enterprise this organization belongs to
-                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                    // Check if this organization is in the enterprise's organization directory
-                    if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
-                        inEnterprise = enterprise;
-                        break;
-                    }
-
-                    // If it's a FoodEnterprise, also check its custom foodIncOrgs list
-                    if (enterprise instanceof FoodEnterprise) {
-                        FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
-                        if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
-                            inEnterprise = enterprise;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            // If still not found through user attributes, use original search methods
-            if (inEnterprise == null) {
-                for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
-                    // First check enterprise level users
-                    if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
-                        inEnterprise = enterprise;
-                        break;
-                    }
-
-                    // Then check organization level
-                    for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                        if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
-                            inEnterprise = enterprise;
-                            inOrganization = organization;
-                            break;
-                        }
-                    }
-
-                    if (inEnterprise != null) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Step 3: 判断是否找到了
+        // 判断登录是否成功
         if (userAccount == null || inNetwork == null) {
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
         }
 
-        // Step 4: Navigate to role interface
-        container.removeAll(); // 清除所有已有面板
+        // 查找 enterprise 和 organization 所属信息
+        if (userAccount.getEnterprise() != null) {
+            inEnterprise = userAccount.getEnterprise();
+        }
+
+        if (inEnterprise == null || userAccount.getOrganization() != null) {
+            inOrganization = userAccount.getOrganization();
+
+            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                if (enterprise.getOrganizationDirectory().getOrganizationList().contains(inOrganization)) {
+                    inEnterprise = enterprise;
+                    break;
+                }
+
+                if (enterprise instanceof FoodEnterprise) {
+                    FoodEnterprise foodEnt = (FoodEnterprise) enterprise;
+                    if (foodEnt.getFoodIncOrgs().contains(inOrganization)) {
+                        inEnterprise = enterprise;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (inEnterprise == null) {
+            for (BasicEnterprise enterprise : inNetwork.getEnterpriseDirectory().getEnterprises()) {
+                if (enterprise.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                    inEnterprise = enterprise;
+                    break;
+                }
+
+                for (BasicOrganization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (organization.getUserAccountDirectory().getUserAccountList().contains(userAccount)) {
+                        inEnterprise = enterprise;
+                        inOrganization = organization;
+                        break;
+                    }
+                }
+
+                if (inEnterprise != null) {
+                    break;
+                }
+            }
+        }
+
+        // 跳转用户工作区域
+        container.removeAll();
         JPanel workArea = userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise,
-                inNetwork);
-        String panelName = "workArea"; // 使用固定名称
-        System.out.println("创建的面板: " + userAccount.getRole().getClass().getSimpleName());
-
-        container.add(panelName, workArea);
+                inNetwork, system);
+        container.add("workArea", workArea);
         CardLayout layout = (CardLayout) container.getLayout();
-        layout.show(container, panelName);
-        container.revalidate(); // 刷新界面
-        container.repaint(); // 重绘界面
+        layout.show(container, "workArea");
 
+        // 状态更新
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
         combox.setEnabled(false);
-
     }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutJButtonActionPerformed
@@ -328,10 +337,10 @@ public class main extends javax.swing.JFrame {
         passwordField.setText("");
 
         container.removeAll();
-        JPanel blankJP = new JPanel();
-        container.add("blank", blankJP);
-        CardLayout crdLyt = (CardLayout) container.getLayout();
-        crdLyt.next(container);
+        WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
+        container.add("WelComeJPanel", welcomeJPanel);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.show(container, "WelComeJPanel");
         combox.setEnabled(true);
         dB4OUtil.storeSystem(system);
     }// GEN-LAST:event_logoutJButtonActionPerformed
@@ -393,6 +402,7 @@ public class main extends javax.swing.JFrame {
     /// populate Combox
     public void populateCombox() {
         combox.removeAllItems();
+        combox.addItem("Select Network or System");
         combox.addItem(system);
         System.out.println(system.getNetworkList().size());
         for (NetWork netWork1 : system.getNetworkList()) {
