@@ -19,7 +19,7 @@ public class WorkRequestNeeds extends WorkRequest{
     public WorkRequestNeeds(){
         Date date = new Date();
         this.setRequestDate(date);
-        this.setStatus("pedding");
+        this.setStatus("pending");
     }
 
     public UserAccount getHomeless() {
