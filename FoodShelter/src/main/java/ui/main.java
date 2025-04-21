@@ -22,6 +22,8 @@ import model.Organization.BasicOrganization;
 import model.NetWork.NetWork;
 import model.Role.SysAdmin;
 import net.datafaker.providers.base.Color;
+import utils.PanelUtils;
+
 import java.awt.Font;
 import javax.swing.BorderFactory;
 
@@ -44,6 +46,7 @@ public class main extends javax.swing.JFrame {
         setSize(1200, 900);
         jSplitPane1.setDividerLocation(0.2);
         WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
+        PanelUtils.addOrReplacePanel(container, "WelComeJPanel", welcomeJPanel);
         container.add("WelComeJPanel", welcomeJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "WelComeJPanel");
@@ -254,6 +257,7 @@ public class main extends javax.swing.JFrame {
                 container.removeAll();
                 JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
                         inNetwork, system);
+                PanelUtils.addOrReplacePanel(container, "workArea", workArea);
                 container.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
                 System.out.println("before jump");

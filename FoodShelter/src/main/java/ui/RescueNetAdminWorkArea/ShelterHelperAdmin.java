@@ -163,11 +163,12 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise, enterprise, netWork);
-        workArea.add("RescueNetAdminStartPoint",rescueNetAdminStartPoint);
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise,
+                enterprise, netWork);
+        workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");
-        
+
     }// GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
@@ -175,7 +176,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg);
         workArea.add("AddShelterHelper", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
+        layout.show(workArea,"AddShelterHelper");
     }// GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed

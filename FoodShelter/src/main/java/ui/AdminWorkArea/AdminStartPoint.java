@@ -22,6 +22,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.WorkQueue.WorkRequestFoodItem;
 import ui.ReportAnalystWorkArea.SummaryMetricsPanel;
+import utils.PanelUtils;
 
 /**
  *
@@ -258,7 +259,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network first.");
         }
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem,netWork));
+        workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem, netWork));
         layout.show(workArea, "AdminWorkAreaPanel");
         workArea.revalidate();
         workArea.repaint();
@@ -286,6 +287,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
         SummaryMetricsPanel panel = new SummaryMetricsPanel(workArea, foodShelterSystem, account);
         workArea.add("SummaryMetricsPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
+        PanelUtils.addOrReplacePanel(workArea, "SummaryMetricsPanel", panel);
         layout.show(workArea, "SummaryMetricsPanel");
         workArea.revalidate();
         workArea.repaint();
