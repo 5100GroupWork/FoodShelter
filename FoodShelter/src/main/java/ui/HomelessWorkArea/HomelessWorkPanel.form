@@ -28,10 +28,6 @@
                       <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="btnWithdraw" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
                       </Group>
                   </Group>
