@@ -203,21 +203,17 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 newEmployee.setEmail(email);
                 newEmployee.setPhone(phone);
                 newEmployee.setOrganization(newOrg);
+                newEmployee.setEnterprise(enterprise);
 
                 JOptionPane.showMessageDialog(this, "New organization and employee created successfully!");
 
-                // add this employee to the enterprise
-                if (enterprise instanceof FoodEnterprise) {
-                        // Find the network this enterprise belongs to
-                        for (NetWork network : foodShelterSystem.getNetworkList()) {
-                                for (BasicEnterprise ent : network.getEnterpriseDirectory().getEnterprises()) {
-                                        if (ent == enterprise) {
-                                                // Found the network, now add the employee
-                                                ((FoodEnterprise) enterprise).getEmployees().add(newEmployee);
-                                                break;
-                                        }
-                                }
-                        }
+                // add this employee to the enterprise and network
+              for (NetWork network : foodShelterSystem.getNetworkList()) {
+                    if (network.getEnterpriseDirectory().getEnterprises().contains(enterprise)) {
+                    ((FoodEnterprise) enterprise).getEmployees().add(newEmployee); // 
+                    network.getUserAccountDirctory().getUserAccountList().add(newEmployee); // 
+                    break;
+                    }
                 }
 
                 txtuserName.setText("");
