@@ -4,9 +4,22 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import java.awt.CardLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.NetWork.NetWork;
 import model.Organization.RequestCollectOrg;
 import model.Role.Homeless;
 
@@ -17,14 +30,22 @@ import model.Role.Homeless;
 public class AddHomelessAccount extends javax.swing.JPanel {
     private BasicEnterprise enterprise;
     private RequestCollectOrg requestCollectOrg;
+    private UserAccount account;
+    private NetWork netWork;
+    JPanel workArea;
+    String InconPath;
 
     /**
      * Creates new form NewJPanel
      */
-    public AddHomelessAccount(BasicEnterprise enterprise, RequestCollectOrg org) {
+    public AddHomelessAccount(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestCollectOrg org) {
         initComponents();
         this.enterprise = enterprise;
         this.requestCollectOrg = org;
+        this.InconPath ="";
+        this.account = account;
+        this.netWork = netWork;
+        this.workArea = workArea;
         beautify();
     }
 
@@ -35,7 +56,8 @@ public class AddHomelessAccount extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
@@ -49,6 +71,9 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         lbPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
+        IncoLabel = new javax.swing.JLabel();
+        btnSelectImg = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -81,89 +106,140 @@ public class AddHomelessAccount extends javax.swing.JPanel {
             }
         });
 
+        btnSelectImg.setText("select an Image");
+        btnSelectImg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectImgActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(btnBack)
-                                .addGap(47, 47, 47)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                        layout.createSequentialGroup()
-                                                                .addComponent(btnSubmit)
-                                                                .addGap(64, 64, 64))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                        layout.createSequentialGroup()
-                                                                .addComponent(lblEmail)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(txtEmail,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 155,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                        layout.createSequentialGroup()
-                                                                .addComponent(lbPhone)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(txtPhone,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 155,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                        layout.createSequentialGroup()
-                                                                .addComponent(lblpassword)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(passwordField,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 155,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                        layout.createSequentialGroup()
-                                                                .addComponent(lbluserName)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(txtuserName,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 155,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(enterpriseLabel))
-                                .addContainerGap(626, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnBack)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterpriseLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblEmail)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lbPhone)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblpassword)
+                                .addGap(18, 18, 18)
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lbluserName)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(IncoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(btnSelectImg)))
+                        .addContainerGap(265, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(336, 336, 336)
+                .addComponent(btnSubmit)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnBack)
-                                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbluserName))
+                                    .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbluserName))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblpassword))
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblpassword))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblEmail))
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbPhone))
-                                .addGap(29, 29, 29)
-                                .addComponent(btnSubmit)
-                                .addContainerGap(384, Short.MAX_VALUE)));
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbPhone)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(IncoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSelectImg))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69)
+                .addComponent(btnSubmit)
+                .addContainerGap(367, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSelectImgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSelectImgActionPerformed
+        // TODO add your handling code here:
+        // 1. using JFileChooser to choose img and limit file type
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("upload homeless' incon（Img only） ");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg", "gif");
+        fileChooser.addChoosableFileFilter(filter);
+        int userSelection = fileChooser.showOpenDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                // 1. 保存图片到本地目录
+                String targetDirPath = "uploadedImages";
+                File dir = new File(targetDirPath);
+                if (!dir.exists())
+                    dir.mkdir();
+
+                File destinationFile = new File(dir, selectedFile.getName());
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                // 2. 显示图片
+                ImageIcon imageIcon = new ImageIcon(destinationFile.getAbsolutePath());
+                Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                IncoLabel.setIcon(new ImageIcon(image));
+                this.InconPath = destinationFile.getAbsolutePath();
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error uploading image: " + e.getMessage());
+            }
+        }
+
+    }// GEN-LAST:event_btnSelectImgActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+        HomelessAdmin homelessAdmin = new HomelessAdmin(workArea, account, enterprise, enterprise, netWork);
+        workArea.add("HomelessAdmin",homelessAdmin);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "HomelessAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_passwordFieldActionPerformed
@@ -188,6 +264,12 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         }
 
         Homeless role = new Homeless();
+        if(this.InconPath!=null && !this.InconPath.equals("")){
+            role.setInconPath(InconPath);
+        }else{
+            role.setInconPath(null);
+        }
+        
 
         UserAccount account = requestCollectOrg.getUserAccountDirectory().createUserAccount(username, password, role);
 
@@ -204,9 +286,12 @@ public class AddHomelessAccount extends javax.swing.JPanel {
     }// GEN-LAST:event_btnSubmitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IncoLabel;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSelectImg;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbPhone;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblpassword;

@@ -23,7 +23,8 @@ import ui.HomelessWorkArea.HomelessWorkPanel;
  */
 public class Homeless extends BasicRole{
     WorkQueue homelessWorkQueue;
-    
+    String InconPath;
+
     public Homeless(){
         this.homelessWorkQueue = new WorkQueue();
     }
@@ -42,6 +43,15 @@ public class Homeless extends BasicRole{
     public WorkQueue getAllRequest(){
         return this.homelessWorkQueue;
     }
+    
+    public String getInconPath() {
+        return InconPath;
+    }
+
+    public void setInconPath(String InconPath) {
+        this.InconPath = InconPath;
+    }
+    
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
