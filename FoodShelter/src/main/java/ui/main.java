@@ -243,6 +243,10 @@ public class main extends javax.swing.JFrame {
                 container.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
                 layout.show(container, "workArea");
+                container.revalidate();
+                container.repaint();
+                
+                
 
                 // 状态更新
                 loginJButton.setEnabled(false);
@@ -318,6 +322,9 @@ public class main extends javax.swing.JFrame {
         container.add("workArea", workArea);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "workArea");
+        
+        container.revalidate();
+        container.repaint();
 
         // 状态更新
         loginJButton.setEnabled(false);
