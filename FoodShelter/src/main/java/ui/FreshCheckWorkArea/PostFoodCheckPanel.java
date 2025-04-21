@@ -7,6 +7,8 @@ package ui.FreshCheckWorkArea;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FreshCheckEnterprise;
 import model.NetWork.NetWork;
@@ -45,6 +47,7 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         }
         initComponents();
         populateTable();
+        beautify();
     }
 
     /**
@@ -54,7 +57,8 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         enterpriseLabel = new javax.swing.JLabel();
@@ -67,22 +71,21 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Post Food Check");
 
         wareFoodTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(wareFoodTable);
@@ -104,71 +107,77 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(370, 370, 370)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRemoveExpired)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnRefreshList)))))
-                .addGap(199, 199, 199))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(370, 370, 370)
+                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(130, 130, 130)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane2,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 671,
+                                                                Short.MAX_VALUE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(btnRemoveExpired)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE)
+                                                                .addComponent(btnRefreshList)))))
+                                .addGap(199, 199, 199)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(btnRefreshList))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnRemoveExpired)))
-                .addGap(120, 120, 120))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(39, 39, 39)
+                                                .addComponent(btnRefreshList))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(27, 27, 27)
+                                                .addComponent(btnRemoveExpired)))
+                                .addGap(120, 120, 120)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRemoveExpiredActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnRemoveExpiredActionPerformed
         // TODO add your handling code here:
-    int rowNumber = wareFoodTable.getSelectedRow();
-    if (rowNumber < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a row first");
-        return;
-    }
+        int rowNumber = wareFoodTable.getSelectedRow();
+        if (rowNumber < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first");
+            return;
+        }
 
-    int foodId = (int) wareFoodTable.getValueAt(rowNumber, 0);
-    
-    WorkRequestFoodItem itemToRemove = null;
-    int count = 0;
-    
-    for (WorkRequest wd : netWork.getWarehouseList().getWorkRequestList()) {
-        if (wd instanceof WorkRequestFoodItem) {
-            count++;
-            if (count == foodId) {
-                itemToRemove = (WorkRequestFoodItem) wd;
-                break;
+        int foodId = (int) wareFoodTable.getValueAt(rowNumber, 0);
+
+        WorkRequestFoodItem itemToRemove = null;
+        int count = 0;
+
+        for (WorkRequest wd : netWork.getWarehouseList().getWorkRequestList()) {
+            if (wd instanceof WorkRequestFoodItem) {
+                count++;
+                if (count == foodId) {
+                    itemToRemove = (WorkRequestFoodItem) wd;
+                    break;
+                }
             }
         }
-    }
-    
-    // 从warehouseList中移除
-    if (itemToRemove != null) {
-        netWork.getWarehouseList().removeWorkRequest(itemToRemove);
-        JOptionPane.showMessageDialog(this, "Food item removed successfully.");
-        populateTable(); 
-    } else {
-        JOptionPane.showMessageDialog(this, "Could not find the selected food item.");
-    }
+
+        // 从warehouseList中移除
+        if (itemToRemove != null) {
+            netWork.getWarehouseList().removeWorkRequest(itemToRemove);
+            JOptionPane.showMessageDialog(this, "Food item removed successfully.");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not find the selected food item.");
+        }
     }// GEN-LAST:event_btnRemoveExpiredActionPerformed
 
     private void btnRefreshListActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnRefreshListActionPerformed
@@ -187,29 +196,65 @@ public class PostFoodCheckPanel extends javax.swing.JPanel {
     /////////////////////////// fun //////////////////
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) wareFoodTable.getModel();
-    model.setRowCount(0);
-    
-    if (netWork == null || netWork.getWarehouseList() == null) {
-        System.out.println("Network or warehouseList is null");
-        return;
-    }
-    
-    WorkQueue foodQueue = netWork.getWarehouseList();
-    System.out.println("Getting warehouse items: " + foodQueue.getWorkRequestList().size() + " items");
-    
-    int count = 0;
-    for (WorkRequest wd : foodQueue.getWorkRequestList()) {
-        if (wd instanceof WorkRequestFoodItem) {
-            WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
-            count++;
-            Object row[] = new Object[5]; 
-            row[0] = count; 
-            row[1] = wrf.getFoodItem().getFoodName();
-            row[2] = wrf.getFoodItem().getNumber(); 
-            row[3] = wrf.getFoodItem().getExpiredDate(); 
-            row[4] = wrf.getFoodItem().getFoodIncOrg(); 
-            model.addRow(row);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        wareFoodTable.setRowSorter(sorter);
+        model.setRowCount(0);
+
+        if (netWork == null || netWork.getWarehouseList() == null) {
+            System.out.println("Network or warehouseList is null");
+            return;
+        }
+
+        WorkQueue foodQueue = netWork.getWarehouseList();
+        System.out.println("Getting warehouse items: " + foodQueue.getWorkRequestList().size() + " items");
+
+        int count = 0;
+        for (WorkRequest wd : foodQueue.getWorkRequestList()) {
+            if (wd instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
+                count++;
+                Object row[] = new Object[5];
+                row[0] = count;
+                row[1] = wrf.getFoodItem().getFoodName();
+                row[2] = wrf.getFoodItem().getNumber();
+                row[3] = wrf.getFoodItem().getExpiredDate();
+                row[4] = wrf.getFoodItem().getFoodIncOrg();
+                model.addRow(row);
+            }
         }
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 按钮样式统一
+        javax.swing.JButton[] buttons = { btnRemoveExpired, btnRefreshList };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        wareFoodTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        wareFoodTable.setRowHeight(28);
+        wareFoodTable.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰网格
+        wareFoodTable.setForeground(new java.awt.Color(33, 33, 33));
+        wareFoodTable.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        wareFoodTable.setSelectionForeground(java.awt.Color.WHITE);
+
+        wareFoodTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        wareFoodTable.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        wareFoodTable.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
     }
+
 }

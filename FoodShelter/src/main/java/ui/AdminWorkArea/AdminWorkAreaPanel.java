@@ -10,6 +10,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
@@ -38,13 +40,16 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     NetWork netWork;
     AdminWorkAreaPanel parent;
 
-    public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+    public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem,
+            NetWork netWork) {
         this.workArea = workArea;
         this.account = account;
+        this.netWork = netWork;
         this.foodShelterSystem = foodShelterSystem;
 
         initComponents();
         populateTable();
+        beautify();
 
     }
 
@@ -55,6 +60,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -62,7 +68,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblOrg = new javax.swing.JTable();
 
@@ -89,8 +94,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Manage Food Organizations");
-
-        jLabel1.setText("Only used to manage food donation organizations.");
 
         tblOrg.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {
@@ -132,20 +135,9 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
                                                         .addGap(113, 113, 113)
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        false)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(btnAdd)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(btnDelete))
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addGap(305, 305, 305)
-                                                                        .addComponent(jLabel1))))))
+                                                        .addComponent(btnAdd)
+                                                        .addGap(454, 454, 454)
+                                                        .addComponent(btnDelete))))
                                 .addContainerGap(177, Short.MAX_VALUE)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +154,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAdd)
                                         .addComponent(btnDelete))
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel1)
-                                .addContainerGap(98, Short.MAX_VALUE)));
+                                .addContainerGap(157, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
@@ -250,7 +240,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblOrg;
     // End of variables declaration//GEN-END:variables
@@ -258,37 +247,73 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     public void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblOrg.setRowSorter(sorter);
         model.setRowCount(0);
+        if (this.netWork == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "it is an empty network !");
+            return;
+        }
+        for (BasicEnterprise be : this.netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (be instanceof FoodEnterprise) {
+                for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof FoodIncOrg) {
+                        FoodIncOrg foodOrg = (FoodIncOrg) org;
 
-        for (NetWork net : foodShelterSystem.getNetworkList()) {
-            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                if (be instanceof FoodEnterprise) {
-                    for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
-                        if (org instanceof FoodIncOrg) {
-                            FoodIncOrg foodOrg = (FoodIncOrg) org;
-
-                            // Find assigned admin
-                            UserAccount admin = null;
-                            for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
-                                if (ua.getOrganization() == foodOrg && (ua.getRole() instanceof FoodEnterpriseManager
-                                        || ua.getRole() instanceof FoodIncEmployee)) {
-                                    admin = ua;
-                                    break;
-                                }
+                        // Find assigned admin
+                        UserAccount admin = null;
+                        for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
+                            if (ua.getOrganization() == foodOrg && (ua.getRole() instanceof FoodEnterpriseManager
+                                    || ua.getRole() instanceof FoodIncEmployee)) {
+                                admin = ua;
+                                break;
                             }
-
-                            Object[] row = new Object[4];
-                            row[0] = foodOrg.getOrganizationID();
-                            row[1] = foodOrg.getName();
-                            row[2] = foodOrg.getAddress();
-                            row[3] = (admin != null) ? admin.getUsername() : "N/A";
-
-                            model.addRow(row);
                         }
+
+                        Object[] row = new Object[4];
+                        row[0] = foodOrg.getOrganizationID();
+                        row[1] = foodOrg.getName();
+                        row[2] = foodOrg.getAddress();
+                        row[3] = (admin != null) ? admin.getUsername() : "N/A";
+
+                        model.addRow(row);
                     }
                 }
             }
         }
+    }
+
+    private void beautify() {
+        // 背景色
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 整体背景
+
+        // 标题样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 按钮样式统一
+        javax.swing.JButton[] buttons = { btnBack, btnAdd, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblOrg.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblOrg.setRowHeight(28);
+        tblOrg.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰边框
+        tblOrg.setForeground(new java.awt.Color(33, 33, 33));
+        tblOrg.setSelectionBackground(new java.awt.Color(190, 170, 240)); // 选中行背景
+        tblOrg.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblOrg.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblOrg.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblOrg.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE); // 表格白底
     }
 
 }

@@ -44,6 +44,7 @@ public class FoodRequestPanel extends javax.swing.JPanel {
         this.netWork = netWork;
 
         populateFoodOrgComboBox();
+        beautify();
     }
 
     private void populateFoodOrgComboBox() {
@@ -227,5 +228,60 @@ public class FoodRequestPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner spinnerQuantity;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JLabel valueLabel1;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰
+
+        // 标题样式
+        jLabel4.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        jLabel4.setForeground(new java.awt.Color(54, 33, 89)); // 深紫标题
+
+        // 标签字体
+        java.awt.Font labelFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13);
+        java.awt.Color labelColor = new java.awt.Color(80, 80, 80);
+        valueLabel.setFont(labelFont);
+        valueLabel.setForeground(labelColor);
+        valueLabel1.setFont(labelFont);
+        valueLabel1.setForeground(labelColor);
+
+        // Spinner 样式
+        spinnerQuantity.setFont(labelFont);
+        spinnerQuantity.setForeground(new java.awt.Color(40, 40, 40));
+        spinnerQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        // ComboBox 美化
+        ComboBoxType.setFont(labelFont);
+        ComboBoxType.setForeground(new java.awt.Color(33, 33, 33));
+        ComboBoxType.setBackground(java.awt.Color.WHITE);
+        ComboBoxType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        ComboBoxType.setRenderer(new javax.swing.plaf.basic.BasicComboBoxRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value, int index,
+                    boolean isSelected, boolean cellHasFocus) {
+                java.awt.Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                c.setFont(labelFont);
+                if (isSelected) {
+                    c.setBackground(new java.awt.Color(230, 240, 255));
+                    c.setForeground(new java.awt.Color(0, 123, 255));
+                } else {
+                    c.setBackground(java.awt.Color.WHITE);
+                    c.setForeground(new java.awt.Color(33, 33, 33));
+                }
+                return c;
+            }
+        });
+
+        // 按钮统一美化
+        javax.swing.JButton[] buttons = { btnSubmit, btnViewRequests };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(labelFont);
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
 }

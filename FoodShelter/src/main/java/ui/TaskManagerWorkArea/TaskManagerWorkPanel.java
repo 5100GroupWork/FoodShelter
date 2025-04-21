@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.RescueNetEnterprise;
@@ -44,6 +46,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         initComponents();
         populateTableDriver();
         populateTableTask();
+        beautify();
     }
 
     /**
@@ -53,7 +56,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -79,22 +83,21 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Task Manager - Task Assignment");
 
         tbDrivers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Driver ID", "Name", "Available"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Driver ID", "Name", "Available"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tbDrivers);
@@ -108,22 +111,21 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setText("Shelter Request Tasks ");
 
         tbUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Food ID", "Food Name", "Quantity", "From", "To", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }
+                },
+                new String[] {
+                        "Food ID", "Food Name", "Quantity", "From", "To", "Status"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(tbUnassignedTasks);
@@ -152,57 +154,64 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(enterpriseLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backJButton)
-                                .addGap(95, 95, 95)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnAssignTask1)
-                        .addGap(257, 257, 257)
-                        .addComponent(btnAssignTask2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(enterpriseLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(btnAssignTask)))
-                .addContainerGap(380, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(252, 252, 252)
+                                                .addComponent(enterpriseLabel2))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 631,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(backJButton)
+                                                                .addGap(95, 95, 95)
+                                                                .addComponent(enterpriseLabel,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 301,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jScrollPane2,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 631,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(91, 91, 91)
+                                                .addComponent(btnAssignTask1)
+                                                .addGap(257, 257, 257)
+                                                .addComponent(btnAssignTask2))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(266, 266, 266)
+                                                .addComponent(enterpriseLabel1))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(274, 274, 274)
+                                                .addComponent(btnAssignTask)))
+                                .addContainerGap(380, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
-                .addGap(18, 18, 18)
-                .addComponent(enterpriseLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssignTask1)
-                    .addComponent(btnAssignTask2))
-                .addGap(39, 39, 39)
-                .addComponent(enterpriseLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAssignTask)
-                .addGap(49, 49, 49))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(backJButton))
+                                .addGap(18, 18, 18)
+                                .addComponent(enterpriseLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnAssignTask1)
+                                        .addComponent(btnAssignTask2))
+                                .addGap(39, 39, 39)
+                                .addComponent(enterpriseLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAssignTask)
+                                .addGap(49, 49, 49)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
@@ -270,6 +279,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     // populizeTable
     public void populateTableTask() {
         DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbUnassignedTasks.setRowSorter(sorter);
         model.setRowCount(0);
         ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
         // 拿到type为 rescueNet的公司
@@ -296,6 +307,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     // populate Task Undo
     public void populateTableTaskUndo() {
         DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbUnassignedTasks.setRowSorter(sorter);
         model.setRowCount(0);
         ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
         // 拿到type为 rescueNet的公司
@@ -323,6 +336,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
     public void populateTableDriver() {
         DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbDrivers.setRowSorter(sorter);
         model.setRowCount(0);
         // 拿到driverOrg
         ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
@@ -345,4 +360,51 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         }
 
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 分区标题
+        enterpriseLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        enterpriseLabel1.setForeground(new java.awt.Color(80, 80, 80));
+
+        enterpriseLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        enterpriseLabel2.setForeground(new java.awt.Color(80, 80, 80));
+
+        // 表格样式（任务 + 司机）
+        javax.swing.JTable[] tables = { tbUnassignedTasks, tbDrivers };
+        for (javax.swing.JTable table : tables) {
+            table.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            table.setRowHeight(28);
+            table.setGridColor(new java.awt.Color(200, 190, 230));
+            table.setForeground(new java.awt.Color(33, 33, 33));
+            table.setSelectionBackground(new java.awt.Color(190, 170, 240));
+            table.setSelectionForeground(java.awt.Color.WHITE);
+
+            table.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+            table.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+            table.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+        }
+
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = {
+                backJButton, btnAssignTask, btnAssignTask1, btnAssignTask2
+        };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
+
 }

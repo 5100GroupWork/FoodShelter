@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -45,6 +47,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
 
         populateTable();
+        beautify();
 
     }
 
@@ -254,6 +257,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     public void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblDriver.setRowSorter(sorter);
         model.setRowCount(0);
 
         if (volunteerOrg == null) {
@@ -288,4 +293,41 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
             }
         }
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题与企业标签样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblEnterprise.setForeground(new java.awt.Color(80, 80, 80)); // 深灰
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = { backJButton, btnAddDriver, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblDriver.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblDriver.setRowHeight(28);
+        tblDriver.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰网格
+        tblDriver.setForeground(new java.awt.Color(33, 33, 33));
+        tblDriver.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblDriver.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblDriver.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblDriver.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblDriver.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }

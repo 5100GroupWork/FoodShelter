@@ -64,6 +64,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
         if (organization != null && organization instanceof FoodIncOrg) {
             this.foodIncOrg = (FoodIncOrg) organization;
         }
+        beautify();
 
     }
 
@@ -368,5 +369,60 @@ public class DonationFormPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFoodName;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JLabel valueLabel1;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景色统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89));
+
+        // 欢迎文字
+        lblWelcome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblWelcome.setForeground(new java.awt.Color(60, 60, 60));
+
+        // Enterprise 标签
+        jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        jLabel2.setForeground(new java.awt.Color(60, 60, 60));
+        lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblEnterprise.setForeground(new java.awt.Color(60, 60, 60));
+
+        // 表单标签样式
+        java.awt.Font labelFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13);
+        java.awt.Color labelColor = new java.awt.Color(80, 80, 80);
+        valueLabel.setFont(labelFont);
+        valueLabel.setForeground(labelColor);
+        valueLabel1.setFont(labelFont);
+        valueLabel1.setForeground(labelColor);
+        jLabel1.setFont(labelFont);
+        jLabel1.setForeground(labelColor);
+
+        // 输入框样式
+        txtFoodName.setFont(labelFont);
+        txtFoodName.setBackground(java.awt.Color.WHITE);
+        txtFoodName.setForeground(new java.awt.Color(40, 40, 40));
+        txtFoodName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        txtExpiry.setFont(labelFont);
+        txtExpiry.setBackground(java.awt.Color.WHITE);
+        txtExpiry.setForeground(new java.awt.Color(40, 40, 40));
+        txtExpiry.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        spinnerQuantity.setFont(labelFont);
+        spinnerQuantity.setForeground(new java.awt.Color(40, 40, 40));
+        spinnerQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        // 按钮统一样式
+        javax.swing.JButton[] buttons = { requestTestJButton, btnResetForm, requestTestJButton1 };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
+
 }

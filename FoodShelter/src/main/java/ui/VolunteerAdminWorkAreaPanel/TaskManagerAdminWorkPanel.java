@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -44,6 +46,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
         this.parentPanel = this;
         populateTable();
+        beautify();
     }
 
     /**
@@ -241,6 +244,8 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblTaskManager.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblTaskManager.setRowSorter(sorter);
         model.setRowCount(0);
 
         if (volunteerOrg == null) {
@@ -277,4 +282,41 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         }
 
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题 & 企业标签样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫色标题
+
+        lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblEnterprise.setForeground(new java.awt.Color(80, 80, 80)); // 深灰说明
+
+        // 按钮统一样式
+        javax.swing.JButton[] buttons = { backJButton, btnAddTaskManager, btnDeleteTaskManager };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫背景
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblTaskManager.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblTaskManager.setRowHeight(28);
+        tblTaskManager.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰色网格线
+        tblTaskManager.setForeground(new java.awt.Color(33, 33, 33));
+        tblTaskManager.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblTaskManager.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblTaskManager.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblTaskManager.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblTaskManager.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }

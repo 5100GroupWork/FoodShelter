@@ -21,6 +21,7 @@ import model.Organization.BasicOrganization;
 import model.WorkQueue.WorkQueue;
 import model.WorkQueue.WorkRequest;
 import model.WorkQueue.WorkRequestFoodItem;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -43,6 +44,7 @@ public class viewNetWorkDetailPanel extends javax.swing.JPanel {
         this.account = account;
         this.system = system;
         populateUserAccountTable();
+        beautify();
     }
 
     @Override
@@ -152,6 +154,8 @@ public class viewNetWorkDetailPanel extends javax.swing.JPanel {
     ///////////////////////////////////////////// fun ////////////////////
     public void populateUserAccountTable() {
         DefaultTableModel model = (DefaultTableModel) tbUserAccount.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbUserAccount.setRowSorter(sorter);
         model.setRowCount(0);
         // 从userAccount的workQueue中获得
 
@@ -173,6 +177,38 @@ public class viewNetWorkDetailPanel extends javax.swing.JPanel {
             row[4] = roleName;
             model.addRow(row);
         }
+    }
+
+    //////////////beautify/////////////////
+    public void beautify() {
+        // ==== 背景 ====
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 整体淡紫灰背景
+        jScrollPane3.getViewport().setBackground(new java.awt.Color(255, 255, 255)); // 表格背景白
+
+        // ==== 表格美化 ====
+        tbUserAccount.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tbUserAccount.setRowHeight(28);
+        tbUserAccount.setGridColor(new java.awt.Color(220, 210, 240)); // 紫色淡边框
+        tbUserAccount.setForeground(new java.awt.Color(33, 33, 33)); // 黑灰色字体
+        tbUserAccount.setSelectionBackground(new java.awt.Color(190, 170, 240)); // 选中背景紫
+        tbUserAccount.setSelectionForeground(new java.awt.Color(255, 255, 255)); // 白色选中文字
+        tbUserAccount.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tbUserAccount.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tbUserAccount.getTableHeader().setForeground(new java.awt.Color(54, 33, 89)); // 深紫标题
+        tbUserAccount.setShowGrid(true);
+        tbUserAccount.setShowVerticalLines(false); // 横向线更简洁
+
+        // ==== 标题 ====
+        jLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+        jLabel1.setForeground(new java.awt.Color(54, 33, 89)); // 深紫标题
+
+        // ==== 返回按钮统一风格 ====
+        BtnBack.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        BtnBack.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+        BtnBack.setForeground(new java.awt.Color(255, 255, 255));
+        BtnBack.setFocusPainted(false);
+        BtnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+
     }
 
 }
