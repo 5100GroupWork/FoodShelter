@@ -4,6 +4,7 @@
 /FoodShelter/.vscode/
 /FoodShelter/Databank.db4o
 /FoodShelter/pom.xml
+*.DS_Store
 
 
 FoodShelter/nbactions.xml
