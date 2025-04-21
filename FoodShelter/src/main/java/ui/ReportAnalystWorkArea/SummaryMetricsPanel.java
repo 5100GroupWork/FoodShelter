@@ -9,7 +9,13 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.FoodItem.FoodItem;
@@ -43,6 +49,7 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         this.workArea = workArea;
         this.account = ua;
         initComponents();
+        btnExport.addActionListener(e -> exportChartsAsImage());
 
         loadSummaryMetrics();
 
@@ -65,8 +72,10 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         lblTotalDonated = new javax.swing.JLabel();
         lblEnergySaved = new javax.swing.JLabel();
         BtnBack = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnExport = new javax.swing.JButton();
 
-        chartContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 10));
+        chartContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 60, 10));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("SummaryMetrics");
@@ -82,38 +91,58 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             }
         });
 
+        btnExport.setText("Export Charts 📤");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExport)
+                .addGap(119, 119, 119))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addComponent(BtnBack)
-                        .addGap(100, 100, 100)
+                        .addGap(191, 191, 191)
                         .addComponent(jLabel1))
-                    .addComponent(lblEnergySaved)
-                    .addComponent(lblTotalDonated))
-                .addContainerGap(495, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotalDonated)
+                            .addComponent(lblEnergySaved)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(BtnBack))
-                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(BtnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExport)
+                .addGap(8, 8, 8)
                 .addComponent(lblTotalDonated)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEnergySaved)
-                .addGap(18, 18, 18)
-                .addComponent(chartContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,8 +156,10 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBack;
+    private javax.swing.JButton btnExport;
     private javax.swing.JPanel chartContainer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblEnergySaved;
     private javax.swing.JLabel lblTotalDonated;
     // End of variables declaration//GEN-END:variables
@@ -149,8 +180,8 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             }
         }
         // pie chart
-        dataset.setValue("Donated", donated);
-        dataset.setValue("Stored", stored);
+        dataset.setValue("🍽 Donated", donated);
+        dataset.setValue("🥫 Stored", stored);
 
         JFreeChart pieChart = ChartFactory.createPieChart(
                 "Food Usage Distribution",
@@ -160,29 +191,38 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
                 false);
 
         PiePlot plot = (PiePlot) pieChart.getPlot();
-        plot.setSectionPaint("Donated", new Color(138, 201, 25)); // light blue
-        plot.setSectionPaint("Stored", new Color(255, 175, 204)); // light orange
-        plot.setBackgroundPaint(new Color(242, 242, 242));
-        pieChart.setBackgroundPaint(new Color(242, 242, 242));
-
+        plot.setSectionPaint("🍽 Donated", new Color(139, 195, 74)); // 
+        plot.setSectionPaint("🥫 Stored", new Color(255, 202, 40)); // 
+       
+        plot.setCircular(true);
         plot.setOutlineVisible(false);
         plot.setShadowPaint(null);
-        pieChart.removeLegend(); // optional
-
-        Dimension fixedSize = new Dimension(280, 240);
+        
+        plot.setLabelFont(new Font("Segoe UI", Font.BOLD, 13));
+        plot.setLabelBackgroundPaint(new Color(245, 242, 250));
+        plot.setLabelOutlinePaint(null);
+        plot.setLabelShadowPaint(null);
+        
+        plot.setBackgroundPaint(new Color(245, 242, 250));
+        pieChart.setBackgroundPaint(new Color(245, 242, 250));
+        pieChart.setTitle(new org.jfree.chart.title.TextTitle(
+                "Food Usage Distribution", new Font("Segoe UI", Font.BOLD, 16)));
 
         ChartPanel piePanel = new ChartPanel(pieChart);
-
+        Dimension fixedSize = new Dimension(280, 240);
         piePanel.setPreferredSize(fixedSize);
-        piePanel.setMaximumSize(fixedSize);
-        piePanel.setMinimumSize(fixedSize);
-        piePanel.setSize(fixedSize);
+        piePanel.setBackground(new Color(245, 242, 250));
+
+//        piePanel.setPreferredSize(fixedSize);
+//        piePanel.setMaximumSize(fixedSize);
+//        piePanel.setMinimumSize(fixedSize);
+//        piePanel.setSize(fixedSize);
 
         // bar chart
 
         DefaultCategoryDataset barDataset = new DefaultCategoryDataset();
-        barDataset.setValue(donated, "Food", "Donated");
-        barDataset.setValue(stored, "Food", "Stored");
+        barDataset.setValue(donated, "Food", "🍽 Donated");
+        barDataset.setValue(stored, "Food", "🥫 Stored");
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Donation Summary",
@@ -192,34 +232,48 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
                 PlotOrientation.VERTICAL,
                 false, true, false);
 
+        barChart.setBackgroundPaint(new Color(245, 242, 250));
+        barChart.setTitle(new org.jfree.chart.title.TextTitle(
+                "Donation Summary", new Font("Segoe UI", Font.BOLD, 16)));
+        
+        var barPlot = barChart.getCategoryPlot();
+        barPlot.setBackgroundPaint(new Color(245, 242, 250));
+        barPlot.setOutlineVisible(false);
+        barPlot.setRangeGridlinePaint(new Color(200, 200, 230));
+        barPlot.getRenderer().setSeriesPaint(0, new Color(63, 81, 181)); // indigo
+        barPlot.getRenderer().setDefaultItemLabelsVisible(true);
+        barPlot.getRenderer().setDefaultItemLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        barPlot.getDomainAxis().setLabelFont(new Font("Segoe UI", Font.BOLD, 13));
+        barPlot.getDomainAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
+        barPlot.getRangeAxis().setLabelFont(new Font("Segoe UI", Font.BOLD, 13));
+        barPlot.getRangeAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
+
         ChartPanel barPanel = new ChartPanel(barChart);
         barPanel.setPreferredSize(fixedSize);
-        barPanel.setMaximumSize(fixedSize);
-        barPanel.setMinimumSize(fixedSize);
-        barPanel.setSize(fixedSize);
+        barPanel.setBackground(new Color(245, 242, 250));
+               
+//        ChartPanel barPanel = new ChartPanel(barChart);
+//        barPanel.setPreferredSize(fixedSize);
+//        barPanel.setMaximumSize(fixedSize);
+//        barPanel.setMinimumSize(fixedSize);
+//        barPanel.setSize(fixedSize);
+
+        chartContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 20));  // 40px horizontal gap, 20px vertical
+        chartContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(60, 10, 30, 10)); // top/bottom padding
 
         chartContainer.removeAll();
-        // chartContainer.setLayout(new GridBagLayout()); // center and stop stretch
         chartContainer.add(barPanel);
+        chartContainer.add(Box.createRigidArea(new Dimension(40, 0)));  // 40px horizontal spacing
         chartContainer.add(piePanel);
         chartContainer.revalidate();
         chartContainer.repaint();
-        barChart.setBackgroundPaint(new Color(245, 242, 250));
-        barChart.getCategoryPlot().setBackgroundPaint(new Color(245, 242, 250));
-        barChart.getCategoryPlot().setDomainGridlinePaint(new Color(200, 200, 230));
-        barChart.getCategoryPlot().setRangeGridlinePaint(new Color(200, 200, 230));
 
         System.out.println("Donated: " + donated + ", Stored: " + stored);
 
     }
 
     private void loadSummaryMetrics() {
-
-        System.out.println("Checking work requests...");
-        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
-            System.out.println(wr); // or wr.getClass().getSimpleName()
-        }
-
         int totalDonated = 0;
         double energySavedPerItem = 0.5; // Example: 0.5 kWh saved per item
 
@@ -234,8 +288,14 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
         double totalEnergySaved = totalDonated * energySavedPerItem;
 
-        lblTotalDonated.setText("Total Food Donated: " + totalDonated);
-        lblEnergySaved.setText("Estimated Energy Saved: " + totalEnergySaved + " kWh");
+        lblTotalDonated.setText("🍽 Total Food Donated: " + totalDonated);
+        lblEnergySaved.setText("💡 Estimated Energy Saved: " + totalEnergySaved + " kWh");
+
+        lblTotalDonated.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+        lblTotalDonated.setForeground(new Color(54, 33, 89));
+
+        lblEnergySaved.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+        lblEnergySaved.setForeground(new Color(54, 33, 89));
     }
 
     //////////////////beautify///////////////////
@@ -247,6 +307,19 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         // 标题字体
         jLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
         jLabel1.setForeground(new Color(54, 33, 89)); // 深紫色
+        
+        // 按钮样式
+        BtnBack.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        BtnBack.setBackground(new java.awt.Color(103, 58, 183)); // 深紫色
+        BtnBack.setForeground(java.awt.Color.WHITE);
+        BtnBack.setFocusPainted(false);
+        BtnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        
+        btnExport.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        btnExport.setBackground(new java.awt.Color(33, 150, 243));
+        btnExport.setForeground(java.awt.Color.WHITE);
+        btnExport.setFocusPainted(false);
+        btnExport.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
 
         // 标签字体优化
         lblTotalDonated.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
@@ -256,4 +329,33 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
     }
 
+    private void exportChartsAsImage() {
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select Folder to Save Charts");
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int result = fileChooser.showSaveDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File dir = fileChooser.getSelectedFile();
+
+            try {
+                for (java.awt.Component comp : chartContainer.getComponents()) {
+                    if (comp instanceof ChartPanel) {
+                        ChartPanel chartPanel = (ChartPanel) comp;
+                        String chartTitle = chartPanel.getChart().getTitle().getText().toLowerCase().replaceAll("\\s+", "_");
+                        File outputFile = new File(dir, chartTitle + ".png");
+                        ImageIO.write(chartPanel.getChart().createBufferedImage(600, 400), "png", outputFile);
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Charts exported to:\n" + dir.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Export failed:\n" + e.getMessage());
+            }
+        }
+    }
+
 }
+

@@ -64,6 +64,14 @@ public class DonationFormPanel extends javax.swing.JPanel {
         if (organization != null && organization instanceof FoodIncOrg) {
             this.foodIncOrg = (FoodIncOrg) organization;
         }
+        
+        expiraDateSpinner.setModel(new javax.swing.SpinnerDateModel());
+        expiraDateSpinner.setEditor(new javax.swing.JSpinner.DateEditor(expiraDateSpinner, "MM/dd/yyyy"));
+        expiraDateSpinner.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+
+
+        
+        
         beautify();
 
     }
@@ -75,23 +83,23 @@ public class DonationFormPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         requestTestJButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         txtFoodName = new javax.swing.JTextField();
         valueLabel = new javax.swing.JLabel();
         enterpriseLabel = new javax.swing.JLabel();
         spinnerQuantity = new javax.swing.JSpinner();
         valueLabel1 = new javax.swing.JLabel();
-        txtExpiry = new javax.swing.JTextField();
         btnResetForm = new javax.swing.JButton();
         requestTestJButton1 = new javax.swing.JButton();
         lblWelcome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblEnterprise = new javax.swing.JLabel();
         imgLable = new javax.swing.JLabel();
+        expiraDateSpinner = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         requestTestJButton.setText("Submit Donation");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,8 +107,6 @@ public class DonationFormPanel extends javax.swing.JPanel {
                 requestTestJButtonActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Expiry Date:");
 
         valueLabel.setText("Quantity:");
 
@@ -131,101 +137,82 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
         lblEnterprise.setText("<value>");
 
+        jLabel1.setText("Expiration Date:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(60, 60, 60)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(requestTestJButton)
-                                                                .addGap(29, 29, 29)
-                                                                .addComponent(btnResetForm)
-                                                                .addGap(27, 27, 27)
-                                                                .addComponent(requestTestJButton1))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGap(89, 89, 89)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                        .addComponent(jLabel1)
-                                                                        .addComponent(valueLabel)
-                                                                        .addComponent(valueLabel1))
-                                                                .addGap(18, 18, 18)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(spinnerQuantity,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtFoodName,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                89,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(txtExpiry,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                89,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(161, 161, 161)
-                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(lblWelcome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 697,
-                                        Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblEnterprise)
-                                .addGap(59, 59, 59))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 500,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblWelcome)
-                                        .addComponent(jLabel2)
-                                        .addComponent(lblEnterprise))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(requestTestJButton)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnResetForm)
+                                .addGap(27, 27, 27)
+                                .addComponent(requestTestJButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(valueLabel)
+                                    .addComponent(valueLabel1)
+                                    .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(valueLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(valueLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtExpiry, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(requestTestJButton)
-                                        .addComponent(btnResetForm)
-                                        .addComponent(requestTestJButton1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFoodName, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                                    .addComponent(spinnerQuantity)
+                                    .addComponent(expiraDateSpinner)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 697, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblEnterprise)
+                .addGap(59, 59, 59))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWelcome)
+                    .addComponent(jLabel2)
+                    .addComponent(lblEnterprise))
+                .addGap(18, 18, 18)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFoodName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valueLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(valueLabel)
+                    .addComponent(spinnerQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(expiraDateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(requestTestJButton)
+                    .addComponent(btnResetForm)
+                    .addComponent(requestTestJButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_requestTestJButtonActionPerformed
@@ -293,7 +280,10 @@ public class DonationFormPanel extends javax.swing.JPanel {
         FoodItem fooditem = new FoodItem();
         fooditem.setFoodName(txtFoodName.getText().trim());
         fooditem.setNumber((int) spinnerQuantity.getValue());
-        fooditem.setExpiredDate(txtExpiry.getText().trim());
+
+        java.util.Date expiryDate = (java.util.Date) expiraDateSpinner.getValue();
+        fooditem.setExpiredDate(new java.text.SimpleDateFormat("MM/dd/yyyy").format(expiryDate));
+
         fooditem.setFoodIncOrg(foodIncOrg);
 
         FoodIncOrg org = null;
@@ -327,7 +317,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Donation submitted successfully!");
             txtFoodName.setText("");
             spinnerQuantity.setValue(0);
-            txtExpiry.setText("");
+            expiraDateSpinner.setValue(new java.util.Date()); // reset to today
+
         } else {
             JOptionPane.showMessageDialog(this, "Error: Could not find appropriate organization for donation.");
         }
@@ -339,7 +330,8 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
         txtFoodName.setText("");
         spinnerQuantity.setValue(0);
-        txtExpiry.setText("");
+        expiraDateSpinner.setValue(new java.util.Date()); // reset to today
+
     }// GEN-LAST:event_btnResetFormActionPerformed
 
     private void requestTestJButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_requestTestJButton1ActionPerformed
@@ -357,6 +349,7 @@ public class DonationFormPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnResetForm;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JSpinner expiraDateSpinner;
     private javax.swing.JLabel imgLable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -365,11 +358,9 @@ public class DonationFormPanel extends javax.swing.JPanel {
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JButton requestTestJButton1;
     private javax.swing.JSpinner spinnerQuantity;
-    private javax.swing.JTextField txtExpiry;
     private javax.swing.JTextField txtFoodName;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JLabel valueLabel1;
-
     // End of variables declaration//GEN-END:variables
     private void beautify() {
         // 背景色统一
@@ -396,6 +387,9 @@ public class DonationFormPanel extends javax.swing.JPanel {
         valueLabel.setForeground(labelColor);
         valueLabel1.setFont(labelFont);
         valueLabel1.setForeground(labelColor);
+
+        jLabel1.setFont(labelFont);
+        jLabel1.setForeground(labelColor);
         jLabel1.setFont(labelFont);
         jLabel1.setForeground(labelColor);
 
@@ -405,10 +399,6 @@ public class DonationFormPanel extends javax.swing.JPanel {
         txtFoodName.setForeground(new java.awt.Color(40, 40, 40));
         txtFoodName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
 
-        txtExpiry.setFont(labelFont);
-        txtExpiry.setBackground(java.awt.Color.WHITE);
-        txtExpiry.setForeground(new java.awt.Color(40, 40, 40));
-        txtExpiry.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
 
         spinnerQuantity.setFont(labelFont);
         spinnerQuantity.setForeground(new java.awt.Color(40, 40, 40));
