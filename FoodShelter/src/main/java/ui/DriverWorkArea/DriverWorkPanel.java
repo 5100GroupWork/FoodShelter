@@ -42,6 +42,7 @@ public class DriverWorkPanel extends javax.swing.JPanel {
         this.driver = userAccount;
         initComponents();
         populateTable();
+        beautify();
     }
 
     /**
@@ -186,6 +187,39 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             row[5] = wrd;
             // r[4]存储的是原来的workrequest
             model.addRow(row);
+        }
+    }
+
+    private void beautify() {
+        // 背景
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰
+
+        // 标题
+        jLabel4.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        jLabel4.setForeground(new java.awt.Color(54, 33, 89)); // 深紫色标题
+
+        // 表格样式
+        TaskTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        TaskTable.setRowHeight(28);
+        TaskTable.setGridColor(new java.awt.Color(200, 190, 230)); // 网格线淡紫灰
+        TaskTable.setForeground(new java.awt.Color(33, 33, 33)); // 字体深灰
+        TaskTable.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        TaskTable.setSelectionForeground(java.awt.Color.WHITE);
+
+        TaskTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        TaskTable.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        TaskTable.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+
+        // 按钮美化
+        javax.swing.JButton[] buttons = { DeliveredBtn, getItemBtn };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
         }
     }
 

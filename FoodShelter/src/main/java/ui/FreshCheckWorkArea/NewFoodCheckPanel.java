@@ -48,6 +48,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
 
         // 最后填充表格
         populateTable();
+        beautify();
     }
 
     /**
@@ -250,4 +251,38 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         }
 
     }
+
+    private void beautify() {
+        // 背景色
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 标题
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = { btnApprove, btnReject };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        NewFoodTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        NewFoodTable.setRowHeight(28);
+        NewFoodTable.setGridColor(new java.awt.Color(200, 190, 230));
+        NewFoodTable.setForeground(new java.awt.Color(33, 33, 33));
+        NewFoodTable.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        NewFoodTable.setSelectionForeground(java.awt.Color.WHITE);
+
+        NewFoodTable.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        NewFoodTable.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        NewFoodTable.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }

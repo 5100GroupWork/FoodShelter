@@ -46,6 +46,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         initComponents();
         populateTableDriver();
         populateTableTask();
+        beautify();
     }
 
     /**
@@ -359,4 +360,51 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         }
 
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 分区标题
+        enterpriseLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        enterpriseLabel1.setForeground(new java.awt.Color(80, 80, 80));
+
+        enterpriseLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        enterpriseLabel2.setForeground(new java.awt.Color(80, 80, 80));
+
+        // 表格样式（任务 + 司机）
+        javax.swing.JTable[] tables = { tbUnassignedTasks, tbDrivers };
+        for (javax.swing.JTable table : tables) {
+            table.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            table.setRowHeight(28);
+            table.setGridColor(new java.awt.Color(200, 190, 230));
+            table.setForeground(new java.awt.Color(33, 33, 33));
+            table.setSelectionBackground(new java.awt.Color(190, 170, 240));
+            table.setSelectionForeground(java.awt.Color.WHITE);
+
+            table.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+            table.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+            table.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+        }
+
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = {
+                backJButton, btnAssignTask, btnAssignTask1, btnAssignTask2
+        };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
+
 }

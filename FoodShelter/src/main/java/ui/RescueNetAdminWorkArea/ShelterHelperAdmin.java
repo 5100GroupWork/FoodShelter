@@ -42,6 +42,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
 
         initComponents();
         populateTable();
+        beautify();
     }
 
     private void populateTable() {
@@ -203,5 +204,39 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblShelterHelper;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题样式
+        accountLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        accountLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 按钮美化
+        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格美化
+        tblShelterHelper.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblShelterHelper.setRowHeight(28);
+        tblShelterHelper.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰网格
+        tblShelterHelper.setForeground(new java.awt.Color(33, 33, 33));
+        tblShelterHelper.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblShelterHelper.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblShelterHelper.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblShelterHelper.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblShelterHelper.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }

@@ -43,6 +43,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         this.parentPanel = parentPanel;
 
         initComponents();
+        beautify();
     }
 
     /**
@@ -268,5 +269,52 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtuserName;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰
+
+        // 标题
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫色标题
+
+        // 标签统一样式
+        java.awt.Font labelFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13);
+        java.awt.Color labelColor = new java.awt.Color(80, 80, 80);
+
+        javax.swing.JLabel[] labels = {
+                lbluserName, lblpassword, lblConfirmPassword, lblOrganization
+        };
+        for (javax.swing.JLabel label : labels) {
+            label.setFont(labelFont);
+            label.setForeground(labelColor);
+        }
+
+        // 文本框样式
+        javax.swing.JTextField[] textFields = { txtuserName, txtEmail, txtPhone };
+        for (javax.swing.JTextField field : textFields) {
+            field.setFont(labelFont);
+            field.setBackground(java.awt.Color.WHITE);
+            field.setForeground(new java.awt.Color(40, 40, 40));
+            field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+        }
+
+        // 密码框样式
+        passwordField.setFont(labelFont);
+        passwordField.setBackground(java.awt.Color.WHITE);
+        passwordField.setForeground(new java.awt.Color(40, 40, 40));
+        passwordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = { btnSubmit, btnBack };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(labelFont);
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
+
 }

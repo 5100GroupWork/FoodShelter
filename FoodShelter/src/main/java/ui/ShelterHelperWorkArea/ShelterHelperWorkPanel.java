@@ -48,6 +48,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         initComponents();
         populateApprovedFoodTable();
         populateShelterRequestTable();
+        beautify();
     }
 
     /**
@@ -304,5 +305,49 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblApprovedFoodTasks;
     private javax.swing.JTable tblShelterRequests;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+        jPanel1.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 标题字体
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫主标题
+
+        // 分区小标题
+        javax.swing.JLabel[] labels = { enterpriseLabel1, enterpriseLabel2 };
+        for (javax.swing.JLabel label : labels) {
+            label.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+            label.setForeground(new java.awt.Color(80, 80, 80)); // 灰紫色副标题
+        }
+
+        // 表格样式统一（两个表格）
+        javax.swing.JTable[] tables = { tblApprovedFoodTasks, tblShelterRequests };
+        for (javax.swing.JTable table : tables) {
+            table.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            table.setRowHeight(28);
+            table.setGridColor(new java.awt.Color(200, 190, 230));
+            table.setForeground(new java.awt.Color(33, 33, 33));
+            table.setSelectionBackground(new java.awt.Color(190, 170, 240));
+            table.setSelectionForeground(java.awt.Color.WHITE);
+
+            table.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+            table.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+            table.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+        }
+
+        // 滚动面板背景白
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+
+        // 按钮样式
+        btnAssignTask.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        btnAssignTask.setBackground(new java.awt.Color(103, 58, 183));
+        btnAssignTask.setForeground(java.awt.Color.WHITE);
+        btnAssignTask.setFocusPainted(false);
+        btnAssignTask.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+    }
+
 }

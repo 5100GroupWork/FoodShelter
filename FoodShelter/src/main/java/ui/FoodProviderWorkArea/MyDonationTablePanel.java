@@ -57,6 +57,7 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                 }
 
                 populateTable();
+                beautify();
 
         }
 
@@ -227,4 +228,41 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                         }
                 }
         }
+
+        private void beautify() {
+                // 整体背景
+                this.setBackground(new java.awt.Color(245, 242, 250));
+
+                // 标题样式
+                enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+                enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89));
+
+                // 企业标签
+                jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+                jLabel2.setForeground(new java.awt.Color(60, 60, 60));
+                lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+                lblEnterprise.setForeground(new java.awt.Color(60, 60, 60));
+
+                // 按钮样式
+                btnBack.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+                btnBack.setBackground(new java.awt.Color(103, 58, 183)); // 深紫色
+                btnBack.setForeground(java.awt.Color.WHITE);
+                btnBack.setFocusPainted(false);
+                btnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+
+                // 表格样式
+                tblDonations.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+                tblDonations.setRowHeight(28);
+                tblDonations.setGridColor(new java.awt.Color(200, 190, 230)); // 淡紫灰
+                tblDonations.setForeground(new java.awt.Color(33, 33, 33));
+                tblDonations.setSelectionBackground(new java.awt.Color(190, 170, 240));
+                tblDonations.setSelectionForeground(java.awt.Color.WHITE);
+
+                tblDonations.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+                tblDonations.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+                tblDonations.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+                jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE); // 保证滚动区域干净
+        }
+
 }

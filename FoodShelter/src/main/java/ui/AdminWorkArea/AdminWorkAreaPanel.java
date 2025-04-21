@@ -40,13 +40,16 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     NetWork netWork;
     AdminWorkAreaPanel parent;
 
-    public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem) {
+    public AdminWorkAreaPanel(JPanel workArea, UserAccount account, FoodShelterSystem foodShelterSystem,
+            NetWork netWork) {
         this.workArea = workArea;
         this.account = account;
+        this.netWork = netWork;
         this.foodShelterSystem = foodShelterSystem;
 
         initComponents();
         populateTable();
+        beautify();
 
     }
 
@@ -247,36 +250,70 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         tblOrg.setRowSorter(sorter);
         model.setRowCount(0);
+        if (this.netWork == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "it is an empty network !");
+            return;
+        }
+        for (BasicEnterprise be : this.netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (be instanceof FoodEnterprise) {
+                for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof FoodIncOrg) {
+                        FoodIncOrg foodOrg = (FoodIncOrg) org;
 
-        for (NetWork net : foodShelterSystem.getNetworkList()) {
-            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                if (be instanceof FoodEnterprise) {
-                    for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
-                        if (org instanceof FoodIncOrg) {
-                            FoodIncOrg foodOrg = (FoodIncOrg) org;
-
-                            // Find assigned admin
-                            UserAccount admin = null;
-                            for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
-                                if (ua.getOrganization() == foodOrg && (ua.getRole() instanceof FoodEnterpriseManager
-                                        || ua.getRole() instanceof FoodIncEmployee)) {
-                                    admin = ua;
-                                    break;
-                                }
+                        // Find assigned admin
+                        UserAccount admin = null;
+                        for (UserAccount ua : be.getUserAccountDirectory().getUserAccountList()) {
+                            if (ua.getOrganization() == foodOrg && (ua.getRole() instanceof FoodEnterpriseManager
+                                    || ua.getRole() instanceof FoodIncEmployee)) {
+                                admin = ua;
+                                break;
                             }
-
-                            Object[] row = new Object[4];
-                            row[0] = foodOrg.getOrganizationID();
-                            row[1] = foodOrg.getName();
-                            row[2] = foodOrg.getAddress();
-                            row[3] = (admin != null) ? admin.getUsername() : "N/A";
-
-                            model.addRow(row);
                         }
+
+                        Object[] row = new Object[4];
+                        row[0] = foodOrg.getOrganizationID();
+                        row[1] = foodOrg.getName();
+                        row[2] = foodOrg.getAddress();
+                        row[3] = (admin != null) ? admin.getUsername() : "N/A";
+
+                        model.addRow(row);
                     }
                 }
             }
         }
+    }
+
+    private void beautify() {
+        // 背景色
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 整体背景
+
+        // 标题样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        // 按钮样式统一
+        javax.swing.JButton[] buttons = { btnBack, btnAdd, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblOrg.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblOrg.setRowHeight(28);
+        tblOrg.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰边框
+        tblOrg.setForeground(new java.awt.Color(33, 33, 33));
+        tblOrg.setSelectionBackground(new java.awt.Color(190, 170, 240)); // 选中行背景
+        tblOrg.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblOrg.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblOrg.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblOrg.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE); // 表格白底
     }
 
 }

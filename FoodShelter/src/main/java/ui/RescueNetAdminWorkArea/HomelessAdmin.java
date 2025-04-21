@@ -40,6 +40,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
 
         initComponents();
         populateTable();
+        beautify();
 
     }
 
@@ -206,4 +207,38 @@ public class HomelessAdmin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblHomeless;
     // End of variables declaration//GEN-END:variables
+
+    private void beautify() {
+        // 背景
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰
+
+        // 标题样式
+        accountLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        accountLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫标题
+
+        // 按钮美化
+        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblHomeless.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblHomeless.setRowHeight(28);
+        tblHomeless.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰边框
+        tblHomeless.setForeground(new java.awt.Color(33, 33, 33));
+        tblHomeless.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblHomeless.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblHomeless.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblHomeless.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblHomeless.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }
