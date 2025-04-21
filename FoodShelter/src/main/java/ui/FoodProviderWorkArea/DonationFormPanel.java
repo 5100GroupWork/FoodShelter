@@ -217,6 +217,28 @@ public class DonationFormPanel extends javax.swing.JPanel {
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_requestTestJButtonActionPerformed
 
+        String foodName = txtFoodName.getText().trim();
+        int quantity = (int) spinnerQuantity.getValue();
+
+        // Validate food name
+        if (foodName.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a food name.",
+                    "Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            txtFoodName.requestFocus();
+            return;
+        }
+
+        // Validate quantity
+        if (quantity <= 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a quantity greater than zero.",
+                    "Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            spinnerQuantity.requestFocus();
+            return;
+        }
         // First find the enterprise if it's null
         if (foodEnterprise == null && account != null) {
             // 直接从用户账户获取企业

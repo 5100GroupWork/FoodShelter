@@ -48,6 +48,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         initComponents();
         populateApprovedFoodTable();
         populateShelterRequestTable();
+        populateAssignedTasksTable();
         beautify();
     }
 
@@ -71,7 +72,10 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblApprovedFoodTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblAssignedTasks = new javax.swing.JTable();
+        enterpriseLabel3 = new javax.swing.JLabel();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Shelter Helper - Task Assignment");
@@ -133,35 +137,53 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("备注（写完后删除）：shelter里的status：Pending/ Matched/ Delivered");
+        tblAssignedTasks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Number", "Food Name", "Vendor", "Quantity"
+            }
+        ));
+        jScrollPane4.setViewportView(tblAssignedTasks);
+
+        jScrollPane3.setViewportView(jScrollPane4);
+
+        enterpriseLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        enterpriseLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        enterpriseLabel3.setText("Assigned Tasks");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(233, 233, 233)
-                                .addComponent(enterpriseLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
+                        .addGap(264, 264, 264)
                         .addComponent(btnAssignTask))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(enterpriseLabel1)))
-                .addContainerGap(375, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(249, 249, 249)
+                                .addComponent(enterpriseLabel1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(enterpriseLabel2)
+                        .addGap(297, 297, 297)
+                        .addComponent(enterpriseLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(250, 770, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,18 +191,21 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(enterpriseLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterpriseLabel2)
+                    .addComponent(enterpriseLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addComponent(enterpriseLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
+                        .addComponent(enterpriseLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnAssignTask)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(48, 48, 48))
+                .addGap(91, 91, 91))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -198,107 +223,188 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
         // TODO add your handling code here:
         int foodRow = tblApprovedFoodTasks.getSelectedRow();
-        int requestRow = tblShelterRequests.getSelectedRow();
+    int requestRow = tblShelterRequests.getSelectedRow();
 
-        if (foodRow < 0 || requestRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select one food item and one shelter request.");
-            return;
+    if (foodRow < 0 || requestRow < 0) {
+        JOptionPane.showMessageDialog(null, "Please select one food item and one shelter request.");
+        return;
+    }
+
+    // Convert view indices to model indices
+    int foodModelRow = tblApprovedFoodTasks.convertRowIndexToModel(foodRow);
+    int requestModelRow = tblShelterRequests.convertRowIndexToModel(requestRow);
+
+    DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+    DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
+
+
+    WorkRequestFoodItem selectedFoodRequest = null;
+    for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+        if (wr instanceof WorkRequestFoodItem) {
+            WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
+            FoodItem food = wrfi.getFoodItem();
+
+            if (food != null && 
+                food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) && 
+                food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
+                food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
+                selectedFoodRequest = wrfi;
+                break;
+            }
         }
+    }
 
-        DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
-        DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(foodModel);
-        TableRowSorter<DefaultTableModel> sorter1 = new TableRowSorter<>(requestModel);
-        tblApprovedFoodTasks.setRowSorter(sorter);
-        tblShelterRequests.setRowSorter(sorter1);
+    WorkRequestNeeds selectedRequest = null;
+    for (WorkRequest wr : rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList()) {
+        if (wr instanceof WorkRequestNeeds) {
+            WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
+            // Match based on displayed properties
+            if (wrn.getFoodOrgName().equals(requestModel.getValueAt(requestModelRow, 1)) &&
+                wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 2))) {
+                selectedRequest = wrn;
+                break;
+            }
+        }
+    }
 
-        FoodItem selectedFood = (FoodItem) foodModel.getValueAt(foodRow, 0);
-        WorkRequest selectedRequest = (WorkRequest) requestModel.getValueAt(requestRow, 0);
+    if (selectedFoodRequest == null || selectedRequest == null) {
+        JOptionPane.showMessageDialog(null, "Could not identify the selected items. Please try again.");
+        return;
+    }
 
-        // 创建配送任务
-        DeliveryTask task = new DeliveryTask();
-        task.setFoodItem(selectedFood);
-        task.setQuantity(selectedFood.getNumber());
-        task.setFromLocation(selectedFood.getFoodIncOrg().getName());
-        task.setToLocation(selectedRequest.getSender().getName());
-        task.setSender(requestEntertainOrg);
-        task.setReceiver(selectedRequest.getSender()); // 接收者是请求的发送者
-        task.setStatus("Pending"); // 初始状态为待处理
+    FoodItem selectedFood = selectedFoodRequest.getFoodItem();
 
-        // 将任务添加到请求发送者的工作队列
-        selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
+    DeliveryTask task = new DeliveryTask();
+    task.setFoodItem(selectedFood);
+    task.setQuantity(selectedFood.getNumber());
+    task.setFromLocation(selectedFood.getFoodIncOrg().getName());
+    task.setToLocation(selectedRequest.getSender().getName());
+    task.setSender(requestEntertainOrg);
+    task.setReceiver(selectedRequest.getSender());
+    task.setStatus("Pending");
 
-        // 将原请求状态更新为"已匹配"
-        selectedRequest.setStatus("Matched");
+    selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
 
-        // 更新食品状态为"已分配"
-        selectedFood.setUsingStatus("Assigned");
+    selectedRequest.setStatus("Matched");
 
-        JOptionPane.showMessageDialog(null, "Task assigned successfully!");
+    selectedFood.setUsingStatus("Assigned");
 
-        // 刷新表格显示
-        populateApprovedFoodTable();
-        populateShelterRequestTable();
+    JOptionPane.showMessageDialog(null, "Task assigned successfully!");
+
+    populateApprovedFoodTable();
+    populateShelterRequestTable();
+    populateAssignedTasksTable();
     }// GEN-LAST:event_btnAssignTaskActionPerformed
 
     private void populateApprovedFoodTable() {
-        DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        tblApprovedFoodTasks.setRowSorter(sorter);
-        model.setRowCount(0);
+       DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+    tblApprovedFoodTasks.setRowSorter(sorter);
+    model.setRowCount(0);
 
-        // 从warehouseList来
-        int index = 0;
-        for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
-            if (wr instanceof WorkRequestFoodItem) {
-                WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
-                FoodItem food = wrfi.getFoodItem();
+    int index = 0;
+    for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+        if (wr instanceof WorkRequestFoodItem) {
+            WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
+            FoodItem food = wrfi.getFoodItem();
 
+            if (food != null && !"Assigned".equals(food.getUsingStatus())) {
+                index++;
+                Object[] row = new Object[5];
+                row[0] = index;
+                row[1] = food.getFoodName();
+                row[2] = food.getFoodIncOrg().getName();
+                row[3] = food.getNumber();
+                row[4] = food.getExpiredDate();
+                model.addRow(row);
+            }
+        }
+    }
+    }
+
+    private void populateShelterRequestTable() {
+        DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+    tblShelterRequests.setRowSorter(sorter);
+    model.setRowCount(0);
+
+    int index = 0;
+    RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
+    WorkQueue queue = org.getWorkQueue();
+    System.out.println("queue size :" + queue.getWorkRequestList().size());
+    
+    for (WorkRequest wr : queue.getWorkRequestList()) {
+        if (wr instanceof WorkRequestNeeds) {
+            WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
+
+            if ("pending".equalsIgnoreCase(wrn.getStatus())) {
+                Object[] row = new Object[3];
+                index++;
+                row[0] = index;
+                row[1] = wrn.getFoodOrgName();
+                row[2] = wrn.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
+    }
+    
+    private void populateAssignedTasksTable() {
+    DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
+    model.setRowCount(0);
+    
+    int index = 0;
+
+    for (WorkRequest wr : requestEntertainOrg.getWorkQueue().getWorkRequestList()) {
+        if (wr instanceof DeliveryTask) {
+            DeliveryTask task = (DeliveryTask) wr;
+            FoodItem food = task.getFoodItem();
+            
+            if (food != null) {
+                index++;
+                Object[] row = new Object[4];
+                row[0] = index;  // Auto-incremented number
+                row[1] = food.getFoodName();
+                row[2] = food.getFoodIncOrg().getName();
+                row[3] = food.getNumber();
+                model.addRow(row);
+            }
+        }
+    }
+
+    for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+        for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof DeliveryTask) {
+                DeliveryTask task = (DeliveryTask) wr;
+                FoodItem food = task.getFoodItem();
+                
                 if (food != null) {
                     index++;
-                    Object[] row = new Object[5];
-                    row[0] = index;
+                    Object[] row = new Object[4];
+                    row[0] = index;  // Auto-incremented number
                     row[1] = food.getFoodName();
                     row[2] = food.getFoodIncOrg().getName();
                     row[3] = food.getNumber();
-                    row[4] = food.getExpiredDate();
                     model.addRow(row);
                 }
             }
         }
     }
-
-    private void populateShelterRequestTable() {
-        DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        tblShelterRequests.setRowSorter(sorter);
-        model.setRowCount(0);
-
-        int index = 0;
-        RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
-        WorkQueue queue = org.getWorkQueue();
-        System.out.println("queue size :" + queue.getWorkRequestList().size());
-        for (WorkRequest wr : queue.getWorkRequestList()) {
-            WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
-            Object[] row = new Object[3];
-            index++;
-            row[0] = index;
-            row[1] = wrn.getFoodOrgName();
-            row[2] = wrn.getStatus();
-            model.addRow(row);
-        }
-    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignTask;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel enterpriseLabel2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel enterpriseLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tblApprovedFoodTasks;
+    private javax.swing.JTable tblAssignedTasks;
     private javax.swing.JTable tblShelterRequests;
     // End of variables declaration//GEN-END:variables
     private void beautify() {
@@ -335,6 +441,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         // 滚动面板背景白
         jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
         jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane4.getViewport().setBackground(java.awt.Color.WHITE);
 
         // 按钮样式
         btnAssignTask.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
