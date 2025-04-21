@@ -5,6 +5,8 @@
 package ui.RescueNetAdminWorkArea;
 
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,7 @@ import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
+import model.Role.Homeless;
 
 /**
  *
@@ -30,6 +33,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
     NetWork netWork;
     RequestCollectOrg requestCollectOrg;
     RescueNetEnterprise rescueNetEnterprise;
+    UserAccount account;
 
     public HomelessAdmin(JPanel workArea, UserAccount account, BasicOrganization organization,
             BasicEnterprise enterprise, NetWork netWork) {
@@ -37,7 +41,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
         this.netWork = netWork;
         this.requestCollectOrg = (RequestCollectOrg) organization;
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
-
+        this.account = account;
         initComponents();
         populateTable();
         beautify();
@@ -54,7 +58,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
         for (UserAccount ua : requestCollectOrg.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[3];
             row[0] = count++;
-            row[1] = ua.getUsername();
+            row[1] = ua;
             row[2] = ua.getPhone();
             model.addRow(row);
         }
@@ -67,7 +71,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -76,6 +80,9 @@ public class HomelessAdmin extends javax.swing.JPanel {
         tblHomeless = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        InconLabel = new javax.swing.JLabel();
+        btnShowIncon = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -88,21 +95,22 @@ public class HomelessAdmin extends javax.swing.JPanel {
         accountLabel.setText("Homeless Admin - Account Management");
 
         tblHomeless.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Homeless ID", "Name", "Contact"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Homeless ID", "Name", "Contact"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblHomeless);
@@ -121,46 +129,79 @@ public class HomelessAdmin extends javax.swing.JPanel {
             }
         });
 
+        btnShowIncon.setText("show Incon");
+        btnShowIncon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowInconActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(backJButton)
-                                                .addGap(48, 48, 48)
-                                                .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 380,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 337, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(btnAdd)
-                                .addGap(343, 343, 343)
-                                .addComponent(btnDelete)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnShowIncon)
+                        .addGap(344, 344, 344)
+                        .addComponent(btnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(backJButton)
+                                .addGap(48, 48, 48)
+                                .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(InconLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(322, 322, 322))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(backJButton))
-                                .addGap(26, 26, 26)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(114, 114, 114)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnAdd)
-                                        .addComponent(btnDelete))
-                                .addContainerGap(288, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backJButton))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnAdd)
+                    .addComponent(btnShowIncon))
+                .addGap(36, 36, 36)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(InconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnShowInconActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowInconActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblHomeless.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first.");
+            return;
+        }
+        String filePath = null;
+        UserAccount account = (UserAccount) tblHomeless.getValueAt(selectedRow, 1);
+        Homeless homeless = (Homeless) account.getRole();
+        filePath = homeless.getInconPath();
+        if(filePath!=null && !filePath.equals("")){
+            ImageIcon imageIcon = new ImageIcon(filePath);
+            Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            InconLabel.setIcon(new ImageIcon(image));
+        }else{
+            JOptionPane.showMessageDialog(this, "this one does not have Incon yet");
+        }
+    }//GEN-LAST:event_btnShowInconActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
 
@@ -168,10 +209,10 @@ public class HomelessAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddHomelessAccount panel = new AddHomelessAccount(rescueNetEnterprise, requestCollectOrg);
+        AddHomelessAccount panel = new AddHomelessAccount(workArea,account, netWork, rescueNetEnterprise, requestCollectOrg);
         workArea.add("AddHomelessAccount", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
+        layout.show(workArea,"AddHomelessAccount");
     }// GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
@@ -182,29 +223,20 @@ public class HomelessAdmin extends javax.swing.JPanel {
             return;
         }
 
-        String username = (String) tblHomeless.getValueAt(selectedRow, 1);
-
-        UserAccount toRemove = null;
-        for (UserAccount ua : requestCollectOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getUsername().equals(username)) {
-                toRemove = ua;
-                break;
-            }
-        }
-
-        if (toRemove != null) {
-            requestCollectOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-            JOptionPane.showMessageDialog(this, "User deleted.");
-            populateTable();
-        }
+        UserAccount account = (UserAccount) tblHomeless.getValueAt(selectedRow, 1);
+        this.requestCollectOrg.getUserAccountDirectory().getUserAccountList().remove(account);
+        this.netWork.getUserAccountDirctory().getUserAccountList().remove(account);
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InconLabel;
     private javax.swing.JLabel accountLabel;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnShowIncon;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblHomeless;
     // End of variables declaration//GEN-END:variables
 
