@@ -10,6 +10,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.FoodEnterprise;
@@ -55,6 +57,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -62,7 +65,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblOrg = new javax.swing.JTable();
 
@@ -89,8 +91,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Manage Food Organizations");
-
-        jLabel1.setText("Only used to manage food donation organizations.");
 
         tblOrg.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {
@@ -132,20 +132,9 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
                                                         .addGap(113, 113, 113)
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        false)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(btnAdd)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(btnDelete))
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addGap(305, 305, 305)
-                                                                        .addComponent(jLabel1))))))
+                                                        .addComponent(btnAdd)
+                                                        .addGap(454, 454, 454)
+                                                        .addComponent(btnDelete))))
                                 .addContainerGap(177, Short.MAX_VALUE)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +151,7 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAdd)
                                         .addComponent(btnDelete))
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel1)
-                                .addContainerGap(98, Short.MAX_VALUE)));
+                                .addContainerGap(157, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
@@ -250,7 +237,6 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JLabel enterpriseLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblOrg;
     // End of variables declaration//GEN-END:variables
@@ -258,6 +244,8 @@ public class AdminWorkAreaPanel extends javax.swing.JPanel {
     public void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblOrg.setRowSorter(sorter);
         model.setRowCount(0);
 
         for (NetWork net : foodShelterSystem.getNetworkList()) {

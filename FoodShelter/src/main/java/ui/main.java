@@ -6,8 +6,13 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
 import model.Account.UserAccount;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.DB4OUtil.DB4OUtil;
@@ -16,6 +21,9 @@ import model.Enterprise.FoodEnterprise;
 import model.Organization.BasicOrganization;
 import model.NetWork.NetWork;
 import model.Role.SysAdmin;
+import net.datafaker.providers.base.Color;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -51,6 +59,9 @@ public class main extends javax.swing.JFrame {
                 System.out.println("系统数据已保存（窗口关闭）");
             }
         });
+
+        // beautify
+        beautify();
     }
 
     /**
@@ -421,6 +432,55 @@ public class main extends javax.swing.JFrame {
             System.out.println(netWork1.getName());
             combox.addItem(netWork1);
         }
+    }
+
+    ///////////////////////////// ui background setting///////////////////////
+    public void beautify() {
+        // 左侧背景：深紫灰
+        jPanel1.setBackground(new java.awt.Color(74, 71, 98));
+
+        // Label 亮色字体
+        jLabel1.setForeground(new java.awt.Color(230, 230, 240));
+        jLabel4.setForeground(new java.awt.Color(230, 230, 240));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+
+        // 输入框：浅底灰突出
+        userNameJTextField.setBackground(new java.awt.Color(245, 245, 255));
+        passwordField.setBackground(new java.awt.Color(245, 245, 255));
+        userNameJTextField.setForeground(new java.awt.Color(40, 40, 40));
+        passwordField.setForeground(new java.awt.Color(40, 40, 40));
+
+        // 登录按钮亮紫
+        loginJButton.setBackground(new java.awt.Color(121, 80, 255));
+        loginJButton.setForeground(new java.awt.Color(255, 255, 255));
+
+        // 登出按钮淡灰紫
+        logoutJButton.setBackground(new java.awt.Color(190, 180, 230));
+        logoutJButton.setForeground(new java.awt.Color(40, 30, 70));
+
+        combox.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        combox.setForeground(new java.awt.Color(60, 60, 60));
+        combox.setBackground(new java.awt.Color(255, 255, 255));
+        combox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        // 下拉框 hover/选中美化
+        combox.setRenderer(new javax.swing.plaf.basic.BasicComboBoxRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value, int index,
+                    boolean isSelected, boolean cellHasFocus) {
+
+                java.awt.Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                c.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+                if (isSelected) {
+                    c.setBackground(new java.awt.Color(235, 230, 250)); // hover 背景
+                    c.setForeground(new java.awt.Color(103, 58, 183)); // 深紫文字
+                } else {
+                    c.setBackground(new java.awt.Color(255, 255, 255));
+                    c.setForeground(new java.awt.Color(60, 60, 60));
+                }
+                return c;
+            }
+        });
     }
 
 }

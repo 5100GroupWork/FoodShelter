@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -254,6 +256,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     public void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblDriver.setRowSorter(sorter);
         model.setRowCount(0);
 
         if (volunteerOrg == null) {

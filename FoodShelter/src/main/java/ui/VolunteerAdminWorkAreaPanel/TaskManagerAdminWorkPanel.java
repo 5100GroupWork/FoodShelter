@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -241,6 +243,8 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblTaskManager.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblTaskManager.setRowSorter(sorter);
         model.setRowCount(0);
 
         if (volunteerOrg == null) {

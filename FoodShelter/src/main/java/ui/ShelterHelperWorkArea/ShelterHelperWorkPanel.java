@@ -7,6 +7,8 @@ package ui.ShelterHelperWorkArea;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.FoodItem.FoodItem;
 
 import model.WorkQueue.DeliveryTask;
@@ -55,7 +57,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -73,22 +76,21 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Shelter Helper - Task Assignment");
 
         tblShelterRequests.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Number", "Requested Vendor", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Number", "Requested Vendor", "Status"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblShelterRequests);
@@ -102,22 +104,21 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setText("Approved Food Table");
 
         tblApprovedFoodTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Number", "Food Name", "Vendor", "Quantity", "Expiry Date"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Number", "Food Name", "Vendor", "Quantity", "Expiry Date"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(tblApprovedFoodTasks);
@@ -134,61 +135,68 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(233, 233, 233)
-                                .addComponent(enterpriseLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(btnAssignTask))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(enterpriseLabel1)))
-                .addContainerGap(375, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addGroup(jPanel1Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 631,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jScrollPane2,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 631,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(233, 233, 233)
+                                                                .addComponent(enterpriseLabel2))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(171, 171, 171)
+                                                                .addComponent(enterpriseLabel,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 301,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(135, 135, 135)
+                                                .addComponent(jLabel1))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(280, 280, 280)
+                                                .addComponent(btnAssignTask))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(265, 265, 265)
+                                                .addComponent(enterpriseLabel1)))
+                                .addContainerGap(375, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(enterpriseLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addComponent(enterpriseLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAssignTask)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(48, 48, 48))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(enterpriseLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addGap(33, 33, 33)
+                                .addComponent(enterpriseLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAssignTask)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel1)
+                                .addGap(48, 48, 48)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
@@ -203,6 +211,10 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
         DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
         DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(foodModel);
+        TableRowSorter<DefaultTableModel> sorter1 = new TableRowSorter<>(requestModel);
+        tblApprovedFoodTasks.setRowSorter(sorter);
+        tblShelterRequests.setRowSorter(sorter1);
 
         FoodItem selectedFood = (FoodItem) foodModel.getValueAt(foodRow, 0);
         WorkRequest selectedRequest = (WorkRequest) requestModel.getValueAt(requestRow, 0);
@@ -235,6 +247,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     private void populateApprovedFoodTable() {
         DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblApprovedFoodTasks.setRowSorter(sorter);
         model.setRowCount(0);
 
         // 从warehouseList来
@@ -260,13 +274,15 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     private void populateShelterRequestTable() {
         DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblShelterRequests.setRowSorter(sorter);
         model.setRowCount(0);
 
         int index = 0;
         RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
         WorkQueue queue = org.getWorkQueue();
-        System.out.println("queue size :"+queue.getWorkRequestList().size());
-        for(WorkRequest wr: queue.getWorkRequestList()){
+        System.out.println("queue size :" + queue.getWorkRequestList().size());
+        for (WorkRequest wr : queue.getWorkRequestList()) {
             WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
             Object[] row = new Object[3];
             index++;
