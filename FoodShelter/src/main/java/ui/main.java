@@ -242,8 +242,9 @@ public class main extends javax.swing.JFrame {
                     inNetwork, system);
                 container.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
+                System.out.println("before page jump");
                 layout.show(container, "workArea");
-
+                System.out.println("after page jump");
                 // 状态更新
                 loginJButton.setEnabled(false);
                 logoutJButton.setEnabled(true);
