@@ -159,12 +159,16 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             }
         }
         if (selectedRequest != null) {
-
-            netWork.getCheckList().removeWorkRequest(selectedRequest);
-            netWork.getWarehouseList().getWorkRequestList().add(selectedRequest);
-
-            populateTable();
-        }
+        selectedRequest.getFoodItem().setCheckingStatus("accepted");
+        selectedRequest.getFoodItem().setUsingStatus("stored");
+        
+        // 从checkList移动到warehouseList
+        netWork.getCheckList().removeWorkRequest(selectedRequest);
+        netWork.getWarehouseList().getWorkRequestList().add(selectedRequest);
+        
+        JOptionPane.showMessageDialog(this, "Food item approved successfully!");
+        populateTable();
+    }
 
     }//GEN-LAST:event_btnApproveActionPerformed
 

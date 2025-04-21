@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -233,18 +234,21 @@ public class main extends javax.swing.JFrame {
         if (selectedItem instanceof FoodShelterSystem) {
             UserAccount sysA = system.getSystemAdmin();
             System.out.println("select systemAdmin login");
-            if(!sysA.getUsername().equals(userName) || !sysA.getPassword().equals(password)){
+            if (!sysA.getUsername().equals(userName) || !sysA.getPassword().equals(password)) {
                 JOptionPane.showMessageDialog(null, "You are not the system admin.");
                 return;
-            }else{
+            } else {
                 container.removeAll();
                 JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
-                    inNetwork, system);
+                        inNetwork, system);
                 container.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
-                System.out.println("before page jump");
+                System.out.println("before jump");
                 layout.show(container, "workArea");
-                System.out.println("after page jump");
+                System.out.println("after jump");
+                container.revalidate();
+                container.repaint();
+
                 // 状态更新
                 loginJButton.setEnabled(false);
                 logoutJButton.setEnabled(true);
@@ -319,6 +323,8 @@ public class main extends javax.swing.JFrame {
         container.add("workArea", workArea);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "workArea");
+        container.revalidate();
+        container.repaint();
 
         // 状态更新
         loginJButton.setEnabled(false);
