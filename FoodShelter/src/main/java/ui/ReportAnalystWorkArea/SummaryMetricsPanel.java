@@ -30,7 +30,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import ui.AdminWorkArea.AdminStartPoint;
-import ui.AdminWorkArea.viewNetWorkDetailPanel;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+import model.Enterprise.BasicEnterprise;
+import model.NetWork.NetWork;
+import model.Organization.BasicOrganization;
+
 
 /**
  *
@@ -49,7 +56,10 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         this.workArea = workArea;
         this.account = ua;
         initComponents();
-        btnExport.addActionListener(e -> exportChartsAsImage());
+
+        btnExport.addActionListener(e -> exportReportAsPDF());
+
+
 
         loadSummaryMetrics();
 
@@ -75,6 +85,9 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         btnExport = new javax.swing.JButton();
 
+        lblTotalStored = new javax.swing.JLabel();
+
+
         chartContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 60, 10));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -91,7 +104,11 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             }
         });
 
-        btnExport.setText("Export Charts 📤");
+
+        btnExport.setText("Export Report 📤");
+
+        lblTotalStored.setText("Total Food Stored: ");
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,7 +133,10 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTotalDonated)
-                            .addComponent(lblEnergySaved)))
+
+                            .addComponent(lblEnergySaved)
+                            .addComponent(lblTotalStored)))
+
                     .addGroup(layout.createSequentialGroup()
                         .addGap(158, 158, 158)
                         .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -137,12 +157,16 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(lblTotalDonated)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+
+                .addComponent(lblTotalStored)
+                .addGap(9, 9, 9)
                 .addComponent(lblEnergySaved)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chartContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,6 +186,7 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblEnergySaved;
     private javax.swing.JLabel lblTotalDonated;
+    private javax.swing.JLabel lblTotalStored;
     // End of variables declaration//GEN-END:variables
 
     private void showChart() {
@@ -169,13 +194,19 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         int donated = 0;
         int stored = 0;
 
-        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof WorkRequestFoodItem) {
-                FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                if (item.getUsingStatus().equalsIgnoreCase("Send")) {
-                    donated += item.getNumber();
-                } else {
-                    stored += item.getNumber();
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                    for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+                        if (wr instanceof WorkRequestFoodItem) {
+                            FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
+                            if (item.getUsingStatus().equalsIgnoreCase("Send")) {
+                                donated += item.getNumber();
+                            } else {
+                                stored += item.getNumber();
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -275,27 +306,42 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
     private void loadSummaryMetrics() {
         int totalDonated = 0;
+        int totalStored = 0;
         double energySavedPerItem = 0.5; // Example: 0.5 kWh saved per item
 
-        for (WorkRequest wr : foodShelterSystem.getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof WorkRequestFoodItem) {
-                FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                if (item.getUsingStatus().equalsIgnoreCase("Send")) {
-                    totalDonated += item.getNumber();
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+        for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+            for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+                    if (wr instanceof WorkRequestFoodItem) {
+                        FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
+                        if (item.getUsingStatus().equalsIgnoreCase("Send")) {
+                            totalDonated += item.getNumber();
+                        } else{
+                            totalStored += item.getNumber();
+                        }
+                    }
                 }
             }
         }
+    }
 
         double totalEnergySaved = totalDonated * energySavedPerItem;
 
         lblTotalDonated.setText("🍽 Total Food Donated: " + totalDonated);
-        lblEnergySaved.setText("💡 Estimated Energy Saved: " + totalEnergySaved + " kWh");
 
-        lblTotalDonated.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
-        lblTotalDonated.setForeground(new Color(54, 33, 89));
+        lblEnergySaved.setText("💡 Estimated Energy Saved: " + totalEnergySaved + " kWh");       
+        lblTotalStored.setText("🥫 Total Food Stored: " + totalStored);
 
-        lblEnergySaved.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
-        lblEnergySaved.setForeground(new Color(54, 33, 89));
+//        lblTotalDonated.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+//        lblTotalDonated.setForeground(new Color(54, 33, 89));
+//
+//        lblEnergySaved.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+//        lblEnergySaved.setForeground(new Color(54, 33, 89));
+//        
+//        lblTotalStored.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+//        lblTotalStored.setForeground(new Color(54, 33, 89));
+
     }
 
     //////////////////beautify///////////////////
@@ -326,7 +372,69 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         lblTotalDonated.setForeground(new Color(60, 60, 60));
         lblEnergySaved.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
         lblEnergySaved.setForeground(new Color(60, 60, 60));
+        lblTotalStored.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
+        lblTotalStored.setForeground(new Color(60, 60, 60));
 
+    }
+
+    private void exportReportAsPDF() {
+
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Save Report As PDF");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    int result = fileChooser.showSaveDialog(this);
+
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File pdfFile = fileChooser.getSelectedFile();
+        if (!pdfFile.getName().endsWith(".pdf")) {
+            pdfFile = new File(pdfFile.getAbsolutePath() + ".pdf");
+        }
+
+        try {
+            // Step 1: Create Document and PDF Writer
+            Document document = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
+            document.open();
+
+            // Step 2: Add title
+            com.itextpdf.text.Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, com.itextpdf.text.BaseColor.DARK_GRAY);
+            Paragraph title = new Paragraph("📊 Food Donation Report", titleFont);
+                    
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);    
+            
+            com.itextpdf.text.Font bodyFont = FontFactory.getFont(FontFactory.HELVETICA, 14);
+            document.add(new Paragraph(lblTotalDonated.getText(), bodyFont));
+            document.add(new Paragraph(lblEnergySaved.getText(), bodyFont));
+          document.add(new Paragraph(lblTotalStored.getText(), bodyFont));
+
+
+            // Step 3: Add summary metrics
+           
+            document.add(Chunk.NEWLINE);
+
+            // Step 4: Add charts as images
+            for (java.awt.Component comp : chartContainer.getComponents()) {
+                if (comp instanceof ChartPanel) {
+                    JFreeChart chart = ((ChartPanel) comp).getChart();
+                     BufferedImage image = chart.createBufferedImage(500, 300);
+                    Image chartImg = Image.getInstance(writer, image, 1.0f);
+                    chartImg.setAlignment(Image.ALIGN_CENTER);
+                    chartImg.setSpacingBefore(10f);
+                    chartImg.setSpacingAfter(20f);
+                    document.add(chartImg);
+                }
+            }
+
+            document.close();
+            JOptionPane.showMessageDialog(this, "PDF saved to:\n" + pdfFile.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Export failed:\n" + e.getMessage());
+        }
+    }
     }
 
     private void exportChartsAsImage() {

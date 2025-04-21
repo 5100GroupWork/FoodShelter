@@ -4,9 +4,12 @@
  */
 package ui.RescueNetAdminWorkArea;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
+import model.NetWork.NetWork;
 import model.Organization.RequestEntertainOrg;
 import model.Role.FoodIncEmployee;
 
@@ -17,14 +20,20 @@ import model.Role.FoodIncEmployee;
 public class AddShelterHelper extends javax.swing.JPanel {
     private BasicEnterprise enterprise;
     private RequestEntertainOrg requestEntertainOrg;
+    JPanel workArea;
+    UserAccount account;
+    NetWork netWork;
 
     /**
      * Creates new form AddShelterHelper
      */
-    public AddShelterHelper(BasicEnterprise enterprise, RequestEntertainOrg requestEntertainOrg) {
+    public AddShelterHelper(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestEntertainOrg requestEntertainOrg) {
         initComponents();
         this.enterprise = enterprise;
         this.requestEntertainOrg = requestEntertainOrg;
+        this.netWork = netWork;
+        this.workArea = workArea;
+        this.account  = account;
         // error to change
         beautify();
     }
@@ -160,6 +169,10 @@ public class AddShelterHelper extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
+        workArea.add("ShelterHelperAdmin",shelterHelperAdmin);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSubmitActionPerformed

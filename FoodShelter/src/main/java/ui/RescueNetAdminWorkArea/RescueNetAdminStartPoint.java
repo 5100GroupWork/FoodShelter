@@ -133,7 +133,7 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         ShelterHelperAdmin panel = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
         workArea.add("ShelterHelperAdmin", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
+        layout.show(workArea,"ShelterHelperAdmin");
     }// GEN-LAST:event_btnShelterActionPerformed
 
     private void btnHomelessActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnHomelessActionPerformed
