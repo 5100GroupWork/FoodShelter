@@ -23,7 +23,7 @@ public class WelcomeJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(245, 245, 245));
        try {
      
-        java.net.URL imageUrl = getClass().getResource("/HomePageLogo.png");
+        java.net.URL imageUrl = getClass().getResource("/Logo.png");
         if (imageUrl != null) {
             ImageIcon icon = new ImageIcon(imageUrl);
             Image scaledImg = icon.getImage().getScaledInstance(700, 560, Image.SCALE_SMOOTH);
