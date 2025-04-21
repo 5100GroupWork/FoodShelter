@@ -116,7 +116,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnExport">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Export Charts \ud83d\udce4" containsInvalidXMLChars="true"/>
+        <Property name="text" type="java.lang.String" value="Export Report \ud83d\udce4" containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
   </SubComponents>

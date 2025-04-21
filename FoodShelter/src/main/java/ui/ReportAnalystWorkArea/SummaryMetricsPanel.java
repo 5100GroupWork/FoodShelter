@@ -30,7 +30,11 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import ui.AdminWorkArea.AdminStartPoint;
-import ui.AdminWorkArea.viewNetWorkDetailPanel;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+
 
 /**
  *
@@ -49,7 +53,8 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         this.workArea = workArea;
         this.account = ua;
         initComponents();
-        btnExport.addActionListener(e -> exportChartsAsImage());
+        btnExport.addActionListener(e -> exportReportAsPDF());
+
 
         loadSummaryMetrics();
 
@@ -91,7 +96,7 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             }
         });
 
-        btnExport.setText("Export Charts 📤");
+        btnExport.setText("Export Report 📤");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -329,32 +334,64 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
     }
 
-    private void exportChartsAsImage() {
+    private void exportReportAsPDF() {
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select Folder to Save Charts");
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    fileChooser.setDialogTitle("Save Report As PDF");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        int result = fileChooser.showSaveDialog(this);
+    int result = fileChooser.showSaveDialog(this);
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File dir = fileChooser.getSelectedFile();
-
-            try {
-                for (java.awt.Component comp : chartContainer.getComponents()) {
-                    if (comp instanceof ChartPanel) {
-                        ChartPanel chartPanel = (ChartPanel) comp;
-                        String chartTitle = chartPanel.getChart().getTitle().getText().toLowerCase().replaceAll("\\s+", "_");
-                        File outputFile = new File(dir, chartTitle + ".png");
-                        ImageIO.write(chartPanel.getChart().createBufferedImage(600, 400), "png", outputFile);
-                    }
-                }
-                JOptionPane.showMessageDialog(this, "Charts exported to:\n" + dir.getAbsolutePath());
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Export failed:\n" + e.getMessage());
-            }
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File pdfFile = fileChooser.getSelectedFile();
+        if (!pdfFile.getName().endsWith(".pdf")) {
+            pdfFile = new File(pdfFile.getAbsolutePath() + ".pdf");
         }
+
+        try {
+            // Step 1: Create Document and PDF Writer
+            Document document = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
+            document.open();
+
+            // Step 2: Add title
+            com.itextpdf.text.Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, com.itextpdf.text.BaseColor.DARK_GRAY);
+            Paragraph title = new Paragraph("📊 Food Donation Report", titleFont);
+                    
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);    
+            
+            com.itextpdf.text.Font bodyFont = FontFactory.getFont(FontFactory.HELVETICA, 14);
+            document.add(new Paragraph(lblTotalDonated.getText(), bodyFont));
+            document.add(new Paragraph(lblEnergySaved.getText(), bodyFont));
+
+
+
+            // Step 3: Add summary metrics
+           
+            document.add(Chunk.NEWLINE);
+
+            // Step 4: Add charts as images
+            for (java.awt.Component comp : chartContainer.getComponents()) {
+                if (comp instanceof ChartPanel) {
+                    JFreeChart chart = ((ChartPanel) comp).getChart();
+                     BufferedImage image = chart.createBufferedImage(500, 300);
+                    Image chartImg = Image.getInstance(writer, image, 1.0f);
+                    chartImg.setAlignment(Image.ALIGN_CENTER);
+                    chartImg.setSpacingBefore(10f);
+                    chartImg.setSpacingAfter(20f);
+                    document.add(chartImg);
+                }
+            }
+
+            document.close();
+            JOptionPane.showMessageDialog(this, "PDF saved to:\n" + pdfFile.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Export failed:\n" + e.getMessage());
+        }
+    }
     }
 
 }
