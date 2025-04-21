@@ -78,7 +78,8 @@ public class AdminStartPoint extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
@@ -105,15 +106,14 @@ public class AdminStartPoint extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -145,7 +145,6 @@ public class AdminStartPoint extends javax.swing.JPanel {
 
         jLabel2.setText(" organization 只是food organization");
 
-
         btnDeleteNetWork.setText("Delete NetWork");
         btnDeleteNetWork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,63 +171,75 @@ public class AdminStartPoint extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDeleteNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnDeleteNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
 
-                    .addComponent(btnSummary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnSummary, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCreateNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(53, 53, 53)
+                                                .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 132,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(49, 49, 49)
+                                                .addComponent(btnCreateNetWork, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        193, javax.swing.GroupLayout.PREFERRED_SIZE))
 
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageOrg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnManageOrg, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 238,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(100, Short.MAX_VALUE))
 
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1)
-                .addContainerGap())
-        );
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jSeparator1)
+                                .addContainerGap()));
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDetail, btnManageOrg, btnSummary});
-
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+                new java.awt.Component[] { btnDetail, btnManageOrg, btnSummary });
 
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblWelcome)
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCreateNetWork))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(lblWelcome)
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnCreateNetWork))
 
-                .addGap(32, 32, 32)
-                .addComponent(btnDeleteNetWork)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(btnDetail)
-                .addGap(32, 32, 32)
-                .addComponent(btnManageOrg)
-                .addGap(28, 28, 28)
-                .addComponent(btnSummary)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(40, 40, 40))
+                                .addGap(32, 32, 32)
+                                .addComponent(btnDeleteNetWork)
+                                .addGap(18, 18, 18)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44,
+                                        Short.MAX_VALUE)
+                                .addComponent(btnDetail)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnManageOrg)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnSummary)
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40))
 
         );
 
@@ -237,15 +248,15 @@ public class AdminStartPoint extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
 
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDetailActionPerformed
@@ -256,6 +267,8 @@ public class AdminStartPoint extends javax.swing.JPanel {
         workArea.add("EmployeeWorkPanel", new viewNetWorkDetailPanel(workArea, netWork, foodShelterSystem, account));
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "EmployeeWorkPanel");
+        workArea.revalidate();
+        workArea.repaint();
 
     }// GEN-LAST:event_btnDetailActionPerformed
 
@@ -265,6 +278,8 @@ public class AdminStartPoint extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem));
         layout.show(workArea, "AdminWorkAreaPanel");
+        workArea.revalidate();
+        workArea.repaint();
     }// GEN-LAST:event_btnManageOrgActionPerformed
 
     private void btnSummaryActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnManageAdminActionPerformed
@@ -273,37 +288,39 @@ public class AdminStartPoint extends javax.swing.JPanel {
         // userProcessContainer.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
         // CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         // layout.next(userProcessContainer);
-    // GEN-LAST:event_btnManageAdminActionPerformed
+        // GEN-LAST:event_btnManageAdminActionPerformed
         FoodItem testItem = new FoodItem();
         testItem.setFoodName("Canned Soup");
         testItem.setNumber(12);
-        testItem.setUsingStatus("Send");   // Required for counting as 'donated'
+        testItem.setUsingStatus("Send"); // Required for counting as 'donated'
         testItem.setFoodStatus("Good");
 
         WorkRequestFoodItem testRequest = new WorkRequestFoodItem();
         testRequest.setFoodItem(testItem);
 
-        
-        
-// Inject it into the system
+        // Inject it into the system
         foodShelterSystem.getWorkQueue().getWorkRequestList().add(testRequest);
 
         SummaryMetricsPanel panel = new SummaryMetricsPanel(foodShelterSystem);
         workArea.add("SummaryMetricsPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "SummaryMetricsPanel");
-        
+        workArea.revalidate();
+        workArea.repaint();
+
     }
+
     private void btnDeleteNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteNetWorkActionPerformed
         // TODO add your handling code here:
-        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+        // DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)
+        // jTree.getLastSelectedPathComponent();
         if (netWork == null) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network to delete.");
             return;
         }
         foodShelterSystem.getNetworkList().remove(netWork);
         populateTree();
-       
+
     }// GEN-LAST:event_btnDeleteNetWorkActionPerformed
 
     private void btnCreateNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateNetWorkActionPerformed

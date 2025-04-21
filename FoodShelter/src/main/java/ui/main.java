@@ -39,6 +39,8 @@ public class main extends javax.swing.JFrame {
         container.add("WelComeJPanel", welcomeJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "WelComeJPanel");
+        container.revalidate();
+        container.repaint();
         populateCombox();
 
         // make sure system are stored correctely
@@ -350,6 +352,9 @@ public class main extends javax.swing.JFrame {
         layout.show(container, "WelComeJPanel");
         combox.setEnabled(true);
         dB4OUtil.storeSystem(system);
+
+        container.revalidate();
+        container.repaint();
     }// GEN-LAST:event_logoutJButtonActionPerformed
 
     /**
