@@ -30,6 +30,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     RequestEntertainOrg requestEntertainOrg;
     NetWork netWork;
     RescueNetEnterprise rescueNetEnterprise;
+    UserAccount account;
     private BasicEnterprise enterprise;
 
     public ShelterHelperAdmin(JPanel workArea, UserAccount account, BasicOrganization organization,
@@ -39,6 +40,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         this.netWork = netWork;
         this.rescueNetEnterprise = (RescueNetEnterprise) enterprise;
         this.enterprise = enterprise;
+        this.account = account;
 
         initComponents();
         populateTable();
@@ -161,12 +163,16 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise, enterprise, netWork);
+        workArea.add("RescueNetAdminStartPoint",rescueNetAdminStartPoint);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "RescueNetAdminStartPoint");
+        
     }// GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddShelterHelper panel = new AddShelterHelper(enterprise, requestEntertainOrg);
+        AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg);
         workArea.add("AddShelterHelper", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);
