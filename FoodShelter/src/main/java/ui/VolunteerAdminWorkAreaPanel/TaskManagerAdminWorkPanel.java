@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -44,6 +46,7 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
         this.parentPanel = this;
         populateTable();
+        beautify();
     }
 
     /**
@@ -53,7 +56,8 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -65,22 +69,21 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         lblEnterprise = new javax.swing.JLabel();
 
         tblTaskManager.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Task Manager ID", "Name", "Contact"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Task Manager ID", "Name", "Contact"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblTaskManager);
@@ -115,42 +118,44 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEnterprise)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btnAddTaskManager)
-                        .addGap(183, 183, 183)
-                        .addComponent(btnDeleteTaskManager))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addGap(91, 91, 91)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(409, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblEnterprise)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(131, 131, 131)
+                                                .addComponent(btnAddTaskManager)
+                                                .addGap(183, 183, 183)
+                                                .addComponent(btnDeleteTaskManager))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(backJButton)
+                                                .addGap(91, 91, 91)
+                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(409, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lblEnterprise)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteTaskManager)
-                    .addComponent(btnAddTaskManager))
-                .addContainerGap(397, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(lblEnterprise)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(backJButton))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnDeleteTaskManager)
+                                        .addComponent(btnAddTaskManager))
+                                .addContainerGap(397, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddTaskManagerActionPerformed
@@ -160,67 +165,70 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
         workArea.add("AddTaskManagerAccountPanel", new AddTaskManagerAccountPanel(workArea, account, volunteerOrg,
                 volunteerEnterprise, netWork, parentPanel));
         layout.show(workArea, "AddTaskManagerAccountPanel");
+        workArea.revalidate();
+        workArea.repaint();
 
     }// GEN-LAST:event_btnAddTaskManagerActionPerformed
 
     private void btnDeleteTaskManagerActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteTaskManagerActionPerformed
         // TODO add your handling code here:
 
-    int selectedRow = tblTaskManager.getSelectedRow();
-    
-    if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        return; 
-    }
-    
-    String accountUuid = (String) tblTaskManager.getValueAt(selectedRow, 0);
-    String username = (String) tblTaskManager.getValueAt(selectedRow, 1);
-    
-    UserAccount toRemove = null;
-    VolunteerOrg targetOrg = null;
-    
-    if (volunteerOrg != null) {
-        targetOrg = volunteerOrg;
-    } else {
-      
-        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-            if (org instanceof VolunteerOrg) {
-                VolunteerOrg volOrg = (VolunteerOrg) org;
-                for (UserAccount ua : volOrg.getUserAccountDirectory().getUserAccountList()) {
-                    // 用accountUuid查找用户，如果后面改了ID的生成方式，记得改这里，要不然可能报错！
-                    if (ua.getAccountUuid() != null && ua.getAccountUuid().equals(accountUuid)) {
-                        toRemove = ua;
-                        targetOrg = volOrg;
-                        break;
-                    } 
-                    else if (ua.getUsername().equals(username)) {
-                        toRemove = ua;
-                        targetOrg = volOrg;
-                        break;
+        int selectedRow = tblTaskManager.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        String accountUuid = (String) tblTaskManager.getValueAt(selectedRow, 0);
+        String username = (String) tblTaskManager.getValueAt(selectedRow, 1);
+
+        UserAccount toRemove = null;
+        VolunteerOrg targetOrg = null;
+
+        if (volunteerOrg != null) {
+            targetOrg = volunteerOrg;
+        } else {
+
+            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof VolunteerOrg) {
+                    VolunteerOrg volOrg = (VolunteerOrg) org;
+                    for (UserAccount ua : volOrg.getUserAccountDirectory().getUserAccountList()) {
+                        // 用accountUuid查找用户，如果后面改了ID的生成方式，记得改这里，要不然可能报错！
+                        if (ua.getAccountUuid() != null && ua.getAccountUuid().equals(accountUuid)) {
+                            toRemove = ua;
+                            targetOrg = volOrg;
+                            break;
+                        } else if (ua.getUsername().equals(username)) {
+                            toRemove = ua;
+                            targetOrg = volOrg;
+                            break;
+                        }
                     }
+                    if (toRemove != null)
+                        break;
                 }
-                if (toRemove != null) break;
             }
         }
-    }
-    
-    if (toRemove != null && targetOrg != null) {
-        targetOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-        JOptionPane.showMessageDialog(this, "User deleted successfully.");
-        populateTable();
-    } else {
-        JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
-    }                                                    
 
+        if (toRemove != null && targetOrg != null) {
+            targetOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+            JOptionPane.showMessageDialog(this, "User deleted successfully.");
+            populateTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
+    }
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
 
         workArea.remove(this);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "VolunteerAdminStartPoint");
+        workArea.revalidate();
+        workArea.repaint();
     }// GEN-LAST:event_backJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -236,43 +244,79 @@ public class TaskManagerAdminWorkPanel extends javax.swing.JPanel {
     void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblTaskManager.getModel();
-    model.setRowCount(0);
-    
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblTaskManager.setRowSorter(sorter);
+        model.setRowCount(0);
 
-    if (volunteerOrg == null) {
-   
-        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-            if (org instanceof VolunteerOrg) {
-                VolunteerOrg volOrg = (VolunteerOrg) org;
-                
-                for (UserAccount ua : volOrg.getUserAccountDirectory().getUserAccountList()) {
-                    if (ua.getRole() instanceof TaskManager) {
-                        TaskManager tm = (TaskManager) ua.getRole();
-                        
-                        Object[] row = new Object[3];
-                        row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
-                        row[1] = ua.getUsername();
-                        row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
-                        model.addRow(row);
+        if (volunteerOrg == null) {
+
+            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof VolunteerOrg) {
+                    VolunteerOrg volOrg = (VolunteerOrg) org;
+
+                    for (UserAccount ua : volOrg.getUserAccountDirectory().getUserAccountList()) {
+                        if (ua.getRole() instanceof TaskManager) {
+                            TaskManager tm = (TaskManager) ua.getRole();
+
+                            Object[] row = new Object[3];
+                            row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                            row[1] = ua.getUsername();
+                            row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                            model.addRow(row);
+                        }
                     }
                 }
             }
-        }
-    } else {
-        for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getRole() instanceof TaskManager) {
-                TaskManager tm = (TaskManager) ua.getRole();
-                
-                Object[] row = new Object[3];
-                row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
-                row[1] = ua.getUsername();
-                row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
-                model.addRow(row);
+        } else {
+            for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()) {
+                if (ua.getRole() instanceof TaskManager) {
+                    TaskManager tm = (TaskManager) ua.getRole();
+
+                    Object[] row = new Object[3];
+                    row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                    row[1] = ua.getUsername();
+                    row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                    model.addRow(row);
+                }
             }
         }
-    }
-        
-        
 
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题 & 企业标签样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫色标题
+
+        lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblEnterprise.setForeground(new java.awt.Color(80, 80, 80)); // 深灰说明
+
+        // 按钮统一样式
+        javax.swing.JButton[] buttons = { backJButton, btnAddTaskManager, btnDeleteTaskManager };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫背景
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblTaskManager.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblTaskManager.setRowHeight(28);
+        tblTaskManager.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰色网格线
+        tblTaskManager.setForeground(new java.awt.Color(33, 33, 33));
+        tblTaskManager.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblTaskManager.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblTaskManager.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblTaskManager.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblTaskManager.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+    }
+
 }

@@ -43,6 +43,7 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         this.parentPanel = parentPanel;
 
         initComponents();
+        beautify();
     }
 
     /**
@@ -52,7 +53,8 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         txtuserName = new javax.swing.JTextField();
@@ -101,131 +103,144 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(274, 274, 274))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblOrganization, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtuserName)
-                            .addComponent(txtEmail)
-                            .addComponent(txtPhone)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(btnSubmit))))
-                    .addComponent(enterpriseLabel))
-                .addContainerGap(643, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnBack)
+                                                .addGap(274, 274, 274))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblpassword,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lbluserName,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lblConfirmPassword,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lblOrganization,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addComponent(txtuserName)
+                                                        .addComponent(txtEmail)
+                                                        .addComponent(txtPhone)
+                                                        .addComponent(passwordField,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 155,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(30, 30, 30)
+                                                                .addComponent(btnSubmit))))
+                                        .addComponent(enterpriseLabel))
+                                .addContainerGap(643, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbluserName))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblpassword)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConfirmPassword)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOrganization)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(btnSubmit)
-                .addContainerGap(435, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnBack)
+                                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbluserName))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblpassword)
+                                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblConfirmPassword)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblOrganization)
+                                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addComponent(btnSubmit)
+                                .addContainerGap(435, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
 
-    String username = txtuserName.getText();
-    String password = passwordField.getText();
-    String email = txtEmail.getText();
-    String phone = txtPhone.getText();
-    
-    if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "All fields are required. Please fill in all information.");
-        return;
-    }
-    
-    for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
-        if (en instanceof VolunteerEnterprise) {
-            for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
-                if (!org.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
-                    JOptionPane.showMessageDialog(this, "Username already exists. Please choose another username.");
-                    return;
+        String username = txtuserName.getText();
+        String password = passwordField.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
 
-                }
-            }
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required. Please fill in all information.");
+            return;
         }
-    }
-    
-    DriverOrg driverOrg = null;
-    for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
-        if (en instanceof VolunteerEnterprise) {
-            VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
-            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                if (org instanceof DriverOrg) {
-                    driverOrg = (DriverOrg) org;
-                    break;
+
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
+                    if (!org.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+                        JOptionPane.showMessageDialog(this, "Username already exists. Please choose another username.");
+                        return;
+
+                    }
                 }
             }
         }
 
-        if (driverOrg != null) {
-            break;
+        DriverOrg driverOrg = null;
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        driverOrg = (DriverOrg) org;
+                        break;
+                    }
+                }
+            }
+
+            if (driverOrg != null) {
+                break;
+            }
         }
+
+        if (driverOrg == null) {
+            JOptionPane.showMessageDialog(this, "Error: Driver organization not found.");
+            return;
+        }
+
+        VolunteerManager vm = (VolunteerManager) account.getRole();
+        UserAccount newDriver = vm.createDriver(driverOrg, netWork, username, password);
+
+        newDriver.setEmail(email);
+        newDriver.setPhone(phone);
+
+        newDriver.setOrganization(driverOrg);
+        newDriver.setEnterprise(volunteerEnterprise);
+
+        JOptionPane.showMessageDialog(this, "Driver added successfully: " + username);
+
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+
+        if (parentPanel != null) {
+            parentPanel.populateTable();
+        }
+
     }
-    
-    if (driverOrg == null) {
-        JOptionPane.showMessageDialog(this, "Error: Driver organization not found.");
-        return;
-    }
-    
-    VolunteerManager vm = (VolunteerManager) account.getRole();
-    UserAccount newDriver = vm.createDriver(driverOrg, netWork, username, password);
-    
-    newDriver.setEmail(email);
-    newDriver.setPhone(phone);
-    
-    newDriver.setOrganization(driverOrg);
-    newDriver.setEnterprise(volunteerEnterprise);
-    
-    JOptionPane.showMessageDialog(this, "Driver added successfully: " + username);
-    
-    txtuserName.setText("");
-    passwordField.setText("");
-    txtEmail.setText("");
-    txtPhone.setText("");
-
-    if (parentPanel != null) {
-        parentPanel.populateTable();
-    }
-        
-    }                                         
-
-
-
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -233,6 +248,8 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
         parentPanel.populateTable();
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "DriverAdminWorkAreaPanel");
+        workArea.revalidate();
+        workArea.repaint();
 
     }// GEN-LAST:event_btnBackActionPerformed
 
@@ -252,5 +269,52 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtuserName;
+
     // End of variables declaration//GEN-END:variables
+    private void beautify() {
+        // 背景
+        this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰
+
+        // 标题
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫色标题
+
+        // 标签统一样式
+        java.awt.Font labelFont = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13);
+        java.awt.Color labelColor = new java.awt.Color(80, 80, 80);
+
+        javax.swing.JLabel[] labels = {
+                lbluserName, lblpassword, lblConfirmPassword, lblOrganization
+        };
+        for (javax.swing.JLabel label : labels) {
+            label.setFont(labelFont);
+            label.setForeground(labelColor);
+        }
+
+        // 文本框样式
+        javax.swing.JTextField[] textFields = { txtuserName, txtEmail, txtPhone };
+        for (javax.swing.JTextField field : textFields) {
+            field.setFont(labelFont);
+            field.setBackground(java.awt.Color.WHITE);
+            field.setForeground(new java.awt.Color(40, 40, 40));
+            field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+        }
+
+        // 密码框样式
+        passwordField.setFont(labelFont);
+        passwordField.setBackground(java.awt.Color.WHITE);
+        passwordField.setForeground(new java.awt.Color(40, 40, 40));
+        passwordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = { btnSubmit, btnBack };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(labelFont);
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+    }
+
 }

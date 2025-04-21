@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import model.Account.UserAccount;
 import model.Enterprise.BasicEnterprise;
 import model.Enterprise.VolunteerEnterprise;
@@ -45,6 +47,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         lblEnterprise.setText("Enterprise: " + enterprise.getName());
 
         populateTable();
+        beautify();
 
     }
 
@@ -55,7 +58,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -77,22 +81,21 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Drivers Management");
 
         tblDriver.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Driver ID", "Name", "Contact"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Driver ID", "Name", "Contact"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblDriver);
@@ -117,45 +120,50 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEnterprise)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backJButton)
-                                .addGap(103, 103, 103)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(btnAddDriver)
-                        .addGap(169, 169, 169)
-                        .addComponent(btnDelete)))
-                .addContainerGap(396, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(49, 49, 49)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblEnterprise)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(backJButton)
+                                                                .addGap(103, 103, 103)
+                                                                .addComponent(enterpriseLabel,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jScrollPane3,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 572,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(172, 172, 172)
+                                                .addComponent(btnAddDriver)
+                                                .addGap(169, 169, 169)
+                                                .addComponent(btnDelete)))
+                                .addContainerGap(396, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblEnterprise)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddDriver)
-                    .addComponent(btnDelete))
-                .addContainerGap(415, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblEnterprise)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(backJButton))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnAddDriver)
+                                        .addComponent(btnDelete))
+                                .addContainerGap(415, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
@@ -163,6 +171,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         workArea.remove(this);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "VolunteerAdminStartPoint");
+        workArea.revalidate();
+        workArea.repaint();
     }// GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddDriverActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddDriverActionPerformed
@@ -172,65 +182,67 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         workArea.add("AddDriverAccountPanel",
                 new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel));
         layout.show(workArea, "AddDriverAccountPanel");
+        workArea.revalidate();
+        workArea.repaint();
 
     }// GEN-LAST:event_btnAddDriverActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
 
-            int selectedRow = tblDriver.getSelectedRow();
-    
-    if (selectedRow < 0){
-        JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning", JOptionPane.INFORMATION_MESSAGE);
-        return;  
-    }
-    
-    String accountUuid = (String) tblDriver.getValueAt(selectedRow, 0);  // 获取ID
-    
-    UserAccount toRemove = null;
-    DriverOrg driverOrg = null;
+        int selectedRow = tblDriver.getSelectedRow();
 
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an account to delete", "Warning",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-    for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
-        if (en instanceof VolunteerEnterprise) {
-            VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
-            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                if (org instanceof DriverOrg) {
-                    driverOrg = (DriverOrg) org;
-                    break;
+        String accountUuid = (String) tblDriver.getValueAt(selectedRow, 0); // 获取ID
+
+        UserAccount toRemove = null;
+        DriverOrg driverOrg = null;
+
+        for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
+            if (en instanceof VolunteerEnterprise) {
+                VolunteerEnterprise volunteerEnterprise = (VolunteerEnterprise) en;
+                for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        driverOrg = (DriverOrg) org;
+                        break;
+                    }
                 }
+
             }
-
-        }
-        if (driverOrg != null) {
-            break; 
-        }
-    }
-  
-    if (driverOrg != null) {
-        // 用accountUuid查找用户，如果后面改了ID的生成方式，记得改这里，要不然可能报错！
-        for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getAccountUuid() != null && ua.getAccountUuid().equals(accountUuid)){
-
-                toRemove = ua;
+            if (driverOrg != null) {
                 break;
             }
         }
 
-        if (toRemove != null) {
-            driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-            JOptionPane.showMessageDialog(this, "User deleted successfully.");
-            populateTable();
+        if (driverOrg != null) {
+            // 用accountUuid查找用户，如果后面改了ID的生成方式，记得改这里，要不然可能报错！
+            for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+                if (ua.getAccountUuid() != null && ua.getAccountUuid().equals(accountUuid)) {
 
+                    toRemove = ua;
+                    break;
+                }
+            }
+
+            if (toRemove != null) {
+                driverOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
+                JOptionPane.showMessageDialog(this, "User deleted successfully.");
+                populateTable();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Could not find user to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Could not find driver organization.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Could not find driver organization.", "Error", JOptionPane.ERROR_MESSAGE);
-    } 
-    }                                         
-
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
@@ -244,39 +256,78 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
     public void populateTable() {
 
-DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblDriver.setRowSorter(sorter);
+        model.setRowCount(0);
 
-    if (volunteerOrg == null) {
-        for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
-            if (org instanceof DriverOrg) {
-                DriverOrg driverOrg = (DriverOrg) org;
-                
-                for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
-                    if (ua.getRole() instanceof Deliver) {
-                        Deliver deliver = (Deliver) ua.getRole();
-                        
-                        Object[] row = new Object[3];
-                        row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
-                        row[1] = ua.getUsername(); 
-                        row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
-                        model.addRow(row);
+        if (volunteerOrg == null) {
+            for (BasicOrganization org : volunteerEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof DriverOrg) {
+                    DriverOrg driverOrg = (DriverOrg) org;
+
+                    for (UserAccount ua : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+                        if (ua.getRole() instanceof Deliver) {
+                            Deliver deliver = (Deliver) ua.getRole();
+
+                            Object[] row = new Object[3];
+                            row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                            row[1] = ua.getUsername();
+                            row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                            model.addRow(row);
+                        }
                     }
                 }
             }
-        }
-    } else {
-        for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getRole() instanceof Deliver) {
-                Deliver deliver = (Deliver) ua.getRole();
-                
-                Object[] row = new Object[3];
-                row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
-                row[1] = ua.getUsername();
-                row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
-                model.addRow(row);
+        } else {
+            for (UserAccount ua : volunteerOrg.getUserAccountDirectory().getUserAccountList()) {
+                if (ua.getRole() instanceof Deliver) {
+                    Deliver deliver = (Deliver) ua.getRole();
+
+                    Object[] row = new Object[3];
+                    row[0] = ua.getAccountUuid() != null ? ua.getAccountUuid() : "N/A";
+                    row[1] = ua.getUsername();
+                    row[2] = ua.getPhone() != null ? ua.getPhone() : "N/A";
+                    model.addRow(row);
+                }
             }
         }
     }
+
+    private void beautify() {
+        // 背景统一
+        this.setBackground(new java.awt.Color(245, 242, 250));
+
+        // 主标题与企业标签样式
+        enterpriseLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        enterpriseLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
+
+        lblEnterprise.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 16));
+        lblEnterprise.setForeground(new java.awt.Color(80, 80, 80)); // 深灰
+
+        // 按钮样式
+        javax.swing.JButton[] buttons = { backJButton, btnAddDriver, btnDelete };
+        for (javax.swing.JButton btn : buttons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(java.awt.Color.WHITE);
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        // 表格样式
+        tblDriver.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblDriver.setRowHeight(28);
+        tblDriver.setGridColor(new java.awt.Color(200, 190, 230)); // 紫灰网格
+        tblDriver.setForeground(new java.awt.Color(33, 33, 33));
+        tblDriver.setSelectionBackground(new java.awt.Color(190, 170, 240));
+        tblDriver.setSelectionForeground(java.awt.Color.WHITE);
+
+        tblDriver.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        tblDriver.getTableHeader().setBackground(new java.awt.Color(230, 225, 250));
+        tblDriver.getTableHeader().setForeground(new java.awt.Color(54, 33, 89));
+
+        jScrollPane3.getViewport().setBackground(java.awt.Color.WHITE);
     }
+
 }

@@ -14,18 +14,25 @@ import net.datafaker.Faker;
 public class FakerUtil {
     private static final Faker faker = new Faker();
     private static final Random random = new Random();
+
     // getName
-    public String getName(){
+    public String getName() {
         return faker.name().fullName();
     }
 
     // get email
-    public String getEmail(){
+    public String getEmail() {
         return faker.internet().emailAddress();
     }
-    
+
     // get Address
-    public String getAddress(){
+    public String getAddress() {
         return faker.address().fullAddress();
     }
+
+    // phone number format xxx-xxx-xxxx
+    public String getPhoneNumber() {
+        return faker.numerify("###-###-####");
+    }
+
 }

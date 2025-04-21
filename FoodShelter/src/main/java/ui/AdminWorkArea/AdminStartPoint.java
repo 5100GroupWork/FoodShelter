@@ -8,15 +8,20 @@ import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import model.Account.UserAccount;
 import model.DB4OUtil.DB4OUtil;
 import model.Enterprise.BasicEnterprise;
+import model.FoodItem.FoodItem;
 import model.FoodShelterSystem.FoodShelterConfig;
 import model.FoodShelterSystem.FoodShelterSystem;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.WorkQueue.WorkRequestFoodItem;
+import ui.ReportAnalystWorkArea.SummaryMetricsPanel;
 
 /**
  *
@@ -66,6 +71,7 @@ public class AdminStartPoint extends javax.swing.JPanel {
                 netWork = null;
             }
         });
+        beautify();
     }
 
     /**
@@ -75,7 +81,9 @@ public class AdminStartPoint extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
@@ -86,26 +94,26 @@ public class AdminStartPoint extends javax.swing.JPanel {
         lblWelcome = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
         btnManageOrg = new javax.swing.JButton();
+        btnSummary = new javax.swing.JButton();
         btnDeleteNetWork = new javax.swing.JButton();
         btnCreateNetWork = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         NameTxt = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
         jScrollPane1.setViewportView(jTree);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -123,6 +131,13 @@ public class AdminStartPoint extends javax.swing.JPanel {
         btnManageOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageOrgActionPerformed(evt);
+            }
+        });
+
+        btnSummary.setText("View Summary/Report");
+        btnSummary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSummaryActionPerformed(evt);
             }
         });
 
@@ -152,62 +167,76 @@ public class AdminStartPoint extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDeleteNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCreateNetWork, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageOrg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1)
-                .addContainerGap())
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDetail, btnManageOrg});
-
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(5, 5, 5)
+                                                .addComponent(lblWelcome))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(38, 38, 38)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addComponent(btnManageOrg,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnSummary, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(26, 26, 26)
+                                                .addGroup(jPanel2Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(btnDeleteNetWork)
+                                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                                .addComponent(jLabel3)
+                                                                .addGap(40, 40, 40)
+                                                                .addComponent(NameTxt,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 105,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(45, 45, 45)
+                                                                .addComponent(btnCreateNetWork)))))
+                                .addGap(926, 926, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jSeparator2)
+                                .addContainerGap()));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblWelcome)
-                .addGap(51, 51, 51)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCreateNetWork))
-                .addGap(18, 18, 18)
-                .addComponent(btnDeleteNetWork)
-                .addGap(20, 20, 20)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(btnDetail)
-                .addGap(32, 32, 32)
-                .addComponent(btnManageOrg)
-                .addGap(174, 174, 174))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(lblWelcome)
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(NameTxt, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnCreateNetWork))
+                                .addGap(46, 46, 46)
+                                .addComponent(btnDeleteNetWork)
+                                .addGap(43, 43, 43)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(btnDetail)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnManageOrg)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnSummary)
+                                .addContainerGap()));
 
         jSplitPane1.setRightComponent(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDetailActionPerformed
@@ -218,36 +247,62 @@ public class AdminStartPoint extends javax.swing.JPanel {
         workArea.add("EmployeeWorkPanel", new viewNetWorkDetailPanel(workArea, netWork, foodShelterSystem, account));
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "EmployeeWorkPanel");
+        workArea.revalidate();
+        workArea.repaint();
 
     }// GEN-LAST:event_btnDetailActionPerformed
 
     private void btnManageOrgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnManageOrgActionPerformed
         // TODO add your handling code here:
-
+        if (netWork == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network first.");
+        }
         CardLayout layout = (CardLayout) workArea.getLayout();
-        workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem));
+        workArea.add("AdminWorkAreaPanel", new AdminWorkAreaPanel(workArea, account, foodShelterSystem,netWork));
         layout.show(workArea, "AdminWorkAreaPanel");
+        workArea.revalidate();
+        workArea.repaint();
     }// GEN-LAST:event_btnManageOrgActionPerformed
 
-    private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnManageAdminActionPerformed
+    private void btnSummaryActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnManageAdminActionPerformed
         // ManageEnterpriseAdminJPanel manageEnterpriseAdminJPanel=new
         // ManageEnterpriseAdminJPanel(userProcessContainer, ecosystem);
         // userProcessContainer.add("manageEnterpriseAdminJPanel",manageEnterpriseAdminJPanel);
         // CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         // layout.next(userProcessContainer);
-    }// GEN-LAST:event_btnManageAdminActionPerformed
+        // GEN-LAST:event_btnManageAdminActionPerformed
+        FoodItem testItem = new FoodItem();
+        testItem.setFoodName("Canned Soup");
+        testItem.setNumber(12);
+        testItem.setUsingStatus("Send"); // Required for counting as 'donated'
+        testItem.setFoodStatus("Good");
+
+        WorkRequestFoodItem testRequest = new WorkRequestFoodItem();
+        testRequest.setFoodItem(testItem);
+
+        // Inject it into the system
+        foodShelterSystem.getWorkQueue().getWorkRequestList().add(testRequest);
+
+        SummaryMetricsPanel panel = new SummaryMetricsPanel(workArea, foodShelterSystem, account);
+        workArea.add("SummaryMetricsPanel", panel);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "SummaryMetricsPanel");
+        workArea.revalidate();
+        workArea.repaint();
+
+    }
 
     private void btnDeleteNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteNetWorkActionPerformed
         // TODO add your handling code here:
-        //DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
-
+        // DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)
+        // jTree.getLastSelectedPathComponent();
         if (netWork == null) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select a Network to delete.");
             return;
         }
         foodShelterSystem.getNetworkList().remove(netWork);
         populateTree();
-        
+
     }// GEN-LAST:event_btnDeleteNetWorkActionPerformed
 
     private void btnCreateNetWorkActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCreateNetWorkActionPerformed
@@ -277,11 +332,12 @@ public class AdminStartPoint extends javax.swing.JPanel {
     private javax.swing.JButton btnDeleteNetWork;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnManageOrg;
+    private javax.swing.JButton btnSummary;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTree jTree;
     private javax.swing.JLabel lblWelcome;
@@ -332,6 +388,48 @@ public class AdminStartPoint extends javax.swing.JPanel {
             }
         }
         model.reload();
+
+    }
+
+    ///////////// beautify//////////////////////
+    public void beautify() {
+
+        // 更亮一点的背景
+        jTree.setBackground(new java.awt.Color(230, 225, 250)); // 浅紫灰
+        jTree.setForeground(new java.awt.Color(54, 33, 89)); // 深紫灰字（更统一）
+
+        // 字体和选中样式（可选）
+        jTree.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+
+        // 设置选中行背景色（需要 UIManager 设定）
+        javax.swing.UIManager.put("Tree.selectionBackground", new java.awt.Color(180, 170, 230));
+        javax.swing.UIManager.put("Tree.selectionForeground", new java.awt.Color(255, 255, 255)); // 保持白字
+
+        javax.swing.SwingUtilities.updateComponentTreeUI(jTree); // 立即刷新树样式
+
+        jPanel2.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰整体感
+
+        lblWelcome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        lblWelcome.setForeground(new java.awt.Color(54, 33, 89)); // 深紫标题
+        javax.swing.JButton[] purpleButtons = {
+                btnCreateNetWork, btnDeleteNetWork, btnDetail, btnManageOrg, btnSummary
+        };
+
+        for (javax.swing.JButton btn : purpleButtons) {
+            btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
+            btn.setForeground(new java.awt.Color(255, 255, 255)); // 白字
+            btn.setFocusPainted(false);
+            btn.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 12, 6, 12));
+        }
+
+        NameTxt.setBackground(new java.awt.Color(255, 255, 255));
+        NameTxt.setForeground(new java.awt.Color(40, 40, 40));
+        NameTxt.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        NameTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
+
+        jLabel3.setForeground(new java.awt.Color(54, 33, 89)); // 输入框说明加深
+        jLabel3.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
 
     }
 }
