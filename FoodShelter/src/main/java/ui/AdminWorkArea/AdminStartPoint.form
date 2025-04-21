@@ -80,6 +80,9 @@
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnDeleteNetWork" min="-2" pref="193" max="-2" attributes="0"/>
+
+                          <Component id="btnSummary" linkSize="1" max="32767" attributes="0"/>
+
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" pref="89" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -118,8 +121,15 @@
                       <EmptySpace pref="57" max="32767" attributes="0"/>
                       <Component id="btnDetail" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="btnManageOrg" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnSummary" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+
                   </Group>
               </Group>
             </DimensionLayout>
@@ -149,6 +159,26 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageOrgActionPerformed"/>
               </Events>
             </Component>
+
+            <Component class="javax.swing.JButton" name="btnSummary">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View Summary/Report"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSummaryActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="enployee &#x8fd8;&#x662f;food enterpris"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=" organization &#x53ea;&#x662f;food organization"/>
+              </Properties>
+            </Component>
+
             <Component class="javax.swing.JButton" name="btnDeleteNetWork">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete NetWork"/>

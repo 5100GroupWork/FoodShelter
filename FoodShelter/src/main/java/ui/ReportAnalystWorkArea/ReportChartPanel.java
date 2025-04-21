@@ -6,7 +6,7 @@ package ui.ReportAnalystWorkArea;
 
 /**
  *
- * @author sylvia
+ * @author yuewu
  */
 public class ReportChartPanel extends javax.swing.JPanel {
 
