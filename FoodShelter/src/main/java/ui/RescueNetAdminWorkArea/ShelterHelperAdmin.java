@@ -65,7 +65,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         for(UserAccount ua: this.account.getOrganization().getUserAccountDirectory().getUserAccountList()){
             Object[] row = new Object[3];
             row[0] = ua.getAccountUuid();
-            row[1] = ua.getUsername();
+            row[1] = ua;
             row[2] = ua.getPhone();
             model.addRow(row);
         }
@@ -78,7 +78,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -87,6 +87,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         tblShelterHelper = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,21 +100,22 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         accountLabel.setText("Shelter Helper Admin - Account Management");
 
         tblShelterHelper.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Shelter Helper ID", "Name", "Contact"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Shelter Helper ID", "Name", "Contact"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblShelterHelper);
@@ -132,43 +134,64 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
             }
         });
 
+        btnUpdate.setText("update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(144, 144, 144)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 423,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(backJButton)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(303, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(176, 176, 176)
-                                .addComponent(btnAdd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete)
-                                .addGap(336, 336, 336)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backJButton)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(303, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(btnAdd)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(336, 336, 336))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(backJButton)
-                                .addGap(27, 27, 27)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnAdd)
-                                        .addComponent(btnDelete))
-                                .addContainerGap(361, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(backJButton)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete)
+                    .addComponent(btnUpdate))
+                .addContainerGap(361, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblShelterHelper.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            return;
+        } 
+        UserAccount ua = (UserAccount) tblShelterHelper.getValueAt(selectedRow, 1);
+        AddShelterHelper addShelterHelper = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg, ua);
+        PanelUtils.addOrReplacePanel(workArea,"AddShelterHelper" , addShelterHelper);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "AddShelterHelper");
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
         RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, requestEntertainOrg,
@@ -182,7 +205,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg);
+        AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg,null);
         workArea.add("AddShelterHelper", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea,"AddShelterHelper");
@@ -196,21 +219,12 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
             return;
         }
 
-        String username = (String) tblShelterHelper.getValueAt(selectedRow, 0);
-
-        UserAccount toRemove = null;
-        for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getUsername().equals(username)) {
-                toRemove = ua;
-                break;
-            }
-        }
-
-        if (toRemove != null) {
-            requestEntertainOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-            JOptionPane.showMessageDialog(this, "User deleted.");
-            populateTable();
-        }
+        UserAccount ua = (UserAccount) tblShelterHelper.getValueAt(selectedRow, 1);
+        netWork.getUserAccountDirctory().getUserAccountList().remove(ua);
+        requestEntertainOrg.getUserAccountDirectory().getUserAccountList().remove(ua);
+        JOptionPane.showMessageDialog(this, "User deleted.");
+        populateTable();
+        
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,9 +232,9 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblShelterHelper;
-
     // End of variables declaration//GEN-END:variables
     private void beautify() {
         // 背景统一
@@ -231,7 +245,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         accountLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
 
         // 按钮美化
-        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete };
+        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete,btnUpdate };
         for (javax.swing.JButton btn : buttons) {
             btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮
