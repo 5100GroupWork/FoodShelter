@@ -7,6 +7,7 @@ package ui.TaskManagerWorkArea;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -59,69 +60,64 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDrivers = new javax.swing.JTable();
-        enterpriseLabel1 = new javax.swing.JLabel();
         enterpriseLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUnassignedTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
+        enterpriseLabel1 = new javax.swing.JLabel();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Task Manager - Task Assignment");
 
         tbDrivers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Driver ID", "Name", "Available"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Driver ID", "Name", "Status"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tbDrivers);
-
-        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        enterpriseLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        enterpriseLabel1.setText("Available Drivers ");
 
         enterpriseLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
         enterpriseLabel2.setText("Shelter Request Tasks ");
 
         tbUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Food Name", "Quantity", "From", "To", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null },
+                        { null, null, null, null, null, null }
+                },
+                new String[] {
+                        "ID", "Food Name", "Quantity", "From", "To", "Status"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(tbUnassignedTasks);
@@ -147,57 +143,65 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             }
         });
 
+        enterpriseLabel1.setText("Table of Drivers");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(152, 152, 152)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnRefresh)
-                        .addGap(257, 257, 257)
-                        .addComponent(btnView))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(btnAssignTask))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(enterpriseLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(enterpriseLabel2)))
-                .addContainerGap(424, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(152, 152, 152)
+                                                                .addComponent(enterpriseLabel,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 389,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jScrollPane2,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 748,
+                                                                Short.MAX_VALUE)
+                                                        .addComponent(jScrollPane1)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(91, 91, 91)
+                                                .addComponent(btnRefresh)
+                                                .addGap(257, 257, 257)
+                                                .addComponent(btnView))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(274, 274, 274)
+                                                .addComponent(btnAssignTask))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(203, 203, 203)
+                                                .addComponent(enterpriseLabel2))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(217, 217, 217)
+                                                .addComponent(enterpriseLabel1)))
+                                .addContainerGap(386, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(enterpriseLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRefresh)
-                    .addComponent(btnView))
-                .addGap(39, 39, 39)
-                .addComponent(enterpriseLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAssignTask)
-                .addGap(49, 49, 49))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(enterpriseLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnRefresh)
+                                        .addComponent(btnView))
+                                .addGap(42, 42, 42)
+                                .addComponent(enterpriseLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAssignTask)
+                                .addGap(49, 49, 49)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
@@ -230,12 +234,18 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
         // Assign driver to task
         task.setDeliver(driver);
-        task.setTaskStatus("picked");
+        task.setTaskStatus("Waiting to be picked up");
 
         // Update driver's work queue
         if (driver.getRole() instanceof Deliver) {
             Deliver deliverRole = (Deliver) driver.getRole();
             deliverRole.newWorkQueue(task);
+
+            // Update status to "busy"
+            deliverRole.setStatus("busy");
+
+            // Update the status in the table
+            driverModel.setValueAt("busy", driverModelRow, 2);
         }
 
         JOptionPane.showMessageDialog(null, "Task assigned successfully.");
@@ -249,11 +259,13 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTask1ActionPerformed
         // TODO add your handling code here:
         populateTableTaskUndo();
+        populateTableDriver();
     }// GEN-LAST:event_btnAssignTask1ActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTask2ActionPerformed
         // TODO add your handling code here:
         populateTableTask();
+        populateTableDriver();
     }// GEN-LAST:event_btnAssignTask2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,155 +284,155 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     ////////////////function ///////////////////
     // populizeTable
     public void populateTableTask() {
-    DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    tbUnassignedTasks.setRowSorter(sorter);
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbUnassignedTasks.setRowSorter(sorter);
+        model.setRowCount(0);
 
-    ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-    
-    System.out.println("开始查找任务...");
-    
-    // 1. 先查找 DeliveryTask（在ShelterHelperWorkPanel创建的任务）
-    for (BasicEnterprise enterprise : enterprises) {
-        if (enterprise instanceof RescueNetEnterprise) {
-            RescueNetEnterprise rescueNet = (RescueNetEnterprise) enterprise;
-            
-            // 检查 RequestEntertainOrg
-            if (rescueNet.getRequestEntertainOrg() != null) {
-                RequestEntertainOrg entertainOrg = rescueNet.getRequestEntertainOrg();
-                System.out.println("检查组织: " + entertainOrg.getName() + "，任务数量: " + 
-                                   entertainOrg.getWorkQueue().getWorkRequestList().size());
-                
-                for (WorkRequest wr : entertainOrg.getWorkQueue().getWorkRequestList()) {
-                    System.out.println("找到任务类型: " + wr.getClass().getSimpleName());
-                    
-                    if (wr instanceof DeliveryTask) {
-                        DeliveryTask task = (DeliveryTask) wr;
-                        if (task.getFoodItem() != null) {
-                            Object row[] = new Object[6];
-                            row[0] = wr.getWorkRequestUuid().substring(0, 8);
-                            row[1] = task.getFoodItem().getFoodName();
-                            row[2] = task.getQuantity();
-                            row[3] = task.getFoodItem().getFoodIncOrg().getAddress();
-                            row[4] = task.getReceiver().getAddress();
-                            row[5] = task;
-                            model.addRow(row);
-                            System.out.println("添加DeliveryTask: " + task.getFoodItem().getFoodName());
-                        }
-                    }
-                    
-                    if (wr instanceof WorkRequestDelivery) {
-                        WorkRequestDelivery wrd = (WorkRequestDelivery) wr;
-                        if (wrd.getFoodItem() != null) {
-                            Object row[] = new Object[6];
-                            row[0] = wrd.getWorkRequestUuid();
-                            row[1] = wrd.getFoodItem().getFoodName();
-                            row[2] = wrd.getFoodItem().getNumber();
-                            
-                            // 地址信息
-                            if (wrd.getFoodItem().getFoodIncOrg() != null) {
-                                row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
-                            } else {
-                                row[3] = "Unknown";
-                            }
-                            
-                            if (wrd.getReceiver() != null) {
-                                row[4] = wrd.getReceiver().getAddress();
-                            } else {
-                                row[4] = "Unknown";
-                            }
-                            
-                            // 状态
-                            row[5] = wrd;
-                            model.addRow(row);
-                            System.out.println("添加WorkRequestDelivery: " + wrd.getFoodItem().getFoodName() + 
-                                            ", TaskStatus: " + wrd.getTaskStatus());
-                        }
-                    }
-                }
-            }
-            
-            // 检查 RequestCollectOrg
-            if (rescueNet.getRequestCollectOrg() != null) {
-                RequestCollectOrg collectOrg = rescueNet.getRequestCollectOrg();
-                System.out.println("检查组织: " + collectOrg.getName() + "，任务数量: " + 
-                                   collectOrg.getWorkQueue().getWorkRequestList().size());
-                
-                // 检查这个组织的工作队列中是否有相关任务
-                for (WorkRequest wr : collectOrg.getWorkQueue().getWorkRequestList()) {
-                    if (wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) {
-                        // 与上面类似的处理
-                        System.out.println("在RequestCollectOrg中找到任务: " + wr.getClass().getSimpleName());
-                    }
-                }
-            }
-        }
-    }
-    
-    // 2. 检查网络级别的任务队列
-    if (netWork.getWarehouseList() != null) {
-        System.out.println("检查网络仓库任务列表，任务数量: " + 
-                           netWork.getWarehouseList().getWorkRequestList().size());
-        
-        for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
-            if (wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) {
-                System.out.println("在网络仓库中找到任务: " + wr.getClass().getSimpleName());
-                // 处理这些任务（与上面类似）
-            }
-        }
-    }
-    
-    System.out.println("总共找到 "  + " 个任务");
-    }
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
 
-    // populate Task Undo
-    public void populateTableTaskUndo() {
-         DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    tbUnassignedTasks.setRowSorter(sorter);
-    model.setRowCount(0);
-    
-    ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-    int index = 0; // Auto-increment counter
-    
-    for (BasicEnterprise enterprise : enterprises) {
-        if (enterprise.getEnterpriseType().getValue().equals("RescueNetEnterprise")) {
-            RescueNetEnterprise en = (RescueNetEnterprise) enterprise;
-            RequestEntertainOrg org = en.getRequestEntertainOrg();
-            
-            if (org != null && org.getWorkQueue() != null) {
-                for (WorkRequest wd : org.getWorkQueue().getWorkRequestList()) {
-                    if (wd instanceof WorkRequestDelivery) {
-                        WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
-                        
-                        // Only show unpicked tasks
-                        if (wrd.getTaskStatus() != null && wrd.getTaskStatus().equalsIgnoreCase("UnPick")) {
-                            // Only add task if it has food item
-                            if (wrd.getFoodItem() != null && wrd.getFoodItem().getFoodIncOrg() != null) {
-                                index++;
+        System.out.println("开始查找任务...");
+
+        // 1. 先查找 DeliveryTask（在ShelterHelperWorkPanel创建的任务）
+        for (BasicEnterprise enterprise : enterprises) {
+            if (enterprise instanceof RescueNetEnterprise) {
+                RescueNetEnterprise rescueNet = (RescueNetEnterprise) enterprise;
+
+                // 检查 RequestEntertainOrg
+                if (rescueNet.getRequestEntertainOrg() != null) {
+                    RequestEntertainOrg entertainOrg = rescueNet.getRequestEntertainOrg();
+                    System.out.println("检查组织: " + entertainOrg.getName() + "，任务数量: " +
+                            entertainOrg.getWorkQueue().getWorkRequestList().size());
+
+                    for (WorkRequest wr : entertainOrg.getWorkQueue().getWorkRequestList()) {
+                        System.out.println("找到任务类型: " + wr.getClass().getSimpleName());
+
+                        if (wr instanceof DeliveryTask) {
+                            DeliveryTask task = (DeliveryTask) wr;
+                            if (task.getFoodItem() != null) {
                                 Object row[] = new Object[6];
-                                row[0] = index; // Auto-incremented number
+                                row[0] = wr.getWorkRequestUuid().substring(0, 8);
+                                row[1] = task.getFoodItem().getFoodName();
+                                row[2] = task.getQuantity();
+                                row[3] = task.getFoodItem().getFoodIncOrg().getAddress();
+                                row[4] = task.getReceiver().getAddress();
+                                row[5] = task;
+                                model.addRow(row);
+                                System.out.println("添加DeliveryTask: " + task.getFoodItem().getFoodName());
+                            }
+                        }
+
+                        if (wr instanceof WorkRequestDelivery) {
+                            WorkRequestDelivery wrd = (WorkRequestDelivery) wr;
+                            if (wrd.getFoodItem() != null) {
+                                Object row[] = new Object[6];
+                                row[0] = wrd.getWorkRequestUuid();
                                 row[1] = wrd.getFoodItem().getFoodName();
                                 row[2] = wrd.getFoodItem().getNumber();
-                                row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
-                                
-                                // Handle potential null for receiver
+
+                                // 地址信息
+                                if (wrd.getFoodItem().getFoodIncOrg() != null) {
+                                    row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
+                                } else {
+                                    row[3] = "Unknown";
+                                }
+
                                 if (wrd.getReceiver() != null) {
                                     row[4] = wrd.getReceiver().getAddress();
                                 } else {
                                     row[4] = "Unknown";
                                 }
-                                
-                                row[5] = wrd; // Store the actual object for later use
+
+                                // 状态
+                                row[5] = wrd;
                                 model.addRow(row);
+                                System.out.println("添加WorkRequestDelivery: " + wrd.getFoodItem().getFoodName() +
+                                        ", TaskStatus: " + wrd.getTaskStatus());
+                            }
+                        }
+                    }
+                }
+
+                // 检查 RequestCollectOrg
+                if (rescueNet.getRequestCollectOrg() != null) {
+                    RequestCollectOrg collectOrg = rescueNet.getRequestCollectOrg();
+                    System.out.println("检查组织: " + collectOrg.getName() + "，任务数量: " +
+                            collectOrg.getWorkQueue().getWorkRequestList().size());
+
+                    // 检查这个组织的工作队列中是否有相关任务
+                    for (WorkRequest wr : collectOrg.getWorkQueue().getWorkRequestList()) {
+                        if (wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) {
+                            // 与上面类似的处理
+                            System.out.println("在RequestCollectOrg中找到任务: " + wr.getClass().getSimpleName());
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. 检查网络级别的任务队列
+        if (netWork.getWarehouseList() != null) {
+            System.out.println("检查网络仓库任务列表，任务数量: " +
+                    netWork.getWarehouseList().getWorkRequestList().size());
+
+            for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+                if (wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) {
+                    System.out.println("在网络仓库中找到任务: " + wr.getClass().getSimpleName());
+                    // 处理这些任务（与上面类似）
+                }
+            }
+        }
+
+        System.out.println("总共找到 " + " 个任务");
+    }
+
+    // populate Task Undo
+    public void populateTableTaskUndo() {
+        DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbUnassignedTasks.setRowSorter(sorter);
+        model.setRowCount(0);
+
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+        int index = 0; // Auto-increment counter
+
+        for (BasicEnterprise enterprise : enterprises) {
+            if (enterprise.getEnterpriseType().getValue().equals("RescueNetEnterprise")) {
+                RescueNetEnterprise en = (RescueNetEnterprise) enterprise;
+                RequestEntertainOrg org = en.getRequestEntertainOrg();
+
+                if (org != null && org.getWorkQueue() != null) {
+                    for (WorkRequest wd : org.getWorkQueue().getWorkRequestList()) {
+                        if (wd instanceof WorkRequestDelivery) {
+                            WorkRequestDelivery wrd = (WorkRequestDelivery) wd;
+
+                            // Only show unpicked tasks
+                            if (wrd.getTaskStatus() != null && wrd.getTaskStatus().equalsIgnoreCase("UnPick")) {
+                                // Only add task if it has food item
+                                if (wrd.getFoodItem() != null && wrd.getFoodItem().getFoodIncOrg() != null) {
+                                    index++;
+                                    Object row[] = new Object[6];
+                                    row[0] = index; // Auto-incremented number
+                                    row[1] = wrd.getFoodItem().getFoodName();
+                                    row[2] = wrd.getFoodItem().getNumber();
+                                    row[3] = wrd.getFoodItem().getFoodIncOrg().getAddress();
+
+                                    // Handle potential null for receiver
+                                    if (wrd.getReceiver() != null) {
+                                        row[4] = wrd.getReceiver().getAddress();
+                                    } else {
+                                        row[4] = "Unknown";
+                                    }
+
+                                    row[5] = wrd; // Store the actual object for later use
+                                    model.addRow(row);
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
     }
 
     public void populateTableDriver() {
@@ -447,8 +459,40 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                             row[0] = account.getAccountUuid();
                             row[1] = account;
                             row[2] = "Available"; // Default status
+//                            if (account.getRole() instanceof Deliver) {
+//                                Deliver deliver = (Deliver) account.getRole();
+//                                row[0] = account.getAccountUuid();
+//                                row[1] = account;
+//                                row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+//
+//                                model.addRow(row);
+//                            }
+                        }
 
-                            model.addRow(row);
+                        // Also check employees list if it exists and isn't empty
+                        if (driverOrg.getEmployees() != null) {
+                            for (UserAccount account : driverOrg.getEmployees()) {
+                                // Only add if not already added from UserAccountDirectory
+                                boolean alreadyAdded = false;
+                                for (int i = 0; i < model.getRowCount(); i++) {
+                                    UserAccount existing = (UserAccount) model.getValueAt(i, 1);
+                                    if (existing.getUsername().equals(account.getUsername())) {
+                                        alreadyAdded = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!alreadyAdded && account.getRole() instanceof Deliver) {
+                                    Deliver deliver = (Deliver) account.getRole();
+                                    Object row[] = new Object[3];
+                                    row[0] = account.getAccountUuid();
+                                    row[1] = account;
+                                    row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+
+                                    model.addRow(row);
+                                }
+                            }
+
                         }
 
                         // Also check employees list if it exists and isn't empty
@@ -478,57 +522,60 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 }
             }
         }
-           
-//        DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-//        tbDrivers.setRowSorter(sorter);
-//        model.setRowCount(0);
-//
-//        // 拿到driverOrg
-//        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-//        int index = 0; // 自动计数器
-//
-//        for (BasicEnterprise enterprise : enterprises) {
-//            if (enterprise.getEnterpriseType().getValue().equals("Volunteer")) {
-//                VolunteerEnterprise en = (VolunteerEnterprise) enterprise;
-//                for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
-//                    if (org instanceof DriverOrg) {
-//                        DriverOrg driverOrg = (DriverOrg) org;
-//                        //check in organization's user accouts
-//                        for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
-//                            if (account.getRole() instanceof Deliver) {
-//                                Deliver deliver = (Deliver) account.getRole();
-//                                index++;
-//
-//                                Object row[] = new Object[3];
-//                                row[0] = deliver.getID(); // Use driver ID
-//                                row[1] = account; // This will be displayed through UserAccount.toString()
-//                                row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
-//
-//                                model.addRow(row);
-//                                System.out.println("Added driver from UAD: " + account.getUsername());
-//                            }
-//                        }
-//
-//                        //also check emplouees collection if it exists 
-//                        if (driverOrg.getEmployees() != null) {
-//                            for (UserAccount account : driverOrg.getEmployees()) {
-//                                if (account.getRole() instanceof Deliver) {
-//                                    Deliver deliver = (Deliver) account.getRole();
-//
-//                                    index++; // 增加计数器
-//                                    Object row[] = new Object[3]; // 注意：表格只有3列
-//                                    row[0] = deliver.getID(); // 自动递增的编号
-//                                    row[1] = account; // 驾驶员账户对象
-//                                    row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
-//                                    model.addRow(row);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
+        // DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
+        // TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        // tbDrivers.setRowSorter(sorter);
+        // model.setRowCount(0);
+        //
+        // // 拿到driverOrg
+        // ArrayList<BasicEnterprise> enterprises =
+        // netWork.getEnterpriseDirectory().getEnterprises();
+        // int index = 0; // 自动计数器
+        //
+        // for (BasicEnterprise enterprise : enterprises) {
+        // if (enterprise.getEnterpriseType().getValue().equals("Volunteer")) {
+        // VolunteerEnterprise en = (VolunteerEnterprise) enterprise;
+        // for (BasicOrganization org :
+        // en.getOrganizationDirectory().getOrganizationList()) {
+        // if (org instanceof DriverOrg) {
+        // DriverOrg driverOrg = (DriverOrg) org;
+        // //check in organization's user accouts
+        // for (UserAccount account :
+        // driverOrg.getUserAccountDirectory().getUserAccountList()) {
+        // if (account.getRole() instanceof Deliver) {
+        // Deliver deliver = (Deliver) account.getRole();
+        // index++;
+        //
+        // Object row[] = new Object[3];
+        // row[0] = deliver.getID(); // Use driver ID
+        // row[1] = account; // This will be displayed through UserAccount.toString()
+        // row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+        //
+        // model.addRow(row);
+        // System.out.println("Added driver from UAD: " + account.getUsername());
+        // }
+        // }
+        //
+        // //also check emplouees collection if it exists
+        // if (driverOrg.getEmployees() != null) {
+        // for (UserAccount account : driverOrg.getEmployees()) {
+        // if (account.getRole() instanceof Deliver) {
+        // Deliver deliver = (Deliver) account.getRole();
+        //
+        // index++; // 增加计数器
+        // Object row[] = new Object[3]; // 注意：表格只有3列
+        // row[0] = deliver.getID(); // 自动递增的编号
+        // row[1] = account; // 驾驶员账户对象
+        // row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+        // model.addRow(row);
+        // }
+        // }
+        // }
+        // }
+        // }
+        // }
+        // }
     }
 
     private void beautify() {

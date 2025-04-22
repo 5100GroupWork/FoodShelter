@@ -246,8 +246,23 @@ public class AddShelterHelper extends javax.swing.JPanel {
         String phone = txtPhone.getText();
 
         IsMatch isMatch = new IsMatch();
-        if (isMatch.isEmailMatch(email) && isMatch.isNameMatch(username)) {
-            JOptionPane.showMessageDialog(this, "name or email validation error");
+
+        if (!isMatch.isNameMatch(username)) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid name format. Name should only contain letters and up to 3 spaces.",
+                    "Name Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            txtuserName.requestFocus();
+            return;
+        }
+
+        if (!isMatch.isEmailMatch(email)) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid email format. Please enter a valid email address.",
+                    "Email Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            txtEmail.requestFocus();
+
             return;
         }
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
@@ -259,6 +274,7 @@ public class AddShelterHelper extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
         }
+
 
         ShelterHelper role = new ShelterHelper();
         UserAccount account = netWork.getUserAccountDirctory().createUserAccount(username, password, role);

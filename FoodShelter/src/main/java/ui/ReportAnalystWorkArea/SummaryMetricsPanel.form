@@ -39,9 +39,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblTotalDonated" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEnergySaved" alignment="0" min="-2" max="-2" attributes="0"/>
-
                           <Component id="lblTotalStored" alignment="0" min="-2" max="-2" attributes="0"/>
-
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -71,7 +69,6 @@
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="lblTotalDonated" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-
               <Component id="lblTotalStored" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="lblEnergySaved" min="-2" max="-2" attributes="0"/>
@@ -80,7 +77,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chartContainer" min="-2" pref="440" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,14 +119,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnExport">
       <Properties>
-
         <Property name="text" type="java.lang.String" value="Export Report \ud83d\udce4" containsInvalidXMLChars="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTotalStored">
       <Properties>
         <Property name="text" type="java.lang.String" value="Total Food Stored: "/>
-
       </Properties>
     </Component>
   </SubComponents>

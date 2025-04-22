@@ -17,7 +17,12 @@ public class WorkRequestDelivery extends WorkRequestFoodItem{
     private String toLocation;
     
     String TaskStatus;// UnPick/ picked/ deliverying / accepted  
-
+    
+    
+    public WorkRequestDelivery() {
+        super();
+        this.TaskStatus = "Waiting to be picked up";
+    }
     public String getTaskStatus() {
         return TaskStatus;
     }
@@ -25,6 +30,8 @@ public class WorkRequestDelivery extends WorkRequestFoodItem{
     public void setTaskStatus(String TaskStatus) {
         this.TaskStatus = TaskStatus;
     }
+
+
 
     public UserAccount getDeliver() {
         return deliver;
