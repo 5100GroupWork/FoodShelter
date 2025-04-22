@@ -19,6 +19,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.Role.Homeless;
+import utils.PanelUtils;
 
 /**
  *
@@ -204,7 +205,14 @@ public class HomelessAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowInconActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-
+        //todo
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, requestCollectOrg,
+                rescueNetEnterprise, netWork);
+        PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
+        workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "RescueNetAdminStartPoint");
+        
     }// GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
@@ -226,6 +234,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
         UserAccount account = (UserAccount) tblHomeless.getValueAt(selectedRow, 1);
         this.requestCollectOrg.getUserAccountDirectory().getUserAccountList().remove(account);
         this.netWork.getUserAccountDirctory().getUserAccountList().remove(account);
+        populateTable();
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

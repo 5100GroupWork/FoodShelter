@@ -16,6 +16,7 @@ import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestEntertainOrg;
+import utils.PanelUtils;
 
 /**
  *
@@ -170,8 +171,9 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise,
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, requestEntertainOrg,
                 enterprise, netWork);
+        PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");

@@ -36,10 +36,17 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.netWork = netWork;
 
+        // 判断跳转过来的角色 同时屏蔽按钮
         if (organization instanceof RequestEntertainOrg) {
+            System.out.println("RequestEntertainOrg");
             this.requestEntertainOrg = (RequestEntertainOrg) organization;
+            btnHomeless.setEnabled(false);
+            btnShelter.setEnabled(true);
         } else if (organization instanceof RequestCollectOrg) {
+            System.out.println("RequestCollectOrg");
             this.requestCollectOrg = (RequestCollectOrg) organization;
+            btnHomeless.setEnabled(true);
+            btnShelter.setEnabled(false);
         }
 
         jLabel1.setText("Welcome, " + account.getUsername());

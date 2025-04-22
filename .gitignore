@@ -5,6 +5,7 @@
 /FoodShelter/Databank.db4o
 /FoodShelter/pom.xml
 *.DS_Store
-
+*.png
+*.db4o
 
 FoodShelter/nbactions.xml

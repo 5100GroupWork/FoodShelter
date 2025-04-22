@@ -12,6 +12,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
+import ui.RescueNetAdminWorkArea.RescueNetAdminStartPoint;
 import ui.RescueNetAdminWorkArea.ShelterHelperAdmin;
 import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
 
@@ -39,7 +40,7 @@ public class ShelterHelperManager extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         //r
-        return new ShelterHelperAdmin(workArea,account,organization,enterprise,netWork);
+        return new RescueNetAdminStartPoint(workArea,account,organization,enterprise,netWork);
     }
     
 }

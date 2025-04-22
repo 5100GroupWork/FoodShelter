@@ -197,11 +197,12 @@ public class FoodShelterConfig {
         helper.setOrganization(requestEntertainOrg);
 
         HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
-        UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "John", "0000", netWork);
-        homeless.setEmail("john@rescue.org");
-        homeless.setPhone("555-901-2345");
-        homeless.setEnterprise(rescuEnterprise);
-        homeless.setOrganization(requestEntertainOrg);
+        UserAccount homelessMa = netWork.getUserAccountDirctory().createUserAccount("John", "0000",homelessManager);
+        rescuEnterprise.getUserAccountDirectory().getUserAccountList().add(homelessMa);
+        homelessMa.setEmail("john@rescue.org");
+        homelessMa.setPhone("555-901-2345");
+        homelessMa.setEnterprise(rescuEnterprise);
+        homelessMa.setOrganization(requestCollectOrg);
 
         UserAccount mainHomeless = homelessManager.addHomeLess(requestCollectOrg, "Mary", "0000", netWork);
         mainHomeless.setEmail("homeless@rescue.org");

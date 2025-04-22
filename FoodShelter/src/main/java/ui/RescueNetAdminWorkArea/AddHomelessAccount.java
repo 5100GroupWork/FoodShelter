@@ -22,6 +22,7 @@ import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.RequestCollectOrg;
 import model.Role.Homeless;
+import utils.IsMatch;
 
 /**
  *
@@ -235,8 +236,7 @@ public class AddHomelessAccount extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
-        HomelessAdmin homelessAdmin = new HomelessAdmin(workArea, account, enterprise, enterprise, netWork);
+        HomelessAdmin homelessAdmin = new HomelessAdmin(workArea, account, this.requestCollectOrg, enterprise, netWork);
         workArea.add("HomelessAdmin",homelessAdmin);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "HomelessAdmin");
@@ -252,12 +252,15 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-
+        IsMatch isMatch = new IsMatch();
+        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
+            JOptionPane.showMessageDialog(this, "name or email validation error");
+            return;
+        }
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
-
         if (!requestCollectOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
@@ -271,13 +274,12 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         }
         
 
-        UserAccount account = requestCollectOrg.getUserAccountDirectory().createUserAccount(username, "0000", role);
-
+        UserAccount account = netWork.getUserAccountDirctory().createUserAccount(username, password, role);
+        requestCollectOrg.getUserAccountDirectory().getUserAccountList().add(account);
         account.setEmail(email);
         account.setPhone(phone);
         account.setOrganization(requestCollectOrg);
         account.setEnterprise(this.enterprise);
-        netWork.getUserAccountDirctory().getUserAccountList().add(account);
 
         JOptionPane.showMessageDialog(this, "New homeless user created successfully!");
 
