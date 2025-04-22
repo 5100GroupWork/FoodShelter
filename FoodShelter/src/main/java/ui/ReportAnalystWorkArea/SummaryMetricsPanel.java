@@ -37,6 +37,8 @@ import java.io.FileOutputStream;
 import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
+import model.WorkQueue.DeliveryTask;
+import model.WorkQueue.WorkRequestDelivery;
 
 
 /**
@@ -198,12 +200,25 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
                 for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
                     for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
-                        if (wr instanceof WorkRequestFoodItem) {
+                        // Count stored food - food that has been approved in food check
+                        if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery) && !(wr instanceof DeliveryTask)) {
                             FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                            if (item.getUsingStatus().equalsIgnoreCase("Send")) {
-                                donated += item.getNumber();
-                            } else {
+                            if (item != null && "Approved".equalsIgnoreCase(wr.getStatus())) {
                                 stored += item.getNumber();
+                            }
+                        }
+                        
+                        // Count donated food - food delivered to homeless
+                        if ((wr instanceof WorkRequestDelivery || wr instanceof DeliveryTask) 
+                            && ("accepted".equalsIgnoreCase(wr.getStatus()) || "Completed".equalsIgnoreCase(wr.getStatus()))) {
+                            if (wr instanceof WorkRequestDelivery) {
+                                WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
+                                if (deliveryReq.getFoodItem() != null) {
+                                    donated += deliveryReq.getFoodItem().getNumber();
+                                }
+                            } else if (wr instanceof DeliveryTask) {
+                                DeliveryTask deliveryTask = (DeliveryTask) wr;
+                                donated += deliveryTask.getQuantity();
                             }
                         }
                     }
@@ -310,21 +325,34 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         double energySavedPerItem = 0.5; // Example: 0.5 kWh saved per item
 
         for (NetWork net : foodShelterSystem.getNetworkList()) {
-        for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-            for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
-                for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
-                    if (wr instanceof WorkRequestFoodItem) {
-                        FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                        if (item.getUsingStatus().equalsIgnoreCase("Send")) {
-                            totalDonated += item.getNumber();
-                        } else{
-                            totalStored += item.getNumber();
+            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                    for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+                        // Count stored food - food that has been approved in food check
+                        if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery) && !(wr instanceof DeliveryTask)) {
+                            FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
+                            if (item != null && "Approved".equalsIgnoreCase(wr.getStatus())) {
+                                totalStored += item.getNumber();
+                            }
+                        }
+                        
+                        // Count donated food - food delivered to homeless
+                        if ((wr instanceof WorkRequestDelivery || wr instanceof DeliveryTask) 
+                            && ("accepted".equalsIgnoreCase(wr.getStatus()) || "Completed".equalsIgnoreCase(wr.getStatus()))) {
+                            if (wr instanceof WorkRequestDelivery) {
+                                WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
+                                if (deliveryReq.getFoodItem() != null) {
+                                    totalDonated += deliveryReq.getFoodItem().getNumber();
+                                }
+                            } else if (wr instanceof DeliveryTask) {
+                                DeliveryTask deliveryTask = (DeliveryTask) wr;
+                                totalDonated += deliveryTask.getQuantity();
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
         double totalEnergySaved = totalDonated * energySavedPerItem;
 
