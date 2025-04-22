@@ -16,6 +16,7 @@ import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestEntertainOrg;
+import utils.PanelUtils;
 
 /**
  *
@@ -54,9 +55,16 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         model.setRowCount(0);
 
         int count = 1;
-        for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+//        for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+//            Object[] row = new Object[3];
+//            row[0] = count++;
+//            row[1] = ua.getUsername();
+//            row[2] = ua.getPhone();
+//            model.addRow(row);
+//        }
+        for(UserAccount ua: this.account.getOrganization().getUserAccountDirectory().getUserAccountList()){
             Object[] row = new Object[3];
-            row[0] = count++;
+            row[0] = ua.getAccountUuid();
             row[1] = ua.getUsername();
             row[2] = ua.getPhone();
             model.addRow(row);
@@ -163,8 +171,9 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise,
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, requestEntertainOrg,
                 enterprise, netWork);
+        PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");

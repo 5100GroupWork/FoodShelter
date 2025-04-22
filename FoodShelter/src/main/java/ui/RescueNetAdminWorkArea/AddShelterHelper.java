@@ -12,6 +12,8 @@ import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.RequestEntertainOrg;
 import model.Role.FoodIncEmployee;
+import utils.IsMatch;
+import utils.PanelUtils;
 
 /**
  *
@@ -27,13 +29,14 @@ public class AddShelterHelper extends javax.swing.JPanel {
     /**
      * Creates new form AddShelterHelper
      */
-    public AddShelterHelper(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestEntertainOrg requestEntertainOrg) {
+    public AddShelterHelper(JPanel workArea, UserAccount account, NetWork netWork, BasicEnterprise enterprise,
+            RequestEntertainOrg requestEntertainOrg) {
         initComponents();
         this.enterprise = enterprise;
         this.requestEntertainOrg = requestEntertainOrg;
         this.netWork = netWork;
         this.workArea = workArea;
-        this.account  = account;
+        this.account = account;
         // error to change
         beautify();
     }
@@ -169,8 +172,10 @@ public class AddShelterHelper extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
-        workArea.add("ShelterHelperAdmin",shelterHelperAdmin);
+        ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg,
+                enterprise, netWork);
+        PanelUtils.addOrReplacePanel(workArea, "ShelterHelperAdmin", shelterHelperAdmin);
+        workArea.add("ShelterHelperAdmin", shelterHelperAdmin);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
@@ -181,7 +186,12 @@ public class AddShelterHelper extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-
+        
+        IsMatch isMatch = new IsMatch();
+        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
+            JOptionPane.showMessageDialog(this, "name or email validation error");
+            return;
+        }
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
@@ -191,13 +201,15 @@ public class AddShelterHelper extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
         }
+        
 
         FoodIncEmployee role = new FoodIncEmployee();
-
-        UserAccount account = requestEntertainOrg.getUserAccountDirectory().createUserAccount(username, password, role);
+        UserAccount account = netWork.getUserAccountDirctory().createUserAccount(username, password, role);
+        requestEntertainOrg.getUserAccountDirectory().getUserAccountList().add(account);
         account.setEmail(email);
         account.setPhone(phone);
         account.setOrganization(requestEntertainOrg);
+        account.setEnterprise(enterprise);
 
         JOptionPane.showMessageDialog(this, "New shelter helper created successfully!");
 

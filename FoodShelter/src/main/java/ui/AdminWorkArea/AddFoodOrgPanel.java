@@ -15,6 +15,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
+import utils.PanelUtils;
 
 /**
  *
@@ -248,56 +249,56 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
             return;
         }
 
-        FoodIncOrg newOrg = null;
-        BasicEnterprise targetEnterprise = null;
-        boolean foundFoodEnterprise = false;
+FoodIncOrg newOrg = null;
+                BasicEnterprise targetEnterprise = null;
+                boolean foundFoodEnterprise = false;
 
-        for (NetWork net : foodShelterSystem.getNetworkList()) {
-            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                if (be instanceof FoodEnterprise) {
-                    foundFoodEnterprise = true;
-                    targetEnterprise = be;
+                for (NetWork net : foodShelterSystem.getNetworkList()) {
+                        for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+                                if (be instanceof FoodEnterprise) {
+                                        foundFoodEnterprise = true;
+                                        targetEnterprise = be;
+                                        FoodEnterprise foodEnterprise = (FoodEnterprise) be;
 
-                    // Check if an org with the same name already exists
-                    boolean orgExists = false;
-                    for (BasicOrganization org : be.getOrganizationDirectory()
-                            .getOrganizationList()) {
-                        if (org instanceof FoodIncOrg
-                                && ((FoodIncOrg) org).getName().equals(orgName)) {
-                            orgExists = true;
-                            break;
+                                        // Check if an org with the same name already exists
+                                        boolean orgExists = false;
+                                        for (BasicOrganization org : be.getOrganizationDirectory()
+                                                        .getOrganizationList()) {
+                                                if (org instanceof FoodIncOrg
+                                                                && ((FoodIncOrg) org).getName().equals(orgName)) {
+                                                        orgExists = true;
+                                                        break;
+                                                }
+                                        }
+                                        if (orgExists) {
+                                                JOptionPane.showMessageDialog(this,
+                                                                "An organization with this name already exists.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+                                                return;
+                                        }
+
+                                        newOrg = foodEnterprise.addFoodIncOrg(orgName);
+                                        newOrg.setAddress(location);
+                                        
+                                        CardLayout layout = (CardLayout) workArea.getLayout();
+                                        workArea.add("AddLocalAdminPanel",
+                                                        new AddLocalAdminPanel(workArea, account, foodShelterSystem,
+                                                                        parent, newOrg, be));
+                                        layout.show(workArea, "AddLocalAdminPanel");
+                                        workArea.revalidate();
+                                        workArea.repaint();
+                                        return;
+                                }
                         }
-                    }
-                    if (orgExists) {
-                        JOptionPane.showMessageDialog(this,
-                                "An organization with this name already exists.",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-
-                    newOrg = new FoodIncOrg(orgName);
-
-                    newOrg.setAddress(location);
-                    be.getOrganizationDirectory().getOrganizationList().add(newOrg);
-                    CardLayout layout = (CardLayout) workArea.getLayout();
-                    workArea.add("AddLocalAdminPanel",
-                            new AddLocalAdminPanel(workArea, account, foodShelterSystem,
-                                    parent, newOrg, be));
-                    layout.show(workArea, "AddLocalAdminPanel");
-                    workArea.revalidate();
-                    workArea.repaint();
-                    return;
                 }
-            }
+                if (!foundFoodEnterprise) {
+                        JOptionPane.showMessageDialog(this,
+                                        "No Food Enterprise found in the system. Please create a Food Enterprise first.",
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                }
         }
-        if (!foundFoodEnterprise) {
-            JOptionPane.showMessageDialog(this,
-                    "No Food Enterprise found in the system. Please create a Food Enterprise first.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }// GEN-LAST:event_btnNextActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
