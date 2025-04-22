@@ -159,7 +159,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(152, 152, 152)
                                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
@@ -175,7 +175,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(203, 203, 203)
                         .addComponent(enterpriseLabel2)))
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
