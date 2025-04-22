@@ -91,6 +91,14 @@ public class Deliver extends BasicRole{
         return  this.doingWorkQueue;
     }
     
+    public boolean isBusy() {
+        return !this.doingWorkQueue.getWorkRequestList().isEmpty();
+    }
+
+    public void updateStatus() {
+        this.status = this.isBusy() ? "busy" : "Available";
+    }
+    
     
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {

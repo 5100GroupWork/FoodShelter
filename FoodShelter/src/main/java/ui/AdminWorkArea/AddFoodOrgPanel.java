@@ -280,7 +280,7 @@ FoodIncOrg newOrg = null;
 
                                         newOrg = foodEnterprise.addFoodIncOrg(orgName);
                                         newOrg.setAddress(location);
-                                        
+
                                         CardLayout layout = (CardLayout) workArea.getLayout();
                                         workArea.add("AddLocalAdminPanel",
                                                         new AddLocalAdminPanel(workArea, account, foodShelterSystem,
