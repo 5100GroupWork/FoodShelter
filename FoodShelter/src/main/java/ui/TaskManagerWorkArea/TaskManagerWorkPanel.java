@@ -258,11 +258,13 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTask1ActionPerformed
         // TODO add your handling code here:
         populateTableTaskUndo();
+        populateTableDriver();
     }// GEN-LAST:event_btnAssignTask1ActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTask2ActionPerformed
         // TODO add your handling code here:
         populateTableTask();
+        populateTableDriver();
     }// GEN-LAST:event_btnAssignTask2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

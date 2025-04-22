@@ -131,10 +131,18 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a row first");
             return;
         }
+        
         WorkRequestDelivery wrd = (WorkRequestDelivery) TaskTable.getValueAt(rowNumber, 5);
 
         if (wrd != null) {
             wrd.setTaskStatus("Delivered");
+            
+            // Remove the task from the work queue
+            Deliver deliver = (Deliver) this.driver.getRole();
+            deliver.WorkQueueFinished(wrd);
+            
+            deliver.updateStatus();
+            
             populateTable();
             JOptionPane.showMessageDialog(this, "Delivery confirmed successfully.");
         } else {
@@ -186,8 +194,8 @@ public class DriverWorkPanel extends javax.swing.JPanel {
             row[0] = count;
             row[1] = wrd.getFoodItem().getFoodName();
             row[2] = wrd.getFoodItem().getNumber();
-            row[3] = wrd.getSender().getAddress();
-            row[4] = wrd.getReceiver().getAddress();
+            row[3] = wrd.getSender() != null ? wrd.getSender().getAddress() : wrd.getFromLocation();
+            row[4] = wrd.getReceiver() != null ? wrd.getReceiver().getAddress() : wrd.getToLocation();
             row[5] = wrd;
             // r[4]存储的是原来的workrequest
             model.addRow(row);
