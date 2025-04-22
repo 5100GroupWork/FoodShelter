@@ -187,19 +187,34 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 String phone = txtPhone.getText().trim();
 
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
-                        return;
-                }
+                JOptionPane.showMessageDialog(this, "Username or password can not be empty.");
+                return;
+            }
 
-                if (!foodShelterSystem.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
-                        JOptionPane.showMessageDialog(this, "Username already exists. Choose a different one.", "Error",
-                                        JOptionPane.ERROR_MESSAGE);
-                        return;
-                }
-                // create a new employee
-                FoodEnterpriseManager role = new FoodEnterpriseManager();
-                UserAccount newEmployee = enterprise.getUserAccountDirectory().createUserAccount(username, password,
-                                role);
+            utils.IsMatch validator = new utils.IsMatch();
+            if (!validator.isNameMatch(username)) {
+                JOptionPane.showMessageDialog(this,
+                        "Username should only contain letters and up to 3 spaces.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!validator.isEmailMatch(email)) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a valid email address.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!foodShelterSystem.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+                JOptionPane.showMessageDialog(this, "Username already exists. Choose a different one.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // create a new employee
+            FoodEnterpriseManager role = new FoodEnterpriseManager();
+            UserAccount newEmployee = enterprise.getUserAccountDirectory().createUserAccount(username, password,
+                    role);
                 newEmployee.setEmail(email);
                 newEmployee.setPhone(phone);
                 newEmployee.setOrganization(newOrg);
