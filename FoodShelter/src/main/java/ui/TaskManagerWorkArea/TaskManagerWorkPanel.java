@@ -61,7 +61,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         enterpriseLabel = new javax.swing.JLabel();
@@ -79,21 +79,22 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Task Manager - Task Assignment");
 
         tbDrivers.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Driver ID", "Name", "Status"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Driver ID", "Name", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tbDrivers);
@@ -103,21 +104,22 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setText("Shelter Request Tasks ");
 
         tbUnassignedTasks.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null },
-                        { null, null, null, null, null, null },
-                        { null, null, null, null, null, null },
-                        { null, null, null, null, null, null }
-                },
-                new String[] {
-                        "ID", "Food Name", "Quantity", "From", "To", "Status"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false, false
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Food Name", "Quantity", "From", "To", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(tbUnassignedTasks);
@@ -148,60 +150,54 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                false)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addGap(152, 152, 152)
-                                                                .addComponent(enterpriseLabel,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 389,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(jScrollPane2,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 748,
-                                                                Short.MAX_VALUE)
-                                                        .addComponent(jScrollPane1)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(91, 91, 91)
-                                                .addComponent(btnRefresh)
-                                                .addGap(257, 257, 257)
-                                                .addComponent(btnView))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(274, 274, 274)
-                                                .addComponent(btnAssignTask))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(203, 203, 203)
-                                                .addComponent(enterpriseLabel2))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(217, 217, 217)
-                                                .addComponent(enterpriseLabel1)))
-                                .addContainerGap(386, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(btnRefresh)
+                        .addGap(257, 257, 257)
+                        .addComponent(btnView))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(274, 274, 274)
+                        .addComponent(btnAssignTask))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(enterpriseLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(enterpriseLabel1)))
+                .addContainerGap(386, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(enterpriseLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnRefresh)
-                                        .addComponent(btnView))
-                                .addGap(42, 42, 42)
-                                .addComponent(enterpriseLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAssignTask)
-                                .addGap(49, 49, 49)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(enterpriseLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRefresh)
+                    .addComponent(btnView))
+                .addGap(42, 42, 42)
+                .addComponent(enterpriseLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAssignTask)
+                .addGap(49, 49, 49))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
