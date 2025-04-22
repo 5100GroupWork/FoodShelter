@@ -7,6 +7,7 @@ package ui.TaskManagerWorkArea;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -84,7 +85,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Driver ID", "Name", "Available"
+                "Driver ID", "Name", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -99,7 +100,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        enterpriseLabel1.setText("Available Drivers ");
+        enterpriseLabel1.setText("Table of Drivers ");
 
         enterpriseLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
@@ -154,7 +155,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(152, 152, 152)
@@ -170,12 +171,12 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                         .addGap(274, 274, 274)
                         .addComponent(btnAssignTask))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(enterpriseLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(203, 203, 203)
-                        .addComponent(enterpriseLabel2)))
-                .addContainerGap(424, Short.MAX_VALUE))
+                        .addComponent(enterpriseLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(enterpriseLabel1)))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +192,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                     .addComponent(btnRefresh)
                     .addComponent(btnView))
                 .addGap(39, 39, 39)
-                .addComponent(enterpriseLabel1)
+                .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -236,7 +237,15 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         if (driver.getRole() instanceof Deliver) {
             Deliver deliverRole = (Deliver) driver.getRole();
             deliverRole.newWorkQueue(task);
+            
+            // Update status to "busy"
+            deliverRole.setStatus("busy");
+
+            // Update the status in the table
+            driverModel.setValueAt("busy", driverModelRow, 2);
         }
+        
+        
 
         JOptionPane.showMessageDialog(null, "Task assigned successfully.");
 
@@ -446,18 +455,20 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
                         // Check in UserAccountDirectory first
                         for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
-                            // Include all accounts, regardless of role type for now
-                            index++;
-                            Object row[] = new Object[3];
-                            row[0] = index;
-                            row[1] = account;
-                            row[2] = "Available"; // Default status
+                            if (account.getRole() instanceof Deliver) {
+                                Deliver deliver = (Deliver) account.getRole();
+                                index++;
+                                Object row[] = new Object[3];
+                                row[0] = index;
+                                row[1] = account;
+                                row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
 
-                            model.addRow(row);
+                                model.addRow(row);
+                            }
                         }
 
                         // Also check employees list if it exists and isn't empty
-                        if (driverOrg.getEmployees() != null && !driverOrg.getEmployees().isEmpty()) {
+                        if (driverOrg.getEmployees() != null) {
                             for (UserAccount account : driverOrg.getEmployees()) {
                                 // Only add if not already added from UserAccountDirectory
                                 boolean alreadyAdded = false;
@@ -469,12 +480,14 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                                     }
                                 }
 
-                                if (!alreadyAdded) {
+                                if (!alreadyAdded && account.getRole() instanceof Deliver) {
+                                    Deliver deliver = (Deliver) account.getRole();
                                     index++;
+                                    
                                     Object row[] = new Object[3];
                                     row[0] = index;
                                     row[1] = account;
-                                    row[2] = "Available"; // Default status
+                                    row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
 
                                     model.addRow(row);
                                 }
@@ -537,6 +550,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 //        }
     }
 
+    
     private void beautify() {
         // 背景统一
         this.setBackground(new java.awt.Color(245, 242, 250));
@@ -569,6 +583,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
         jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
         jScrollPane2.getViewport().setBackground(java.awt.Color.WHITE);
+        
+
 
         // 按钮样式
         javax.swing.JButton[] buttons = {
