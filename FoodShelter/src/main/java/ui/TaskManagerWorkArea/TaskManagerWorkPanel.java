@@ -231,7 +231,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
         // Assign driver to task
         task.setDeliver(driver);
-        task.setTaskStatus("picked");
+        task.setTaskStatus("Waiting to be picked up");
 
         // Update driver's work queue
         if (driver.getRole() instanceof Deliver) {
