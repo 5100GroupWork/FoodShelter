@@ -33,13 +33,14 @@ public class AddHomelessAccount extends javax.swing.JPanel {
     private RequestCollectOrg requestCollectOrg;
     private UserAccount account;
     private NetWork netWork;
+    private UserAccount oldUserAccount;
     JPanel workArea;
     String InconPath;
 
     /**
      * Creates new form NewJPanel
      */
-    public AddHomelessAccount(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestCollectOrg org) {
+    public AddHomelessAccount(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestCollectOrg org, UserAccount oldAccount) {
         initComponents();
         this.enterprise = enterprise;
         this.requestCollectOrg = org;
@@ -47,6 +48,15 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         this.account = account;
         this.netWork = netWork;
         this.workArea = workArea;
+        this.oldUserAccount = oldAccount;
+        if(oldUserAccount==null){
+            btnSubmit.setEnabled(true);
+            btnUpdate.setEnabled(false);
+        }else{
+            btnSubmit.setEnabled(false);
+            btnUpdate.setEnabled(true);
+            PopulateTxt();
+        }
         beautify();
     }
 
@@ -75,6 +85,7 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         IncoLabel = new javax.swing.JLabel();
         btnSelectImg = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        btnUpdate = new javax.swing.JButton();
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +127,13 @@ public class AddHomelessAccount extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        btnUpdate.setText("update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,35 +146,40 @@ public class AddHomelessAccount extends javax.swing.JPanel {
                     .addComponent(enterpriseLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblEmail)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbPhone)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblpassword)
-                                .addGap(18, 18, 18)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbluserName)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IncoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblEmail)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lbPhone)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblpassword)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lbluserName)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(btnSelectImg)))
-                        .addContainerGap(265, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(336, 336, 336)
-                .addComponent(btnSubmit)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(133, 133, 133)
+                                .addComponent(btnSubmit)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnUpdate)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(IncoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(btnSelectImg)))
+                                .addContainerGap(265, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,11 +216,54 @@ public class AddHomelessAccount extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(69, 69, 69)
-                .addComponent(btnSubmit)
-                .addContainerGap(367, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnUpdate))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        String username = txtuserName.getText();
+        String password = String.valueOf(passwordField.getPassword());
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        
+        IsMatch isMatch = new IsMatch();
+        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
+            JOptionPane.showMessageDialog(this, "name or email validation error");
+            return;
+        }
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+        if (!requestCollectOrg.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+            JOptionPane.showMessageDialog(this, "Username already exists.");
+            return;
+        }
+
+        Homeless role = (Homeless) oldUserAccount.getRole();
+        if(this.InconPath!=null && !this.InconPath.equals("")){
+            role.setInconPath(InconPath);
+        }else{
+            role.setInconPath(null);
+        }
+        
+        oldUserAccount.setEmail(email);
+        oldUserAccount.setPhone(phone);
+        oldUserAccount.setUsername(username);
+
+        JOptionPane.showMessageDialog(this, "update successfully!");
+
+        txtuserName.setText("");
+        passwordField.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSelectImgActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSelectImgActionPerformed
         // TODO add your handling code here:
@@ -252,6 +318,7 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        
         IsMatch isMatch = new IsMatch();
         if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
             JOptionPane.showMessageDialog(this, "name or email validation error");
@@ -294,6 +361,7 @@ public class AddHomelessAccount extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSelectImg;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbPhone;
@@ -306,6 +374,19 @@ public class AddHomelessAccount extends javax.swing.JPanel {
     private javax.swing.JTextField txtuserName;
     // End of variables declaration//GEN-END:variables
 
+    
+    // pupolate Text field
+    private void PopulateTxt(){
+        txtuserName.setText(oldUserAccount.getUsername());
+        txtEmail.setText(oldUserAccount.getEmail());
+        txtPhone.setText(oldUserAccount.getPhone());
+        passwordField.setText(oldUserAccount.getPassword());
+        Homeless homeless = (Homeless) oldUserAccount.getRole();
+        ImageIcon imageIcon = new ImageIcon(homeless.getInconPath());
+        Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        IncoLabel.setIcon(new ImageIcon(image));
+    }
+    
     //
     private void beautify() {
         // 背景
@@ -347,7 +428,7 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         passwordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
 
         // 按钮样式
-        javax.swing.JButton[] buttons = { btnBack, btnSubmit };
+        javax.swing.JButton[] buttons = { btnBack, btnSubmit,btnUpdate };
         for (javax.swing.JButton btn : buttons) {
             btn.setFont(labelFont);
             btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫

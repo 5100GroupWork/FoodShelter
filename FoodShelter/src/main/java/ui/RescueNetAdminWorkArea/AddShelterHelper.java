@@ -186,6 +186,7 @@ public class AddShelterHelper extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        
         IsMatch isMatch = new IsMatch();
         if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
             JOptionPane.showMessageDialog(this, "name or email validation error");
