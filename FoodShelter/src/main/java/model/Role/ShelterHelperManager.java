@@ -12,6 +12,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
+import ui.RescueNetAdminWorkArea.RescueNetAdminStartPoint;
 import ui.RescueNetAdminWorkArea.ShelterHelperAdmin;
 import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
 
@@ -27,11 +28,10 @@ public class ShelterHelperManager extends BasicRole{
         this.org = org;
     }
     
-    // add homeless
+    // add helter
     public UserAccount addShelterHelper(RequestEntertainOrg org,String username, String password,NetWork netWork){
-        ShelterHelper sh = new ShelterHelper(username,org);
+        ShelterHelper sh = new ShelterHelper();
         UserAccount helper = netWork.getUserAccountDirctory().createUserAccount(username,password,sh);
-        //org.userAccountDirectory.getUserAccountList().add(homelessUser);
         org.getUserAccountDirectory().getUserAccountList().add(helper);
         return helper;
     }  
@@ -40,7 +40,7 @@ public class ShelterHelperManager extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         //r
-        return new ShelterHelperAdmin(workArea,account,organization,enterprise,netWork);
+        return new RescueNetAdminStartPoint(workArea,account,organization,enterprise,netWork);
     }
     
 }

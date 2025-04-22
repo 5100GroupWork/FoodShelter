@@ -19,14 +19,7 @@ public class PanelUtils {
 
         // search for same JPanel
         for (Component comp : container.getComponents()) {
-            if (name.equals(container.getLayout() instanceof CardLayout
-                    ? ((CardLayout) container.getLayout()).toString()
-                    : container.getName())) {
-                toRemove = comp;
-                break;
-            }
-            // double-search
-            if (comp instanceof JPanel && name.equals(comp.getName())) {
+            if (name.equals(comp.getName())) {
                 toRemove = comp;
                 break;
             }
@@ -36,10 +29,10 @@ public class PanelUtils {
             container.remove(toRemove);
         }
 
-        panel.setName(name); 
-        container.add(name, panel);
+        panel.setName(name);
+        container.add(panel, name);
 
-        // flesh it
+        // 刷新 UI
         container.revalidate();
         container.repaint();
     }

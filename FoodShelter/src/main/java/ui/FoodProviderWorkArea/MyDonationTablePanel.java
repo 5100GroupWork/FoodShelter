@@ -7,6 +7,7 @@ package ui.FoodProviderWorkArea;
 import java.awt.CardLayout;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -68,119 +69,144 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                enterpriseLabel = new javax.swing.JLabel();
-                jScrollPane1 = new javax.swing.JScrollPane();
-                tblDonations = new javax.swing.JTable();
-                btnBack = new javax.swing.JButton();
-                jLabel2 = new javax.swing.JLabel();
-                lblEnterprise = new javax.swing.JLabel();
-                imgLabel = new javax.swing.JLabel();
+        enterpriseLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDonations = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblEnterprise = new javax.swing.JLabel();
+        imgLabel = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JButton();
+        FoodImg = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TxtDesc = new javax.swing.JTextArea();
 
-                enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-                enterpriseLabel.setText("My Donation");
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setText("My Donation");
 
-                tblDonations.setModel(new javax.swing.table.DefaultTableModel(
-                                new Object[][] {
-                                                { null, null, null, null, null },
-                                                { null, null, null, null, null },
-                                                { null, null, null, null, null },
-                                                { null, null, null, null, null }
-                                },
-                                new String[] {
-                                                "Food ID", "Food Name", "Quantity", "Expiry Date", "Status"
-                                }) {
-                        boolean[] canEdit = new boolean[] {
-                                        false, true, false, false, false
-                        };
+        tblDonations.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
 
-                        public boolean isCellEditable(int rowIndex, int columnIndex) {
-                                return canEdit[columnIndex];
-                        }
-                });
-                jScrollPane1.setViewportView(tblDonations);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblDonations);
 
-                btnBack.setText("<< Back");
-                btnBack.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnBackActionPerformed(evt);
-                        }
-                });
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
-                jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-                jLabel2.setText("Enterprise: ");
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Enterprise: ");
 
-                lblEnterprise.setText("<value>");
+        lblEnterprise.setText("<value>");
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-                this.setLayout(layout);
-                layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(52, 52, 52)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addComponent(btnBack)
-                                                                                                                                .addGap(101, 101,
-                                                                                                                                                101)
-                                                                                                                                .addComponent(enterpriseLabel))
-                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addComponent(jLabel2)
-                                                                                                                                .addPreferredGap(
-                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                                                                .addComponent(lblEnterprise))))
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(61, 61, 61)
-                                                                                                .addComponent(jScrollPane1,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                                .addContainerGap(501, Short.MAX_VALUE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                                .createSequentialGroup()
-                                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                                .addComponent(imgLabel,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                480,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)));
-                layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                                .createSequentialGroup()
-                                                                .addGap(10, 10, 10)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(jLabel2)
-                                                                                .addComponent(lblEnterprise))
-                                                                .addGap(18, 18, 18)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(btnBack)
-                                                                                .addComponent(enterpriseLabel,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGap(58, 58, 58)
-                                                                .addComponent(jScrollPane1,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                228,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(imgLabel,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                260,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addContainerGap(37, Short.MAX_VALUE)));
-        }// </editor-fold>//GEN-END:initComponents
+        btnCheck.setText("check");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
+
+        TxtDesc.setColumns(20);
+        TxtDesc.setRows(5);
+        jScrollPane2.setViewportView(TxtDesc);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(101, 101, 101)
+                        .addComponent(enterpriseLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEnterprise))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCheck)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(FoodImg, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblEnterprise))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBack)
+                            .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(FoodImg, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnCheck)
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblDonations.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first.");
+            return;
+        }
+        WorkRequestFoodItem wrd = (WorkRequestFoodItem) tblDonations.getValueAt(selectedRow, 0);
+        if(wrd.getFoodItem().getDecs()!=null){
+            TxtDesc.setText(wrd.getFoodItem().getDecs());
+        }
+        if(wrd.getFoodItem().getInconPath()!=null){
+            ImageIcon icon = new ImageIcon(wrd.getFoodItem().getInconPath());
+            Image scaledImg = icon.getImage().getScaledInstance(350, 240, Image.SCALE_SMOOTH);
+            FoodImg.setIcon(new ImageIcon(scaledImg));
+        }
+        
+    }//GEN-LAST:event_btnCheckActionPerformed
 
         private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
                 // TODO add your handling code here:
@@ -192,15 +218,19 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                 workArea.repaint();
         }// GEN-LAST:event_btnBackActionPerformed
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnBack;
-        private javax.swing.JLabel enterpriseLabel;
-        private javax.swing.JLabel imgLabel;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JLabel lblEnterprise;
-        private javax.swing.JTable tblDonations;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FoodImg;
+    private javax.swing.JTextArea TxtDesc;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCheck;
+    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JLabel imgLabel;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblEnterprise;
+    private javax.swing.JTable tblDonations;
+    // End of variables declaration//GEN-END:variables
 
         private void populateTable() {
 
@@ -219,7 +249,7 @@ public class MyDonationTablePanel extends javax.swing.JPanel {
                                 FoodItem foodItem = wrd.getFoodItem();
 
                                 Object row[] = new Object[5];
-                                row[0] = foodItem.getId();
+                                row[0] = wrd;
                                 row[1] = foodItem.getFoodName();
                                 row[2] = foodItem.getNumber();
                                 row[3] = foodItem.getExpiredDate();

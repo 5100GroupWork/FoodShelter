@@ -457,6 +457,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
 
                         // Check in UserAccountDirectory first
                         for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+
                             if (account.getRole() instanceof Deliver) {
                                 Deliver deliver = (Deliver) account.getRole();
                                 index++;
@@ -490,6 +491,32 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                                     row[0] = index;
                                     row[1] = account;
                                     row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+
+                                    model.addRow(row);
+                                }
+                            }
+
+                        }
+
+                        // Also check employees list if it exists and isn't empty
+                        if (driverOrg.getEmployees() != null && !driverOrg.getEmployees().isEmpty()) {
+                            for (UserAccount account : driverOrg.getEmployees()) {
+                                // Only add if not already added from UserAccountDirectory
+                                boolean alreadyAdded = false;
+                                for (int i = 0; i < model.getRowCount(); i++) {
+                                    UserAccount existing = (UserAccount) model.getValueAt(i, 1);
+                                    if (existing.getUsername().equals(account.getUsername())) {
+                                        alreadyAdded = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!alreadyAdded) {
+                                    index++;
+                                    Object row[] = new Object[3];
+                                    row[0] = index;
+                                    row[1] = account;
+                                    row[2] = "Available"; // Default status
 
                                     model.addRow(row);
                                 }

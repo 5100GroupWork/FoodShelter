@@ -16,6 +16,7 @@ import model.Enterprise.RescueNetEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestEntertainOrg;
+import utils.PanelUtils;
 
 /**
  *
@@ -54,10 +55,18 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         model.setRowCount(0);
 
         int count = 1;
-        for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+        // for (UserAccount ua :
+        // requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
+        // Object[] row = new Object[3];
+        // row[0] = count++;
+        // row[1] = ua.getUsername();
+        // row[2] = ua.getPhone();
+        // model.addRow(row);
+        // }
+        for (UserAccount ua : this.account.getOrganization().getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[3];
-            row[0] = count++;
-            row[1] = ua.getUsername();
+            row[0] = ua.getAccountUuid();
+            row[1] = ua;
             row[2] = ua.getPhone();
             model.addRow(row);
         }
@@ -70,6 +79,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -79,6 +89,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         tblShelterHelper = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +135,13 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
             }
         });
 
+        btnUpdate.setText("update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,6 +158,8 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(176, 176, 176)
                                 .addComponent(btnAdd)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUpdate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDelete)
@@ -158,14 +178,31 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
                                 .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAdd)
-                                        .addComponent(btnDelete))
+                                        .addComponent(btnDelete)
+                                        .addComponent(btnUpdate))
                                 .addContainerGap(361, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblShelterHelper.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            return;
+        }
+        UserAccount ua = (UserAccount) tblShelterHelper.getValueAt(selectedRow, 1);
+        AddShelterHelper addShelterHelper = new AddShelterHelper(workArea, account, netWork, enterprise,
+                requestEntertainOrg, ua);
+        PanelUtils.addOrReplacePanel(workArea, "AddShelterHelper", addShelterHelper);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.show(workArea, "AddShelterHelper");
+    }// GEN-LAST:event_btnUpdateActionPerformed
+
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
-        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account, enterprise,
+        RescueNetAdminStartPoint rescueNetAdminStartPoint = new RescueNetAdminStartPoint(workArea, account,
+                requestEntertainOrg,
                 enterprise, netWork);
-        workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
+        PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");
 
@@ -173,10 +210,11 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg);
+        AddShelterHelper panel = new AddShelterHelper(workArea, account, netWork, enterprise, requestEntertainOrg,
+                null);
         workArea.add("AddShelterHelper", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.show(workArea,"AddShelterHelper");
+        layout.show(workArea, "AddShelterHelper");
     }// GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
@@ -187,21 +225,12 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
             return;
         }
 
-        String username = (String) tblShelterHelper.getValueAt(selectedRow, 0);
+        UserAccount ua = (UserAccount) tblShelterHelper.getValueAt(selectedRow, 1);
+        netWork.getUserAccountDirctory().getUserAccountList().remove(ua);
+        requestEntertainOrg.getUserAccountDirectory().getUserAccountList().remove(ua);
+        JOptionPane.showMessageDialog(this, "User deleted.");
+        populateTable();
 
-        UserAccount toRemove = null;
-        for (UserAccount ua : requestEntertainOrg.getUserAccountDirectory().getUserAccountList()) {
-            if (ua.getUsername().equals(username)) {
-                toRemove = ua;
-                break;
-            }
-        }
-
-        if (toRemove != null) {
-            requestEntertainOrg.getUserAccountDirectory().getUserAccountList().remove(toRemove);
-            JOptionPane.showMessageDialog(this, "User deleted.");
-            populateTable();
-        }
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,6 +238,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblShelterHelper;
 
@@ -222,7 +252,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         accountLabel.setForeground(new java.awt.Color(54, 33, 89)); // 深紫
 
         // 按钮美化
-        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete };
+        javax.swing.JButton[] buttons = { backJButton, btnAdd, btnDelete, btnUpdate };
         for (javax.swing.JButton btn : buttons) {
             btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮

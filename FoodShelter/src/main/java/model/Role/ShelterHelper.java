@@ -23,11 +23,7 @@ import ui.ShelterHelperWorkArea.ShelterHelperWorkPanel;
  * @author 59386
  */
 public class ShelterHelper extends BasicRole{
-    String name;
-    BasicOrganization org;
-    public ShelterHelper(String name,BasicOrganization org){
-        this.name = name;
-        this.org = org;
+    public ShelterHelper(){
     }
     
     // getAll CheckedFoodItem

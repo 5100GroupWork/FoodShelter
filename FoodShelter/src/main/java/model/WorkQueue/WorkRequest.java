@@ -94,4 +94,9 @@ public class WorkRequest {
     private String foodOrgName; // 对应 ComboBoxType 的值
     private int quantity;       // 对应 spinner 的值
     private String workRequestUuid;
+    
+    @Override
+    public String toString(){
+        return this.workRequestUuid.substring(0,8);
+    }
 }

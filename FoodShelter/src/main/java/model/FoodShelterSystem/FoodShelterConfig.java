@@ -24,6 +24,7 @@ import model.Role.FoodIncEmployee;
 import model.Role.FreshChecker;
 import model.Role.HomelessManager;
 import model.Role.PostFoodChecker;
+import model.Role.ShelterHelper;
 import model.Role.ShelterHelperManager;
 import model.Role.SysAdmin;
 import model.Role.TaskManager;
@@ -185,6 +186,9 @@ public class FoodShelterConfig {
         // create rescueNetOrg(helper and homeless) and people
         RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
         RequestEntertainOrg requestEntertainOrg = rescuEnterprise.addRequestEntertainOrg("ShelterHelperOrg1");
+        if(requestCollectOrg==null){
+            System.out.println("requestCollectOrg error");
+        }
 
         ShelterHelperManager shelterHelperManager = new ShelterHelperManager(requestEntertainOrg);
 
@@ -193,19 +197,23 @@ public class FoodShelterConfig {
         uaShelterManager.setEmail("morgan@rescue.org");
         uaShelterManager.setPhone("555-789-0123");
         uaShelterManager.setEnterprise(rescuEnterprise);
+        uaShelterManager.setOrganization(requestEntertainOrg);
 
-        UserAccount helper = shelterHelperManager.addShelterHelper(requestEntertainOrg, "Jones", "0000", netWork);
+        
+        UserAccount helper = netWork.getUserAccountDirctory().createUserAccount("Jones", "0000", new ShelterHelper());
+        requestEntertainOrg.getUserAccountDirectory().getUserAccountList().add(helper);
         helper.setEmail("jones@rescue.org");
         helper.setPhone("555-890-1234");
         helper.setEnterprise(rescuEnterprise);
         helper.setOrganization(requestEntertainOrg);
 
         HomelessManager homelessManager = new HomelessManager(requestCollectOrg);
-        UserAccount homeless = homelessManager.addHomeLess(requestCollectOrg, "John", "0000", netWork);
-        homeless.setEmail("john@rescue.org");
-        homeless.setPhone("555-901-2345");
-        homeless.setEnterprise(rescuEnterprise);
-        homeless.setOrganization(requestEntertainOrg);
+        UserAccount homelessMa = netWork.getUserAccountDirctory().createUserAccount("John", "0000",homelessManager);
+        rescuEnterprise.getUserAccountDirectory().getUserAccountList().add(homelessMa);
+        homelessMa.setEmail("john@rescue.org");
+        homelessMa.setPhone("555-901-2345");
+        homelessMa.setEnterprise(rescuEnterprise);
+        homelessMa.setOrganization(requestCollectOrg);
 
         UserAccount mainHomeless = homelessManager.addHomeLess(requestCollectOrg, "Mary", "0000", netWork);
         mainHomeless.setEmail("homeless@rescue.org");
@@ -215,8 +223,8 @@ public class FoodShelterConfig {
 
         FakerUtil faker = new FakerUtil();
         for (int i = 0; i < 20; i++) {
-            String randomName = "homeless-" + (i + 1);
-            UserAccount randomHomeless = homelessManager.addHomeLess(requestCollectOrg, randomName, "0000", netWork);
+            
+            UserAccount randomHomeless = homelessManager.addHomeLess(requestCollectOrg, faker.getName(), "0000", netWork);
             randomHomeless.setEmail(faker.getEmail());
             randomHomeless.setPhone(faker.getPhoneNumber());
             randomHomeless.setOrganization(requestCollectOrg);

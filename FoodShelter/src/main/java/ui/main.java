@@ -47,7 +47,6 @@ public class main extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(0.2);
         WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
         PanelUtils.addOrReplacePanel(container, "WelComeJPanel", welcomeJPanel);
-        container.add("WelComeJPanel", welcomeJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "WelComeJPanel");
         container.revalidate();
@@ -258,7 +257,6 @@ public class main extends javax.swing.JFrame {
                 JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
                         inNetwork, system);
                 PanelUtils.addOrReplacePanel(container, "workArea", workArea);
-                container.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
                 System.out.println("before jump");
                 layout.show(container, "workArea");
@@ -266,7 +264,6 @@ public class main extends javax.swing.JFrame {
                 System.out.println("after jump");
                 container.revalidate();
                 container.repaint();
-
 
                 // 状态更新
                 loginJButton.setEnabled(false);

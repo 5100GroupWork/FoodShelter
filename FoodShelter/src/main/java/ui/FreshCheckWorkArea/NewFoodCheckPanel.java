@@ -240,7 +240,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
                 WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
                 count++;
                 Object row[] = new Object[5];
-                row[0] = count;
+                row[0] = wrf;
                 row[1] = wrf.getFoodItem().getFoodName();
                 row[2] = wrf.getFoodItem().getNumber();
                 row[3] = wrf.getFoodItem().getExpiredDate();
