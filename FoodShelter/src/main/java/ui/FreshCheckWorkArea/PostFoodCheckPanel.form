@@ -25,7 +25,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="671" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="665" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnRemoveExpired" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
@@ -34,7 +34,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,18 +44,13 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="enterpriseLabel" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="441" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="btnRefreshList" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="btnRemoveExpired" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Component id="jScrollPane2" min="-2" pref="197" max="-2" attributes="0"/>
+              <EmptySpace pref="318" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnRefreshList" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRemoveExpired" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
