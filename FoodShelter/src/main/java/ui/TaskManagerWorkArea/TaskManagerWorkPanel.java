@@ -66,13 +66,13 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDrivers = new javax.swing.JTable();
-        enterpriseLabel1 = new javax.swing.JLabel();
         enterpriseLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbUnassignedTasks = new javax.swing.JTable();
         btnAssignTask = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
+        enterpriseLabel1 = new javax.swing.JLabel();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Task Manager - Task Assignment");
@@ -97,10 +97,6 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbDrivers);
-
-        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        enterpriseLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        enterpriseLabel1.setText("Table of Drivers ");
 
         enterpriseLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         enterpriseLabel2.setForeground(new java.awt.Color(0, 102, 102));
@@ -148,6 +144,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
             }
         });
 
+        enterpriseLabel1.setText("Table of Drivers");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,10 +170,11 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                         .addComponent(btnAssignTask))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(203, 203, 203)
-
-                        .addComponent(enterpriseLabel2)))
-                .addContainerGap(263, Short.MAX_VALUE))
-
+                        .addComponent(enterpriseLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(enterpriseLabel1)))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,8 +189,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
                     .addComponent(btnView))
-                .addGap(39, 39, 39)
-                .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(enterpriseLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
