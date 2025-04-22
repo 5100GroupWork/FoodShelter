@@ -186,6 +186,21 @@ public class AddDriverAccountPanel extends javax.swing.JPanel {
             return;
         }
 
+        utils.IsMatch validator = new utils.IsMatch();
+        if (!validator.isNameMatch(username)) {
+            JOptionPane.showMessageDialog(this,
+                    "Username should only contain letters and up to 3 spaces.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!validator.isEmailMatch(email)) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid email address.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         for (BasicEnterprise en : netWork.getEnterpriseDirectory().getEnterprises()) {
             if (en instanceof VolunteerEnterprise) {
                 for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
