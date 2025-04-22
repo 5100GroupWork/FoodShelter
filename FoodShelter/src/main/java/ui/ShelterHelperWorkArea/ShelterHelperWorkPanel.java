@@ -263,7 +263,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
             // Match based on displayed properties
             if (wrn.getFoodOrgName().equals(requestModel.getValueAt(requestModelRow, 1)) &&
-                wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 2))) {
+                wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 3))) {
                 selectedRequest = wrn;
                 break;
             }

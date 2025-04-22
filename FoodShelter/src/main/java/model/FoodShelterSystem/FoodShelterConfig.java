@@ -18,6 +18,7 @@ import model.Organization.PushedFoodCheckOrg;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.Organization.VolunteerOrg;
+import model.Role.Deliver;
 import model.Role.FoodEnterpriseManager;
 import model.Role.FoodIncEmployee;
 import model.Role.FreshChecker;
@@ -170,6 +171,11 @@ public class FoodShelterConfig {
         driver.setPhone("555-678-9012");
         driver.setEnterprise(volunteerEnterprise);
         driver.setOrganization(driverOrg);
+        
+        if (driver.getRole() instanceof Deliver) {
+            Deliver deliverRole = (Deliver) driver.getRole();
+            deliverRole.setStatus("Available");
+        }
 
         if (driverOrg.getEmployees() == null) {
             driverOrg.setEmployees(new ArrayList<>());

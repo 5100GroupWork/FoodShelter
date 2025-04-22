@@ -48,6 +48,7 @@ public class Deliver extends BasicRole{
     
     public Deliver() {
         this.ID = ++count;
+        this.status = "Available";
     }
     
     public String getContact() {

@@ -427,42 +427,114 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     }
 
     public void populateTableDriver() {
+
         DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    tbDrivers.setRowSorter(sorter);
-    model.setRowCount(0);
-    
-    // 拿到driverOrg
-    ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-    int index = 0; // 自动计数器
-    
-    for (BasicEnterprise enterprise : enterprises) {
-        if (enterprise.getEnterpriseType().getValue().equals("Volunteer")) {
-            VolunteerEnterprise en = (VolunteerEnterprise) enterprise;
-            for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
-                if (org instanceof DriverOrg driverOrg) {
-                    if (driverOrg.getEmployees() != null) {
-                        for (UserAccount account : driverOrg.getEmployees()) {
-                            index++; // 增加计数器
-                            Object row[] = new Object[3]; // 注意：表格只有3列
-                            row[0] = index; // 自动递增的编号
-                            row[1] = account; // 驾驶员账户对象
-                            
-                            // 安全检查角色类型
-                            if (account.getRole() instanceof Deliver) {
-                                Deliver deliver = (Deliver) account.getRole();
-                                row[2] = deliver.getStatus();
-                            } else {
-                                row[2] = "Unknown";
-                            }
-                            
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbDrivers.setRowSorter(sorter);
+        model.setRowCount(0);
+
+        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+        int index = 0;
+
+        for (BasicEnterprise enterprise : enterprises) {
+            if (enterprise instanceof VolunteerEnterprise) {
+                VolunteerEnterprise en = (VolunteerEnterprise) enterprise;
+
+                for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof DriverOrg) {
+                        DriverOrg driverOrg = (DriverOrg) org;
+
+                        // Check in UserAccountDirectory first
+                        for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+                            // Include all accounts, regardless of role type for now
+                            index++;
+                            Object row[] = new Object[3];
+                            row[0] = index;
+                            row[1] = account;
+                            row[2] = "Available"; // Default status
+
                             model.addRow(row);
+                        }
+
+                        // Also check employees list if it exists and isn't empty
+                        if (driverOrg.getEmployees() != null && !driverOrg.getEmployees().isEmpty()) {
+                            for (UserAccount account : driverOrg.getEmployees()) {
+                                // Only add if not already added from UserAccountDirectory
+                                boolean alreadyAdded = false;
+                                for (int i = 0; i < model.getRowCount(); i++) {
+                                    UserAccount existing = (UserAccount) model.getValueAt(i, 1);
+                                    if (existing.getUsername().equals(account.getUsername())) {
+                                        alreadyAdded = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!alreadyAdded) {
+                                    index++;
+                                    Object row[] = new Object[3];
+                                    row[0] = index;
+                                    row[1] = account;
+                                    row[2] = "Available"; // Default status
+
+                                    model.addRow(row);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-    }
+           
+//        DefaultTableModel model = (DefaultTableModel) tbDrivers.getModel();
+//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+//        tbDrivers.setRowSorter(sorter);
+//        model.setRowCount(0);
+//
+//        // 拿到driverOrg
+//        ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
+//        int index = 0; // 自动计数器
+//
+//        for (BasicEnterprise enterprise : enterprises) {
+//            if (enterprise.getEnterpriseType().getValue().equals("Volunteer")) {
+//                VolunteerEnterprise en = (VolunteerEnterprise) enterprise;
+//                for (BasicOrganization org : en.getOrganizationDirectory().getOrganizationList()) {
+//                    if (org instanceof DriverOrg) {
+//                        DriverOrg driverOrg = (DriverOrg) org;
+//                        //check in organization's user accouts
+//                        for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
+//                            if (account.getRole() instanceof Deliver) {
+//                                Deliver deliver = (Deliver) account.getRole();
+//                                index++;
+//
+//                                Object row[] = new Object[3];
+//                                row[0] = deliver.getID(); // Use driver ID
+//                                row[1] = account; // This will be displayed through UserAccount.toString()
+//                                row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+//
+//                                model.addRow(row);
+//                                System.out.println("Added driver from UAD: " + account.getUsername());
+//                            }
+//                        }
+//
+//                        //also check emplouees collection if it exists 
+//                        if (driverOrg.getEmployees() != null) {
+//                            for (UserAccount account : driverOrg.getEmployees()) {
+//                                if (account.getRole() instanceof Deliver) {
+//                                    Deliver deliver = (Deliver) account.getRole();
+//
+//                                    index++; // 增加计数器
+//                                    Object row[] = new Object[3]; // 注意：表格只有3列
+//                                    row[0] = deliver.getID(); // 自动递增的编号
+//                                    row[1] = account; // 驾驶员账户对象
+//                                    row[2] = deliver.getStatus() != null ? deliver.getStatus() : "Available";
+//                                    model.addRow(row);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void beautify() {
