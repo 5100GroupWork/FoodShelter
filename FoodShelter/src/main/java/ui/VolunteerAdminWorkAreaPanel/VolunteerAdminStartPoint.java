@@ -74,78 +74,71 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                lblWelcome = new javax.swing.JLabel();
-                lblEnterprise = new javax.swing.JLabel();
-                btnManageDriver = new javax.swing.JButton();
-                btnManageTaskManager = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
+        lblEnterprise = new javax.swing.JLabel();
+        btnManageDriver = new javax.swing.JButton();
+        btnManageTaskManager = new javax.swing.JButton();
 
-                setBackground(new java.awt.Color(255, 153, 102));
+        setBackground(new java.awt.Color(204, 204, 204));
 
-                lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-                lblWelcome.setText("Welcome, <value>");
+        lblWelcome.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblWelcome.setText("Welcome, <value>");
 
-                lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-                lblEnterprise.setText("Enterprise: < >");
+        lblEnterprise.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblEnterprise.setText("Enterprise: < >");
 
-                btnManageDriver.setText("Manage Drivers");
-                btnManageDriver.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnManageDriverActionPerformed(evt);
-                        }
-                });
+        btnManageDriver.setText("Manage Drivers");
+        btnManageDriver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageDriverActionPerformed(evt);
+            }
+        });
 
-                btnManageTaskManager.setText("Manage Task Managers");
-                btnManageTaskManager.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnManageTaskManagerActionPerformed(evt);
-                        }
-                });
+        btnManageTaskManager.setText("Manage Task Managers");
+        btnManageTaskManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageTaskManagerActionPerformed(evt);
+            }
+        });
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-                this.setLayout(layout);
-                layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(28, 28, 28)
-                                                                                                .addComponent(lblWelcome,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                186,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(lblEnterprise))
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(151, 151, 151)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                .addComponent(btnManageTaskManager)
-                                                                                                                .addComponent(btnManageDriver))))
-                                                                .addContainerGap(682, Short.MAX_VALUE)));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEnterprise))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnManageTaskManager)
+                            .addComponent(btnManageDriver))))
+                .addContainerGap(682, Short.MAX_VALUE))
+        );
 
-                layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-                                new java.awt.Component[] { btnManageDriver, btnManageTaskManager });
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageDriver, btnManageTaskManager});
 
-                layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addGap(26, 26, 26)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(lblWelcome)
-                                                                                .addComponent(lblEnterprise))
-                                                                .addGap(67, 67, 67)
-                                                                .addComponent(btnManageDriver)
-                                                                .addGap(35, 35, 35)
-                                                                .addComponent(btnManageTaskManager)
-                                                                .addContainerGap(537, Short.MAX_VALUE)));
-        }// </editor-fold>//GEN-END:initComponents
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWelcome)
+                    .addComponent(lblEnterprise))
+                .addGap(67, 67, 67)
+                .addComponent(btnManageDriver)
+                .addGap(35, 35, 35)
+                .addComponent(btnManageTaskManager)
+                .addContainerGap(537, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
         private void btnManageDriverActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnManageDriverActionPerformed
                 // TODO add your handling code here:
@@ -173,12 +166,12 @@ public class VolunteerAdminStartPoint extends javax.swing.JPanel {
 
         }// GEN-LAST:event_btnManageTaskManagerActionPerformed
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnManageDriver;
-        private javax.swing.JButton btnManageTaskManager;
-        private javax.swing.JLabel lblEnterprise;
-        private javax.swing.JLabel lblWelcome;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageDriver;
+    private javax.swing.JButton btnManageTaskManager;
+    private javax.swing.JLabel lblEnterprise;
+    private javax.swing.JLabel lblWelcome;
+    // End of variables declaration//GEN-END:variables
 
         private void beautify() {
                 // 背景统一

@@ -31,7 +31,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -63,7 +62,6 @@
                       </Group>
                   </Group>
                   <EmptySpace min="250" pref="770" max="32767" attributes="0"/>
-
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,10 +87,8 @@
                       <Component id="jScrollPane3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-
                   <Component id="btnAssignTask" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-
               </Group>
           </Group>
         </DimensionLayout>
@@ -233,7 +229,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAssignTaskActionPerformed"/>
           </Events>
         </Component>
-
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
@@ -299,7 +294,6 @@
             <Property name="text" type="java.lang.String" value="Assigned Tasks"/>
           </Properties>
         </Component>
-
       </SubComponents>
     </Container>
   </SubComponents>

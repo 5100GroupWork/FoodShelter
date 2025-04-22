@@ -23,6 +23,7 @@ import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import model.Organization.RequestEntertainOrg;
 import model.WorkQueue.WorkQueue;
+import model.WorkQueue.WorkRequestDelivery;
 import model.WorkQueue.WorkRequestFoodItem;
 import model.WorkQueue.WorkRequestNeeds;
 
@@ -275,7 +276,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     FoodItem selectedFood = selectedFoodRequest.getFoodItem();
 
-    DeliveryTask task = new DeliveryTask();
+    WorkRequestDelivery task = new WorkRequestDelivery();
     task.setFoodItem(selectedFood);
     task.setQuantity(selectedFood.getNumber());
     task.setFromLocation(selectedFood.getFoodIncOrg().getName());
@@ -283,6 +284,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     task.setSender(requestEntertainOrg);
     task.setReceiver(selectedRequest.getSender());
     task.setStatus("Pending");
+    task.setTaskStatus("UnPick"); 
 
     selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
 
@@ -292,6 +294,9 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
     JOptionPane.showMessageDialog(null, "Task assigned successfully!");
 
+    requestEntertainOrg.getWorkQueue().getWorkRequestList().add(task);
+    System.out.println("Task added to RequestEntertainOrg: " + task.getFoodItem().getFoodName() + 
+                     ", Status: " + task.getTaskStatus());
     populateApprovedFoodTable();
     populateShelterRequestTable();
     populateAssignedTasksTable();
@@ -351,46 +356,67 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     }
     
     private void populateAssignedTasksTable() {
-    DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
+  DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
     model.setRowCount(0);
     
     int index = 0;
+ 
+    java.util.HashSet<WorkRequest> addedTasks = new java.util.HashSet<>();
+
 
     for (WorkRequest wr : requestEntertainOrg.getWorkQueue().getWorkRequestList()) {
-        if (wr instanceof DeliveryTask) {
-            DeliveryTask task = (DeliveryTask) wr;
-            FoodItem food = task.getFoodItem();
+        if ((wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) && !addedTasks.contains(wr)) {
+            FoodItem food = null;
+            
+            if (wr instanceof DeliveryTask) {
+                food = ((DeliveryTask) wr).getFoodItem();
+            } else if (wr instanceof WorkRequestDelivery) {
+                food = ((WorkRequestDelivery) wr).getFoodItem();
+            }
             
             if (food != null) {
                 index++;
                 Object[] row = new Object[4];
-                row[0] = index;  // Auto-incremented number
+                row[0] = index;
                 row[1] = food.getFoodName();
                 row[2] = food.getFoodIncOrg().getName();
                 row[3] = food.getNumber();
                 model.addRow(row);
+                
+                addedTasks.add(wr);
+                System.out.println("Added task to assigned tasks table: " + food.getFoodName());
             }
         }
     }
 
     for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
         for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof DeliveryTask) {
-                DeliveryTask task = (DeliveryTask) wr;
-                FoodItem food = task.getFoodItem();
+            if ((wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) && !addedTasks.contains(wr)) {
+                FoodItem food = null;
+                
+                if (wr instanceof DeliveryTask) {
+                    food = ((DeliveryTask) wr).getFoodItem();
+                } else if (wr instanceof WorkRequestDelivery) {
+                    food = ((WorkRequestDelivery) wr).getFoodItem();
+                }
                 
                 if (food != null) {
                     index++;
                     Object[] row = new Object[4];
-                    row[0] = index;  // Auto-incremented number
+                    row[0] = index;
                     row[1] = food.getFoodName();
                     row[2] = food.getFoodIncOrg().getName();
                     row[3] = food.getNumber();
                     model.addRow(row);
+                    
+                    addedTasks.add(wr);
+                    System.out.println("Added task from other org to assigned tasks table: " + food.getFoodName());
                 }
             }
         }
     }
+    
+    System.out.println("Total unique assigned tasks found: " + index);
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -165,11 +165,16 @@ public class FoodShelterConfig {
         volunteer.setEnterprise(volunteerEnterprise);
         volunteer.setOrganization(volunteerOrg);
 
-        UserAccount driver = volunteerManager.createDriver(driverOrg, netWork, "Jessica", "0000");
+        UserAccount driver = volunteerManager.createDriver(driverOrg, netWork, "Driver", "0000");
         driver.setEmail("jessica@driver.org");
         driver.setPhone("555-678-9012");
         driver.setEnterprise(volunteerEnterprise);
         driver.setOrganization(driverOrg);
+
+        if (driverOrg.getEmployees() == null) {
+            driverOrg.setEmployees(new ArrayList<>());
+        }
+        driverOrg.getEmployees().add(driver);
 
         // create rescueNetOrg(helper and homeless) and people
         RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
