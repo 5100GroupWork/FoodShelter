@@ -40,10 +40,10 @@ public class AddShelterHelper extends javax.swing.JPanel {
         this.workArea = workArea;
         this.account = account;
         this.oldAccount = oldAccount;
-        if(oldAccount==null){
+        if (oldAccount == null) {
             btnUpdate.setEnabled(true);
             btnSubmit.setEnabled(false);
-        }else{
+        } else {
             populateTxt();
             btnSubmit.setEnabled(false);
             btnUpdate.setEnabled(false);
@@ -58,7 +58,8 @@ public class AddShelterHelper extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
@@ -115,76 +116,98 @@ public class AddShelterHelper extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnBack)
-                        .addGap(30, 30, 30)
-                        .addComponent(enterpriseLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblpassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbluserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbPhone, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtuserName)
-                                    .addComponent(txtEmail)
-                                    .addComponent(txtPhone)
-                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(btnSubmit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUpdate)))))
-                .addContainerGap(601, Short.MAX_VALUE))
-        );
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addComponent(btnBack)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(enterpriseLabel))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(139, 139, 139)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(lblpassword,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(lbluserName,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(lblEmail,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(lbPhone,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING))
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(txtuserName)
+                                                                        .addComponent(txtEmail)
+                                                                        .addComponent(txtPhone)
+                                                                        .addComponent(passwordField,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                155,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(27, 27, 27)
+                                                                .addComponent(btnSubmit)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE)
+                                                                .addComponent(btnUpdate)))))
+                                .addContainerGap(601, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbluserName))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblpassword)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPhone)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSubmit)
-                    .addComponent(btnUpdate))
-                .addContainerGap(420, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnBack)
+                                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtuserName, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbluserName))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblpassword)
+                                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblEmail)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lbPhone)
+                                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnSubmit)
+                                        .addComponent(btnUpdate))
+                                .addContainerGap(420, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         String username = txtuserName.getText();
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
+
         IsMatch isMatch = new IsMatch();
-        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
+        if (isMatch.isEmailMatch(email) && isMatch.isNameMatch(username)) {
             JOptionPane.showMessageDialog(this, "name or email validation error");
             return;
         }
@@ -197,21 +220,20 @@ public class AddShelterHelper extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
         }
-        
+
         oldAccount.setEmail(email);
         oldAccount.setPhone(phone);
         oldAccount.setPassword(password);
         oldAccount.setUsername(username);
 
         JOptionPane.showMessageDialog(this, "New shelter helper created successfully!");
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }// GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg,
                 enterprise, netWork);
         PanelUtils.addOrReplacePanel(workArea, "ShelterHelperAdmin", shelterHelperAdmin);
-        workArea.add("ShelterHelperAdmin", shelterHelperAdmin);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
@@ -222,9 +244,9 @@ public class AddShelterHelper extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
+
         IsMatch isMatch = new IsMatch();
-        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
+        if (isMatch.isEmailMatch(email) && isMatch.isNameMatch(username)) {
             JOptionPane.showMessageDialog(this, "name or email validation error");
             return;
         }
@@ -237,7 +259,6 @@ public class AddShelterHelper extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
         }
-        
 
         ShelterHelper role = new ShelterHelper();
         UserAccount account = netWork.getUserAccountDirctory().createUserAccount(username, password, role);
@@ -274,17 +295,16 @@ public class AddShelterHelper extends javax.swing.JPanel {
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtuserName;
     // End of variables declaration//GEN-END:variables
-    
+
     // populateTxt
-    public void populateTxt(){
-        //ShelterHelper shelterHelper =(ShelterHelper) oldAccount.getRole();
+    public void populateTxt() {
+        // ShelterHelper shelterHelper =(ShelterHelper) oldAccount.getRole();
         txtuserName.setText(oldAccount.getUsername());
         txtEmail.setText(oldAccount.getEmail());
         txtPhone.setText(oldAccount.getPhone());
         passwordField.setText(oldAccount.getPassword());
-    }    
-    
-    
+    }
+
     private void beautify() {
         // 背景
         this.setBackground(new java.awt.Color(245, 242, 250)); // 淡紫灰背景
@@ -322,7 +342,7 @@ public class AddShelterHelper extends javax.swing.JPanel {
         passwordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 150, 200)));
 
         // 按钮样式
-        javax.swing.JButton[] buttons = { btnBack, btnSubmit,btnUpdate };
+        javax.swing.JButton[] buttons = { btnBack, btnSubmit, btnUpdate };
         for (javax.swing.JButton btn : buttons) {
             btn.setFont(labelFont);
             btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫

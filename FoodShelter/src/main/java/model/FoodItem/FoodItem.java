@@ -18,6 +18,7 @@ public class FoodItem {
     public static int counter = 0;
     int id;
     String FoodName;
+    String InconPath;
 //    String CatalogName;
     String decs;
     int number;
@@ -126,6 +127,13 @@ public class FoodItem {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public String getInconPath() {
+        return InconPath;
+    }
+
+    public void setInconPath(String InconPath) {
+        this.InconPath = InconPath;
     }
     
     

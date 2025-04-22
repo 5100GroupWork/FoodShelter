@@ -272,12 +272,13 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
 
                                         newOrg = foodEnterprise.addFoodIncOrg(orgName);
                                         newOrg.setAddress(location);
-                                        
+
                                         CardLayout layout = (CardLayout) workArea.getLayout();
-                                        workArea.add("AddLocalAdminPanel",
-                                                        new AddLocalAdminPanel(workArea, account, foodShelterSystem,
-                                                                        parent, newOrg, be));
-                                        PanelUtils.addOrReplacePanel(workArea, "AddLocalAdminPanel", null);
+                                        AddLocalAdminPanel addLocalAdminPanel = new AddLocalAdminPanel(workArea,
+                                                        account, foodShelterSystem,
+                                                        parent, newOrg, be);
+                                        PanelUtils.addOrReplacePanel(workArea, "AddLocalAdminPanel",
+                                                        addLocalAdminPanel);
                                         layout.show(workArea, "AddLocalAdminPanel");
                                         workArea.revalidate();
                                         workArea.repaint();
