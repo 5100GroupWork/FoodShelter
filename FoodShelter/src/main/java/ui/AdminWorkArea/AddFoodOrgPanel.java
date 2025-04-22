@@ -250,6 +250,7 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
                                 if (be instanceof FoodEnterprise) {
                                         foundFoodEnterprise = true;
                                         targetEnterprise = be;
+                                        FoodEnterprise foodEnterprise = (FoodEnterprise) be;
 
                                         // Check if an org with the same name already exists
                                         boolean orgExists = false;
@@ -269,10 +270,9 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
                                                 return;
                                         }
 
-                                        newOrg = new FoodIncOrg(orgName);
-
+                                        newOrg = foodEnterprise.addFoodIncOrg(orgName);
                                         newOrg.setAddress(location);
-                                        be.getOrganizationDirectory().getOrganizationList().add(newOrg);
+                                        
                                         CardLayout layout = (CardLayout) workArea.getLayout();
                                         workArea.add("AddLocalAdminPanel",
                                                         new AddLocalAdminPanel(workArea, account, foodShelterSystem,

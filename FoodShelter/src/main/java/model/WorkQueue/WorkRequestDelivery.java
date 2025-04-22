@@ -13,6 +13,9 @@ import model.Role.Deliver;
  */
 public class WorkRequestDelivery extends WorkRequestFoodItem{
     
+    private String fromLocation;
+    private String toLocation;
+    
     String TaskStatus;// UnPick/ picked/ deliverying / accepted  
 
     public String getTaskStatus() {
@@ -31,6 +34,21 @@ public class WorkRequestDelivery extends WorkRequestFoodItem{
         this.deliver = deliver;
     }
 
+    public String getFromLocation() {
+        return fromLocation;
+    }
+
+    public void setFromLocation(String fromLocation) {
+        this.fromLocation = fromLocation;
+    }
+
+    public String getToLocation() {
+        return toLocation;
+    }
+
+    public void setToLocation(String toLocation) {
+        this.toLocation = toLocation;
+    }
     
     UserAccount deliver;
     

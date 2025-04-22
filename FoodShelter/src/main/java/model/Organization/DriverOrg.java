@@ -19,6 +19,7 @@ public class DriverOrg extends BasicOrganization{
     
     public DriverOrg(String name){
         super(Type.DriverOrg.getValue(),name);
+        this.employees = new ArrayList<>();
     }
     
 
