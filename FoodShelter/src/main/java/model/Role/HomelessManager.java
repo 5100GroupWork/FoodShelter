@@ -13,6 +13,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.RequestCollectOrg;
 import ui.RescueNetAdminWorkArea.HomelessAdmin;
+import ui.RescueNetAdminWorkArea.RescueNetAdminStartPoint;
 
 /**
  *
@@ -37,7 +38,7 @@ public class HomelessManager extends BasicRole{
     @Override
     public JPanel createWorkArea(JPanel workArea, UserAccount account, BasicOrganization organization, BasicEnterprise enterprise, NetWork netWork,FoodShelterSystem system) {
         //
-        return new HomelessAdmin(workArea,account,organization,enterprise,netWork);
+        return new RescueNetAdminStartPoint(workArea,account,organization,enterprise,netWork);
     }
 
     

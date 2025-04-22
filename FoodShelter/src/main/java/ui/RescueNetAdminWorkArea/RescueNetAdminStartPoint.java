@@ -36,10 +36,17 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.netWork = netWork;
 
+        // 判断跳转过来的角色 同时屏蔽按钮
         if (organization instanceof RequestEntertainOrg) {
+            System.out.println("RequestEntertainOrg");
             this.requestEntertainOrg = (RequestEntertainOrg) organization;
+            btnHomeless.setEnabled(false);
+            btnShelter.setEnabled(true);
         } else if (organization instanceof RequestCollectOrg) {
+            System.out.println("RequestCollectOrg");
             this.requestCollectOrg = (RequestCollectOrg) organization;
+            btnHomeless.setEnabled(true);
+            btnShelter.setEnabled(false);
         }
 
         jLabel1.setText("Welcome, " + account.getUsername());
@@ -133,7 +140,7 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         ShelterHelperAdmin panel = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
         workArea.add("ShelterHelperAdmin", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.show(workArea,"ShelterHelperAdmin");
+        layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnShelterActionPerformed
 
     private void btnHomelessActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnHomelessActionPerformed
@@ -141,7 +148,7 @@ public class RescueNetAdminStartPoint extends javax.swing.JPanel {
         HomelessAdmin panel = new HomelessAdmin(workArea, account, requestCollectOrg, enterprise, netWork);
         workArea.add("HomelessAdmin", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.next(workArea);
+        layout.show(workArea, "HomelessAdmin");
     }// GEN-LAST:event_btnHomelessActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

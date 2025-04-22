@@ -15,6 +15,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
+import utils.PanelUtils;
 
 /**
  *
@@ -276,6 +277,7 @@ public class AddFoodOrgPanel extends javax.swing.JPanel {
                                         workArea.add("AddLocalAdminPanel",
                                                         new AddLocalAdminPanel(workArea, account, foodShelterSystem,
                                                                         parent, newOrg, be));
+                                        PanelUtils.addOrReplacePanel(workArea, "AddLocalAdminPanel", null);
                                         layout.show(workArea, "AddLocalAdminPanel");
                                         workArea.revalidate();
                                         workArea.repaint();
