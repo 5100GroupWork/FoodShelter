@@ -5,6 +5,7 @@
 package model.WorkQueue;
 
 import java.util.Date;
+import java.util.UUID;
 import model.Organization.BasicOrganization;
 
 /**
@@ -97,6 +98,10 @@ public class WorkRequest {
     
     @Override
     public String toString(){
+        if(this.workRequestUuid==null){
+            String uuid = UUID.randomUUID().toString();
+            workRequestUuid = uuid;
+        }
         return this.workRequestUuid.substring(0,8);
     }
 }

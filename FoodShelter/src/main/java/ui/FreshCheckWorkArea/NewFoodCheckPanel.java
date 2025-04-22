@@ -4,6 +4,8 @@
  */
 package ui.FreshCheckWorkArea;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -58,7 +60,7 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         enterpriseLabel = new javax.swing.JLabel();
@@ -66,26 +68,31 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         NewFoodTable = new javax.swing.JTable();
         btnApprove = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
+        FoodIncon = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TxtDesc = new javax.swing.JTextArea();
+        btnCheck = new javax.swing.JButton();
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("New Food Check");
 
         NewFoodTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null },
-                        { null, null, null, null, null },
-                        { null, null, null, null, null },
-                        { null, null, null, null, null }
-                },
-                new String[] {
-                        "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Food ID", "Food Name", "Quantity", "Expiry Date", "Donor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(NewFoodTable);
@@ -104,48 +111,80 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             }
         });
 
+        TxtDesc.setColumns(20);
+        TxtDesc.setRows(5);
+        jScrollPane1.setViewportView(TxtDesc);
+
+        btnCheck.setText("check");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(362, 362, 362)
-                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(132, 132, 132)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                false)
-                                                        .addComponent(jScrollPane2,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 682,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(btnApprove)
-                                                                .addPreferredGap(
-                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                        Short.MAX_VALUE)
-                                                                .addComponent(btnReject)))))
-                                .addGap(117, 195, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnApprove)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnReject))
+                            .addComponent(btnCheck)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(FoodIncon, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(117, 195, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46,
-                                        Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnReject)
-                                        .addComponent(btnApprove))
-                                .addGap(109, 109, 109)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnCheck)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FoodIncon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnApprove)
+                    .addComponent(btnReject))
+                .addGap(62, 62, 62))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = NewFoodTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row first.");
+            return;
+        }
+        WorkRequestFoodItem wrd = (WorkRequestFoodItem) NewFoodTable.getValueAt(selectedRow, 0);
+        if(wrd.getFoodItem().getDecs()!=null){
+            TxtDesc.setText(wrd.getFoodItem().getDecs());
+        }
+        if(wrd.getFoodItem().getInconPath()!=null){
+            ImageIcon icon = new ImageIcon(wrd.getFoodItem().getInconPath());
+            Image scaledImg = icon.getImage().getScaledInstance(250, 200, Image.SCALE_SMOOTH);
+            FoodIncon.setIcon(new ImageIcon(scaledImg));
+        }
+
+    }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnApproveActionPerformed
         // TODO add your handling code here:
@@ -155,29 +194,15 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             return;
         }
 
-        DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        NewFoodTable.setRowSorter(sorter);
-        int foodId = (int) model.getValueAt(rowNumber, 0); // 获取Food ID
+        WorkRequestFoodItem wrd = (WorkRequestFoodItem) NewFoodTable.getValueAt(rowNumber, 0);
 
-        WorkRequestFoodItem selectedRequest = null;
-        int count = 0;
-        for (WorkRequest wd : netWork.getCheckList().getWorkRequestList()) {
-            if (wd instanceof WorkRequestFoodItem) {
-                count++;
-                if (count == foodId) {
-                    selectedRequest = (WorkRequestFoodItem) wd;
-                    break;
-                }
-            }
-        }
-        if (selectedRequest != null) {
-            selectedRequest.getFoodItem().setCheckingStatus("accepted");
-            selectedRequest.getFoodItem().setUsingStatus("stored");
+        if (wrd.getFoodItem() != null) {
+            wrd.getFoodItem().setCheckingStatus("accepted");
+            wrd.getFoodItem().setUsingStatus("stored");
 
             // 从checkList移动到warehouseList
-            netWork.getCheckList().removeWorkRequest(selectedRequest);
-            netWork.getWarehouseList().getWorkRequestList().add(selectedRequest);
+            netWork.getCheckList().removeWorkRequest(wrd);
+            netWork.getWarehouseList().getWorkRequestList().add(wrd);
 
             JOptionPane.showMessageDialog(this, "Food item approved successfully!");
             populateTable();
@@ -193,35 +218,23 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
             return;
         }
 
-        DefaultTableModel model = (DefaultTableModel) NewFoodTable.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        NewFoodTable.setRowSorter(sorter);
-        int foodId = (int) model.getValueAt(rowNumber, 0); // 获取Food ID
-
-        WorkRequestFoodItem selectedRequest = null;
-        int count = 0;
-        for (WorkRequest wd : netWork.getCheckList().getWorkRequestList()) {
-            if (wd instanceof WorkRequestFoodItem) {
-                count++;
-                if (count == foodId) {
-                    selectedRequest = (WorkRequestFoodItem) wd;
-                    break;
-                }
-            }
-        }
-
-        if (selectedRequest != null) {
-            netWork.getCheckList().removeWorkRequest(selectedRequest);
-
+        
+        WorkRequestFoodItem wrd = (WorkRequestFoodItem) NewFoodTable.getValueAt(rowNumber, 0);
+        if (wrd != null) {
+            netWork.getCheckList().removeWorkRequest(wrd);
             populateTable();
         }
     }// GEN-LAST:event_btnRejectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FoodIncon;
     private javax.swing.JTable NewFoodTable;
+    private javax.swing.JTextArea TxtDesc;
     private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnReject;
     private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 

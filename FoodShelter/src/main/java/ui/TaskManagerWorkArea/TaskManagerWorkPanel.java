@@ -113,7 +113,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Number", "Food Name", "Quantity", "From", "To", "Status"
+                "ID", "Food Name", "Quantity", "From", "To", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -272,13 +272,12 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
     ////////////////function ///////////////////
     // populizeTable
     public void populateTableTask() {
-         DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
+    DefaultTableModel model = (DefaultTableModel) tbUnassignedTasks.getModel();
     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
     tbUnassignedTasks.setRowSorter(sorter);
     model.setRowCount(0);
 
     ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-    int index = 0; // 自动递增计数器
     
     System.out.println("开始查找任务...");
     
@@ -299,13 +298,12 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                     if (wr instanceof DeliveryTask) {
                         DeliveryTask task = (DeliveryTask) wr;
                         if (task.getFoodItem() != null) {
-                            index++;
                             Object row[] = new Object[6];
-                            row[0] = index;
+                            row[0] = wr.getWorkRequestUuid().substring(0, 8);
                             row[1] = task.getFoodItem().getFoodName();
                             row[2] = task.getQuantity();
-                            row[3] = task.getFromLocation();
-                            row[4] = task.getToLocation();
+                            row[3] = task.getFoodItem().getFoodIncOrg().getAddress();
+                            row[4] = task.getReceiver().getAddress();
                             row[5] = task;
                             model.addRow(row);
                             System.out.println("添加DeliveryTask: " + task.getFoodItem().getFoodName());
@@ -315,9 +313,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                     if (wr instanceof WorkRequestDelivery) {
                         WorkRequestDelivery wrd = (WorkRequestDelivery) wr;
                         if (wrd.getFoodItem() != null) {
-                            index++;
                             Object row[] = new Object[6];
-                            row[0] = index;
+                            row[0] = wrd.getWorkRequestUuid();
                             row[1] = wrd.getFoodItem().getFoodName();
                             row[2] = wrd.getFoodItem().getNumber();
                             
@@ -374,7 +371,7 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         }
     }
     
-    System.out.println("总共找到 " + index + " 个任务");
+    System.out.println("总共找到 "  + " 个任务");
     }
 
     // populate Task Undo
@@ -434,7 +431,6 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         ArrayList<BasicEnterprise> enterprises = netWork.getEnterpriseDirectory().getEnterprises();
-        int index = 0;
 
         for (BasicEnterprise enterprise : enterprises) {
             if (enterprise instanceof VolunteerEnterprise) {
@@ -447,9 +443,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                         // Check in UserAccountDirectory first
                         for (UserAccount account : driverOrg.getUserAccountDirectory().getUserAccountList()) {
                             // Include all accounts, regardless of role type for now
-                            index++;
                             Object row[] = new Object[3];
-                            row[0] = index;
+                            row[0] = account.getAccountUuid();
                             row[1] = account;
                             row[2] = "Available"; // Default status
 
@@ -470,9 +465,8 @@ public class TaskManagerWorkPanel extends javax.swing.JPanel {
                                 }
 
                                 if (!alreadyAdded) {
-                                    index++;
                                     Object row[] = new Object[3];
-                                    row[0] = index;
+                                    row[0] = account.getAccountUuid();
                                     row[1] = account;
                                     row[2] = "Available"; // Default status
 

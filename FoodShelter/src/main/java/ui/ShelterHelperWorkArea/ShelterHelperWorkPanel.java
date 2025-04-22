@@ -90,7 +90,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Number", "Requested Vendor", "Requested Quantity", "Status"
+                "ID", "Requested Vendor", "Requested Quantity", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -120,7 +120,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Number", "Food Name", "Vendor", "Quantity", "Expiry Date"
+                "ID", "Food Name", "Vendor", "Quantity", "Expiry Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -148,7 +148,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Number", "Food Name", "Vendor", "Quantity"
+                "ID", "Food Name", "Vendor", "Quantity"
             }
         ));
         jScrollPane4.setViewportView(tblAssignedTasks);
@@ -164,29 +164,31 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(btnAssignTask))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(249, 249, 249)
-                                .addComponent(enterpriseLabel1))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(249, 249, 249)
+                                        .addComponent(enterpriseLabel1))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))
+                                .addGap(28, 28, 28)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(233, 233, 233)
+                                .addComponent(enterpriseLabel2)
+                                .addGap(297, 297, 297)
+                                .addComponent(enterpriseLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(enterpriseLabel2)
-                        .addGap(297, 297, 297)
-                        .addComponent(enterpriseLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(250, 770, Short.MAX_VALUE))
+                        .addGap(161, 161, 161)
+                        .addComponent(btnAssignTask)))
+                .addGap(341, 356, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,36 +228,36 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
         // TODO add your handling code here:
         int foodRow = tblApprovedFoodTasks.getSelectedRow();
-    int requestRow = tblShelterRequests.getSelectedRow();
+        int requestRow = tblShelterRequests.getSelectedRow();
 
-    if (foodRow < 0 || requestRow < 0) {
-        JOptionPane.showMessageDialog(null, "Please select one food item and one shelter request.");
-        return;
-    }
+        if (foodRow < 0 || requestRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select one food item and one shelter request.");
+            return;
+        }
 
-    // Convert view indices to model indices
-    int foodModelRow = tblApprovedFoodTasks.convertRowIndexToModel(foodRow);
-    int requestModelRow = tblShelterRequests.convertRowIndexToModel(requestRow);
+        // Convert view indices to model indices
+        int foodModelRow = tblApprovedFoodTasks.convertRowIndexToModel(foodRow);
+        int requestModelRow = tblShelterRequests.convertRowIndexToModel(requestRow);
 
-    DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
-    DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
+        DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+        DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
 
 
-    WorkRequestFoodItem selectedFoodRequest = null;
-    for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
-        if (wr instanceof WorkRequestFoodItem) {
-            WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
-            FoodItem food = wrfi.getFoodItem();
+        WorkRequestFoodItem selectedFoodRequest = null;
+        for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+            if (wr instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
+                FoodItem food = wrfi.getFoodItem();
 
-            if (food != null && 
-                food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) && 
-                food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
-                food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
-                selectedFoodRequest = wrfi;
-                break;
+                if (food != null && 
+                    food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) && 
+                    food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
+                    food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
+                    selectedFoodRequest = wrfi;
+                    break;
+                }
             }
         }
-    }
 
     WorkRequestNeeds selectedRequest = null;
     for (WorkRequest wr : rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList()) {
@@ -304,21 +306,19 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     }// GEN-LAST:event_btnAssignTaskActionPerformed
 
     private void populateApprovedFoodTable() {
-       DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+    DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
     tblApprovedFoodTasks.setRowSorter(sorter);
     model.setRowCount(0);
 
-    int index = 0;
     for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
         if (wr instanceof WorkRequestFoodItem) {
             WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
             FoodItem food = wrfi.getFoodItem();
 
             if (food != null && !"Assigned".equals(food.getUsingStatus())) {
-                index++;
                 Object[] row = new Object[5];
-                row[0] = index;
+                row[0] = wr;
                 row[1] = food.getFoodName();
                 row[2] = food.getFoodIncOrg().getName();
                 row[3] = food.getNumber();
@@ -335,7 +335,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     tblShelterRequests.setRowSorter(sorter);
     model.setRowCount(0);
 
-    int index = 0;
     RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
     WorkQueue queue = org.getWorkQueue();
     System.out.println("queue size :" + queue.getWorkRequestList().size());
@@ -346,8 +345,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
 
             if ("pending".equalsIgnoreCase(wrn.getStatus())) {
                 Object[] row = new Object[4];
-                index++;
-                row[0] = index;
+                row[0] = wr;
                 row[1] = wrn.getFoodOrgName();
                 row[2] = wrn.getQuantity();
                 row[3] = wrn.getStatus();
@@ -361,7 +359,6 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
   DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
     model.setRowCount(0);
     
-    int index = 0;
  
     java.util.HashSet<WorkRequest> addedTasks = new java.util.HashSet<>();
 
@@ -377,9 +374,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             }
             
             if (food != null) {
-                index++;
                 Object[] row = new Object[4];
-                row[0] = index;
+                row[0] = wr;
                 row[1] = food.getFoodName();
                 row[2] = food.getFoodIncOrg().getName();
                 row[3] = food.getNumber();
@@ -403,9 +399,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 }
                 
                 if (food != null) {
-                    index++;
                     Object[] row = new Object[4];
-                    row[0] = index;
+                    row[0] = wr;
                     row[1] = food.getFoodName();
                     row[2] = food.getFoodIncOrg().getName();
                     row[3] = food.getNumber();
@@ -418,7 +413,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         }
     }
     
-    System.out.println("Total unique assigned tasks found: " + index);
+    System.out.println("Total unique assigned tasks found: " );
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

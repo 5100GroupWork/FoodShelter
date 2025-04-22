@@ -39,6 +39,7 @@ public class FoodShelterConfig {
 
     public static FoodShelterSystem configure(String name, FoodShelterSystem system) {
 
+         FakerUtil faker = new FakerUtil();
         if (system == null) {
             system = FoodShelterSystem.getInstance();
             UserAccount systemAdmin = new UserAccount();
@@ -86,7 +87,7 @@ public class FoodShelterConfig {
         // add FoodInc org into food-enterprise
         // 在这里改变之前的设计，user同时归属于enterprise/org/network （如果在下面的层级中存在的话）
         FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
-        foodIncOrg.setAddress("Backbay-Boston-MA");
+        foodIncOrg.setAddress(faker.getAddress());
         UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
                 new FoodIncEmployee());
 
@@ -221,7 +222,7 @@ public class FoodShelterConfig {
         mainHomeless.setOrganization(requestCollectOrg);
         mainHomeless.setEnterprise(rescuEnterprise);
 
-        FakerUtil faker = new FakerUtil();
+       
         for (int i = 0; i < 20; i++) {
             
             UserAccount randomHomeless = homelessManager.addHomeLess(requestCollectOrg, faker.getName(), "0000", netWork);
