@@ -25,7 +25,7 @@
                               <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                               <Component id="enterpriseLabel" min="-2" pref="389" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" alignment="0" pref="587" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" pref="748" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -48,7 +48,9 @@
                       <Component id="enterpriseLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+
               <EmptySpace pref="386" max="32767" attributes="0"/>
+
           </Group>
       </Group>
     </DimensionLayout>

@@ -318,10 +318,23 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         String password = String.valueOf(passwordField.getPassword());
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
+
         IsMatch isMatch = new IsMatch();
-        if(isMatch.isEmailMatch(email)&&isMatch.isNameMatch(username)){
-            JOptionPane.showMessageDialog(this, "name or email validation error");
+        if (!isMatch.isNameMatch(username)) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid name format. Name should only contain letters and up to 3 spaces.",
+                    "Name Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            txtuserName.requestFocus();
+            return;
+        }
+
+        if (!isMatch.isEmailMatch(email)) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid email format. Please enter a valid email address.",
+                    "Email Validation Error",
+                    JOptionPane.ERROR_MESSAGE);
+            txtEmail.requestFocus();
             return;
         }
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
