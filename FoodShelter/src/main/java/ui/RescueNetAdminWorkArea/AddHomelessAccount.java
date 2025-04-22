@@ -271,11 +271,13 @@ public class AddHomelessAccount extends javax.swing.JPanel {
         }
         
 
-        UserAccount account = requestCollectOrg.getUserAccountDirectory().createUserAccount(username, password, role);
+        UserAccount account = requestCollectOrg.getUserAccountDirectory().createUserAccount(username, "0000", role);
 
         account.setEmail(email);
         account.setPhone(phone);
         account.setOrganization(requestCollectOrg);
+        account.setEnterprise(this.enterprise);
+        netWork.getUserAccountDirctory().getUserAccountList().add(account);
 
         JOptionPane.showMessageDialog(this, "New homeless user created successfully!");
 

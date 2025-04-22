@@ -12,6 +12,7 @@ import model.Enterprise.BasicEnterprise;
 import model.NetWork.NetWork;
 import model.Organization.RequestEntertainOrg;
 import model.Role.FoodIncEmployee;
+import utils.PanelUtils;
 
 /**
  *
@@ -27,13 +28,14 @@ public class AddShelterHelper extends javax.swing.JPanel {
     /**
      * Creates new form AddShelterHelper
      */
-    public AddShelterHelper(JPanel workArea,UserAccount account, NetWork netWork,BasicEnterprise enterprise, RequestEntertainOrg requestEntertainOrg) {
+    public AddShelterHelper(JPanel workArea, UserAccount account, NetWork netWork, BasicEnterprise enterprise,
+            RequestEntertainOrg requestEntertainOrg) {
         initComponents();
         this.enterprise = enterprise;
         this.requestEntertainOrg = requestEntertainOrg;
         this.netWork = netWork;
         this.workArea = workArea;
-        this.account  = account;
+        this.account = account;
         // error to change
         beautify();
     }
@@ -169,8 +171,10 @@ public class AddShelterHelper extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg, enterprise, netWork);
-        workArea.add("ShelterHelperAdmin",shelterHelperAdmin);
+        ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg,
+                enterprise, netWork);
+        PanelUtils.addOrReplacePanel(workArea, "ShelterHelperAdmin", shelterHelperAdmin);
+        workArea.add("ShelterHelperAdmin", shelterHelperAdmin);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
@@ -198,6 +202,8 @@ public class AddShelterHelper extends javax.swing.JPanel {
         account.setEmail(email);
         account.setPhone(phone);
         account.setOrganization(requestEntertainOrg);
+        account.setEnterprise(enterprise);
+        enterprise.getUserAccountDirectory().getUserAccountList().add(account);
 
         JOptionPane.showMessageDialog(this, "New shelter helper created successfully!");
 
