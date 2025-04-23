@@ -243,6 +243,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
         AddHomelessAccount addHomelessAccount = new AddHomelessAccount(workArea, account, netWork, rescueNetEnterprise,
                 requestCollectOrg, oldAccount);
         PanelUtils.addOrReplacePanel(workArea, "AddHomelessAccount", addHomelessAccount);
+        workArea.add("AddHomelessAccount", addHomelessAccount);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "AddHomelessAccount");
 
@@ -254,6 +255,7 @@ public class HomelessAdmin extends javax.swing.JPanel {
                 requestCollectOrg,
                 rescueNetEnterprise, netWork);
         PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
+        workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");
 

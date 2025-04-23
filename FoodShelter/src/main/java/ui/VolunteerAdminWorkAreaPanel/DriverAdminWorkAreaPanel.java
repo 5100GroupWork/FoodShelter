@@ -60,7 +60,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
@@ -83,22 +84,21 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Drivers Management");
 
         tblDriver.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Driver ID", "Name", "Contact"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                new Object[][] {
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null },
+                        { null, null, null }
+                },
+                new String[] {
+                        "Driver ID", "Name", "Contact"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblDriver);
@@ -130,48 +130,50 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddDriver)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate)
-                        .addGap(202, 202, 202)
-                        .addComponent(btnDelete))
-                    .addComponent(lblEnterprise)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addGap(103, 103, 103)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(396, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnAddDriver)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnUpdate)
+                                                .addGap(202, 202, 202)
+                                                .addComponent(btnDelete))
+                                        .addComponent(lblEnterprise)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(backJButton)
+                                                .addGap(103, 103, 103)
+                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 572,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(396, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblEnterprise)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddDriver)
-                    .addComponent(btnDelete)
-                    .addComponent(btnUpdate))
-                .addContainerGap(415, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblEnterprise)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(backJButton))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnAddDriver)
+                                        .addComponent(btnDelete)
+                                        .addComponent(btnUpdate))
+                                .addContainerGap(415, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblDriver.getSelectedRow();
         if (selectedRow < 0) {
@@ -179,14 +181,15 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
                     JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         UserAccount ua = (UserAccount) tblDriver.getValueAt(selectedRow, 1);
-        AddDriverAccountPanel addDriverAccountPanel = new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel, ua);
+        AddDriverAccountPanel addDriverAccountPanel = new AddDriverAccountPanel(workArea, account, volunteerOrg,
+                volunteerEnterprise, netWork, parentPanel, ua);
         PanelUtils.addOrReplacePanel(workArea, "AddDriverAccountPanel", addDriverAccountPanel);
+        workArea.add("AddDriverAccountPanel", addDriverAccountPanel);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "AddDriverAccountPanel");
-        
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }// GEN-LAST:event_btnUpdateActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backJButtonActionPerformed
 
@@ -202,7 +205,8 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
 
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("AddDriverAccountPanel",
-                new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel,null));
+                new AddDriverAccountPanel(workArea, account, volunteerOrg, volunteerEnterprise, netWork, parentPanel,
+                        null));
         layout.show(workArea, "AddDriverAccountPanel");
         workArea.revalidate();
         workArea.repaint();
@@ -329,7 +333,7 @@ public class DriverAdminWorkAreaPanel extends javax.swing.JPanel {
         lblEnterprise.setForeground(new java.awt.Color(80, 80, 80)); // 深灰
 
         // 按钮样式
-        javax.swing.JButton[] buttons = { backJButton, btnAddDriver, btnDelete,btnUpdate };
+        javax.swing.JButton[] buttons = { backJButton, btnAddDriver, btnDelete, btnUpdate };
         for (javax.swing.JButton btn : buttons) {
             btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             btn.setBackground(new java.awt.Color(103, 58, 183)); // 深紫按钮

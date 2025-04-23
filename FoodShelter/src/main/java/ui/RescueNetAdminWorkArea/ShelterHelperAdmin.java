@@ -194,6 +194,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
         AddShelterHelper addShelterHelper = new AddShelterHelper(workArea, account, netWork, enterprise,
                 requestEntertainOrg, ua);
         PanelUtils.addOrReplacePanel(workArea, "AddShelterHelper", addShelterHelper);
+        workArea.add("AddShelterHelper", addShelterHelper);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "AddShelterHelper");
     }// GEN-LAST:event_btnUpdateActionPerformed
@@ -203,6 +204,7 @@ public class ShelterHelperAdmin extends javax.swing.JPanel {
                 requestEntertainOrg,
                 enterprise, netWork);
         PanelUtils.addOrReplacePanel(workArea, "RescueNetAdminStartPoint", rescueNetAdminStartPoint);
+        workArea.add("RescueNetAdminStartPoint", rescueNetAdminStartPoint);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "RescueNetAdminStartPoint");
 

@@ -47,6 +47,7 @@ public class main extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(0.2);
         WelcomeJPanel welcomeJPanel = new WelcomeJPanel();
         PanelUtils.addOrReplacePanel(container, "WelComeJPanel", welcomeJPanel);
+        container.add("WelcomeJPanel", welcomeJPanel);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.show(container, "WelComeJPanel");
         container.revalidate();
@@ -257,6 +258,7 @@ public class main extends javax.swing.JFrame {
                 JPanel workArea = sysA.getRole().createWorkArea(container, sysA, inOrganization, inEnterprise,
                         inNetwork, system);
                 PanelUtils.addOrReplacePanel(container, "workArea", workArea);
+                workArea.add("workArea", workArea);
                 CardLayout layout = (CardLayout) container.getLayout();
                 System.out.println("before jump");
                 layout.show(container, "workArea");

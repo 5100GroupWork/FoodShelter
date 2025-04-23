@@ -207,8 +207,14 @@ public class AddShelterHelper extends javax.swing.JPanel {
         String phone = txtPhone.getText();
 
         IsMatch isMatch = new IsMatch();
-        if (isMatch.isEmailMatch(email) && isMatch.isNameMatch(username)) {
+        if (!isMatch.isEmailMatch(email) && !isMatch.isNameMatch(username)) {
             JOptionPane.showMessageDialog(this, "name or email validation error");
+            return;
+        }
+        if (!isMatch.isPhoneMatch(phone)) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid phone",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
@@ -234,6 +240,7 @@ public class AddShelterHelper extends javax.swing.JPanel {
         ShelterHelperAdmin shelterHelperAdmin = new ShelterHelperAdmin(workArea, account, requestEntertainOrg,
                 enterprise, netWork);
         PanelUtils.addOrReplacePanel(workArea, "ShelterHelperAdmin", shelterHelperAdmin);
+        workArea.add("ShelterHelperAdmin",shelterHelperAdmin)
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.show(workArea, "ShelterHelperAdmin");
     }// GEN-LAST:event_btnBackActionPerformed
@@ -265,6 +272,13 @@ public class AddShelterHelper extends javax.swing.JPanel {
 
             return;
         }
+        if (!isMatch.isPhoneMatch(phone)) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter a valid email address.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
@@ -274,7 +288,6 @@ public class AddShelterHelper extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Username already exists.");
             return;
         }
-
 
         ShelterHelper role = new ShelterHelper();
         UserAccount account = netWork.getUserAccountDirctory().createUserAccount(username, password, role);
