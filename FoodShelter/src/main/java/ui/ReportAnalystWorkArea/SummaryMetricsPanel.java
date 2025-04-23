@@ -196,38 +196,66 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
         int donated = 0;
         int stored = 0;
 
-        for (NetWork net : foodShelterSystem.getNetworkList()) {
-            for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
-                for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
-                    for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
-                        // Count stored food - food that has been approved in food check
-                        if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery) && !(wr instanceof DeliveryTask)) {
-                            FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                            if (item != null && "Approved".equalsIgnoreCase(wr.getStatus())) {
-                                stored += item.getNumber();
-                            }
+         for (NetWork net : foodShelterSystem.getNetworkList()) {
+        for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
+            for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
+                for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+
+                    // Stored Food: Food items with usingStatus "stored"
+                    // This includes all items that have been approved by food check
+                    if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery) && !(wr instanceof DeliveryTask)) {
+                        WorkRequestFoodItem foodReq = (WorkRequestFoodItem) wr;
+                        FoodItem item = foodReq.getFoodItem();
+                        if (item != null && "stored".equalsIgnoreCase(item.getUsingStatus())) {
+                            stored += item.getNumber();
+                            System.out.println("Adding to stored: " + item.getFoodName() + " - " + item.getNumber());
                         }
-                        
-                        // Count donated food - food delivered to homeless
-                        if ((wr instanceof WorkRequestDelivery || wr instanceof DeliveryTask) 
-                            && ("accepted".equalsIgnoreCase(wr.getStatus()) || "Completed".equalsIgnoreCase(wr.getStatus()))) {
-                            if (wr instanceof WorkRequestDelivery) {
-                                WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
-                                if (deliveryReq.getFoodItem() != null) {
-                                    donated += deliveryReq.getFoodItem().getNumber();
-                                }
-                            } else if (wr instanceof DeliveryTask) {
-                                DeliveryTask deliveryTask = (DeliveryTask) wr;
-                                donated += deliveryTask.getQuantity();
-                            }
+                    }
+
+                    // Donated Food: delivery requests with taskStatus "Delivered"
+                    if (wr instanceof WorkRequestDelivery) {
+                        WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
+                        if (deliveryReq.getFoodItem() != null 
+                            && "Delivered".equalsIgnoreCase(deliveryReq.getTaskStatus())) {
+                            donated += deliveryReq.getFoodItem().getNumber();
+                            System.out.println("Adding to donated (delivery): " + 
+                                deliveryReq.getFoodItem().getFoodName() + " - " + 
+                                deliveryReq.getFoodItem().getNumber());
+                        }
+                    } else if (wr instanceof DeliveryTask) {
+                        DeliveryTask deliveryTask = (DeliveryTask) wr;
+                        if ("Delivered".equalsIgnoreCase(deliveryTask.getStatus())) {
+                            donated += deliveryTask.getQuantity();
+                            System.out.println("Adding to donated (task): " + 
+                                (deliveryTask.getFoodItem() != null ? 
+                                deliveryTask.getFoodItem().getFoodName() : "Unknown") + 
+                                " - " + deliveryTask.getQuantity());
                         }
                     }
                 }
             }
         }
+    }
+        
+            for (NetWork net : foodShelterSystem.getNetworkList()) {
+        if (net.getWarehouseList() != null) {
+            for (WorkRequest wr : net.getWarehouseList().getWorkRequestList()) {
+                if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery)) {
+                    WorkRequestFoodItem foodReq = (WorkRequestFoodItem) wr;
+                    FoodItem item = foodReq.getFoodItem();
+                    if (item != null && "stored".equalsIgnoreCase(item.getUsingStatus())) {
+                        stored += item.getNumber();
+                        System.out.println("Adding to stored from warehouse: " + 
+                            item.getFoodName() + " - " + item.getNumber());
+                    }
+                }
+            }
+        }
+    }
+              
         // pie chart
-        dataset.setValue("🍽 Donated", donated);
-        dataset.setValue("🥫 Stored", stored);
+        dataset.setValue("🍽 Donated", donated/2);
+        dataset.setValue("🥫 Stored", stored/2);
 
         JFreeChart pieChart = ChartFactory.createPieChart(
                 "Food Usage Distribution",
@@ -265,10 +293,13 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 //        piePanel.setSize(fixedSize);
 
         // bar chart
+        
+        Color donatedBarColor = new Color(0, 184, 148); // Vibrant teal
+        Color barChartBackgroundColor = new Color(248, 249, 250);
 
         DefaultCategoryDataset barDataset = new DefaultCategoryDataset();
-        barDataset.setValue(donated, "Food", "🍽 Donated");
-        barDataset.setValue(stored, "Food", "🥫 Stored");
+        barDataset.setValue(donated/2, "Food", "🍽 Donated");
+        barDataset.setValue(stored/2, "Food", "🥫 Stored");
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Donation Summary",
@@ -278,26 +309,31 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
                 PlotOrientation.VERTICAL,
                 false, true, false);
 
-        barChart.setBackgroundPaint(new Color(245, 242, 250));
+        barChart.setBackgroundPaint(barChartBackgroundColor);
         barChart.setTitle(new org.jfree.chart.title.TextTitle(
                 "Donation Summary", new Font("Segoe UI", Font.BOLD, 16)));
-        
+
         var barPlot = barChart.getCategoryPlot();
-        barPlot.setBackgroundPaint(new Color(245, 242, 250));
+        barPlot.setBackgroundPaint(barChartBackgroundColor);
         barPlot.setOutlineVisible(false);
-        barPlot.setRangeGridlinePaint(new Color(200, 200, 230));
-        barPlot.getRenderer().setSeriesPaint(0, new Color(63, 81, 181)); // indigo
+        barPlot.setRangeGridlinePaint(new Color(230, 230, 230)); // Lighter grid lines
+
+// Updated modern colors for bars - just change the series paint
+        barPlot.getRenderer().setSeriesPaint(0, donatedBarColor); // Vibrant teal for donated
         barPlot.getRenderer().setDefaultItemLabelsVisible(true);
         barPlot.getRenderer().setDefaultItemLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
 
-        barPlot.getDomainAxis().setLabelFont(new Font("Segoe UI", Font.BOLD, 13));
-        barPlot.getDomainAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
-        barPlot.getRangeAxis().setLabelFont(new Font("Segoe UI", Font.BOLD, 13));
-        barPlot.getRangeAxis().setTickLabelFont(new Font("Segoe UI", Font.PLAIN, 12));
+// Set nicer fonts for the axes
+        Font axisFont = new Font("Segoe UI", Font.BOLD, 13);
+        Font tickFont = new Font("Segoe UI", Font.PLAIN, 12);
+        barPlot.getDomainAxis().setLabelFont(axisFont);
+        barPlot.getDomainAxis().setTickLabelFont(tickFont);
+        barPlot.getRangeAxis().setLabelFont(axisFont);
+        barPlot.getRangeAxis().setTickLabelFont(tickFont);
 
-        ChartPanel barPanel = new ChartPanel(barChart);
-        barPanel.setPreferredSize(fixedSize);
-        barPanel.setBackground(new Color(245, 242, 250));
+ChartPanel barPanel = new ChartPanel(barChart);
+barPanel.setPreferredSize(fixedSize);
+barPanel.setBackground(barChartBackgroundColor);
                
 //        ChartPanel barPanel = new ChartPanel(barChart);
 //        barPanel.setPreferredSize(fixedSize);
@@ -328,26 +364,51 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
             for (BasicEnterprise be : net.getEnterpriseDirectory().getEnterprises()) {
                 for (BasicOrganization org : be.getOrganizationDirectory().getOrganizationList()) {
                     for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
-                        // Count stored food - food that has been approved in food check
+
                         if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery) && !(wr instanceof DeliveryTask)) {
-                            FoodItem item = ((WorkRequestFoodItem) wr).getFoodItem();
-                            if (item != null && "Approved".equalsIgnoreCase(wr.getStatus())) {
+                            WorkRequestFoodItem foodReq = (WorkRequestFoodItem) wr;
+                            FoodItem item = foodReq.getFoodItem();
+                            if (item != null && "stored".equalsIgnoreCase(item.getUsingStatus())) {
                                 totalStored += item.getNumber();
+                                System.out.println("Metrics - Adding to stored: " + item.getFoodName() + " - " + item.getNumber());
                             }
                         }
-                        
-                        // Count donated food - food delivered to homeless
-                        if ((wr instanceof WorkRequestDelivery || wr instanceof DeliveryTask) 
-                            && ("accepted".equalsIgnoreCase(wr.getStatus()) || "Completed".equalsIgnoreCase(wr.getStatus()))) {
-                            if (wr instanceof WorkRequestDelivery) {
-                                WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
-                                if (deliveryReq.getFoodItem() != null) {
-                                    totalDonated += deliveryReq.getFoodItem().getNumber();
-                                }
-                            } else if (wr instanceof DeliveryTask) {
-                                DeliveryTask deliveryTask = (DeliveryTask) wr;
-                                totalDonated += deliveryTask.getQuantity();
+
+                        // Donated Food: taskStatus is "Delivered"
+                        if (wr instanceof WorkRequestDelivery) {
+                            WorkRequestDelivery deliveryReq = (WorkRequestDelivery) wr;
+                            if (deliveryReq.getFoodItem() != null
+                                    && "Delivered".equalsIgnoreCase(deliveryReq.getTaskStatus())) {
+                                totalDonated += deliveryReq.getFoodItem().getNumber();
+                                System.out.println("Metrics - Adding to donated (delivery): "
+                                        + deliveryReq.getFoodItem().getFoodName() + " - "
+                                        + deliveryReq.getFoodItem().getNumber());
                             }
+                        } else if (wr instanceof DeliveryTask) {
+                            DeliveryTask deliveryTask = (DeliveryTask) wr;
+                            if ("Delivered".equalsIgnoreCase(deliveryTask.getStatus())) {
+                                totalDonated += deliveryTask.getQuantity();
+                                System.out.println("Metrics - Adding to donated (task): "
+                                        + (deliveryTask.getFoodItem() != null
+                                        ? deliveryTask.getFoodItem().getFoodName() : "Unknown")
+                                        + " - " + deliveryTask.getQuantity());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        for (NetWork net : foodShelterSystem.getNetworkList()) {
+            if (net.getWarehouseList() != null) {
+                for (WorkRequest wr : net.getWarehouseList().getWorkRequestList()) {
+                    if (wr instanceof WorkRequestFoodItem && !(wr instanceof WorkRequestDelivery)) {
+                        WorkRequestFoodItem foodReq = (WorkRequestFoodItem) wr;
+                        FoodItem item = foodReq.getFoodItem();
+                        if (item != null && "stored".equalsIgnoreCase(item.getUsingStatus())) {
+                            totalStored += item.getNumber();
+                            System.out.println("Metrics - Adding to stored from warehouse: "
+                                    + item.getFoodName() + " - " + item.getNumber());
                         }
                     }
                 }
@@ -356,10 +417,10 @@ public class SummaryMetricsPanel extends javax.swing.JPanel {
 
         double totalEnergySaved = totalDonated * energySavedPerItem;
 
-        lblTotalDonated.setText("🍽 Total Food Donated: " + totalDonated);
+        lblTotalDonated.setText("🍽 Total Food Donated: " + totalDonated/2);
 
-        lblEnergySaved.setText("💡 Estimated Energy Saved: " + totalEnergySaved + " kWh");       
-        lblTotalStored.setText("🥫 Total Food Stored: " + totalStored);
+        lblEnergySaved.setText("💡 Estimated Energy Saved: " + totalEnergySaved/2 + " kWh");       
+        lblTotalStored.setText("🥫 Total Food Stored: " + totalStored/2);
 
 //        lblTotalDonated.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
 //        lblTotalDonated.setForeground(new Color(54, 33, 89));
