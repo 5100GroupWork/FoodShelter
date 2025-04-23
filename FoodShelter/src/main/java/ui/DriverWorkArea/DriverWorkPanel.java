@@ -136,7 +136,10 @@ public class DriverWorkPanel extends javax.swing.JPanel {
 
         if (wrd != null) {
             wrd.setTaskStatus("Delivered");
-            
+
+            if (wrd.getFoodItem() != null) {
+                wrd.getFoodItem().setUsingStatus("donated");
+            }           
             // Remove the task from the work queue
             Deliver deliver = (Deliver) this.driver.getRole();
             deliver.WorkQueueFinished(wrd);
