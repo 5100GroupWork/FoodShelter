@@ -62,7 +62,8 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -83,22 +84,21 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("Shelter Helper - Task Assignment");
 
         tblShelterRequests.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Requested Vendor", "Requested Quantity", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                new Object[][] {
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null }
+                },
+                new String[] {
+                        "ID", "Requested Vendor", "Requested Quantity", "Status"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblShelterRequests);
@@ -113,22 +113,21 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         enterpriseLabel2.setText("Approved Food Table");
 
         tblApprovedFoodTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Food Name", "Vendor", "Quantity", "Expiry Date"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "ID", "Food Name", "Vendor", "Quantity", "Expiry Date"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(tblApprovedFoodTasks);
@@ -141,16 +140,15 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         });
 
         tblAssignedTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Food Name", "Vendor", "Quantity"
-            }
-        ));
+                new Object[][] {
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null },
+                        { null, null, null, null }
+                },
+                new String[] {
+                        "ID", "Food Name", "Vendor", "Quantity"
+                }));
         jScrollPane4.setViewportView(tblAssignedTasks);
 
         jScrollPane3.setViewportView(jScrollPane4);
@@ -162,67 +160,79 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(249, 249, 249)
-                                        .addComponent(enterpriseLabel1))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1))
-                                .addGap(28, 28, 28)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(233, 233, 233)
-                                .addComponent(enterpriseLabel2)
-                                .addGap(297, 297, 297)
-                                .addComponent(enterpriseLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(btnAssignTask)))
-                .addGap(341, 356, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addGroup(jPanel1Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                                .addGap(249, 249, 249)
+                                                                                .addComponent(enterpriseLabel1))
+                                                                        .addComponent(jScrollPane2,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                558, Short.MAX_VALUE)
+                                                                        .addComponent(jScrollPane1))
+                                                                .addGap(28, 28, 28)
+                                                                .addComponent(jScrollPane3,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 319,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(233, 233, 233)
+                                                                .addComponent(enterpriseLabel2)
+                                                                .addGap(297, 297, 297)
+                                                                .addComponent(enterpriseLabel3,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 123,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGap(171, 171, 171)
+                                                                .addComponent(enterpriseLabel,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 301,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(161, 161, 161)
+                                                .addComponent(btnAssignTask)))
+                                .addGap(341, 356, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enterpriseLabel2)
-                    .addComponent(enterpriseLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                        .addGap(33, 33, 33)
-                        .addComponent(enterpriseLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAssignTask)
-                .addGap(91, 91, 91))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(enterpriseLabel2)
+                                        .addComponent(enterpriseLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 199,
+                                                        Short.MAX_VALUE)
+                                                .addGap(33, 33, 33)
+                                                .addComponent(enterpriseLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAssignTask)
+                                .addGap(91, 91, 91)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
@@ -242,162 +252,134 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
         DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
 
-
         WorkRequestFoodItem selectedFoodRequest = null;
         for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
             if (wr instanceof WorkRequestFoodItem) {
                 WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
                 FoodItem food = wrfi.getFoodItem();
 
-                if (food != null && 
-                    food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) && 
-                    food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
-                    food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
+                if (food != null &&
+                        food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) &&
+                        food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
+                        food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
                     selectedFoodRequest = wrfi;
                     break;
                 }
             }
         }
 
-    WorkRequestNeeds selectedRequest = null;
-    for (WorkRequest wr : rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList()) {
-        if (wr instanceof WorkRequestNeeds) {
-            WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
-            // Match based on displayed properties
-            if (wrn.getFoodOrgName().equals(requestModel.getValueAt(requestModelRow, 1)) &&
-                wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 3))) {
-                selectedRequest = wrn;
-                break;
+        WorkRequestNeeds selectedRequest = null;
+        for (WorkRequest wr : rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof WorkRequestNeeds) {
+                WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
+                // Match based on displayed properties
+                if (wrn.getFoodOrgName().equals(requestModel.getValueAt(requestModelRow, 1)) &&
+                        wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 3))) {
+                    selectedRequest = wrn;
+                    break;
+                }
             }
         }
-    }
 
-    if (selectedFoodRequest == null || selectedRequest == null) {
-        JOptionPane.showMessageDialog(null, "Could not identify the selected items. Please try again.");
-        return;
-    }
+        if (selectedFoodRequest == null || selectedRequest == null) {
+            JOptionPane.showMessageDialog(null, "Could not identify the selected items. Please try again.");
+            return;
+        }
 
-    FoodItem selectedFood = selectedFoodRequest.getFoodItem();
+        FoodItem selectedFood = selectedFoodRequest.getFoodItem();
 
-    WorkRequestDelivery task = new WorkRequestDelivery();
-    task.setFoodItem(selectedFood);
-    task.setQuantity(selectedFood.getNumber());
-    task.setFromLocation(selectedFood.getFoodIncOrg().getName());
-    task.setToLocation(selectedRequest.getSender().getName());
-    task.setSender(requestEntertainOrg);
-    task.setReceiver(selectedRequest.getSender());
-    task.setStatus("Pending");
-    task.setTaskStatus("UnPick"); 
+        WorkRequestDelivery task = new WorkRequestDelivery();
+        task.setFoodItem(selectedFood);
+        task.setQuantity(selectedFood.getNumber());
+        task.setFromLocation(selectedFood.getFoodIncOrg().getName());
+        task.setToLocation(selectedRequest.getSender().getName());
+        task.setSender(requestEntertainOrg);
+        task.setReceiver(selectedRequest.getSender());
+        task.setStatus("Pending");
+        task.setTaskStatus("UnPick");
 
-    selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
+        selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
 
-    selectedRequest.setStatus("Matched");
+        selectedRequest.setStatus("Matched");
 
-    selectedFood.setUsingStatus("Assigned");
+        selectedFood.setUsingStatus("Assigned");
 
-    JOptionPane.showMessageDialog(null, "Task assigned successfully!");
+        JOptionPane.showMessageDialog(null, "Task assigned successfully!");
 
-    requestEntertainOrg.getWorkQueue().getWorkRequestList().add(task);
-    System.out.println("Task added to RequestEntertainOrg: " + task.getFoodItem().getFoodName() + 
-                     ", Status: " + task.getTaskStatus());
-    populateApprovedFoodTable();
-    populateShelterRequestTable();
-    populateAssignedTasksTable();
+        requestEntertainOrg.getWorkQueue().getWorkRequestList().add(task);
+        System.out.println("Task added to RequestEntertainOrg: " + task.getFoodItem().getFoodName() +
+                ", Status: " + task.getTaskStatus());
+        populateApprovedFoodTable();
+        populateShelterRequestTable();
+        populateAssignedTasksTable();
     }// GEN-LAST:event_btnAssignTaskActionPerformed
 
     private void populateApprovedFoodTable() {
-    DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    tblApprovedFoodTasks.setRowSorter(sorter);
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblApprovedFoodTasks.setRowSorter(sorter);
+        model.setRowCount(0);
 
-    for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
-        if (wr instanceof WorkRequestFoodItem) {
-            WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
-            FoodItem food = wrfi.getFoodItem();
+        for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
+            if (wr instanceof WorkRequestFoodItem) {
+                WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
+                FoodItem food = wrfi.getFoodItem();
 
-            if (food != null && !"Assigned".equals(food.getUsingStatus())) {
-                Object[] row = new Object[5];
-                row[0] = wr;
-                row[1] = food.getFoodName();
-                row[2] = food.getFoodIncOrg().getName();
-                row[3] = food.getNumber();
-                row[4] = food.getExpiredDate();
-                model.addRow(row);
+                if (food != null && !"Assigned".equals(food.getUsingStatus())) {
+                    Object[] row = new Object[5];
+                    row[0] = wr;
+                    row[1] = food.getFoodName();
+                    row[2] = food.getFoodIncOrg().getName();
+                    row[3] = food.getNumber();
+                    row[4] = food.getExpiredDate();
+                    model.addRow(row);
+                }
             }
         }
-    }
     }
 
     private void populateShelterRequestTable() {
         DefaultTableModel model = (DefaultTableModel) tblShelterRequests.getModel();
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-    tblShelterRequests.setRowSorter(sorter);
-    model.setRowCount(0);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tblShelterRequests.setRowSorter(sorter);
+        model.setRowCount(0);
 
-    RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
-    WorkQueue queue = org.getWorkQueue();
-    System.out.println("queue size :" + queue.getWorkRequestList().size());
-    
-    for (WorkRequest wr : queue.getWorkRequestList()) {
-        if (wr instanceof WorkRequestNeeds) {
-            WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
+        RequestCollectOrg org = rescueNetEnterprise.getRequestCollectOrg();
+        WorkQueue queue = org.getWorkQueue();
+        System.out.println("queue size :" + queue.getWorkRequestList().size());
 
-            if ("pending".equalsIgnoreCase(wrn.getStatus())) {
-                Object[] row = new Object[4];
-                row[0] = wr;
-                row[1] = wrn.getFoodOrgName();
-                row[2] = wrn.getQuantity();
-                row[3] = wrn.getStatus();
-                model.addRow(row);
+        for (WorkRequest wr : queue.getWorkRequestList()) {
+            if (wr instanceof WorkRequestNeeds) {
+                WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
+
+                if ("pending".equalsIgnoreCase(wrn.getStatus())) {
+                    Object[] row = new Object[4];
+                    row[0] = wr;
+                    row[1] = wrn.getFoodOrgName();
+                    row[2] = wrn.getQuantity();
+                    row[3] = wrn.getStatus();
+                    model.addRow(row);
+                }
             }
         }
     }
-    }
-    
+
     private void populateAssignedTasksTable() {
-  DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
-    model.setRowCount(0);
-    
- 
-    java.util.HashSet<WorkRequest> addedTasks = new java.util.HashSet<>();
+        DefaultTableModel model = (DefaultTableModel) tblAssignedTasks.getModel();
+        model.setRowCount(0);
 
+        java.util.HashSet<WorkRequest> addedTasks = new java.util.HashSet<>();
 
-    for (WorkRequest wr : requestEntertainOrg.getWorkQueue().getWorkRequestList()) {
-        if ((wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) && !addedTasks.contains(wr)) {
-            FoodItem food = null;
-            
-            if (wr instanceof DeliveryTask) {
-                food = ((DeliveryTask) wr).getFoodItem();
-            } else if (wr instanceof WorkRequestDelivery) {
-                food = ((WorkRequestDelivery) wr).getFoodItem();
-            }
-            
-            if (food != null) {
-                Object[] row = new Object[4];
-                row[0] = wr;
-                row[1] = food.getFoodName();
-                row[2] = food.getFoodIncOrg().getName();
-                row[3] = food.getNumber();
-                model.addRow(row);
-                
-                addedTasks.add(wr);
-                System.out.println("Added task to assigned tasks table: " + food.getFoodName());
-            }
-        }
-    }
-
-    for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
-        for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest wr : requestEntertainOrg.getWorkQueue().getWorkRequestList()) {
             if ((wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) && !addedTasks.contains(wr)) {
                 FoodItem food = null;
-                
+
                 if (wr instanceof DeliveryTask) {
                     food = ((DeliveryTask) wr).getFoodItem();
                 } else if (wr instanceof WorkRequestDelivery) {
                     food = ((WorkRequestDelivery) wr).getFoodItem();
                 }
-                
+
                 if (food != null) {
                     Object[] row = new Object[4];
                     row[0] = wr;
@@ -405,16 +387,41 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                     row[2] = food.getFoodIncOrg().getName();
                     row[3] = food.getNumber();
                     model.addRow(row);
-                    
+
                     addedTasks.add(wr);
-                    System.out.println("Added task from other org to assigned tasks table: " + food.getFoodName());
+                    System.out.println("Added task to assigned tasks table: " + food.getFoodName());
                 }
             }
         }
+
+        for (BasicOrganization org : rescueNetEnterprise.getOrganizationDirectory().getOrganizationList()) {
+            for (WorkRequest wr : org.getWorkQueue().getWorkRequestList()) {
+                if ((wr instanceof DeliveryTask || wr instanceof WorkRequestDelivery) && !addedTasks.contains(wr)) {
+                    FoodItem food = null;
+
+                    if (wr instanceof DeliveryTask) {
+                        food = ((DeliveryTask) wr).getFoodItem();
+                    } else if (wr instanceof WorkRequestDelivery) {
+                        food = ((WorkRequestDelivery) wr).getFoodItem();
+                    }
+
+                    if (food != null) {
+                        Object[] row = new Object[4];
+                        row[0] = wr;
+                        row[1] = food.getFoodName();
+                        row[2] = food.getFoodIncOrg().getName();
+                        row[3] = food.getNumber();
+                        model.addRow(row);
+
+                        addedTasks.add(wr);
+                        System.out.println("Added task from other org to assigned tasks table: " + food.getFoodName());
+                    }
+                }
+            }
+        }
+
+        System.out.println("Total unique assigned tasks found: ");
     }
-    
-    System.out.println("Total unique assigned tasks found: " );
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignTask;
@@ -430,6 +437,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblApprovedFoodTasks;
     private javax.swing.JTable tblAssignedTasks;
     private javax.swing.JTable tblShelterRequests;
+
     // End of variables declaration//GEN-END:variables
     private void beautify() {
         // 背景统一

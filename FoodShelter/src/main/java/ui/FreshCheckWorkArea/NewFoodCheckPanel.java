@@ -246,14 +246,11 @@ public class NewFoodCheckPanel extends javax.swing.JPanel {
         NewFoodTable.setRowSorter(sorter);
         model.setRowCount(0);
         WorkQueue foodQueue = netWork.getCheckList();
-
-        int count = 0;
         for (WorkRequest wd : foodQueue.getWorkRequestList()) {
             if (wd instanceof WorkRequestFoodItem) {
                 WorkRequestFoodItem wrf = (WorkRequestFoodItem) wd;
-                count++;
                 Object row[] = new Object[5];
-                row[0] = count;
+                row[0] = wrf;
                 row[1] = wrf.getFoodItem().getFoodName();
                 row[2] = wrf.getFoodItem().getNumber();
                 row[3] = wrf.getFoodItem().getExpiredDate();
