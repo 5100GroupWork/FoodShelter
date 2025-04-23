@@ -88,6 +88,7 @@ public class FoodShelterConfig {
         // 在这里改变之前的设计，user同时归属于enterprise/org/network （如果在下面的层级中存在的话）
         FoodIncOrg foodIncOrg = foodEnterprise.addFoodIncOrg("WholeFoods-backbay");
         foodIncOrg.setAddress(faker.getAddress());
+        System.out.println(foodIncOrg.getAddress());
         UserAccount foodEnplyee = netWork.getUserAccountDirctory().createUserAccount("Mike", "0000",
                 new FoodIncEmployee());
 
@@ -187,6 +188,8 @@ public class FoodShelterConfig {
         // create rescueNetOrg(helper and homeless) and people
         RequestCollectOrg requestCollectOrg = rescuEnterprise.addRequestCollectOrg("HomelessOrg1");
         RequestEntertainOrg requestEntertainOrg = rescuEnterprise.addRequestEntertainOrg("ShelterHelperOrg1");
+        requestCollectOrg.setAddress(faker.getAddress());
+        requestEntertainOrg.setAddress(faker.getAddress());
         if(requestCollectOrg==null){
             System.out.println("requestCollectOrg error");
         }
