@@ -78,6 +78,10 @@ public class WorkRequest {
         this.quantity = quantity;
     }
     public String getWorkRequestUuid() {
+        if(this.workRequestUuid==null){
+            String uuid = UUID.randomUUID().toString();
+            workRequestUuid = uuid;
+        }
         return workRequestUuid;
     }
 

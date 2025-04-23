@@ -235,8 +235,7 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAssignTaskActionPerformed
-        // TODO add your handling code here:
+    private void btnAssignTaskActionPerformed(java.awt.event.ActionEvent evt) {
         int foodRow = tblApprovedFoodTasks.getSelectedRow();
         int requestRow = tblShelterRequests.getSelectedRow();
 
@@ -245,41 +244,10 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
             return;
         }
 
-        // Convert view indices to model indices
-        int foodModelRow = tblApprovedFoodTasks.convertRowIndexToModel(foodRow);
-        int requestModelRow = tblShelterRequests.convertRowIndexToModel(requestRow);
+        // 直接从表格中取出 WorkRequest 并进行类型转换
+        WorkRequestFoodItem selectedFoodRequest = (WorkRequestFoodItem) tblApprovedFoodTasks.getValueAt(foodRow, 0);
 
-        DefaultTableModel foodModel = (DefaultTableModel) tblApprovedFoodTasks.getModel();
-        DefaultTableModel requestModel = (DefaultTableModel) tblShelterRequests.getModel();
-
-        WorkRequestFoodItem selectedFoodRequest = null;
-        for (WorkRequest wr : netWork.getWarehouseList().getWorkRequestList()) {
-            if (wr instanceof WorkRequestFoodItem) {
-                WorkRequestFoodItem wrfi = (WorkRequestFoodItem) wr;
-                FoodItem food = wrfi.getFoodItem();
-
-                if (food != null &&
-                        food.getFoodName().equals(foodModel.getValueAt(foodModelRow, 1)) &&
-                        food.getFoodIncOrg().getName().equals(foodModel.getValueAt(foodModelRow, 2)) &&
-                        food.getNumber() == Integer.parseInt(foodModel.getValueAt(foodModelRow, 3).toString())) {
-                    selectedFoodRequest = wrfi;
-                    break;
-                }
-            }
-        }
-
-        WorkRequestNeeds selectedRequest = null;
-        for (WorkRequest wr : rescueNetEnterprise.getRequestCollectOrg().getWorkQueue().getWorkRequestList()) {
-            if (wr instanceof WorkRequestNeeds) {
-                WorkRequestNeeds wrn = (WorkRequestNeeds) wr;
-                // Match based on displayed properties
-                if (wrn.getFoodOrgName().equals(requestModel.getValueAt(requestModelRow, 1)) &&
-                        wrn.getStatus().equals(requestModel.getValueAt(requestModelRow, 3))) {
-                    selectedRequest = wrn;
-                    break;
-                }
-            }
-        }
+        WorkRequestNeeds selectedRequest = (WorkRequestNeeds) tblShelterRequests.getValueAt(requestRow, 0);
 
         if (selectedFoodRequest == null || selectedRequest == null) {
             JOptionPane.showMessageDialog(null, "Could not identify the selected items. Please try again.");
@@ -298,21 +266,23 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
         task.setStatus("Pending");
         task.setTaskStatus("UnPick");
 
+        // 添加任务到请求方、当前 org 的 workQueue
         selectedRequest.getSender().getWorkQueue().getWorkRequestList().add(task);
+        requestEntertainOrg.getWorkQueue().getWorkRequestList().add(task);
 
+        // 更新状态
         selectedRequest.setStatus("Matched");
-
         selectedFood.setUsingStatus("Assigned");
 
         JOptionPane.showMessageDialog(null, "Task assigned successfully!");
-
-        requestEntertainOrg.getWorkQueue().getWorkRequestList().add(task);
         System.out.println("Task added to RequestEntertainOrg: " + task.getFoodItem().getFoodName() +
                 ", Status: " + task.getTaskStatus());
+
+        // 刷新三个表格
         populateApprovedFoodTable();
         populateShelterRequestTable();
         populateAssignedTasksTable();
-    }// GEN-LAST:event_btnAssignTaskActionPerformed
+    }
 
     private void populateApprovedFoodTable() {
         DefaultTableModel model = (DefaultTableModel) tblApprovedFoodTasks.getModel();
@@ -381,11 +351,12 @@ public class ShelterHelperWorkPanel extends javax.swing.JPanel {
                 }
 
                 if (food != null) {
-                    Object[] row = new Object[4];
-                    row[0] = wr;
+                    Object[] row = new Object[5];
+                    row[0] = wr.getWorkRequestUuid();
                     row[1] = food.getFoodName();
                     row[2] = food.getFoodIncOrg().getName();
                     row[3] = food.getNumber();
+                    row[4] = wr;
                     model.addRow(row);
 
                     addedTasks.add(wr);
