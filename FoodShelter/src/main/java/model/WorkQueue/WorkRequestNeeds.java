@@ -13,6 +13,7 @@ import model.Account.UserAccount;
  */
 public class WorkRequestNeeds extends WorkRequest{
     private UserAccount homeless;
+
     private String needStatus=""; // accepted || rejected 
     
     // 不用传入，直接在ui的部分填入需要的东西
@@ -37,5 +38,6 @@ public class WorkRequestNeeds extends WorkRequest{
     public void setNeedStatus(String needStatus) {
         this.needStatus = needStatus;
     }
+    
 
 }

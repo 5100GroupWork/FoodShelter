@@ -89,6 +89,15 @@ public class WorkRequest {
         this.workRequestUuid = workRequestUuid;
     }
     
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    
     private String message;
     private BasicOrganization sender;
     private BasicOrganization receiver;
@@ -99,6 +108,7 @@ public class WorkRequest {
     private String foodOrgName; // 对应 ComboBoxType 的值
     private int quantity;       // 对应 spinner 的值
     private String workRequestUuid;
+    String desc;
     
     @Override
     public String toString(){
