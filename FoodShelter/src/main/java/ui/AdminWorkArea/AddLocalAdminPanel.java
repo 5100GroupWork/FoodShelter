@@ -15,6 +15,7 @@ import model.NetWork.NetWork;
 import model.Organization.BasicOrganization;
 import model.Organization.FoodIncOrg;
 import model.Role.FoodEnterpriseManager;
+import model.Role.FoodIncEmployee;
 
 /**
  *
@@ -212,7 +213,7 @@ public class AddLocalAdminPanel extends javax.swing.JPanel {
                 return;
             }
             // create a new employee
-            FoodEnterpriseManager role = new FoodEnterpriseManager();
+            FoodIncEmployee role = new FoodIncEmployee();
             UserAccount newEmployee = enterprise.getUserAccountDirectory().createUserAccount(username, password,
                     role);
                 newEmployee.setEmail(email);
